@@ -1,6 +1,10 @@
-# weekly
-每周分享
+# weekly 
 ## dir 
+- KM(Knowledge Map) 
 
-- KM(Knowledge Map)
- 功能：知识地图
+ >tag:work
+  
+ - CM(Cognitive Map) 
+ 
+ >tag:life 
+
