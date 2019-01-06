@@ -1,10 +1,13 @@
 # weekly 
+
+
 ## dir 
-- KM(Knowledge Map) 
+
+- KM(Knowledge Map)  知识地图
 
  >tag:work
 
- - CM(Cognitive Map) 
+ - CM(Cognitive Map)  认知地图
 
  >tag:life 
 
@@ -12,7 +15,7 @@
 
 ![1546654219511](C:\Users\wangchuanyi\AppData\Roaming\Typora\typora-user-images\1546654219511.png)
 
-- FQA
+- FQA  周报
 
   > weekly
 
