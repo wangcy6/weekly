@@ -249,6 +249,100 @@ coroutine:[云风的一个C语言同步协程库](https://github.com/cloudwu/cor
 
 
 
+
+
+# 第二天 stl的map和hash使用场景
+
+
+
+#### 1 随着数据量的增多
+- 更快的查找速度 ：std::hash_map>std::map
+- 更快的插入和删除速度：std::map>std::hash_map
+- 更少的存储空间：std::map >std::hash_map
+
+#### 2 测试查找
+![查找n(4..40w)](https://upload-images.jianshu.io/upload_images/1837968-1ae5f7e9f2656f95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+>一般 在少量数据情况下 map查找耗时最小，随着数据的增加，map的查找耗时
+>急剧上升（这里说的一般情况 还有其他因素）
+>[图片上传失败...(image-ac5c82-1547435643829)]
+
+ ###3 测试 插入和删除操作
+ hash_map（10万） map（10万） hash_map（20万） map（20万） hash_map（30万） map（30万） 
+添加：   93 （少)    47 |  156   94(少)  | 203   172（map 少）
+删除： 8422   32（map 少） | 33765   63 (map 少)| 76016   78（map 少）
+
+>map在频繁的删除和插入方面 耗时更少。
+
+
+
+STL map , nginx，linux 虚拟内存管理，他们都有红黑树的应用. 当你对搜索的效率要求较高，并且数据经常改动的情景，你可以用红黑树, 也就是 map.
+
+https://github.com/PeterRK/DSGO/blob/master/book/pages/08-A.md
+
+## 3. 优化空间
+
+- map 插入的后是有序数据，需要重载  bool operator < (const Foo & cmp) const 操作
+- hash函数和空间的利用（这个是重点！！）
+
+
+
+谷歌的google:dense_hash_map耗时更少
+
+
+
+
+
+![1547436431069](../images/1547436431069.png)
+
+## 4. 什么时候用map，什么时候用hash_map?
+分析角度 查找（命中 还是不命中）  插入 和存储空间 这三个方面
+
+![map_02](../images/map_02.PNG)
+
+![map_02](../images/map_01.PNG)
+
+
+
+
+
+> When to choose unordered_map instead of map
+
+- When you have good hasher and no memory limitation
+
+>When to choose map instead of unordered_map
+- When you need Low Memory:
+
+
+- When you need guaranted Performance
+    std::unordered_map  complexity O(1) ~~O(n) i
+       std::map because it will give you guaranteed O(log N).
+
+
+
+
+
+
+
+
+## 5 塔山
+- https://blog.csdn.net/a418382926/article/details/22302907
+
+-  https://www.youtube.com/watch?v=fHNmRkzxHWs
+-  
+
+
+
+扩展阅读：
+
+ **majflt代表major fault，中文名叫大错误（物理地址到磁盘），minflt代表minor fault，中文名叫小错误(  虚拟地址-物理地址)**
+
+
+
+![img](https://img-blog.csdn.net/20130625110817750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRExVVEJydWNlWmhhbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+
+
 #### 熟练度: 
 
 
@@ -263,6 +357,24 @@ coroutine:[云风的一个C语言同步协程库](https://github.com/cloudwu/cor
 
 
 
+
+
+扩展阅读：
+
+压力测试：观察缺页中断情况
+
+执行一次只有一个结果
+ps -o majflt,minflt -p 1731
+
+一直监控 知道手工终结
+strace  -T -ttt -c  -p 1731 
+
+pidstat - Report statistics for Linux tasks.
+
+pidstat -r -p 1731  5
+
+
+
 # 求指教
 
 ## 微信公共账号：
@@ -272,3 +384,10 @@ coroutine:[云风的一个C语言同步协程库](https://github.com/cloudwu/cor
 ## 知识星球（付费的，不要加入 ）
 
 ![知识星球](../images/知识星球.jpg)
+
+
+
+
+
+
+
