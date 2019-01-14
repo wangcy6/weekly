@@ -64,7 +64,7 @@ COE :执行上下文
    - - possibly some other minial state
    - all others: shared from process（共享的范围 什么？  2  3  4 ）
 
-![1547177329624](C:\Users\wangchuanyi\AppData\Roaming\Typora\typora-user-images\1547177329624.png)
+![1547177329624](../images/1547177329624.png)
 
 
 
