@@ -12,22 +12,60 @@
 
 
 
-## 第二天 redis 数据分片
+## 第二天 如何为正在飞行的飞机更换引擎
 
 几个问题：
 
 1. 给你一个key 如何确定在哪个主机上？
 2. 如何新增一台机器？
-
- 
-
-
+3. 如减少一一台机器？
+4. 在没有停机的情况下升级或重新启动Redis实例
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+塔山
+
+视频：
+
+https://www.youtube.com/watch?v=nFJ7LD-2yXc
+
+文章：
+
+https://redis.io/topics/partitioning
+
+https://www.zhihu.com/question/21419897/answer/89771396
+
+-  分区：如何在多个Redis实例之间拆分数据
+
+​     https://www.jianshu.com/p/dbc62ed27f03
+
+
+
+
+
+## 第三天  gperftools 分析redis数据迁移过程
+
+### profiler 
+
+https://gperftools.github.io/gperftools/cpuprofile.html
+
+
+
+塔山
+
+https://yq.aliyun.com/articles/64884
 
 
 
