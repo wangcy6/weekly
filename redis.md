@@ -51,11 +51,20 @@ https://www.zhihu.com/question/21419897/answer/89771396
 
 ​     https://www.jianshu.com/p/dbc62ed27f03
 
+-  数据库秒级平滑扩容架构方案
+
 
 
 
 
 ## 第三天  gperftools 分析redis数据迁移过程
+
+几个问题
+
+-  stl结构数据如何mmap方式保存到文件 （这是操作系统干的事情） 如何解析文件内容呀？
+
+
+
 
 ### profiler 
 
@@ -65,7 +74,25 @@ https://gperftools.github.io/gperftools/cpuprofile.html
 
 塔山
 
+move:
+
+
+
 https://yq.aliyun.com/articles/64884
+
+https://www.youtube.com/watch?v=Q9MdwzewSZg
+
+doc：
+
+http://www.cnblogs.com/huxiao-tee/p/4660352.html
+
+https://blog.csdn.net/chenxinl/article/details/6679654  内存的数据应到到文件是如何理解
+
+https://blog.csdn.net/lotluck/article/details/81632071
+
+http://www.cppblog.com/lmlf001/archive/2007/09/13/32112.html
+
+ mmap函数实现把一个文件映射到一个内存区域，从而我们可以像读写内存一样读写文件
 
 
 
