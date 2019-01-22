@@ -53,7 +53,11 @@ index
 
 ## 一起交流：
 
- 微信公众号： ![jiagous](/qrcode__860.jpg)
+- QQ群：
+
+​        234303445
+
+- 微信公众号： ![jiagous](/qrcode__860.jpg)
 
 
 
