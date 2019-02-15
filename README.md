@@ -6,12 +6,22 @@
 
 ## 2019
 
-**二月**：[第 1 期](docs/issue-43.md):high_brightness:
+**二月**：[第 1 期](https://www.jianshu.com/p/681b70df9320):high_brightness:
 
 
 
 
+## 一起交流：
 
+- QQ群：
+
+​        234303445
+
+- 微信公众号： ![jiagous](/qrcode__860.jpg)
+
+
+
+![知识星球](/知识星球.jpg)
 
 
 
@@ -90,14 +100,3 @@ index
 
 
 
-## 一起交流：
-
-- QQ群：
-
-​        234303445
-
-- 微信公众号： ![jiagous](/qrcode__860.jpg)
-
-
-
-![知识星球](/知识星球.jpg)
