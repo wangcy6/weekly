@@ -251,62 +251,23 @@ coroutine:[云风的一个C语言同步协程库](https://github.com/cloudwu/cor
 
 
 
-# 第二天 stl的map和hash使用场景
+# 第二天 map和unordered_map
 
-## 1. 区别
-
-### 从时间复杂度
-
-​	者对单次查询有时间要求的应用场景下，应使用map
-
-> map是基于红黑树实现。红黑树作为一种自平衡二叉树，保障了良好的最坏情况运行时间，即它可以做到在O(log n)时间内完成查找，插入和删除，在对单次时间敏感的场景下比较建议使用map做为容器。比如实时应用，可以保证最坏情况的运行时间也在预期之内
+## 1. 优缺点
 
 
 
-https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+#### unordered_map:
 
-| Algorithm  | **Average** | **Worst case** |
-| ---------- | ----------- | -------------- |
-| **Space**  | O(*n*）     | O(*n*）        |
-| **Search** | O(log *n*)  | O(log *n*)     |
-| **Insert** | O(log *n*)  | O(log *n*)     |
-| **Delete** | O(log *n*)  | O(log *n*)     |
-
-
-
-### 从空间来看：
-
-
-
-其余情况应使用unordered_map
-
-> unordered_map是基于hash_table实现，一般是由一个大vector，vector元素节点可挂接链表来解决冲突来实现。hash_table最大的优点，就是把数据的存储和查找消耗的时间大大降低，几乎可以看成是常数时间；
-
-而代价仅仅是消耗比较多的内存。然而在当前可利用内存越来越多的情况下，用空间换时间的做法是值得的。
-
-https://en.wikipedia.org/wiki/Hash_table
-
-
-
-
-
-
-
-数据是否有序：
-
-
-
-在需要有序性，map有限
-
-### 优缺点
-
-#### hash:
+unordered_map是基于hash_table实现
 
 - 优点：
 
-  ​	Hash表，在完全随机/无冲突 的情况下，插入、查询和删除都可以认为是O(1)的时间复杂度，最完美
+  ​	Hash表，在数据无冲突 的情况下，插入、查询和删除都可以认为是O(1)的时间复杂度，最完美
 
-    
+  ​       常数时间，操作
+
+  https://en.wikipedia.org/wiki/Hash_table
 
   | Algorithm  | **Average** | **Worst case** |
   | ---------- | ----------- | -------------- |
@@ -325,9 +286,9 @@ https://en.wikipedia.org/wiki/Hash_table
 
   问题1  哈希表扩容的过程，以及对查找性能的影响
 
-  > Redis 通过增量式扩容解决了这个缺点
+  意思是说：vector扩容期间，业务无法操作
 
-  
+  > Redis 通过增量式扩容解决了这个扩容期间缺点
 
   
 
@@ -335,15 +296,26 @@ https://en.wikipedia.org/wiki/Hash_table
 
   ​            即使扩容以后他们的位置也不会变化，性能不会发生变化  .
 
-  意思是说 ：根据 **负载因子** （总键值对数 / 箱子个数）  来调整扩容也无法解决问题
+  意思是说 ：根据 **负载因子** （总键值对数 / 箱子个数）  来调整扩容也无法解决哈希函数设计不合理的问题
 
   
 
-  > Java 的长处在于当哈希函数不合理导致链表过长时，会使用红黑树来保证插入和查找的效率
+  > Java ：openjdk/jdk/src/share/classes/java/util/HashMap.java
   >
-  > Redis 经过严格测试，表现良好的默认哈希函数，避免了链表过长的问题
+  > 哈希函数不合理导致链表过长时（8个记录）
   >
-  > 没有完美的架构，只有满足需求的架构
+  > 会使用红黑树来保证插入和查找的效率，解决了这个链表过长缺点
+  >
+  > 
+  >
+  > Redis：经过严格测试，表现良好的默认哈希函数，避免了链表过长的问题，解决了这个缺点
+  >
+
+
+
+*有两个字典，分别存有 100 条数据和 10000 条数据，如果用一个不存在的 key 去查找数据，在哪个字典中速度更快？* 这个你不好回答了
+
+
 
 
 
@@ -351,19 +323,33 @@ https://en.wikipedia.org/wiki/Hash_table
 
 - 优点：
 
-  能够保证二叉树的插入和查找操作一直都是O(log(n))的时间复杂度（无坏情况）
+  能够保证二叉树的插入和查找操作一直都是O(log(n))的时间复杂度（无最坏情况）
 
   所有的元素在树中是排序好的。
 
   RB-Tree是**功能、性能、空间开销的折中结果**。
 
-  
+  https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+
+| Algorithm  | **Average** | **Worst case** |
+| ---------- | ----------- | -------------- |
+| **Space**  | O(*n*）     | O(*n*）        |
+| **Search** | O(log *n*)  | O(log *n*)     |
+| **Insert** | O(log *n*)  | O(log *n*)     |
+| **Delete** | O(log *n*)  | O(log *n*)     |
+
+
+
 
 - 缺点：
 
+  随着n的变大（40w），map性能有下降（**纳秒级别，相差10倍**）也最够满足一般的业务了
+
   
 
+  
 
+![查找n(4..40w)](https://upload-images.jianshu.io/upload_images/1837968-1ae5f7e9f2656f95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
@@ -377,13 +363,11 @@ https://en.wikipedia.org/wiki/Hash_table
 
 
 
-####  随着数据量的增多
-
 https://zhuanlan.zhihu.com/p/48066839
 
 
 
-![查找n(4..40w)](https://upload-images.jianshu.io/upload_images/1837968-1ae5f7e9f2656f95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 ### 2.1 10w
 
@@ -434,6 +418,29 @@ unordered_map内存：50M
 
 
  
+
+旁白
+
+1. 精确到秒
+
+   ```c
+   time_t beg = time(0)
+   ```
+
+   
+
+2. 精确到毫秒数
+
+```c
+clock_t begin , end;
+begin = clock();
+//这里是要统计时间的代码
+end = clock();
+
+unsigned uRunTime = (end - begin) * 1.0 / CLOCKS_PER_SEC * 1000;
+```
+
+
 
 ### 2.3 测试 插入和删除操作
 
