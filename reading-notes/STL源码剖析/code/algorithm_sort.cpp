@@ -4,6 +4,8 @@
 
 using namespace std;
 //函数对象
+//函数对象通常不定义构造函数和析构函数，所以在构造和析构时不会发生任何问题
+//()”操作符表示的是一个函数调用符号
 struct myclass {
   bool operator()(int i,int j) 
   { 
@@ -28,6 +30,9 @@ struct Sum
     int sum;
 };
 
+auto compare = [](const Base &a, const Base &b) {
+                     return a.variable < b.variable;};
+					 
 //g++ -g -std=c++11 algorithm_sort.cpp
 int main()
 {
@@ -52,3 +57,14 @@ int main()
 	
 	return 0;
 }
+
+auto compare = [](const <vector<int> &a, const <vector<int> &b) {
+                     if (a[0]<b[0])
+					 {
+						 return a[0]<b[0]
+					 }else if(a[1]<b[1])
+					 {
+						return a[1]<b[1]
+					 }						 
+					 };
+					 

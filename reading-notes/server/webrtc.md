@@ -1,0 +1,7 @@
+### plan
+- webrtc：基础库  -周
+- apprtc:1对1 -周
+- licode: 对:对 -周
+
+### 搭建
+https://blog.csdn.net/foruok/article/details/54944427
