@@ -6,7 +6,10 @@
 
 ## 2019
 
-**二月**：[第 1 期](https://www.jianshu.com/p/681b70df9320):high_brightness:
+**五月**：[第 1 期](https://www.jianshu.com/p/a735b8ae3ac3) :high_brightness:
+
+**二月**：[第 1 期](https://www.jianshu.com/p/681b70df9320)
+
 
 
 
