@@ -255,13 +255,11 @@ coroutine:[云风的一个C语言同步协程库](https://github.com/cloudwu/cor
 
 ## 1. 优缺点
 
-
-
 #### unordered_map:
 
 unordered_map是基于hash_table实现
 
-- 优点：
+- ##### 优点：
 
   ​	Hash表，在数据无冲突 的情况下，插入、查询和删除都可以认为是O(1)的时间复杂度，最完美
 
@@ -278,35 +276,41 @@ unordered_map是基于hash_table实现
 
   ![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/1280px-Hash_table_3_1_1_0_1_0_0_SP.svg.png)
 
-- 缺点： .
+  ### 缺点： .
 
   链地址法冲突的缺点
 
   
 
-  问题1  哈希表扩容的过程，以及对查找性能的影响
-
-  意思是说：vector扩容期间，业务无法操作
-
-  > Redis 通过增量式扩容解决了这个扩容期间缺点
+  ##### 问题1  哈希表大小设置不合理的，导致频繁扩容，/扩容期间造成内存不足等情况
 
   
 
-  问题2  如果哈希函数设计不合理，哈希表在极端情况下会变成线性表.性能极低
+  <u>意思是说：vector扩容期间，回阻塞业务</u>
 
-  ​            即使扩容以后他们的位置也不会变化，性能不会发生变化  .
+  > > > <u>Redis 通过增量式扩容解决了这个扩容期间业务无法访问的缺点</u>
+  > > >
+  > > > Redis默认初始化值为4
 
-  意思是说 ：根据 **负载因子** （总键值对数 / 箱子个数）  来调整扩容也无法解决哈希函数设计不合理的问题
+  > <u>`渐进式哈希`的精髓在于：数据的迁移不是一次性完成的，而是可以通过dictRehash()这个函数分步规划的</u>
 
-  
+  在迁移的过程中，数据是在新表还是旧表中并不是一个非常急迫的需求，迁移的过程并不会丢失数据，在旧表中找不到再到新表中寻找就是了（一般情况）
+
+  遇到内存不足，然后ha切换 也会有问题。
+
+  ##### 问题2  如果哈希函数设计不合理，哈希表在极端情况下会变成线性表.性能极低
+
+  > *即使扩容以后他们的位置也不会变化，性能不会发生变化  .*
+
+  *意思是说 ：根据 **负载因子** （总键值对数 / 箱子个数）  来调整扩容也无法解决哈希函数设计不*合理的问题
+
+  旁白： 负载因子超过某个阈值时，出于链表性能的考虑，会进行Resize的操作
 
   > Java ：openjdk/jdk/src/share/classes/java/util/HashMap.java
   >
-  > 哈希函数不合理导致链表过长时（8个记录）
+  > jdk 8 对于链表长度超过 8 的链表将转储为红黑树
   >
-  > 会使用红黑树来保证插入和查找的效率，解决了这个链表过长缺点
-  >
-  > 
+  > ![hashmap](https://img-blog.csdn.net/20171205200000196?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzUzMjY3MTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
   >
   > Redis：经过严格测试，表现良好的默认哈希函数，避免了链表过长的问题，解决了这个缺点
   >
@@ -321,15 +325,17 @@ unordered_map是基于hash_table实现
 
 #### 红黑树
 
-- 优点：
 
-  能够保证二叉树的插入和查找操作一直都是O(log(n))的时间复杂度（无最坏情况）
 
-  所有的元素在树中是排序好的。
+##### 优点：
 
-  RB-Tree是**功能、性能、空间开销的折中结果**。
+能够保证二叉树的插入和查找操作一直都是O(log(n))的时间复杂度（无最坏情况）
 
-  https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
+
+
+
+
+https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
 
 | Algorithm  | **Average** | **Worst case** |
 | ---------- | ----------- | -------------- |
@@ -340,36 +346,59 @@ unordered_map是基于hash_table实现
 
 
 
+旁白：[理解时间复杂度O(log n)](https://github.com/wayou/wayou.github.io/issues/10)
 
-- 缺点：
+如果有1000个记录，最多查找10次，1,000,000个记录，最多查找20次
 
-  随着n的变大（40w），map性能有下降（**纳秒级别，相差10倍**）也最够满足一般的业务了
+![img](https://i.stack.imgur.com/4yiP0.jpg)
 
-  
+> > ![](https://images0.cnblogs.com/blog/175043/201412/151255023901167.png)
+> >
+> > > ##### 优点是占用内存小(没有多余的空节点，不会发生扩容等操作)
+> > >
+> > > 旁白：rb tree从众多平衡tree胜出，是因为 **功能、性能、空间开销的折中结果，最优**。
 
-  
+​       适合频繁更新，删除等操作。
+
+
+
+##### 缺点：
+
+随着n的变大（40w），map性能有下降（**纳秒级别，相差10倍**）也最够满足一般的业务了
+
 
 ![查找n(4..40w)](https://upload-images.jianshu.io/upload_images/1837968-1ae5f7e9f2656f95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
+- 数据查找 根据数据大小有关系。
+
+  
 
 
 
-
-
-
-## 2 测试查找
+## 2 黑盒测试
 
 
 
 https://zhuanlan.zhihu.com/p/48066839
 
+### 随机数据
 
 
 
+#### 2.0 n=1千
 
-### 2.1 10w
+map insert time: 0.623000 
+map find time: 0.381000 
+map erase time: 0.619000 
+unordered_map insert time: 0.432000 
+unordered_map find time: 0.148000 
+unordered_map erase time: 0.246000 
+
+
+
+### 2.1 10w 
 
 > 10w量级的耗时，可以看出，map在增 删 查 三项上均**弱于unordered_map**，内存使用map略少
 
@@ -385,13 +414,12 @@ https://zhuanlan.zhihu.com/p/48066839
 10w量级的耗时，可以看出，map在增删查三项上均弱于unordered_map，内存使用map略少，但不明显：
 
 ```text
-map insert time: 71.064000
-map find time: 30.305000
-map erase time: 45.373000
-
-unordered_map insert time: 42.139000
-unordered_map find time: 11.316000
-unordered_map erase time: 31.453000
+map insert time: 102.693000 
+map find time: 69.264000 
+map erase time: 96.144000 
+unordered_map insert time: 43.258000 
+unordered_map find time: 15.834000 
+unordered_map erase time: 29.619000 
 
 map内存：5096K
 unordered_map内存：6712K
@@ -401,15 +429,15 @@ unordered_map内存：6712K
 
 > 100w量级的耗时，结论同上
 
-（why）????
+（why）
 
 ```text
-map insert time: 955.625000
-map find time: 574.289000
-map erase time: 623.460000
-unordered_map insert time: 575.636000
-unordered_map find time: 166.449000
-unordered_map erase time: 294.509000
+map insert time: 1462.718000 
+map find time: 1161.637000 
+map erase time: 1354.383000 
+unordered_map insert time: 702.626000 
+unordered_map find time: 328.684000 
+unordered_map erase time: 448.539000 
 
 map内存：47M
 unordered_map内存：50M
@@ -417,7 +445,31 @@ unordered_map内存：50M
 
 
 
- 
+ ###  类似数据
+
+#### n=100
+
+map insert time: 0.012000 
+map find time: 0.010000 
+map erase time: 0.019000 
+
+unordered_map insert time: 0.034000 
+unordered_map find time: 0.012000 
+unordered_map erase time: 0.009000 
+
+
+
+#### n=10w
+
+map insert time: 52.211000 
+map find time: 56.472000 
+map erase time: 88.810000 
+
+unordered_map insert time: 154.170000 
+unordered_map find time: 89.057000 
+unordered_map erase time: 48.600000
+
+
 
 旁白
 
@@ -426,8 +478,6 @@ unordered_map内存：50M
    ```c
    time_t beg = time(0)
    ```
-
-   
 
 2. 精确到毫秒数
 
@@ -442,26 +492,36 @@ unsigned uRunTime = (end - begin) * 1.0 / CLOCKS_PER_SEC * 1000;
 
 
 
-### 2.3 测试 插入和删除操作
 
 
+STL map , nginx，linux 虚拟内存管理，他们都有红黑树的应用. 当你对搜索的效率要求较高，并且数据经常改动的情景，
 
- hash_map（10万） map（10万） hash_map（20万） map（20万） hash_map（30万） map（30万） 
-添加：   93 （少)    47 |  156   94(少)  | 203   172（map 少）
-删除： 8422   32（map 少） | 33765   63 (map 少)| 76016   78（map 少）
-
->map在频繁的删除和插入方面 耗时更少。
-
-
-
-STL map , nginx，linux 虚拟内存管理，他们都有红黑树的应用. 当你对搜索的效率要求较高，并且数据经常改动的情景，你可以用红黑树, 也就是 map.
+你可以用红黑树, 也就是 map.
 
 https://github.com/PeterRK/DSGO/blob/master/book/pages/08-A.md
+
+### 总结
+
+1. 单纯从测试数据看 unorder_map 性能优于map ，可以得出一个结论 前面性能就好吗？
+
+有没有自己数据有问题，和测试场景有问题，o(1)-0(n)
+
+数据太少并没有发现hash_table 缺点。
+
+2. hash 在随机数据性能好于固定数据的。
+
+3. 影响 HashMap 效率的主要是 哈希算法 和 内存分配算法,在哈希算法足够散列的情况下，预分配方式的效率更高
+
+4. https://www.quora.com/What-is-the-Big-O-for-operations-in-a-Hashmap
+
+5. ava 8 has a HashMap which degrades into a tree for collisions.
+
+   This means it is O(1) typically and O(log N) in the worst case. 
 
 ## 3. 优化空间
 
 - map 插入的后是有序数据，需要重载  bool operator < (const Foo & cmp) const 操作
-- hash函数和空间的利用（这个是重点！！）
+- hash函数
 
 
 
@@ -502,15 +562,31 @@ https://github.com/PeterRK/DSGO/blob/master/book/pages/08-A.md
 
 
 
-
 ## 5 塔山
+
+- https://zhuanlan.zhihu.com/p/37472912
+
 - https://blog.csdn.net/a418382926/article/details/22302907
+
 - https://www.youtube.com/watch?v=fHNmRkzxHWs
+
 - https://my.oschina.net/hosee/blog/619618
+
 - https://bestswifter.com/hashtable/
+
 - https://blog.csdn.net/jasper_xulei/article/details/18364313 redis中几种哈希函数的研究
+
 - https://caticat.github.io/2018/05/23/redis-algorithmic-hash/  redis中几种哈希函数的研究
+
 - https://zhuanlan.zhihu.com/p/48066839 C++基础-map与unordered_map
+
+- https://www.cnblogs.com/ontoweb-zp/p/10477039.html
+
+- # [美团针对Redis Rehash机制的探索和实践](https://tech.meituan.com/2018/07/27/redis-rehash-practice-optimization.html)
+
+- 数组+链表+红黑树的存储结构
+
+- https://www.youtube.com/watch?v=c3RVW3KGIIE
 
 
 
@@ -560,7 +636,25 @@ pidstat -r -p 1731  5
 
 ![知识星球]()
 
-## 第三天  IO
+# 第三天  IO
+
+## 3.1 五大状态
+
+
+
+
+
+
+
+![](https://pic1.zhimg.com/9faf605ebd46e68d125f5f5ed76495cc_r.jpg)
+
+
+
+![](https://img-blog.csdn.net/20180624153134787?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Nhb3lhbmdfSGU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+## 3.2 epoll
+
+
 
 ```c++
 int select(int nfds, fd_set *readfds, fd_set *writefds,
@@ -614,9 +708,19 @@ typedef struct {
 
 
 ```c
+
 int epoll_create(int size);
 int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+EPOLL_CTL_ADD：注册新的fd到epfd中；
+EPOLL_CTL_MOD：修改已经注册的fd的监听事件；
+EPOLL_CTL_DEL：从epfd中删除一个fd
 int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
+
+
+struct epoll_event {
+    uint32_t     events;    /* Epoll events */
+    epoll_data_t data;      /* User data variable */
+};
 
  typedef union epoll_data {
                void    *ptr;
@@ -624,13 +728,23 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
                uint32_t u32;
                uint64_t u64;
            } epoll_data_t;
+EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；
 
-           struct epoll_event {
-               uint32_t     events;    /* Epoll events */
-               epoll_data_t data;      /* User data variable */
-           };
+EPOLLOUT：表示对应的文件描述符可以写；
+
+EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；
+
+EPOLLERR：表示对应的文件描述符发生错误；
+
+EPOLLHUP：表示对应的文件描述符被挂断；
+
+EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。
+
+EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+--------------------- ！
 
 ```
+https://zh.wikipedia.org/wiki/Epoll
 
 ### 3.4 总结
 
@@ -654,7 +768,65 @@ int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
 
 3. 使用红黑树来管理文件描述符，可以做到快速添加监听的文件描述符。
 
-   
+####  Reactor
+
+If the Reactor pattern is used in an application with only one
+thread of control it is possible to eliminate all synchronizatio
+
+如果Reactor模式仅在具有一个的应用程序中使用
+控制线程可以消除所有同步
+
+
+
+
+
+
+
+
+
+```c++
+由上图可知，在non-blocking IO中，虽然进程大部分时间都不会被block，但是它仍然要求进程去主动的check，并且当数据准备完成以后，也需要进程主动将数据拷贝到用户内存。I/O multiplexing中虽然在数据准备阶段和数据拷贝阶段会被block，由于其基于事件通知的，避免了持续check数据是否。
+
+
+而asynchronous IO则完全不同。它就像是用户进程将整个IO操作交给了内核去完成，然后等待信号通知，用户进程不需要检查IO操作的状态，也不需要主动的去拷贝数据
+--------------------- 
+作者：wzgang123 
+来源：CSDN 
+原文：https://blog.csdn.net/wzgang123/article/details/51179776 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+```
+
+![**阻塞I/O模型**](https://images0.cnblogs.com/blog/468825/201403/082155544565666.png)
+
+
+
+![image](https://images0.cnblogs.com/blog/468825/201403/082155571121722.png)
+
+![image](https://images0.cnblogs.com/blog/468825/201403/082156006903861.png)
+
+
+
+![](https://images0.cnblogs.com/blog/468825/201403/082156034098131.png)
+
+![image](https://images0.cnblogs.com/blog/468825/201403/082156066597071.png)
+
+
+
+### 3.3 同步I/O和异步I/O总结
+
+https://songlee24.github.io/2016/07/19/explanation-of-5-IO-models/
+
+POSIX把这两个术语定义如下:
+
+- **同步I/O操作（synchronous I/O operation）导致请求进程阻塞，直到I/O操作完成。**
+
+  A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes
+
+- **异步I/O操作（asynchronous I/O operation）不导致请求进程阻塞。**
+
+  An asynchronous I/O operation does not cause the requesting process to be blocked
+
+![image](https://images0.cnblogs.com/blog/468825/201403/082156103464413.png)
 
 # 求指教
 
