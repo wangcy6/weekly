@@ -46,19 +46,12 @@ kube-proxy 负责为 Service 提供 cluster 内部的服务发现和负载均衡
 ![db](https://feisky.gitbooks.io/kubernetes/content/introduction/architecture.png)
 
 ###  部署
+http://hutao.tech/k8s-source-code-analysis/prepare/debug-environment.html
 
-
-
-1.  安装kubectl 
-- 方法1  通过 curl 命令安装 kubectl 可执行文件(翻墙版本)
-   https://k8smeetup.github.io/docs/tasks/tools/install-kubectl/
-   
-- 方法2  源码安装 --没有验证过
-
-- 方法3 :kubernetes HA集群在centos7无翻墙搭建
+1. 步骤1 
+- 方法 :kubernetes HA集群在centos7无翻墙搭建
 https://zhuanlan.zhihu.com/p/48346592
 使用阿里镜像安装
-
 配置源
 ~~~
 sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -79,17 +72,31 @@ sudo yum install -y kubelet kubeadm kubectl ipvsadm --disableexcludes=kubernetes
 
 
 
-2.安装 Minikube 
+安装k8s master
+tip：下面的ip地址(192.168.19.100)大家需要替换成自己机器上的！
 
-https://yq.aliyun.com/articles/221687
-
-~~~
-keytool -genkey -v -alias myapprtc -keyalg RSA -validity 3650 -keystore ./123456.keystore
+kubeadm init --pod-network-cidr=10.100.0.0/16 --service-cidr=10.101.0.0/16 --kubernetes-version=v1.13.3 --apiserver-advertise-address 10.115.37.45
 
 
-alias: 别名 这里起名testKey
-keyalg: 证书算法，RSA
-validity：证书有效时间，10年
-keystore：证书生成的目标路径和文件名,替换成你自己的路径即可,我定义的是~/Lee/test.keystore
 
-~~~
+方法2 .安装 Minikube 舍去 
+
+https://github.com/kubernetes/minikube
+
+
+### 第一步
+
+minikube start defaults to virtualbox, but supports other drivers using the --vm-driver argument:
+
+KVM2 - Recommended Linux driver
+查看cpu是否支持虚拟化
+cat /proc/cpuinfo | egrep 'vmx|svm'
+
+hyperkit - Recommended macOS driver
+virtualbox - Recommended Windows driver
+none - bare-metal execution on Linux, at the expense of system security and reliability
+
+[root@vm-10-115-37-45 gadmin]# cat /etc/centos-release
+CentOS Linux release 7.2.1511 (Core) 
+[root@vm-10-115-37-45 gadmin]# uname -r
+3.10.0-327.el7.x86_64

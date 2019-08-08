@@ -5,48 +5,18 @@
 - 版本
  1. 版本6.8的根本不支持 
  >cat /etc/redhat-release
- 
  CentOS release 6.8 (Final)
- 
  >cat /proc/version
  Linux version 2.6.32-642.gome.el6.x86_64
   
   建议安装最新的docker使用centos7
   官方文档要求Linux kernel至少3.8以上，且docker只能运行在64位的系统中。由于RHEL6和CentOS6的内核版本为2.6，
   
-
 2. centos7
   cat /etc/redhat-release
   CentOS Linux release 7.2.1511 (Core) 
 
-- 更新 yum源改为阿里 (解决翻墙问题)
 
-~~~
-
-1. 把/etc/yum.repos.d下的文件全部删除
-
-2. yum源更改为阿里云的yum源
-get -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-
-3. 
-Create the repository config file /etc/yum.repos.d/slce.repo:
-[slce]
-name=Scientific Linux Cyrillic Edition
-baseurl=http://downloads.naulinux.ru/pub/SLCE/6x/$basearch/CyrEd/RPMS/
-enabled=0
-gpgcheck=1
-gpgkey=http://downloads.naulinux.ru/pub/SLCE/RPM-GPG-KEY-linux-ink
-Install rpmforge-release rpm package:
-# yum --enablerepo=slce install rpmforge-release
-
-4
-
-yum clean
-yum makecache
-yum update
-
-yum list
-~~~
 
 - docker安装
 
@@ -81,13 +51,6 @@ https://blog.gmem.cc/webrtc-server-basedon-kurento#entrypoint
 https://www.jianshu.com/p/762a4587346d
 
 
-~~~
-docker run -d --name kms -p 8888:8888 \
-    kurento/kurento-media-server:latest \
-     -v /etc/kurento/:/etc/kurento/
-    
-telnet 127.0.0.1  8888    
-    
 ~~~
 
 
@@ -213,3 +176,25 @@ sudo docker run -p 3478:3478 -p 3478:3478/udp coturn
 
 turnutils_uclient -u kurento -w kurento 10.115.37.45
 
+# FAQ
+1 Kurento : NOT_ENOUGH_RESOURCES Exception
+Error: Underlying transport protocol
+https://github.com/zaphoyd/websocketpp/issues/640
+
+A:
+
+https://stackoverflow.com/questions/1356675/check-the-open-fd-limit-for-a-given-process-in-linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import resource
+>>> print(resource.getrlimit(resource.RLIMIT_NOFILE))
+(655360, 655360)
+
+
+### coturn
+
+https://github.com/coturn/coturn/issues/389
+
+coturn是作为一个STUN/TURN来使用，
+其中STUN是用于P2P，而TURN是用于中继转发，用来穿透虚拟网络架构用的
+http://blog.51yip.com/server/1946.html
+https://www.jianshu.com/p/762a4587346d
