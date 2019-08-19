@@ -1,0 +1,502 @@
+define("ga-util", ["jquery","lodash"], function(__WEBPACK_EXTERNAL_MODULE_85__, __WEBPACK_EXTERNAL_MODULE_108__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 531);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 108:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_108__;
+
+/***/ }),
+
+/***/ 531:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* eslint-env browser */
+/*
+ * Copyright 2015 Evernote Corporation. All rights reserved.
+ */
+
+
+var _jquery = __webpack_require__(85);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _lodash = __webpack_require__(108);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var me = {};
+
+var ecommerceJsFetched = void 0;
+var enhancedEcommerceRequired = void 0;
+
+var getGa = function getGa() {
+  return window.ga || function () {
+    window.console && window.console.log('DEBUG: GA not found on window.');
+  };
+};
+
+var ensureEcommerceJsFetched = function ensureEcommerceJsFetched() {
+  ecommerceJsFetched || getGa()('require', 'ecommerce', 'ecommerce.js');
+  ecommerceJsFetched = true;
+};
+
+var ensureEnhancedEcommerceRequired = function ensureEnhancedEcommerceRequired() {
+  enhancedEcommerceRequired || getGa()('require', 'ec');
+  enhancedEcommerceRequired = true;
+};
+
+/**
+ * Perform a 'send' GA call, sending a pageview or event for example.
+ *
+ * @param {Object} parameters An object containing values to be sent to GA. For example,
+ *     to send a pageview, the object must have 'hitType' set to 'pageview', and to
+ *     send an event, 'hitType' must be 'event' - if sending an event, this function
+ *     also validates that 'eventCategory' and 'eventAction' are also set.
+ * @return {$Promise} A promise resolved successfully after GA receives the data. The
+ *     promise is rejected if the provided data is invalid or the timeout expires.
+ */
+me._send = function (parameters) {
+  var deferred = _jquery2.default.Deferred();
+  if ((typeof parameters === 'undefined' ? 'undefined' : _typeof(parameters)) !== 'object' || parameters.hitType === 'event' && (!parameters.eventCategory || !parameters.eventAction)) {
+    deferred.reject();
+    return deferred.promise();
+  }
+
+  // workaround - when the 'send' call failed,
+  // hitCallback will never be called.
+  // this timer ensure the deferred to be resolved.
+  var timer = setTimeout(function () {
+    if (deferred.state() !== 'resolved') {
+      deferred.reject();
+    }
+  }, parameters.timeout || 5000);
+
+  var requestParameters = _lodash2.default.cloneDeep(parameters);
+  _lodash2.default.extend(requestParameters, {
+    hitCallback: function hitCallback() {
+      clearTimeout(timer);
+      if (deferred.state() !== 'resolved') {
+        deferred.resolve();
+      }
+    }
+  });
+  getGa()('send', requestParameters);
+  return deferred.promise();
+};
+
+/**
+ * Deprecated, use me._send
+ */
+var send = function send(parameters) {
+  return me._send(parameters);
+};
+
+/**
+ * Tracks an event and returns a Deferred object that is resolved when the
+ * event is tracked.
+ * https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+ *
+ * Two call patterns accepted:
+ * {
+ *   category:
+ *   action:
+ *   label:
+ *   value:
+ *   extraParameters:
+ *   timeout:
+ * }
+ *
+ * DEPRECATED:
+ * trackEvent(category, action, label, value, extraParameters)
+ */
+me.trackEvent = function (opts) {
+  // handle deprecated case:
+  if ((typeof opts === 'undefined' ? 'undefined' : _typeof(opts)) !== 'object') {
+    var newOpts = {
+      category: arguments[0],
+      action: arguments[1],
+      label: arguments[2],
+      value: arguments[3],
+      extraParameters: arguments[4]
+    };
+    opts = newOpts;
+  }
+
+  var sendParameters = {
+    hitType: 'event',
+    eventCategory: opts.category,
+    eventAction: opts.action,
+    eventLabel: opts.label
+  };
+  if (opts.timeout) {
+    sendParameters.timeout = opts.timeout;
+  }
+
+  if (typeof opts.value === 'number') {
+    sendParameters.eventValue = opts.value;
+  }
+
+  var deferred = _jquery2.default.Deferred();
+  send(_jquery2.default.extend(sendParameters, opts.extraParameters)).then(function () {
+    deferred.resolve();
+  }, function () {
+    deferred.reject();
+  });
+
+  // Also log events to Tealium - see WEB-47378 for info on migration from GA to Tealium.
+  if (window.utag) {
+    var linkParams = {
+      'event_name': 'ga_pilot',
+      'property.category': sendParameters.eventCategory,
+      'property.action': sendParameters.eventAction,
+      'property.label': sendParameters.eventLabel
+    };
+    if (window.__EVERNOTE_TEALIUM_GLOBAL_USER_ID__) {
+      /* HACK: Make the user ID available to tealium without needing to pass it to the
+       * gaUtil call. For GA, we're able to associate with the user ID on page load, but
+       * we cannot reliably do this for Tealium; we need to pass the user ID for each
+       * link() call. Rather than change the gaUtil API, instead use a hacky global
+       * variable. For future Tealium link() calls that we add that aren't tied to old
+       * GA events, we should consider passing the user ID properly. */
+      linkParams['property.global_user_id'] = window.__EVERNOTE_TEALIUM_GLOBAL_USER_ID__;
+    }
+    window.utag.link(linkParams);
+  }
+
+  return deferred.promise();
+};
+
+/**
+ * @DEPRECATED: use trackEvent({timeout: XXXX, ...})
+ */
+me.trackEventWithTimeout = function (category, action, label, value, extraParameters, timeout) {
+  return this.trackEvent({
+    category: category,
+    action: action,
+    label: label,
+    value: value,
+    extraParameters: extraParameters,
+    timeout: timeout
+  });
+};
+
+/**
+ * Tracks an event and navigates to the given URL when the event is tracked.
+ * TODO: incorporate into trackEvent({});
+ */
+me.trackLink = function (category, action, label, url, value, extraParameters) {
+  return me.trackEvent(category, action, label, value, extraParameters).always(function () {
+    if (url) {
+      if (url.indexOf('mailto:') === 0) {
+        window.top.location.href = url;
+      } else {
+        window.location.href = url;
+      }
+    }
+  });
+};
+
+/**
+ * Set a global field in google analytics. Use this for custom dimensions.
+ */
+me.set = function (fieldName, value) {
+  getGa()('set', fieldName, value);
+};
+
+/** Track User Timing data
+ * https://developers.google.com/analytics/devguides/collection/analyticsjs/user-timings
+ * For example: ga('send', {
+          'hitType': 'timing',
+          'timingCategory': 'featurette performance',
+          'timingVar': 'start show images',
+          'timingValue': 120,
+          'timingLabel': 'large-mobile-layout'
+         });
+ */
+me.trackUserTiming = function (category, timingVar, value, label, extraParameters) {
+  var parameters = {
+    hitType: 'timing',
+    timingCategory: category,
+    timingVar: timingVar,
+    timingValue: Number(value),
+    timingLabel: label
+  };
+  return send(_jquery2.default.extend(parameters, extraParameters));
+};
+
+/**
+ * Tracks a pageview and returns a Deferred object that is resolved when the
+ * pageview is tracked. If no path is provided, then a pageview is set with the current
+ * `page` value set in GA.
+ * https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
+ */
+me.trackPageview = function (path, extraParameters) {
+  var parameters = {
+    hitType: 'pageview'
+  };
+  if (path) {
+    parameters.page = path;
+  }
+
+  return send(_jquery2.default.extend(parameters, extraParameters));
+};
+
+/**
+ * Takes a javascript object, the transaction,  with the following fields:
+ * id (required), affiliation, total (required), tax, shipping, currency.
+ */
+me.addTrans = function (transaction) {
+  ensureEcommerceJsFetched();
+
+  // Add required fields.
+  var transactionToSend = {
+    id: transaction.id,
+
+    /*
+     * Total is shown as 'Revenue in the Transactions report. Does not include Tax and
+     * Shipping.
+     */
+    revenue: transaction.total
+  };
+
+  // Add optional fields.
+  if (transaction.affiliation) {
+    // Affiliation or store name.
+    transactionToSend.affiliation = transaction.affiliation;
+  }
+  if (transaction.shipping) {
+    transactionToSend.shipping = transaction.shipping;
+  }
+  if (transaction.tax) {
+    transactionToSend.tax = transaction.tax;
+  }
+  if (transaction.currency) {
+    transactionToSend.currency = transaction.currency;
+  }
+
+  getGa()('ecommerce:addTransaction', transactionToSend);
+};
+
+me.addItem = function (item) {
+  ensureEcommerceJsFetched();
+
+  // Add required fields.
+  var itemToSend = {
+    id: item.transactionId,
+    name: item.productName,
+    sku: item.sku
+  };
+
+  // Add optional fields.
+  if (item.category) {
+    itemToSend.category = item.category;
+  }
+  if (item.unitPrice) {
+    itemToSend.price = item.unitPrice;
+  }
+  if (item.quantity) {
+    itemToSend.quantity = item.quantity;
+  }
+
+  getGa()('ecommerce:addItem', itemToSend);
+};
+
+me.trackTrans = function () {
+  getGa()('ecommerce:send');
+};
+
+// Market specific tracking object
+me.market = {};
+
+me.market.addImpression = function (product) {
+  ensureEnhancedEcommerceRequired();
+  getGa('ec:addImpression', product);
+};
+
+// This is used to send off a regular GA event once you have added impressions elsewhere
+me.market.trackImpressionView = function (category, action, label) {
+  ensureEnhancedEcommerceRequired();
+  var parameters = {
+    hitType: 'event',
+    eventCategory: category,
+    eventAction: action,
+    eventLabel: label
+  };
+
+  getGa()('set', 'nonInteraction', true);
+  return send(parameters);
+};
+
+me.market.trackImpressionWithProduct = function (category, action, label) {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:setAction', 'detail');
+  me.market.trackImpressionView(category, action, label);
+};
+
+me.market.addMarketProduct = function (product) {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:addProduct', product);
+};
+
+me.market.addMarketProductClick = function (product) {
+  ensureEnhancedEcommerceRequired();
+  me.market.addMarketProduct(product);
+  getGa()('ec:setAction', 'click', { list: product.list });
+};
+
+me.market.addToCartMarketProduct = function (product) {
+  ensureEnhancedEcommerceRequired();
+  me.market.addMarketProduct(product);
+  getGa()('ec:setAction', 'add');
+};
+
+me.market.setAddProduct = function () {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:setAction', 'add');
+};
+
+// Tracks remove to cart for Market enhanced eCommerce tracking
+me.market.setRemoveProduct = function () {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:setAction', 'remove');
+};
+
+me.market.setAndSendCheckoutStep = function (step) {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:setAction', 'checkout', { step: step });
+  getGa()('send', 'pageview');
+};
+
+me.market.setAndSendPurchase = function (purchaseInfo) {
+  ensureEnhancedEcommerceRequired();
+  getGa()('ec:setAction', 'purchase', purchaseInfo);
+  getGa()('send', 'pageview');
+};
+
+/**
+ * Setup a click handler on an element to execute a function and wait for its
+ * resolution before retriggering the click event.
+ * this is designed to be used with links which navigate the user away.
+ *
+ * e.g. GAUtil.setupAnchorTrackingEvent(GAUtil.trackEvent(
+ *        {category: 'x', action: 'y', label: 'z', timeout: 500}),
+ *        '.navigate-away-button');
+ * will attempt to track the event {x,y,z} when .navigate-away-button is clicked, but
+ * will only wait 500 for the event's promise to resolve before redirecting.
+ *
+ * @param trackingFunction function which returns a promise. If a promise isn't
+ *                         returned, the anchor will be clicked immediately.
+ * @param selector string to determine which elements to attach event handler to.
+ * @param event to fire tracking function on. defaults to 'click'
+ */
+me.setupAnchorTrackingEvent = function (trackingFunction, selector, event) {
+  event = event || 'click';
+  var handler = function handler(e) {
+    var promise = trackingFunction();
+    if (promise && typeof promise.always === 'function') {
+      promise.always(function () {
+        // $('a').trigger('click') doesn't follow anchors surprisingly. For anchors,
+        // call the underlying click() function.
+        if ((0, _jquery2.default)(e.target).is('a') && event === 'click') {
+          e.target.click();
+        } else {
+          (0, _jquery2.default)(e.target).trigger(event);
+        }
+      });
+      return false;
+    }
+    return true;
+  };
+  (0, _jquery2.default)(selector).one(event, handler);
+};
+
+exports.default = me;
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_85__;
+
+/***/ })
+
+/******/ })});;

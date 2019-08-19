@@ -1,0 +1,100 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-drawer-Filter-placeholder {
+  cursor: text;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 14px;
+  width: 100%;
+}
+.focus-drawer-Filter-search-icon {
+  display: inline-block;
+  height: 14px;
+  margin-right: 5px;
+  margin-top: -1px;
+  width: 14px;
+  vertical-align: top;
+}
+@media all {
+  .focus-drawer-Filter-search-icon {
+    background:  url("/redesign/global/js/focus/img/search_gray_14x14.png") center;
+    -webkit-background-size: 14px 14px;
+    -moz-background-size: 14px 14px;
+    -o-background-size: 14px 14px;
+    background-size: 14px 14px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-Filter-search-icon {
+    background:  url("/redesign/global/js/focus/img/search_gray_14x14@2x.png") center;
+    -webkit-background-size: 14px 14px;
+    -moz-background-size: 14px 14px;
+    -o-background-size: 14px 14px;
+    background-size: 14px 14px;
+  }
+}
+.focus-drawer-Filter-placeholder-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #ababab;
+  display: inline-block;
+  vertical-align: top;
+}
+.focus-drawer-Filter-container {
+  position: relative;
+}
+.focus-drawer-Filter-input {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  background-color: transparent;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 40px 9px 8px;
+  outline: none;
+  width: 100%;
+}
+.focus-drawer-Filter-input:focus {
+  border-color: #c4c4c4;
+}
+.focus-drawer-Filter-input::-ms-clear {
+  display: none;
+}
+.focus-drawer-Filter-search-clear {
+  cursor: pointer;
+  height: 18px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 18px;
+}
+@media all {
+  .focus-drawer-Filter-search-clear {
+    background:  url("/redesign/global/js/focus/img/search_clear.png") center;
+    -webkit-background-size: 18px 18px;
+    -moz-background-size: 18px 18px;
+    -o-background-size: 18px 18px;
+    background-size: 18px 18px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-Filter-search-clear {
+    background:  url("/redesign/global/js/focus/img/search_clear@2x.png") center;
+    -webkit-background-size: 18px 18px;
+    -moz-background-size: 18px 18px;
+    -o-background-size: 18px 18px;
+    background-size: 18px 18px;
+  }
+}

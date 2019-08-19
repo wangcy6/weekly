@@ -1,0 +1,34 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-NotesView-NotesList-AvatarCircles-AvatarCircles-circle {
+  border-radius: 50%;
+  display: inline-block;
+  min-width: 22px;
+  overflow: hidden;
+  vertical-align: top;
+  height: 22px;
+}
+.focus-NotesView-NotesList-AvatarCircles-AvatarCircles-circle + .focus-NotesView-NotesList-AvatarCircles-AvatarCircles-circle {
+  margin-left: 3px;
+}
+.focus-NotesView-NotesList-AvatarCircles-AvatarCircles-face-image {
+  height: 22px;
+  width: 22px;
+}
+.focus-NotesView-NotesList-AvatarCircles-AvatarCircles-grouped-count {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-color: #d9d9d9;
+  color: #878787;
+  line-height: 22px;
+  text-align: center;
+}

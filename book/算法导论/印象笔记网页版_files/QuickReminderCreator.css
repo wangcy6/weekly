@@ -1,0 +1,74 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-NotesView-RemindersList-QuickReminderCreator-form {
+  height: 40px;
+  padding: 10px 36px 10px 21px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.focus-NotesView-RemindersList-QuickReminderCreator {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #ababab;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  width: 250px;
+  text-overflow: ellipsis;
+}
+.focus-NotesView-RemindersList-QuickReminderCreator-editing .focus-NotesView-RemindersList-QuickReminderCreator {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: caecilia, times, serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #878787;
+  height: 20px;
+}
+.focus-NotesView-RemindersList-QuickReminderCreator-plusIcon {
+  content: '';
+  display: inline-block;
+  margin-right: 6px;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+}
+@media all {
+  .focus-NotesView-RemindersList-QuickReminderCreator-plusIcon {
+    background:  url("/redesign/global/js/focus/img/RemindersList/reminder_plus.png") center;
+    -webkit-background-size: 12px 12px;
+    -moz-background-size: 12px 12px;
+    -o-background-size: 12px 12px;
+    background-size: 12px 12px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-RemindersList-QuickReminderCreator-plusIcon {
+    background:  url("/redesign/global/js/focus/img/RemindersList/reminder_plus@2x.png") center;
+    -webkit-background-size: 12px 12px;
+    -moz-background-size: 12px 12px;
+    -o-background-size: 12px 12px;
+    background-size: 12px 12px;
+  }
+}
+@media all {
+  .focus-NotesView-RemindersList-QuickReminderCreator-editing .focus-NotesView-RemindersList-QuickReminderCreator-plusIcon {
+    background: none;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-RemindersList-QuickReminderCreator-editing .focus-NotesView-RemindersList-QuickReminderCreator-plusIcon {
+    background: none;
+  }
+}

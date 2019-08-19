@@ -1,0 +1,32 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-drawer-BusinessToggle-toggle-buttons {
+  margin: 12px 24px;
+}
+.focus-drawer-BusinessToggle-toggle-button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 2px solid #d1d1d1;
+  white-space: nowrap;
+  color: #ababab;
+  height: 24px;
+  width: 50%;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 5px 8px 0 0;
+  vertical-align: top;
+}
+.focus-drawer-BusinessToggle-toggle-button.focus-drawer-BusinessToggle-selected {
+  color: #2dbe60;
+  border-bottom: 2px solid #28a955;
+}

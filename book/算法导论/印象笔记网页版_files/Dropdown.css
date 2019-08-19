@@ -1,0 +1,24 @@
+/*  ==================================================================================
+    Copyright 2015 Evernote Corporation. All rights reserved.
+
+    React dropdown (.Dropdown)
+
+    Base styling for the React dropdown component.
+    ================================================================================== */
+.Dropdown {
+  position: relative;
+}
+.Dropdown-button {
+  cursor: pointer;
+  outline: none;
+}
+.Dropdown-menu {
+  position: absolute;
+}
+.Dropdown-menu.Dropdown-hidden {
+  display: none;
+  visibility: hidden;
+}
+.Dropdown-menu.Dropdown-fixed {
+  position: fixed;
+}

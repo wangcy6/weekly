@@ -1,0 +1,199 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-OnboardingSurveySelectorComponent-selector-container-low {
+  text-align: center;
+  margin-top: 20px;
+}
+.focus-OnboardingSurveySelectorComponent-selector-container-high {
+  text-align: center;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-only {
+  display: inline-block;
+  margin: 10px;
+  padding: 18px 20px;
+  border: 2px solid #F3F3F3;
+  border-radius: 4px;
+  color: #383838;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: caecilia, times, serif;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-transition: border-color 0.15s ease;
+  -moz-transition: border-color 0.15s ease;
+  -ms-transition: border-color 0.15s ease;
+  -o-transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-only:hover {
+  border: 2px solid #2DBE60;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-only-on {
+  background: #E6F7EC;
+  border: 2px solid #2DBE60;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-illustrated {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  width: 130px;
+  height: 120px;
+  margin: 11px;
+  padding: 78px 15px 5px 15px;
+  border: 2px solid #DEDEDE;
+  border-radius: 4px;
+  color: #383838;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 14px;
+  vertical-align: bottom;
+  background-size: 69px 50px;
+  background-position: center 16px;
+  background-repeat: no-repeat;
+  -webkit-transition: border-color 0.15s ease;
+  -moz-transition: border-color 0.15s ease;
+  -ms-transition: border-color 0.15s ease;
+  -o-transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-illustrated:hover {
+  border: 2px solid #2DBE60;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-illustrated-on {
+  border: 2px solid #2DBE60;
+}
+.focus-OnboardingSurveySelectorComponent-checkmark {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 21px;
+  height: 20px;
+  background-size: 21px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("/redesign/global/img/checkmarkFilled.png");
+  -webkit-transition: all 0.12s ease-in;
+  -moz-transition: all 0.12s ease-in;
+  -ms-transition: all 0.12s ease-in;
+  -o-transition: all 0.12s ease-in;
+  transition: all 0.12s ease-in;
+  transform: scale(0, 0);
+  opacity: 0;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-illustrated-on .focus-OnboardingSurveySelectorComponent-checkmark {
+  -webkit-transition: all 0.12s ease-out;
+  -moz-transition: all 0.12s ease-out;
+  -ms-transition: all 0.12s ease-out;
+  -o-transition: all 0.12s ease-out;
+  transition: all 0.12s ease-out;
+  transform: scale(1, 1);
+  opacity: 1;
+}
+.focus-OnboardingSurveySelectorComponent-checkmark-ghosted {
+  background-image: url("/redesign/global/img/checkmarkFilledGray.png");
+  -webkit-transition: all 0.12s ease-out;
+  -moz-transition: all 0.12s ease-out;
+  -ms-transition: all 0.12s ease-out;
+  -o-transition: all 0.12s ease-out;
+  transition: all 0.12s ease-out;
+  transform: scale(1, 1);
+  opacity: 1;
+}
+.focus-OnboardingSurveySelectorComponent-btn-text-illustrated-on .focus-OnboardingSurveySelectorComponent-checkmark-ghosted {
+  -webkit-transition: all 0.12s ease-in;
+  -moz-transition: all 0.12s ease-in;
+  -ms-transition: all 0.12s ease-in;
+  -o-transition: all 0.12s ease-in;
+  transition: all 0.12s ease-in;
+  transform: scale(0, 0);
+  opacity: 0;
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-notes {
+    background-image: url("/redesign/global/img/onboarding/useitfor_notes.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-notes {
+    background-image: url("/redesign/global/img/onboarding/useitfor_notes@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-todos {
+    background-image: url("/redesign/global/img/onboarding/useitfor_todos.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-todos {
+    background-image: url("/redesign/global/img/onboarding/useitfor_todos@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-ideas {
+    background-image: url("/redesign/global/img/onboarding/useitfor_ideas.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-ideas {
+    background-image: url("/redesign/global/img/onboarding/useitfor_ideas@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-reminders {
+    background-image: url("/redesign/global/img/onboarding/useitfor_reminders.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-reminders {
+    background-image: url("/redesign/global/img/onboarding/useitfor_reminders@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-archive {
+    background-image: url("/redesign/global/img/onboarding/useitfor_bills.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-archive {
+    background-image: url("/redesign/global/img/onboarding/useitfor_bills@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-documents {
+    background-image: url("/redesign/global/img/onboarding/useitfor_docs.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-documents {
+    background-image: url("/redesign/global/img/onboarding/useitfor_docs@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-clips {
+    background-image: url("/redesign/global/img/onboarding/useitfor_clippings.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-clips {
+    background-image: url("/redesign/global/img/onboarding/useitfor_clippings@2x.png");
+  }
+}
+@media all {
+  .focus-OnboardingSurveySelectorComponent-illustration-photos {
+    background-image: url("/redesign/global/img/onboarding/useitfor_album.png");
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-OnboardingSurveySelectorComponent-illustration-photos {
+    background-image: url("/redesign/global/img/onboarding/useitfor_album@2x.png");
+  }
+}

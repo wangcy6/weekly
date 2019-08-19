@@ -1,0 +1,6 @@
+.SelectorOption {
+  cursor: pointer;
+}
+.SelectorOption.SelectorOption-selected {
+  cursor: default;
+}

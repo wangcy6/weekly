@@ -1,0 +1,269 @@
+define("header", ["jquery","ga-util","common"], function(__WEBPACK_EXTERNAL_MODULE_85__, __WEBPACK_EXTERNAL_MODULE_115__, __WEBPACK_EXTERNAL_MODULE_131__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 494);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 115:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_115__;
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* eslint-env browser,node */
+var actionBean = {};
+
+// These checks exist because global.window is undefined when importing in unit tests
+if (global === undefined || global.window === undefined || global.window.__EVERNOTE_ACTIONBEAN__ === undefined) {
+  actionBean = {
+    __errorReadingActionBeanOnWindow: true
+  };
+} else {
+  actionBean = global.window.__EVERNOTE_ACTIONBEAN__;
+}
+
+exports.default = actionBean;
+module.exports = exports["default"];
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ }),
+
+/***/ 131:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_131__;
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 494:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _jquery = __webpack_require__(85);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _common = __webpack_require__(131);
+
+var _gaUtil = __webpack_require__(115);
+
+var _gaUtil2 = _interopRequireDefault(_gaUtil);
+
+var _actionBean = __webpack_require__(129);
+
+var _actionBean2 = _interopRequireDefault(_actionBean);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* eslint-env browser */
+/**
+ * Copyright 2012-2016 Evernote Corporation. All rights reserved.
+ *
+ * Shared header functionality.
+ */
+var menu = (0, _jquery2.default)('.Menu');
+var menuPopover = (0, _jquery2.default)('.Menu-popover');
+var logoutButton = (0, _jquery2.default)('.logout', menu);
+var referralPromo = (0, _jquery2.default)('.referral-promo');
+var earnPoints = (0, _jquery2.default)('.earn-points-link');
+var betaButton = (0, _jquery2.default)('#try-it-button');
+var downloadLink = (0, _jquery2.default)('#header-download-link');
+
+// Hook up webclient beta button
+betaButton.click(function () {
+  _gaUtil2.default.trackEvent('account', 'focus_beta_opt_in', 'header_link');
+  _jquery2.default.post('/Settings.action?enableBeta', function () {
+    window.location.reload();
+  });
+});
+
+// Hook up referral promo tracking
+referralPromo.click(function () {
+  var free = (0, _jquery2.default)(this).hasClass('free');
+  var url = (0, _jquery2.default)(this).attr('href');
+  _gaUtil2.default.trackEvent('clickEvent', 'Refer a Friend', free ? 'free' : 'premium').always(function () {
+    window.location.href = url;
+  });
+  return false;
+});
+
+// Hook up earn points link tracking
+earnPoints.click(function () {
+  var url = (0, _jquery2.default)(this).attr('href');
+  _gaUtil2.default.trackEvent('clickEvent', 'Refer a Friend', 'Earn Points').always(function () {
+    window.location.href = url;
+  });
+  return false;
+});
+
+// hook up download link tracking (WEB-45641)
+downloadLink.click(function () {
+  _gaUtil2.default.trackEvent({
+    category: 'upsells',
+    action: 'engt_web_downloadLink_WEB-45641_v1',
+    label: 'headerMenu_clicked',
+    extraParameters: {
+      dimension8: '1'
+    }
+  });
+});
+
+/**
+ * Turn gear menu on/off by clicking your username / gear icon
+ */
+var toggleMenu = function toggleMenu() {
+  if (!menuPopover.hasClass('is-active')) {
+    _gaUtil2.default.trackEvent({
+      category: 'upsells',
+      action: 'engt_web_downloadLink_WEB-45641_v1',
+      label: 'headerMenu_shown',
+      extraParameters: {
+        dimension8: '1'
+      }
+    });
+  }
+  menuPopover.toggleClass('is-active');
+  menu.toggleClass('is-active');
+};
+
+var onMenuClick = function onMenuClick(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  toggleMenu();
+  return false;
+};
+
+(0, _common.addClickOut)(menuPopover, toggleMenu);
+(0, _common.blockDoubleClick)(logoutButton);
+
+if (_actionBean2.default && _actionBean2.default.headerJson) {
+  var expGroup = _actionBean2.default.headerJson.downloadLinkExpGroup;
+  if (expGroup) {
+    _gaUtil2.default.trackEvent({
+      category: 'split_test',
+      action: 'engt_web_downloadLink_WEB-45641_v1',
+      label: expGroup,
+      extraParameters: {
+        dimension8: '1'
+      }
+    });
+  }
+}
+
+// Hook up menu button to toggle menu
+(0, _jquery2.default)('.Menu-activator').click(onMenuClick);
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_85__;
+
+/***/ })
+
+/******/ })});;

@@ -1,0 +1,105 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-drawer-TagsDrawer-TagInput-input-positioner {
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: visibility 0s .5s;
+  visibility: hidden;
+}
+.focus-drawer-TagsDrawer-TagInput-input-positioner.focus-drawer-TagsDrawer-TagInput-edit-mode {
+  transition: none;
+  visibility: visible;
+}
+.focus-drawer-TagsDrawer-TagInput-input-container {
+  background: #f8f8f8;
+  border: 1px solid #ababab;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0 12px;
+  vertical-align: top;
+  visibility: hidden;
+  width: 372px;
+}
+.focus-drawer-TagsDrawer-TagInput-input-container.focus-drawer-TagsDrawer-TagInput-edit-mode {
+  transition: visibility 0s .5s;
+  visibility: visible;
+}
+.focus-drawer-TagsDrawer-TagInput-input {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  background: #f8f8f8;
+  border: none;
+  color: #4a4a4a;
+  height: 22px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  vertical-align: top;
+  width: 100%;
+}
+.focus-drawer-TagsDrawer-TagInput-input::-ms-clear {
+  display: none;
+}
+.focus-drawer-TagsDrawer-TagInput-icon {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+}
+.focus-drawer-TagsDrawer-TagInput-confirm-icon {
+  height: 16px;
+  margin-left: 12px;
+  margin-top: 4px;
+  transition: opacity 0.2s ease-in-out 0.3s;
+  width: 16px;
+}
+@media all {
+  .focus-drawer-TagsDrawer-TagInput-confirm-icon {
+    background:  url("/redesign/global/js/focus/img/check_button_gray_16x16.png") center;
+    -webkit-background-size: 16px 16px;
+    -moz-background-size: 16px 16px;
+    -o-background-size: 16px 16px;
+    background-size: 16px 16px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-TagsDrawer-TagInput-confirm-icon {
+    background:  url("/redesign/global/js/focus/img/check_button_gray_16x16@2x.png") center;
+    -webkit-background-size: 16px 16px;
+    -moz-background-size: 16px 16px;
+    -o-background-size: 16px 16px;
+    background-size: 16px 16px;
+  }
+}
+.focus-drawer-TagsDrawer-TagInput-confirm-icon.focus-drawer-TagsDrawer-TagInput-hidden {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, visibility 0s 0.2s;
+  visibility: hidden;
+}
+@media all {
+  .focus-drawer-TagsDrawer-TagInput-confirm-icon:hover {
+    background:  url("/redesign/global/js/focus/img/check_button_green_16x16.png") center;
+    -webkit-background-size: 16px 16px;
+    -moz-background-size: 16px 16px;
+    -o-background-size: 16px 16px;
+    background-size: 16px 16px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-TagsDrawer-TagInput-confirm-icon:hover {
+    background:  url("/redesign/global/js/focus/img/check_button_green_16x16@2x.png") center;
+    -webkit-background-size: 16px 16px;
+    -moz-background-size: 16px 16px;
+    -o-background-size: 16px 16px;
+    background-size: 16px 16px;
+  }
+}

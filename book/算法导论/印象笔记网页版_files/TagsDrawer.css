@@ -1,0 +1,80 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-drawer-TagsDrawer-TagsDrawer-header {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #878787;
+  margin: 21px 24px 32px;
+}
+.focus-drawer-TagsDrawer-TagsDrawer-create-tag-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 21px;
+  right: 24px;
+  width: 24px;
+  height: 24px;
+  background-color: red;
+}
+@media all {
+  .focus-drawer-TagsDrawer-TagsDrawer-create-tag-icon {
+    background:  url("/redesign/global/js/focus/img/new_tag_grey.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-TagsDrawer-TagsDrawer-create-tag-icon {
+    background:  url("/redesign/global/js/focus/img/new_tag_grey@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+.focus-drawer-TagsDrawer-TagsDrawer-filter-container {
+  border-bottom: 1px solid #ececec;
+  margin: 0 24px;
+  padding-bottom: 12px;
+}
+.focus-drawer-TagsDrawer-TagsDrawer-body-container {
+  position: relative;
+}
+.focus-drawer-TagsDrawer-TagsDrawer-help-image {
+  height: 64px;
+  width: 93px;
+}
+@media all {
+  .focus-drawer-TagsDrawer-TagsDrawer-help-image {
+    background:  url("/redesign/global/js/focus/img/drawers_empty_state_tags.png") center;
+    -webkit-background-size: 93px 64px;
+    -moz-background-size: 93px 64px;
+    -o-background-size: 93px 64px;
+    background-size: 93px 64px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-drawer-TagsDrawer-TagsDrawer-help-image {
+    background:  url("/redesign/global/js/focus/img/drawers_empty_state_tags@2x.png") center;
+    -webkit-background-size: 93px 64px;
+    -moz-background-size: 93px 64px;
+    -o-background-size: 93px 64px;
+    background-size: 93px 64px;
+  }
+}
+.focus-drawer-TagsDrawer-TagsDrawer-bold {
+  font-weight: bold;
+}
+.focus-drawer-TagsDrawer-TagsDrawer-no-text-transform {
+  text-transform: none;
+}

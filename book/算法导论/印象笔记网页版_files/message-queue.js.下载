@@ -1,0 +1,177 @@
+define("message-queue", ["es6","preconditions"], function(__WEBPACK_EXTERNAL_MODULE_132__, __WEBPACK_EXTERNAL_MODULE_135__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 528);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 132:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_132__;
+
+/***/ }),
+
+/***/ 135:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_135__;
+
+/***/ }),
+
+/***/ 528:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _preconditions = __webpack_require__(135);
+
+var _preconditions2 = _interopRequireDefault(_preconditions);
+
+__webpack_require__(132);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * A message queue which allows subscribing to message topics and publishing
+ * messages to those topics. There may be any number of unique queues, and
+ * subscribing/ publishing will be local to that queue.
+ */
+var MessageQueue = function () {
+  function MessageQueue() {
+    _classCallCheck(this, MessageQueue);
+
+    this._handlersByTopic = {};
+  }
+
+  _createClass(MessageQueue, [{
+    key: '_invokeHandlers',
+    value: function _invokeHandlers(topic, message) {
+      var self = this;
+      var handlers = self._handlersByTopic[topic];
+      //
+      if (handlers) {
+        handlers.forEach(function (handler) {
+          // TODO: handle exceptions to make sure a failing handler
+          // doesn't break the chain?
+          handler(message);
+        });
+      }
+    }
+
+    /**
+     * Publish a message to a topic.
+     *
+     * @param topic The topic to publish the message top
+     * @param message The message to publish
+     */
+
+  }, {
+    key: 'publish',
+    value: function publish(topic, message) {
+      _preconditions2.default.assertIsString(topic);
+      _preconditions2.default.assertIsNotNull(message);
+      var self = this;
+      self._invokeHandlers(topic, message);
+    }
+
+    /**
+     * Subscribe to receive notifications for a topic
+     * Events published to the topic will be passed
+     * to the provided handler.
+     *
+     * @param topic The topic to subscribe to messages on
+     */
+
+  }, {
+    key: 'subscribe',
+    value: function subscribe(topic, handler) {
+      _preconditions2.default.assertIsString(topic);
+      _preconditions2.default.assertIsFunction(handler);
+      var self = this;
+      self._handlersByTopic[topic] = self._handlersByTopic[topic] || [];
+      self._handlersByTopic[topic].push(handler);
+    }
+  }]);
+
+  return MessageQueue;
+}();
+
+exports.default = MessageQueue;
+module.exports = exports['default'];
+
+/***/ })
+
+/******/ })});;

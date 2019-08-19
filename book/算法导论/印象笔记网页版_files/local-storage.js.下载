@@ -1,0 +1,216 @@
+define("local-storage", ["jquery","cookies"], function(__WEBPACK_EXTERNAL_MODULE_85__, __WEBPACK_EXTERNAL_MODULE_277__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 538);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 277:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_277__;
+
+/***/ }),
+
+/***/ 538:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _jquery = __webpack_require__(85);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _cookies = __webpack_require__(277);
+
+var _cookies2 = _interopRequireDefault(_cookies);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* eslint-env browser */
+
+
+var supportsLocalStorage = void 0;
+var isSafariPrivateBrowsing = false;
+var storage = {};
+var prefix = 'en_store_';
+
+function getStdLocalStorage() {
+  return {
+    getItem: function getItem(key) {
+      return localStorage.getItem(prefix + key);
+    },
+    setItem: function setItem(key, data) {
+      localStorage.setItem(prefix + key, data);
+    },
+    removeItem: function removeItem(key) {
+      localStorage.removeItem(prefix + key);
+    }
+  };
+}
+
+function getCookieLocalStorage() {
+  return {
+    getItem: function getItem(key) {
+      return _cookies2.default.get(prefix + key) || null;
+    },
+    setItem: function setItem(key, data) {
+      _cookies2.default.set(prefix + key, data, -1);
+    },
+    removeItem: function removeItem(key) {
+      _cookies2.default.unset(prefix + key);
+    }
+  };
+}
+
+function getInMemory() {
+  return {
+    setItem: function setItem(key, value) {
+      storage[key] = value;
+    },
+    removeItem: function removeItem(key) {
+      delete storage[key];
+    },
+    getItem: function getItem(key) {
+      return storage[key] || null;
+    }
+  };
+}
+
+/**
+ * obtain default tree of local storage structs
+ * priority is:
+ *   - localStorage
+ *   - in memory iff localStorage is available but with errors
+ *   - cookies
+ *   - in memory
+ */
+function getLocalStorageStructDefault() {
+  if (supportsLocalStorage) {
+    if (!isSafariPrivateBrowsing) {
+      return getStdLocalStorage();
+    } else {
+      // localStorage is available but not fully functional, usually as a result of
+      // running out of quota or Safari setting the quota to 0 in private browsing
+      return getInMemory();
+    }
+  } else if (document.cookie) {
+    // local storage is not supported, use cookies
+    return getCookieLocalStorage();
+  } else {
+    // We don't have anywhere else to store things, return in memory impl.
+    return getInMemory();
+  }
+}
+
+var LocalStorage = function LocalStorage() {
+  _classCallCheck(this, LocalStorage);
+
+  try {
+    supportsLocalStorage = 'localStorage' in window && window.localStorage !== null;
+  } catch (e) {
+    supportsLocalStorage = false;
+  }
+
+  /* heuristic for checking safari private browsing. safari sets quota to 0 in private
+   * resulting in a quota error being thrown whenever an item is attempted to be set
+   * This will catch any error in localStorage functionality, though legitimate
+   * localStorage failures are very difficult to come by.
+   */
+  try {
+    localStorage.setItem('test', 'test');
+    localStorage.removeItem('test');
+  } catch (e) {
+    isSafariPrivateBrowsing = true;
+  }
+
+  storage = {
+    isAvailable: function isAvailable() {
+      return supportsLocalStorage;
+    }
+  };
+
+  return _jquery2.default.extend(storage, getLocalStorageStructDefault());
+};
+
+exports.default = new LocalStorage();
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_85__;
+
+/***/ })
+
+/******/ })});;

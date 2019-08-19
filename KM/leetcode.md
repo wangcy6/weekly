@@ -1,10 +1,22 @@
-| #    | Title                                                        | c++                                                          | go                                           | c    | Difficulty | Tag   |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------- | ---- | ---------- | ----- |
-| 001  | 83. Remove Duplicates   from Sorted List                     | [c++](https://www.jianshu.com/p/af402dc6d84e)                | [go](https://www.jianshu.com/p/af402dc6d84e) | c    | Easy       | List  |
-| 002  | 148.sort-list                                                | [c++](https://www.jianshu.com/p/af402dc6d84e)                | [go](https://www.jianshu.com/p/af402dc6d84e) | c    | Medium     | List  |
-| 003  | 162.find-peak-element                                        | [c++](https://www.jianshu.com/p/0076f5859d9d)                | [go](https://www.jianshu.com/p/0076f5859d9d) |      | Medium     | Array |
-| 004  | 232. Implement Queue   using Stacks                          | [ c++](https://www.jianshu.com/p/167961c4f096)               |                                              |      | Medium     |       |
-| 005  | [103. Binary Tree Zigzag Level Order Traversal](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) | [c++](https://github.com/wangcy6/leetcode/blob/master/005_tree_103.zigzagLevelOrder.md) | go                                           |      | Medium     | tree  |
+# leetocde 
+
+## 001 快速排序
+
+心里：
+
+- 出题者考察不是你死记能力，如果大学学背诵一遍，肯定过不了，因为上面代码缺陷这个你能解决吗，大学教程很多错误地方。你感觉没问题，就是很大的问题。
+- 假如是你，别人按照课本内容写一遍，你认为他真的懂吗？这是比赛，拿出真货来！
+- 你心里想太简单了，出题者是不是，有问题，对他们进行鄙视！
+
+
+
+细节：
+
+- 你看到链表从第一位置 移动最后一个位置，这是逻辑变化。
+
+  其实每个元素地址没有发生。
+
+  链表swap只能是相邻位置元素，不能跨越n个元素 for循环就是唯一遍历方法。
 
 
 

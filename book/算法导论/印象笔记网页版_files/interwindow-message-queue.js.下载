@@ -1,0 +1,257 @@
+define("interwindow-message-queue", ["jquery","es6","local-storage","preconditions","message-queue"], function(__WEBPACK_EXTERNAL_MODULE_85__, __WEBPACK_EXTERNAL_MODULE_132__, __WEBPACK_EXTERNAL_MODULE_134__, __WEBPACK_EXTERNAL_MODULE_135__, __WEBPACK_EXTERNAL_MODULE_284__) { return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 534);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 132:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_132__;
+
+/***/ }),
+
+/***/ 134:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_134__;
+
+/***/ }),
+
+/***/ 135:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_135__;
+
+/***/ }),
+
+/***/ 284:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_284__;
+
+/***/ }),
+
+/***/ 534:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* eslint-env browser */
+
+
+var _jquery = __webpack_require__(85);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _enMessageQueue = __webpack_require__(284);
+
+var _enMessageQueue2 = _interopRequireDefault(_enMessageQueue);
+
+var _preconditions = __webpack_require__(135);
+
+var _preconditions2 = _interopRequireDefault(_preconditions);
+
+var _localStorage = __webpack_require__(134);
+
+var _localStorage2 = _interopRequireDefault(_localStorage);
+
+__webpack_require__(132);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LOCAL_STORAGE_PREFIX = 'ENMQ_';
+
+/**
+ * An inter-window message queue which allows subscribing to message topics and
+ * publishing messages to those topics that can be recieved in any window of the
+ * current browser.
+ *
+ * The inter-window message queue is a singleton per window, as local storage
+ * change events cannot be scoped to a particular object in other windows.
+ */
+
+var InterwindowMessageQueue = function () {
+  function InterwindowMessageQueue() {
+    _classCallCheck(this, InterwindowMessageQueue);
+
+    var self = this;
+    self._mq = new _enMessageQueue2.default();
+
+    // set up the storage change event handler
+    (0, _jquery2.default)(window).bind('storage', function (storageEvent) {
+      self._handleInterWindowMessage(storageEvent.originalEvent);
+    });
+  }
+
+  _createClass(InterwindowMessageQueue, [{
+    key: '_handleInterWindowMessage',
+    value: function _handleInterWindowMessage(storageEvent) {
+      var self = this;
+      _preconditions2.default.assertIsNotNull(storageEvent);
+      if (storageEvent.newValue === null) {
+        // storage events are only fired when the value changes, so each time
+        // we want to add an event to a topic, we first clear the current
+        // value. Ignore those refresh events
+        return;
+      }
+      if (storageEvent.key.indexOf(LOCAL_STORAGE_PREFIX) !== 0) {
+        // this isn't one of our topics, ignore
+        return;
+      }
+      var topic = storageEvent.key.substring(LOCAL_STORAGE_PREFIX.length);
+      var message = storageEvent.newValue;
+
+      try {
+        message = JSON.parse(message);
+      } catch (e) {
+        // Not parseable to JSON, pass on the string value
+      }
+
+      self._mq._invokeHandlers(topic, message);
+    }
+
+    /**
+     * Publish a message to a topic.
+     *
+     * @param topic The topic to publish the message to
+     * @param message The message to publish. This must be either a String or
+     *                an object that can be serialized to JSON.
+     * @param publishToCurrentWindow  Whether to notify subscribers in this window
+     */
+
+  }, {
+    key: 'publish',
+    value: function publish(topic, message, publishToCurrentWindow) {
+      _preconditions2.default.assertIsString(topic);
+      _preconditions2.default.assertIsNotNull(message);
+      var self = this;
+
+      var key = LOCAL_STORAGE_PREFIX + topic;
+      var serializedMessage = message;
+
+      if ((typeof message === 'undefined' ? 'undefined' : _typeof(message)) === 'object') {
+        serializedMessage = JSON.stringify(message);
+      } else if (typeof message !== 'string') {
+        throw new Error('Messages must be either serializable objects or strings');
+      }
+
+      // storage events are only fired when the value changes, so each time
+      // we want to add an event to a topic, we first clear the current
+      // value
+      _localStorage2.default.removeItem(key);
+      _localStorage2.default.setItem(key, serializedMessage);
+
+      if (publishToCurrentWindow) {
+        self._mq.publish(topic, message);
+      }
+    }
+  }, {
+    key: 'subscribe',
+    value: function subscribe(topic, handler) {
+      var self = this;
+      self._mq.subscribe(topic, handler);
+    }
+
+    /**
+     * Get the last message published to a topic. May return undefined if no
+     * messages have been sent to the given topic.
+     */
+
+  }, {
+    key: 'peek',
+    value: function peek(topic) {
+      var key = LOCAL_STORAGE_PREFIX + topic;
+      return _localStorage2.default.getItem(key);
+    }
+  }]);
+
+  return InterwindowMessageQueue;
+}();
+
+exports.default = new InterwindowMessageQueue();
+module.exports = exports['default'];
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_85__;
+
+/***/ })
+
+/******/ })});;

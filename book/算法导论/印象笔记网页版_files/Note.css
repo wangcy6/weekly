@@ -1,0 +1,368 @@
+/* Copyright 2012, Evernote Corp
+ *
+ * author: Andrei Thorp, athorp@evernote.com
+ */
+/*** Evernote CSS Framework ***/
+/* "Evernote Green" */
+.focus-NotesView-Note {
+  height: 120px;
+  cursor: pointer;
+  margin: 0 auto;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+  transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noTransition {
+  transition: none;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImages {
+  height: 96px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImagesOrText {
+  height: 58px;
+}
+.focus-NotesView-Note:hover .focus-NotesView-Note-date,
+.focus-NotesView-Note:hover .focus-NotesView-Note-noteTitle,
+.focus-NotesView-Note:hover .focus-NotesView-Note-snippet {
+  color: #fff;
+}
+.focus-NotesView-Note .focus-NotesView-Note-innerSnippetContainer {
+  position: relative;
+  height: 100%;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetThumbnail {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  max-width: 96px;
+  max-height: 96px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-hoverOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  background-color: rgba(43, 181, 92, 0.9);
+  transition: opacity 0.1s ease-in-out;
+}
+.focus-NotesView-Note:hover .focus-NotesView-Note-hoverOverlay {
+  opacity: 1;
+}
+.focus-NotesView-Note .focus-NotesView-Note-selectOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.focus-NotesView-Note.focus-NotesView-Note-selected .focus-NotesView-Note-selectOverlay {
+  border: 3px solid #d9d9d9;
+}
+.focus-NotesView-Note.focus-NotesView-Note-selected:hover .focus-NotesView-Note-selectOverlay {
+  border: none;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetContent {
+  color: #878787;
+  left: 24px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  position: absolute;
+  right: 24px;
+  top: 12px;
+  word-wrap: break-word;
+  bottom: 15px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImages .focus-NotesView-Note-snippetContent {
+  bottom: 8px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImagesOrText .focus-NotesView-Note-snippetContent {
+  bottom: 0;
+}
+.focus-NotesView-Note.focus-NotesView-Note-hasImagesAndText.focus-NotesView-Note-hasPresentAvatars .focus-NotesView-Note-snippetContent {
+  bottom: 29px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-date,
+.focus-NotesView-Note .focus-NotesView-Note-snippet {
+  transition: color 0.1s ease-in-out;
+}
+.focus-NotesView-Note.focus-NotesView-Note-hasThumbnail .focus-NotesView-Note-date,
+.focus-NotesView-Note.focus-NotesView-Note-hasThumbnail .focus-NotesView-Note-snippet {
+  margin-right: 96px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-hasThumbnail .focus-NotesView-Note-noteTitle {
+  width: 200px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImages.focus-NotesView-Note-hasPresentAvatars .focus-NotesView-Note-noteTitle,
+.focus-NotesView-Note.focus-NotesView-Note-noImagesOrText.focus-NotesView-Note-hasPresentAvatars .focus-NotesView-Note-noteTitle {
+  width: 240px;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImages.focus-NotesView-Note-hasPresentAvatars:hover .focus-NotesView-Note-noteTitle,
+.focus-NotesView-Note.focus-NotesView-Note-noImagesOrText.focus-NotesView-Note-hasPresentAvatars:hover .focus-NotesView-Note-noteTitle,
+.focus-NotesView-Note:hover .focus-NotesView-Note-noteTitle {
+  width: 180px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-noteTitle {
+  transition: color 0.1s ease-in-out, width 0s ease-in-out 0.1s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: caecilia, times, serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4a4a4a;
+  margin-bottom: 4px;
+  max-height: 40px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  line-height: 20px;
+  width: 302px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-date {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippet {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetDivider {
+  border-top: 1px solid #ececec;
+  left: 20px;
+  right: 20px;
+  top: 0;
+  position: absolute;
+}
+.focus-NotesView-Note:hover .focus-NotesView-Note-snippetDivider {
+  border-top: none;
+}
+.focus-NotesView-Note .focus-NotesView-Note-avatars {
+  bottom: 10px;
+  left: 20px;
+  position: absolute;
+  transition: opacity 0.1s ease-in-out;
+}
+.focus-NotesView-Note.focus-NotesView-Note-noImages .focus-NotesView-Note-avatars,
+.focus-NotesView-Note.focus-NotesView-Note-noImagesOrText .focus-NotesView-Note-avatars {
+  bottom: auto;
+  left: auto;
+  right: 12px;
+  top: 6px;
+}
+.focus-NotesView-Note:hover .focus-NotesView-Note-avatars {
+  opacity: 0;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-iconContainer {
+  display: inline-block;
+  vertical-align: top;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverButton {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: gotham, helvetica, arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  background: none;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin: 16px 16px 0 0;
+  vertical-align: top;
+  outline: none;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverButton:hover,
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverButton:active {
+  background-color: #fff;
+  border-color: transparent;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverButton:hover {
+  color: #2dbe60;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverButton:active {
+  color: #28a955;
+}
+.focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-hoverIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin: 8px 12px 0 0;
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat {
+    background:  url("/redesign/global/js/focus/img/work_chat_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat {
+    background:  url("/redesign/global/js/focus/img/work_chat_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat:hover,
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat.active {
+    background:  url("/redesign/global/js/focus/img/work_chat_solid_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat:hover,
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-workChat.active {
+    background:  url("/redesign/global/js/focus/img/work_chat_solid_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder {
+    background:  url("/redesign/global/js/focus/img/reminder_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder {
+    background:  url("/redesign/global/js/focus/img/reminder_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder:hover,
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder.active {
+    background:  url("/redesign/global/js/focus/img/reminder_solid_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder:hover,
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-reminder.active {
+    background:  url("/redesign/global/js/focus/img/reminder_solid_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut {
+    background:  url("/redesign/global/js/focus/img/shortcuts_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut {
+    background:  url("/redesign/global/js/focus/img/shortcuts_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut:hover,
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut.active {
+    background:  url("/redesign/global/js/focus/img/shortcuts_solid_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut:hover,
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-shortcut.active {
+    background:  url("/redesign/global/js/focus/img/shortcuts_solid_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete {
+    background:  url("/redesign/global/js/focus/img/delete_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete {
+    background:  url("/redesign/global/js/focus/img/delete_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all {
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete:hover,
+  .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete.active {
+    background:  url("/redesign/global/js/focus/img/delete_solid_white_24x24.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+@media all and (-moz-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (-webkit-min-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5), all and (min-resolution: 1.5dppx) {
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete:hover,
+  html:not(.ie8) .focus-NotesView-Note .focus-NotesView-Note-snippetHoverContainer .focus-NotesView-Note-delete.active {
+    background:  url("/redesign/global/js/focus/img/delete_solid_white_24x24@2x.png") center;
+    -webkit-background-size: 24px 24px;
+    -moz-background-size: 24px 24px;
+    -o-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}
+.focus-NotesView-Note:hover .focus-NotesView-Note-snippetHoverContainer {
+  opacity: 1;
+}
