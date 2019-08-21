@@ -11,10 +11,9 @@
   git clone https://github.com/wangcy6/leetcode-1.git
 
 说明：
-1. 不同用户下工程
-2. fork的代码更新，我clone代码不会自动更新。
+> azl397985856/leetcode项目更新，wangcy6/leetcode-1.git 代码不会自动更新。
 
-### 同步更新
+### 同步更新 
 
 
 git remote -v
@@ -22,42 +21,30 @@ git remote -v
 git remote add upstream https://github.com/azl397985856/leetcode.git
 
 git fetch upstream
-git merge upstream/master
-git push --提交代码到到自己分支
 
 
-### 合并代码
+
+master分支一般用来发布稳定版本，dev分支（开发分支）用来发布开发版本。
+
+
+
+git merge upstream/master// 稳定版本分支
+
+git merge upstream/daily-branch//开发版本分支
+
+
+
+
+
+
+
+
 
 https://backlog.com/git-tutorial/cn/stepup/stepup2_7.html
 https://happygitwithr.com/pull-tricky.html
 
 
 
-
-**Merging is not possible because you have unmerged files**
-你代码不是最新的，别人已经更新该文件，你当前文件是old的。你当前版本002 ，别人更新008
- 团队中两人同时fetch了一个分支。 第一个人修改后提交，第二个人提交就失败
-
-1. 查看冲突 
- - git diff 
- -  git status 可以用来查看仓库的状态。
-   撤销本地修改
-    有三个状态，三个出来方案
-    git checkout  --2019-06-14.md
-    git reset HEAD 2019-06-14.md
-
-```
-git checkout -- filepathname    //  放弃某个文件
-git checkout .                  // 放弃所有文件
-```
-
-2. 修改冲突
-
-   ```c
-   git reset --hard HEAD^ 
-   ```
-   
-   https://cs.xieyonghui.com/git/git-cancel-commit_77.html
 ### 提交代码
 https://www.atlassian.com/git/tutorials/making-a-pull-request#how-it-works
 
@@ -71,24 +58,63 @@ Pull Request 的流程:
 - 切换分支
   git checkout -b daily-branch
   git branch
+  
 - 添加代码 
   git add 2019-06-14.md 
   git commit  -am "#add"
+  
 - 提交代码
+  
+  git checkout daily-branch
+  
   git push --set-upstream origin daily-branch
+
+​       git push origin daily-branch //分支提交到主干
+
+
+
 - 重新登录GitHub并切换到work分支，点击compare&Pull Request
 
-#### 报错1 git push
-fatal: The current branch daily-branch has no upstream branch.
-To push the current branch and set the remote as upstream, use
 
-    git push --set-upstream origin daily-branch
-    git push origin some-branch
+
+### 合并代码
+
+#### 合并自己创建的工程
+
+
+
+$ git checkout master
+$ git merge hotfix
+
+https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424
+
+### 查看提交状态
+
+- git status 可以用来查看仓库的状态。
+  撤销本地修改
+   有三个状态，三个出来方案
+   git checkout  --2019-06-14.md
+   git reset HEAD 2019-06-14.md
+
+```
+git checkout -- filepathname    //  放弃某个文件
+git checkout .                  // 放弃所有文件
+```
+
+Git用`<<<<<<<`，`=======`，`>>>>>>>`标记出不同分支的内容，我们修改如下后保存：
+
+
 
 
 
 ### 常见错误
 
+-  git push 提交代码
+**fatal: The current branch daily-branch has no upstream branch.**
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin daily-branch
+    git push origin some-branch
 -  git pull --修改了冲突文件，但是没有提交代码
 
  git pull --tags origin master
