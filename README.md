@@ -16,6 +16,15 @@
 
 
 
+# 周报
+
+## 2019
+
+**八月**：[第 1 期](https://www.jianshu.com/p/681b70df9320):[第 2期](https://www.jianshu.com/p/a735b8ae3ac3)  [第 3期](https://www.jianshu.com/p/4d3f6062b97):[第 4期](https://mp.weixin.qq.com/s/JguScQhyAeAQK5ZFxqey7w)
+
+
+
+
 #  目录索引
 
 ## KM(Knowledge Map)  知识地图
@@ -38,13 +47,7 @@
 
 
 
-# 周报
 
-## 2019
-
-**八月**：[第 33周](https://www.jianshu.com/p/4d3f6062b97):high_brightness：
-**五月**：[第 1 期](https://www.jianshu.com/p/a735b8ae3ac3) 
-**二月**：[第 1 期](https://www.jianshu.com/p/681b70df9320)
 
 # 关于我：
 

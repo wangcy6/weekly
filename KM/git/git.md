@@ -30,7 +30,7 @@ master分支一般用来发布稳定版本，dev分支（开发分支）用来�
 
 git merge upstream/master// 稳定版本分支
 
-git merge upstream/daily-branch//开发版本分支
+git merge upstream/daily-branch //开发版本分支
 
 
 
