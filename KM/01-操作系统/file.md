@@ -30,7 +30,7 @@
 
 # 基础篇
 
-### 文件系统
+## 文件系统
 
 
 
@@ -50,9 +50,13 @@ Linux 下的文件系统主要可分为三大块：
 
 ![1568019662577.jpg](https://upload-images.jianshu.io/upload_images/1837968-14fbf22dc1ac6cb1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+![](https://pic3.zhimg.com/80/v2-212ca855ac2dad87983b23b6539e21ce_hd.jpg)
+
+### 第一个问题：文件系统类型有哪些？
+
+> 字符设备、块设备、网络设备
 
 
-第一个问题：文件系统类型有哪些？
 
 ```shell
  df -h
@@ -70,14 +74,29 @@ tmpfs                     1.6G     0  1.6G   0% /run/user/888
 tmpfs是最好的基于RAM的文件系统。是一种基于内存的文件系
 /dev目录下的每一个文件都对应的是一个设备
 proc文件系统为操作系统本身和应用程序之间的通信提供了一个安全的接口
-
+https://blog.csdn.net/qq_27840681/article/details/77567094
 ```
 
+.上层应用如何调用底层驱动？
+
+## VFS
 
 
-### VFS
 
 文件系统是如何运行的 
+
+>那么文件系统是如何运行的呢？这与操作系统的文件数据有关。较新的操作系统的文件数据
+>除了文件实际内容外， 通常含有非常多的属性，
+>
+>例如 Linux 操作系统的文件权限（rwx） 与文
+>件属性（拥有者、群组、时间参数等） 。
+>
+> 文件系统通常会将这两部份的数据分别存放在不同
+>的区块，权限与属性放置到 inode 中，
+>
+>至于实际数据则放置到 data block 区块中。 另外，还
+>有一个超级区块 （superblock） 会记录整个文件系统的整体信息，包括 inode 与 block 的总
+>量、使用量、剩余量等 
 
 - 构成
 
@@ -158,9 +177,11 @@ VFS （virtual File System）
 
 ![](https://pic1.zhimg.com/80/v2-b5d3e0b7b1f2a1aecb89ed0c93ac907c_hd.jpg)
 
-
+![](https://pic3.zhimg.com/80/v2-1bbe92018e1fb7bb11cc5b11e806c43a_hd.jpg)
 
 ![](http://www.opsers.org/wp-content/uploads/2011/04/inode_thumb.png)
+
+
 
 ### inode 结构
 
@@ -213,7 +234,7 @@ struct ext4_inode {
 };
 ```
 
-inode保存了文件系统中的一个**文件系统对象**（包括[文件](https://zh.wikipedia.org/wiki/计算机文件)、[目录](https://zh.wikipedia.org/wiki/目录_(文件系统))、[设备文件](https://zh.wikipedia.org/wiki/设备文件)、[socket](https://zh.wikipedia.org/wiki/Unix域套接字)、[管道](https://zh.wikipedia.org/wiki/管道_(Unix)), 等等）的元信息数据，但不包括数据内容或者文件名
+inode保存了文件系统中的一个**文件系统对象**（包括[文件](https://zh.wikipedia.org/wiki/计算机文件)、[目录](https://zh.wikipedia.org/wiki/目录_(文件系统))、[设备文件](https://zh.wikipedia.org/wiki/设备文件)、[socket](https://zh.wikipedia.org/wiki/Unix域套接字)、[管道](https://zh.wikipedia.org/wiki/管道_(Unix)), 等等）的元信息数据，**但不包括数据内容或者文件名**
 
 - inode 编号
 
@@ -462,9 +483,12 @@ df -i;df
 
 ### 实验：文件的打开过程
 
+### 实验 设备文件的类型
+
 
 
 # 参考
 
 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html
 
+https://www.cnblogs.com/xiaojiang1025/p/6363626.html
