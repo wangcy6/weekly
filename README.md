@@ -23,11 +23,17 @@
 ![image.png](https://upload-images.jianshu.io/upload_images/1837968-c2aa6ae4762bbc12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-第二题：(操作系统-网络))[问题 手绘TCP状态机?](daily-interview/3.你对B+Tree的理解.md) --答案 呆整理
+第二题：(操作系统-网络))[问题 手绘TCP状态机?](daily-interview/3.你对B+Tree的理解.md) --[答案](https://mp.weixin.qq.com/s/zVGKBkZ_jzOrowS5k0a7rg)
+
+There are two reasons for the TIME_WAIT state:
+一、保证TCP协议的全双工连接能够可靠关闭
+To implement TCP's full-duplex connection termination reliably
+二、保证这次连接的重复数据段从网络中消失
+To allow old duplicate segments to expire in the network
 
 
-# 历史题目
-
+# 后续题目
+![操作系统十一问题](./images/201909/ask11.jpg)
 
 # 周报
 
@@ -39,6 +45,7 @@
 ### KM(Knowledge Map)  知识地图
 
 #### 操作系统
+
 
 
 
