@@ -1,17 +1,6 @@
 
 
 
-
-# weekly 
-
-每周技术总结
-
-如果你看到好的链接，欢迎通过 [issue](https://github.com/wangcy6/weekly/issues/) 提交。
-
-程序员技能图谱 https://github.com/TeamStuQ/skill-map
-
-
-
 # daily-interview 
 
 每日一题 ，如果你看到好的题目，欢迎通过 [issue](https://github.com/wangcy6/weekly/issues/) 提交。
@@ -20,15 +9,24 @@
 - 坚持每天花10分钟左右学习。每天进步一点点，成功就会在眼前。
 - 不要等到火烧眉毛狂刷题，平时多烧香，面试才不慌。
 
-###  今日面试题
+- 每周技术总结
+
+  程序员技能图谱 https://github.com/TeamStuQ/skill-map
 
 
+###  每日一题
 
-###  本周主题
 
-- [操作系统原理](https://mooc.study.163.com/learn/1000002008?tid=2402970013#/learn/testlist)(40%)
-- 极客-Linux性能优化（60%）
+第一题：(数据结构) [问题：谈谈你对B+Tree的理解?](daily-interview/3.你对B+Tree的理解.md) -- [答案](https://mp.weixin.qq.com/s/gM97XLcB0JMI_a2m8UuNpg)
 
+![image.png](https://upload-images.jianshu.io/upload_images/1837968-d5d5e7db85a22ec2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1837968-c2aa6ae4762bbc12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+第二题：(操作系统-网络))[问题 手绘TCP状态机?](daily-interview/3.你对B+Tree的理解.md) --答案 呆整理
+
+
+# 历史题目
 
 
 # 周报
@@ -37,17 +35,8 @@
 
 **八月**：[第 1 期](https://www.jianshu.com/p/681b70df9320):[第 2期](https://www.jianshu.com/p/a735b8ae3ac3)  [第 3期](https://www.jianshu.com/p/4d3f6062b97):[第 4期](https://mp.weixin.qq.com/s/JguScQhyAeAQK5ZFxqey7w)
 
-# 历史面试题
 
-
-
-#  目录索引
-
-### daily-interview 每日面试题
-
-
-
-## KM(Knowledge Map)  知识地图
+### KM(Knowledge Map)  知识地图
 
 #### 操作系统
 
