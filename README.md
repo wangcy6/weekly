@@ -75,7 +75,7 @@ To allow old duplicate segments to expire in the network
 
   
 
-  ![image](https://user-images.githubusercontent.com/5937331/63406734-4f987d00-c41d-11e9-84f1-a527dd6cd5fe.png)
+  ![微信号](https://user-images.githubusercontent.com/5937331/63406734-4f987d00-c41d-11e9-84f1-a527dd6cd5fe.png)
 
 
 
