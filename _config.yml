@@ -5,7 +5,7 @@ header-img: img/post-bg-desk.jpg
 email: wang_cyi@163.com
 description: "Every failure is leading towards success."
 keyword: "BY, BY Blog, Troy的博客, 程序员思维,认知升级"
-url: "http://wangcy6.github.io"          # your host, for absolute URL
+url: "http://weekly.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/qiubaiying/qiubaiying.github.io.git" # you code repository
 
