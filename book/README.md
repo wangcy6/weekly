@@ -52,6 +52,8 @@
 
 
 
+![左耳多耗子专栏](../images/201909/左耳多耗子专栏.jpg)
+
 ## 左耳朵耗子推荐经典资料
 
 ### 基础理论
@@ -173,7 +175,7 @@
 FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Paterson。它是关于理论上能做出的功能最强的共识算法会受到怎样的限制的讨论
 
 ### 论文
-
+- raft
 阅读[ Dynamo 论文](http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)和帕特·赫尔兰（Pat Helland）的经典论文[ Life Beyond Transactions ](http://www.cloudtran.com/pdfs/LifeBeyondDistTRX.pdf)能获很得大启发。
 
 
