@@ -1,7 +1,9 @@
 
 
 
-# daily-interview 
+# 食用指南
+
+##  daily-interview 每日一题 
 
 每日一题 ，如果你看到好的题目，欢迎通过 [issue](https://github.com/wangcy6/weekly/issues/) 提交。
 
@@ -11,9 +13,17 @@
 
 - 不要等到火烧眉毛狂刷题，平时多烧香，面试才不慌。
 
-- 每周技术总结 程序员技能图谱 https://github.com/TeamStuQ/skill-map
+##  ARTS --每周总结 
 
 
+## KM(Knowledge Map)  知识地图
+
+程序员技能图谱 https://github.com/TeamStuQ/skill-map 发展路线
+👉 [从新手到大师 ](https://github.com/wangcy6/weekly/tree/master/KM）
+
+### CM(Cognitive Map)  认知地图
+
+每周 推荐一本书 提高认知  👉 [去查看](https://github.com/wangcy6/weekly/tree/master/CM)
 
 
 
