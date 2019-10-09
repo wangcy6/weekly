@@ -18,12 +18,11 @@
 
 ## KM(Knowledge Map)  知识地图
 
-程序员技能图谱 https://github.com/TeamStuQ/skill-map 发展路线
-👉 [从新手到大师 ](https://github.com/wangcy6/weekly/tree/master/KM）
+### 程序员技能图谱 https://github.com/TeamStuQ/skill-map 发展路线👉 [从新手到大师](hhttps://github.com/wangcy6/weekly/tree/master/KM)
 
 ### CM(Cognitive Map)  认知地图
 
-每周 推荐一本书 提高认知  👉 [去查看](https://github.com/wangcy6/weekly/tree/master/CM)
+### 每周 推荐一本书 提高认知  👉 [去查看](https://github.com/wangcy6/weekly/tree/master/CM)
 
 
 
