@@ -6,15 +6,24 @@
 每日一题 ，如果你看到好的题目，欢迎通过 [issue](https://github.com/wangcy6/weekly/issues/) 提交。
 
 - 不要以工作忙为借口而荒废了自己，请记住“学如逆水行舟，不进则退”。
+
 - 坚持每天花10分钟左右学习。每天进步一点点，成功就会在眼前。
+
 - 不要等到火烧眉毛狂刷题，平时多烧香，面试才不慌。
 
-- 每周技术总结
-
-  程序员技能图谱 https://github.com/TeamStuQ/skill-map
+- 每周技术总结 程序员技能图谱 https://github.com/TeamStuQ/skill-map
 
 
-###  每日一题
+
+
+
+## 今日面试题 （2019-10-09）
+
+### [raft在网络分区情况下如何选举领导？](https://github.com/wangcy6/weekly/issues/19) 👉 [去答题](https://github.com/wangcy6/weekly/issues/19)
+
+
+
+###  当月题目
 
 
 第一题：(数据结构) [问题：谈谈你对B+Tree的理解?](daily-interview/3.你对B+Tree的理解.md) -- [答案](https://mp.weixin.qq.com/s/gM97XLcB0JMI_a2m8UuNpg)
@@ -32,7 +41,7 @@ To implement TCP's full-duplex connection termination reliably
 To allow old duplicate segments to expire in the network
 ~~~
 
-# 后续题目
+##  后续题目
 ![操作系统十一问题](./images/201909/ask11.jpg)
 
 # 周报
