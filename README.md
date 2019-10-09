@@ -14,11 +14,11 @@
 - 不要等到火烧眉毛狂刷题，平时多烧香，面试才不慌。
 
 ##  ARTS --每周总结 
-
+### 记录过去一周发生的事情  👉 [去查看](https://github.com/wangcy6/weekly/tree/master/ARTS)
 
 ## KM(Knowledge Map)  知识地图
 
-### 程序员技能图谱 https://github.com/TeamStuQ/skill-map 发展路线👉 [从新手到大师](hhttps://github.com/wangcy6/weekly/tree/master/KM)
+### 程序员技能图谱 https://github.com/TeamStuQ/skill-map 发展路线👉 [从新手到大师](https://github.com/wangcy6/weekly/tree/master/KM)
 
 ### CM(Cognitive Map)  认知地图
 
