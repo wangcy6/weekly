@@ -10,7 +10,7 @@ https://stackoverflow.com/questions/2131832/whats-the-difference-between-a-threa
 
 
 
-2.  为什么需要单独的进程内核栈？ 
+2.  为什么需要单独的进程内核栈？  
 
  https://durant35.github.io/2017/10/29/VM_Stacks/ 
 
@@ -22,7 +22,7 @@ https://stackoverflow.com/questions/2131832/whats-the-difference-between-a-threa
 
 线程栈是在进程的堆
 
-极客时间版权所有: https://time.geekbang.org/column/article/94479###
+
 
 
 
