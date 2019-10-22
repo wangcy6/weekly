@@ -24,7 +24,9 @@
 待补充中
 
 #### 电子书信息
+**文件类型：**azw3，mobi，pdf
 
+网盘地址：
 ~~~
 链接：https://pan.baidu.com/s/1pjJUGcUvUysva0_D0umt4Q&shfl=sharepset 
 提取码：cev9 
