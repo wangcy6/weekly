@@ -4,7 +4,41 @@
 
 
 
-###  格局 (2019年 第 39周 )
+
+
+###  第三本 演讲的力量(2019年 第 40周 )
+
+![image.png](https://i.loli.net/2019/10/22/FXobiYqu4lE6fZL.png)
+
+#### 简介
+
+ 作者: [[美\] 克里斯·安德森](https://book.douban.com/author/345045/)
+出版社: 中信出版集团股份有限公司
+副标题: 如何让公众表达变成影响力
+原作名: TED Talks: The Official TED Guide to Public Speaking 
+
+
+
+#### 读书笔记
+
+待补充中
+
+#### 电子书信息
+
+~~~
+链接：https://pan.baidu.com/s/1pjJUGcUvUysva0_D0umt4Q&shfl=sharepset 
+提取码：cev9 
+
+送人玫瑰+手留余香，给个star
+~~~
+
+
+
+
+
+
+
+###  第二本格局 (2019年 第 39周 )
 
 #### 简介
 
@@ -25,7 +59,12 @@
 
 #### 电子书信息
 
-格局：格局的大小决定成就的顶点 – 吴军 pdf+azw3+epub+mobi+txt+docx
+
+
+链接：https://pan.baidu.com/s/1F8lLw874NJ_aFhtyiV_Uhg&shfl=sharepset 
+提取码：ogky
+
+送人玫瑰+手留余香，给个star
 
 待补充中
 
@@ -33,7 +72,7 @@
 
 ![](https://img3.doubanio.com/view/subject/l/public/s33461495.jpg)
 
-###  被讨厌的勇气（2019年 第 38周）
+###  第一本 被讨厌的勇气（2019年 第 38周）
 
 
 
@@ -78,6 +117,8 @@
 
 > 链接：https://pan.baidu.com/s/1d-pounIbP9NzIATAfsBeHw 
 > 提取码：ojgl 
+>
+> 送人玫瑰+手留余香，给个star
 
 ![已经被翻拍成电视剧](https://upload-images.jianshu.io/upload_images/1837968-ead4073417a00ea4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
