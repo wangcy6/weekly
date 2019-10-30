@@ -24,11 +24,21 @@
 - ls -i 显示inode 就是 long 类型的编号 还有什么呀？
 - Superblock  是啥东西？
 
-### 索引
+# 索引
+
+![image-20191029165246759](../images/201909/image-20191029165246759.png)
+
+# 概念理解
 
 
 
-# 基础篇
+![image-20191029165602251](../images/201909/image-20191029165602251.png)
+
+![image-20191029165823043](../images/201909/image-20191029165823043.png)
+
+- 缓存
+
+![image-20191029165953551](../images/201909/image-20191029165953551.png)
 
 ## 文件系统
 
@@ -36,7 +46,7 @@
 
 在 Linux 中一切皆文件。不仅普通的文件和目录，就连块设备、套接字、管道等，也都要通过统一的文件系统来管理。
 
-
+ ![img](https://www.ibm.com/developerworks/cn/linux/l-cn-vfs/2.jpg) 
 
 Linux 下的文件系统主要可分为三大块：
 
@@ -46,7 +56,7 @@ Linux 下的文件系统主要可分为三大块：
 
 三是挂载到 VFS 中的各实际文件系统
 
-
+![image-20191029171230016](../images/201909/image-20191029171230016.png)
 
 ![1568019662577.jpg](https://upload-images.jianshu.io/upload_images/1837968-14fbf22dc1ac6cb1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -79,11 +89,17 @@ https://blog.csdn.net/qq_27840681/article/details/77567094
 
 .上层应用如何调用底层驱动？
 
-## VFS
+# VFS
+
+## 定义
 
 
 
-文件系统是如何运行的 
+
+
+![image-20191029171712870](../images/201909/image-20191029171712870.png)文件系统是如何运行的 
+
+
 
 >那么文件系统是如何运行的呢？这与操作系统的文件数据有关。较新的操作系统的文件数据
 >除了文件实际内容外， 通常含有非常多的属性，
@@ -160,6 +176,12 @@ VFS （virtual File System）
 > 超级块，存储整个文件系统的状态。
 > 索引节点区，用来存储索引节点。
 > 数据块区，则用来存储文件数据。
+
+
+
+
+
+ 
 
 
 
@@ -316,116 +338,27 @@ dumpe2fs -h /dev/sda2
 - 如果我想要读取 /etc/passwd 这个文件时，
   系统是如何读取的呢？ 
 
+### 缓存
+
+![image-20191029172455029](../images/201909/image-20191029172455029.png)
+
+![image-20191029172803543](../images/201909/image-20191029172803543.png)
+
+![image-20191029173304985](../images/201909/image-20191029173304985.png)
+
+# 案例实践
 
 
 
 
-# 工具篇
-
-### ln
-
-- 知识点：
-
-  1. 目录是也是一个文件
-  2. 不同文件名 可以使用相同inode
-  3.  
-
-  
-
-- 使用场景
-
-ln - make links between files
-
-当我们需要在不同的目录，用到相同的文件时，我们不需要在每一个需要的目录下都放一个必须相同的文件，
-
-我们只要在某个固定的目录，放上该文件，
-
-然后在 其它的目录下用ln命令链接（link）它就可以，不必重复的占用磁盘空间。
-
-- 基本用法
 
 
 
-![ 硬链接](https://s3.51cto.com/wyfs02/M01/9C/5C/wKioL1lvUGjQ8TirAAAnGNq3aDs576.png)
+### 实验1： 查看文件系统 缓存占用情况 
 
+- 文件系统中的目录项和索引节 
 
-
-![软连接](https://s5.51cto.com/wyfs02/M01/9C/5C/wKiom1lvUGjTXRJMAAAtjT6GldQ692.png)
-
-画外音：
-
-> 软连接就 c++指针， 2个对象
-> 硬链接就是 c++的 引用 是一个对象
->
-> 无论是软链接还是硬链接，文件都保持同步变化
-
-```shell
- ln -s  turn.log  symbolic_link.log
- -s, --symbolic
-              make symbolic links instead of hard links
-
-ls  turn.log  hard_link.log
-
-[root@vm-10-115-37-45 log]# ls -lri
-total 8
-30932995 -rw-r--r-- 2 root root 3482 Jul 19 10:08 turn.log
-30933373 lrwxrwxrwx 1 root root    8 Sep  9 15:42 symbolic_link.log -> turn.log
-30932995 -rw-r--r-- 2 root root 3482 Jul 19 10:08 hard_link.log（inode相同）
-[root@vm-10-115-37-45 log]# 
-
-
-
-```
-
-
-
-###  stat
-
-- 基本用法
-
-
-
-stat - display file or file system status
-
-stat log
-  File: ‘log’
-  Size: 4096            Blocks: 8          IO Block: 4096   directory
-Device: fc01h/64513d    Inode: 30932994    Links: 2
-Access: (0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
-Access: 2019-09-09 16:00:38.715192930 +0800
-Modify: 2019-09-09 16:00:37.679198767 +0800
-Change: 2019-09-09 16:00:37.679198767 +0800
-
-- 使用细节
-- 背后原理
-
-
-
-### df
-
-1 基本用法
-
-2 使用细节
-
-3 背后原理
-
-### strace 跟踪进程中的系统调用
-
-1 基本用法
-
-2 使用细节
-
-3 背后原理
-
-# 动手实践
-
-
-
-### 实验： 查看文件系统 缓存占用情况 
-
-
-
-```
+```c++
 # 按下 c 按照缓存大小排序，按下 a 按照活跃对象数排序 
 
 $ slabtop 
@@ -441,53 +374,165 @@ Minimum / Average / Maximum Object : 0.01K / 0.20K / 22.88K
 58260  55397   0%    0.13K   1942       30      7768K kernfs_node_cache 
    485    413   0%    5.69K     97        5      3104K task_struct 
   1472   1397   0%    2.00K     92       16      2944K kmalloc-2048 
+    
+   dentry 行表示目录项缓存，inode_cache 行，表示 VFS 索引节点缓存，其余的则是各种文件系统的索引节点缓存。
+    
+ 目录项和索引节点占用了最多的 Slab 缓存。
+
+不过它们占用的内存其实并不大，加起来也只有 23MB 左右
+    
 ```
 
 
 
-从这个结果你可以看到，在我的系统中，
+-  free 输出的 Cache，是页缓存和可回收 Slab 缓存的和  （vmstat free）
 
-目录项和索引节点占用了最多的 Slab 缓存。
+~~~shell
 
-不过它们占用的内存其实并不大，加起来也只有 23MB 左右。
+$ cat /proc/meminfo | grep -E "SReclaimable|Cached" 
+Cached:           748316 kB 
+SwapCached:            0 kB 
+SReclaimable:     179508 kB 
 
 
-
-创建文件消耗一个inode
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0  81196 13122800 239084 2126152    0    0     0     1    0    0  1  0 99  0  0
+~~~
 
 ```powershell
-cp a b
 
-df -i;df  
-一个Inode对应一个文件
+
+cat /proc/meminfo
+MemTotal:       16267884 kB
+MemFree:        13119460 kB
+MemAvailable:   13798228 kB
+Buffers:          240324 kB
+Cached:          1648252 kB
+SwapCached:         9644 kB
+Active:           802676 kB
+Inactive:        1733356 kB
+Active(anon):     510300 kB
+Inactive(anon):  1449420 kB
+Active(file):     292376 kB
+Inactive(file):   283936 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       1048572 kB
+SwapFree:         967376 kB
+Dirty:               108 kB
+Writeback:             0 kB
+AnonPages:        639208 kB
+Mapped:           109460 kB
+Shmem:           1312244 kB
+Slab:             478768 kB
+SReclaimable:     355860 kB
+SUnreclaim:       122908 kB
+KernelStack:        5376 kB
+PageTables:        10860 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     9182512 kB
+Committed_AS:    3782272 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       34736 kB
+VmallocChunk:   34359698684 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:    253952 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      108416 kB
+DirectMap2M:    10377216 kB
+DirectMap1G:     8388608 kB
 ```
 
-​	
-
-###  实验 ：**硬链接不占用磁盘空间，软链接占用的空间只是存储路径所占用的极小空间。**
 
 
-  ![](https://s1.51cto.com/wyfs02/M00/9C/5C/wKioL1lvTvryo42DAAAOvuFDmTM298.png)
+### 实验2：指标
 
-![](https://s1.51cto.com/wyfs02/M01/9C/5C/wKioL1lvTvqiTbORAAAZIXyN4JU168.png)
+![image-20191029173536471](../images/201909/image-20191029173536471.png)
 
-![https://s1.51cto.com/wyfs02/M01/9C/5C/wKioL1lvT2XBfAylAAAVvciajlY492.png](https://s1.51cto.com/wyfs02/M01/9C/5C/wKioL1lvT2XBfAylAAAVvciajlY492.png)
+![image-20191029173708265](../images/201909/image-20191029173708265.png)s
 
-![](https://s1.51cto.com/wyfs02/M00/9C/5C/wKiom1lvT5yjPmFAAAAZoX9y70M036.png)
+- iostat 整体
 
+ ![img](https://static001.geekbang.org/resource/image/cf/8d/cff31e715af51c9cb8085ce1bb48318d.png) 
 
 
 
+- 进程
 
-/dev/sda2      2536000 703264 1832736   28% /
+~~~shell
 
-### 实验：文件的打开过程
+$ pidstat -d 1 
+13:39:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command 
+13:39:52      102       916      0.00      4.00      0.00       0  rsyslogd
 
-### 实验 设备文件的类型
+用户 ID（UID）和进程 ID（PID）  。
+每秒读取的数据大小（kB_rd/s） ，单位是 KB。
+每秒发出的写请求数据大小（kB_wr/s） ，单位是 KB。
+每秒取消的写请求数据大小（kB_ccwr/s） ，单位是 KB。
+块 I/O 延迟（iodelay），包括等待同步块 I/O 和换入块 I/O 结束的时间，单位是时钟周期。
+
+~~~
+
+
+
+- sar
+
+~~~shell
+
+# sar -B 
+Linux 3.10.0-327.el7.x86_64 (vm-10-115-37-45)   10/29/2019      _x86_64_        (8 CPU)
+12:00:01 AM  pgpgin/s pgpgout/s   fault/s  majflt/s  pgfree/s pgscank/s pgscand/s pgsteal/s    %vmeff
+12:10:01 AM      0.00      6.51   1217.27      0.00    375.57      0.00      0.00      0.00      0.00
+
+-B     Report paging statistics.  The following values are displayed:
+
+  pgpgin/s
+                     Total number of kilobytes the system paged in from disk per second.
+
+              pgpgout/s
+                     Total number of kilobytes the system paged out to disk per second.
+
+              fault/s
+                     Number  of  page faults (major + minor) made by the system per second.  This is not a count of page faults that generate I/O, because some page
+                     faults can be resolved without I/O.
+
+              majflt/s
+                     Number of major faults the system has made per second, those which have required loading a memory page from disk.
+
+              pgfree/s
+                     Number of pages placed on the free list by the system per second.
+
+              pgscank/s
+                     Number of pages scanned by the kswapd daemon per second.
+
+              pgscand/s
+                     Number of pages scanned directly per second.
+
+              pgsteal/s
+                     Number of pages the system has reclaimed from cache (pagecache and swapcache) per second to satisfy its memory demands.
+
+              %vmeff
+                     Calculated as pgsteal / pgscan, this is a metric of the efficiency of page reclaim. If it is near 100% then almost every page  coming  off  the
+                     tail  of  the  inactive  list is being reaped. If it gets too low (e.g. less than 30%) then the virtual memory is having some difficulty.  This
+                     field is displayed as zero if no pages have been scanned during the interval of time.
+~~~
+
+
+
+
 
 
 
 # 参考
+
+ https://github.com/freelancer-leon/notes/blob/master/kernel/vfs.md 
 
 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html
 
