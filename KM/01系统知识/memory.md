@@ -6,11 +6,21 @@
 
 
 
-### 资料
+# 资料
 
   [Linux中的虚拟内存系统](https://app.yinxiang.com/shard/s39/nl/8226829/72805ed3-e659-4310-bf67-bad3d4dfea70)  
 
-### 虚拟内存（概念）
+
+
+# 内存管理
+
+ ![img](https://lday-me-1257906058.cos.ap-shanghai.myqcloud.com/0023_linux_page_cache_and_buffer_cache/img/27_file_page_device_block.png) 
+
+ ![img](https://lday-me-1257906058.cos.ap-shanghai.myqcloud.com/0023_linux_page_cache_and_buffer_cache/img/28_linux-2.6.18_page_cache_buffer_cache.png) 
+
+
+
+# 虚拟内存（概念）
 
 - 术语
 
@@ -54,7 +64,7 @@
 
 ![image-20191029160941280](../images/201909/image-20191029160941280.png)
 
-### 手动实验（指标）
+# 手动实验（指标）
 
  ![img](https://static001.geekbang.org/resource/image/8f/ed/8f477035fc4348a1f80bde3117a7dfed.png) 
 
@@ -166,6 +176,7 @@ $ dd if=/dev/urandom of=/tmp/file bs=1M count=500k
 
 
 
-### 参考
+# 参考
 
--  https://www.cnblogs.com/kerrycode/p/10383328.html 
+[1]  http://lday.me/2019/09/09/0023_linux_page_cache_and_buffer_cache/ 
+

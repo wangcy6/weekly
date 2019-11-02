@@ -16,13 +16,12 @@
 
 ### 第一性原理
 
+- mysql 有b+作为索引，为什么liunx文件系统不用b+索引结构，采用inode下面一个固定大小数组来表示？
+
 - 为什么需要进行“格式化”呢
 
-- 元信息数据是啥
-- 文件系统对象是啥
-- inode没有存储文件名，但是缓存目录文件名从哪来来，缓存数据不会自己凭空冒出来？
 - ls -i 显示inode 就是 long 类型的编号 还有什么呀？
-- Superblock  是啥东西？
+- 文件存储在哪里呀？内存还是磁盘
 
 # 索引
 
@@ -91,7 +90,7 @@ https://blog.csdn.net/qq_27840681/article/details/77567094
 
 # VFS
 
-## 定义
+## 组成
 
 
 
@@ -177,16 +176,6 @@ VFS （virtual File System）
 > 索引节点区，用来存储索引节点。
 > 数据块区，则用来存储文件数据。
 
-
-
-
-
- 
-
-
-
-
-
 - 关系：
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1837968-67064997f97bc05d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -199,17 +188,74 @@ VFS （virtual File System）
 
 ![](https://pic1.zhimg.com/80/v2-b5d3e0b7b1f2a1aecb89ed0c93ac907c_hd.jpg)
 
+
+
+
+
+### 1. inode 结构
+
+
+
+
+
+ 每个inode保存了文件系统中的一个**文件系统对象**（包括[文件](https://zh.wikipedia.org/wiki/计算机文件)、[目录](https://zh.wikipedia.org/wiki/目录_(文件系统))、[设备文件](https://zh.wikipedia.org/wiki/设备文件)、[socket](https://zh.wikipedia.org/wiki/Unix域套接字)、[管道](https://zh.wikipedia.org/wiki/管道_(Unix)), 等等）的元信息数据，但不包括数据内容或者文件名[[1\]](https://zh.wikipedia.org/wiki/Inode#cite_note-1)。 
+
+
+
+ 文件系统创建（格式化）时，就把存储区域分为两大连续的存储区域。
+
+一个用来保存文件系统对象的元信息数据，这是由inode组成的表，
+
+ 每个inode节点的大小，一般是128字节或256字节。inode节点的总数，
+
+在格式化时就给定，一般是每1KB或每2KB就设置一个inode。
+
+> 假定在一块1GB的硬盘中，每个inode节点的大小为128字节，
+>
+> 每1KB就设置一个inode，那么inode table的大小就会达到128MB，占整块硬盘的12.8%。 
+
+
+
+
+
+另一个用来保存“文件系统对象”的内容数据，划分为512字节的扇区，以及由8个扇区组成的4K字节的块。块是读写时的基本单位。一个文件系统的inode的总数是固定的。
+
+这限制了该文件系统所能存储的文件系统对象的总数目。典型的实现下，所有inode占用了文件系统1%左右的存储容量。 
+
+> 一个数据快大小4k，一个inode节点256字节，根本装不下快，因此不包括数据内容
+
+
+
+![image-20191102122010632](../images/201909/image-20191102122010632.png)
+
+
+
+![image-20191102122928053](../images/201909/image-20191102122928053.png)
+
 ![](https://pic3.zhimg.com/80/v2-1bbe92018e1fb7bb11cc5b11e806c43a_hd.jpg)
 
-![](http://www.opsers.org/wp-content/uploads/2011/04/inode_thumb.png)
+
+
+小王： 你明白了吧  inode 不仅仅是 *inode 编号*  
 
 
 
-### inode 结构
+ls -i src
+30933073 github.com
 
-*inode* 是 UNIX 操作系统中的一种数据结构
+30933073 是而*索引编号*实际上是 inode 的标识编号，
 
- *inode* 指的是数据结构；而*索引编号*实际上是 inode 的标识编号
+因此也称其为 *inode 编号* 或者*索引编号*。
+
+索引编号只是文件相关信息中一项重要的内容 
+
+
+
+
+
+
+
+
 
 
 
@@ -256,31 +302,7 @@ struct ext4_inode {
 };
 ```
 
-inode保存了文件系统中的一个**文件系统对象**（包括[文件](https://zh.wikipedia.org/wiki/计算机文件)、[目录](https://zh.wikipedia.org/wiki/目录_(文件系统))、[设备文件](https://zh.wikipedia.org/wiki/设备文件)、[socket](https://zh.wikipedia.org/wiki/Unix域套接字)、[管道](https://zh.wikipedia.org/wiki/管道_(Unix)), 等等）的元信息数据，**但不包括数据内容或者文件名**
 
-- inode 编号
-
-- 用来识别文件类型，以及用于 `stat C` 函数的模式信息
-
-- 文件的链接数目
-
-- 属主的 UID
-
-- 属主的组 ID (GID)
-
-- 文件的大小
-
-- 文件所使用的磁盘块的实际数目
-
-- 最近一次修改的时间
-
-- 最近一次访问的时间
-
-- 最近一次更改的时间
-
-   都会被持久化存储到磁盘中。所以记住，索引节点同样占用磁盘空间。
-   
-   等等。
 
 
 
@@ -292,7 +314,7 @@ inode保存了文件系统中的一个**文件系统对象**（包括[文件](ht
 
 文件系统一开始就将 inode 与 block 规划好了，除非重新格式化 
 
-### Superblock （超级区块） 
+#### Superblock （超级区块） 
 
 ```
 block 与 inode 的总量；
@@ -312,39 +334,98 @@ dumpe2fs -h /dev/sda2
 
 ```
 
-### 目录与文件 
+### 2. 目录项对象（directory entry）
 
-> 文件名 存储在哪里?
-
-
-
-当我们在 Linux 下的文件系统创建一个目录时(目录是文件)，文件系统会分配一个 inode 与**至少**一块 block
-（根据文件数量有关系）
-
-其中，inode 记录该目录的相关权限与属性，并可记录分配到的那块 block 号码；
-
-而 block 则是记录在这个目录下的文件名与该文件名占用的 inode 号码数据 
+> 存储在哪里
 
 
 
-- 知识点1  inode 本身并不记录文件名，文件名的记录
-  是在目录的 block 当中 
+
+
+![image-20191101112234783](../images/201909/image-20191101112234783.png)
+
+
+
+> 什么是目录项 ，如何读取的
+
+   / ,/etc,/etc/passwd 都是目录项
+
+ 
 
 ![inode 本身并不记录文件名，文件名的记录
 是在目录的 block 当中 ](https://upload-images.jianshu.io/upload_images/1837968-67064997f97bc05d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
-- 如果我想要读取 /etc/passwd 这个文件时，
-  系统是如何读取的呢？ 
+- node 本身并不记录文件名，文件名的记录 是在目录文件中
 
-### 缓存
+  
+
+### 3. 缓存
 
 ![image-20191029172455029](../images/201909/image-20191029172455029.png)
 
 ![image-20191029172803543](../images/201909/image-20191029172803543.png)
 
 ![image-20191029173304985](../images/201909/image-20191029173304985.png)
+
+
+
+ ### 4 Linux 内核中文件 Cache 管理的机制
+
+ http://www.ilinuxkernel.com/files/Linux.Kernel.Cache.pdf 
+
+
+
+### 概念回顾
+
+ 文件 Cache 是文件数据在内存中的副本 ,
+
+文件 Cache 分为两个层面，一是 Page Cache，  另一个 Buffer Cache
+
+- Page
+
+![image-20191101154937693](../images/201909/image-20191101154937693.png)
+
+- 内存管理系统和 VFS 只与 Page Cache 交互 
+
+![image-20191101152555437](../images/201909/image-20191101152555437.png)
+
+ ![](https://www.ibm.com/developerworks/cn/linux/l-cache/images/1.jpg)
+
+-  Page Cache、Buffer Cache、文件以及磁盘之间的关系 
+
+   文件的每个数据块最多只能对应一个 Page Cache 项 ，
+
+    页面Cache中的每页所包含的数据是属于某个文件 
+
+  
+
+ ![img](https://www.ibm.com/developerworks/cn/linux/l-cache/images/2.jpg) 
+
+-  每一个 Page Cache 包含若干 Buffer Cache 
+
+
+
+ ![img](https://www.ibm.com/developerworks/cn/linux/l-cache/images/3.jpg) 
+
+-   **Page cache和Buffer cache的区别** 
+
+  
+
+  磁盘的操作有逻辑级（文件系统）和物理级（磁盘块），这两种Cache就是分别缓存逻辑和物理级数据的。
+
+  
+
+  > 假设我们通过文件系统操作文件，那么文件将被缓存到Page Cache，
+  >
+  > 如果需要刷新文件的时候，Page Cache将交给Buffer Cache去完成，因为Buffer Cache就是缓存磁盘块的。
+
+  
+
+  Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。当page cache的数据需要刷新时，page cache中的数据交给buffer cache 
+
+  
 
 # 案例实践
 
@@ -354,7 +435,7 @@ dumpe2fs -h /dev/sda2
 
 
 
-### 实验1： 查看文件系统 缓存占用情况 
+### 实验1： 查看文件系统 占用情况 
 
 - 文件系统中的目录项和索引节 
 
@@ -452,79 +533,112 @@ DirectMap1G:     8388608 kB
 
 
 
-### 实验2：指标
-
-![image-20191029173536471](../images/201909/image-20191029173536471.png)
-
-![image-20191029173708265](../images/201909/image-20191029173708265.png)s
-
-- iostat 整体
-
- ![img](https://static001.geekbang.org/resource/image/cf/8d/cff31e715af51c9cb8085ce1bb48318d.png) 
 
 
-
-- 进程
+-  可以用stat命令，查看某个文件的inode信息 
 
 ~~~shell
+ stat cmd.txt 
+  File: ‘cmd.txt’
+  Size: 131             Blocks: 8          IO Block: 4096   regular file
+Device: fd00h/64768d    Inode: 482         Links: 1
+Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2019-01-22 17:22:54.685741395 +0800
+Modify: 2019-01-22 16:34:25.993178846 +0800
+Change: 2019-01-22 16:34:25.993178846 +0800
+ Birth: -
 
-$ pidstat -d 1 
-13:39:51      UID       PID   kB_rd/s   kB_wr/s kB_ccwr/s iodelay  Command 
-13:39:52      102       916      0.00      4.00      0.00       0  rsyslogd
+stat - display file or file system status
 
-用户 ID（UID）和进程 ID（PID）  。
-每秒读取的数据大小（kB_rd/s） ，单位是 KB。
-每秒发出的写请求数据大小（kB_wr/s） ，单位是 KB。
-每秒取消的写请求数据大小（kB_ccwr/s） ，单位是 KB。
-块 I/O 延迟（iodelay），包括等待同步块 I/O 和换入块 I/O 结束的时间，单位是时钟周期。
+stat -f cmd.txt 
+  File: "cmd.txt"
+    ID: 37fc5f360777ebb Namelen: 255     Type: ext2/ext3
+Block size: 4096       Fundamental block size: 4096
+Blocks: Total: 4817666    Free: 2971792    Available: 2748308
+Inodes: Total: 1227328    Free: 1148127
+
+
+df -i
+Filesystem                 Inodes  IUsed    IFree IUse% Mounted on
+/dev/mapper/vg_root-root  1227328  79201  1148127    7% /
+devtmpfs                  2030909    422  2030487    1% /dev
+tmpfs                     2033485      1  2033484    1% /dev/shm
 
 ~~~
 
 
 
-- sar
+
+
+- 是否缓存 1631-->112
 
 ~~~shell
+To free pagecache:
+# echo 1 > /proc/sys/vm/drop_caches
+To free dentries and inodes:
+# echo 2 > /proc/sys/vm/drop_caches
+To free pagecache, dentries and inodes:
+# echo 3 > /proc/sys/vm/drop_caches
 
-# sar -B 
-Linux 3.10.0-327.el7.x86_64 (vm-10-115-37-45)   10/29/2019      _x86_64_        (8 CPU)
-12:00:01 AM  pgpgin/s pgpgout/s   fault/s  majflt/s  pgfree/s pgscank/s pgscand/s pgsteal/s    %vmeff
-12:10:01 AM      0.00      6.51   1217.27      0.00    375.57      0.00      0.00      0.00      0.00
 
--B     Report paging statistics.  The following values are displayed:
+root@work:~# free -m
+              total        used        free      shared  buff/cache   available
+Mem:           2009         276         101           3        1631        1545
+Swap:           425     
 
-  pgpgin/s
-                     Total number of kilobytes the system paged in from disk per second.
+root@work:~# echo 3 > /proc/sys/vm/drop_caches
+root@work:~# free -m
+              total        used        free      shared  buff/cache   available
+Mem:           2009         250        1646           1         112        1628
+Swap:
 
-              pgpgout/s
-                     Total number of kilobytes the system paged out to disk per second.
+命令slabtop查看slab占用情况
 
-              fault/s
-                     Number  of  page faults (major + minor) made by the system per second.  This is not a count of page faults that generate I/O, because some page
-                     faults can be resolved without I/O.
+Slab的两个主要作用：
+Slab对小对象进行分配，不用为每个小对象分配一个页，节省了空间。
+内核中一些小对象创建析构很频繁，Slab对这些小对象做缓存，可以重复利用一些相同的对象，减少内存分配次
 
-              majflt/s
-                     Number of major faults the system has made per second, those which have required loading a memory page from disk.
+https://fivezh.github.io/2017/06/25/Linux-slab-info/
 
-              pgfree/s
-                     Number of pages placed on the free list by the system per second.
+[root@vm-10-115-37-60 bin]#  cat /proc/slabinfo |awk '{print $1,$3*$4/1024,"KB"}' | sort -k2 -n | tail
+sysfs_dir_cache 2019.94 KB
+kmalloc-1024 2080 KB
+kmalloc-2048 2304 KB
+kmalloc-4096 2528 KB
+buffer_head 6515.74 KB
+ext4_inode_cache 8439.27 KB
+inode_cache 9396.84 KB
+radix_tree_node 11705.1 KB
+shmem_inode_cache 91290 KB
+dentry 309050 KB
 
-              pgscank/s
-                     Number of pages scanned by the kswapd daemon per second.
 
-              pgscand/s
-                     Number of pages scanned directly per second.
-
-              pgsteal/s
-                     Number of pages the system has reclaimed from cache (pagecache and swapcache) per second to satisfy its memory demands.
-
-              %vmeff
-                     Calculated as pgsteal / pgscan, this is a metric of the efficiency of page reclaim. If it is near 100% then almost every page  coming  off  the
-                     tail  of  the  inactive  list is being reaped. If it gets too low (e.g. less than 30%) then the virtual memory is having some difficulty.  This
-                     field is displayed as zero if no pages have been scanned during the interval of time.
 ~~~
 
+- nmon
 
+~~~shell
+wget http://sourceforge.net/projects/nmon/files/nmon16e_mpginc.tar.gz
+tar -zxvf nmon16e_mpginc.tar.gz
+cp nmon_x86_64_centos7 /usr/local/bin/nmon
+cd /usr/local/bin
+chmod 777 nmon
+
+~~~
+
+-  vmtouch
+
+ http://ohmycat.me/2017/12/05/vmtouch.html 
+
+
+
+
+
+
+
+
+
+ 祝玩得开心！ 
 
 
 
@@ -532,8 +646,29 @@ Linux 3.10.0-327.el7.x86_64 (vm-10-115-37-45)   10/29/2019      _x86_64_        
 
 # 参考
 
- https://github.com/freelancer-leon/notes/blob/master/kernel/vfs.md 
+[1]  https://github.com/freelancer-leon/notes/blob/master/kernel/vfs.md 
 
 https://wizardforcel.gitbooks.io/vbird-linux-basic-4e/content/59.html
 
 https://www.cnblogs.com/xiaojiang1025/p/6363626.html
+
+[2]  directory entry cache (dcache). 是什么  https://www.kernel.org/doc/ols/2002/ols2002-pages-289-300.pdf
+
+[3] 一次FIND命令导致的内存问题排查  https://ixyzero.com/blog/archives/3231.html 
+
+[4] 什么是PAGECACHE/DENTRIES/INODES?  https://ixyzero.com/blog/archives/3233.html 
+
+[5]  free  https://zhuanlan.zhihu.com/p/35277219 
+
+[6] Linux Used内存到底哪里去了？  http://blog.yufeng.info/archives/2456 
+
+[7] x86 CPU中逻辑地址到物理地址映射过程  http://ilinuxkernel.com/?p=448 
+
+[8]  https://zh.wikipedia.org/wiki/Inode 
+
+[9]  http://www.ruanyifeng.com/blog/2011/12/inode.html 
+
+
+
+ 
+

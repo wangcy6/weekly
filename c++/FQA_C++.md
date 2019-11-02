@@ -1,4 +1,10 @@
-# FQA c++
+# FQA
+
+ ## Object-oriented programming (c++)
+
+
+
+ ![来源 https://github.com/huihut/interview ](https://raw.githubusercontent.com/huihut/interview/master/images/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81.png) 
 
 ### 一、 在c++的构造函数内调用虚函数可以吗？
 
@@ -68,11 +74,16 @@ this->vptr[index] ，
 
 ![1571975239172](../images/201909/1571975239172.png)
 
-### 三、  指针和引用区别 是什么，各自使用场景是什么？
+### 三、  指针和引用区别 是什么，[各自使用场景是什么](https://www.zhihu.com/question/37608201)？
 
-大王：有没有一点创意呀，这题目被问多少次了，每次听到都是罗里罗嗦，小王回答一下。
+1. 指针和引用从定义上2个不同类型。指针 ！=引用 
+2. 各自优势
 
-小王：
+引用：在类的拷贝构造函数和运算符重载方面 使用无歧义--引用就是变量
+
+指针：返回值可以返回null。在链表 tree方面优势（指针和变量2个不同对象）
+
+
 
 ### ref
 
@@ -200,3 +211,11 @@ inline int A::doA() { return 0; }   // 需要显式内联
    
 
 3. 是否内联，程序员不可控。内联函数只是对编译器的建议，是否对函数内联，决定权在于编译器
+
+
+
+ 
+
+> 由于编者水平有限，缺点和疏漏在所难免，恳请大家不吝指正，万分感激 
+
+### 六、 What is the difference between variable declaration and variable definition? 
