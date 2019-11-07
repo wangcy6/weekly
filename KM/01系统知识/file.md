@@ -4,7 +4,7 @@
 
 # 文件系统-知识地图
 
-
+ [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
 
 阅读相关书籍
 
@@ -38,13 +38,13 @@
 
 
 
-# 概念理解s
+# 概念理解
 
 
 
 ![image-20191029165602251](./../../images/201909/image-20191029165602251.png)
 
-![image-20191029165823043](../images/201909/image-20191029165823043.png)
+![image-20191029165823043](../../images/201909/image-20191029165823043.png)
 
 - 缓存
 
@@ -66,11 +66,11 @@ Linux 下的文件系统主要可分为三大块：
 
 三是挂载到 VFS 中的各实际文件系统
 
-![image-20191029171230016](../images/201909/image-20191029171230016.png)
+![image-20191029171230016](../../images/201909/image-20191029171230016.png)
 
 ![1568019662577.jpg](https://upload-images.jianshu.io/upload_images/1837968-14fbf22dc1ac6cb1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![](https://pic3.zhimg.com/80/v2-212ca855ac2dad87983b23b6539e21ce_hd.jpg)
+
 
 ### 第一个问题：文件系统类型有哪些？
 
@@ -103,11 +103,7 @@ https://blog.csdn.net/qq_27840681/article/details/77567094
 
 ## 组成
 
-
-
-
-
-![image-20191029171712870](../images/201909/image-20191029171712870.png)文件系统是如何运行的 
+![image-20191029171712870](../../images/201909/image-20191029171712870.png)文件系统是如何运行的 
 
 
 
@@ -197,7 +193,7 @@ VFS （virtual File System）
 
 
 
-![](https://pic1.zhimg.com/80/v2-b5d3e0b7b1f2a1aecb89ed0c93ac907c_hd.jpg)
+
 
 
 
@@ -237,11 +233,11 @@ VFS （virtual File System）
 
 
 
-![image-20191102122010632](../images/201909/image-20191102122010632.png)
+![image-20191102122010632](../../images/201909/image-20191102122010632.png)
 
 
 
-![image-20191102122928053](../images/201909/image-20191102122928053.png)
+![image-20191102122928053](../../images/201909/image-20191102122928053.png)
 
 ![](https://pic3.zhimg.com/80/v2-1bbe92018e1fb7bb11cc5b11e806c43a_hd.jpg)
 
@@ -259,12 +255,6 @@ ls -i src
 因此也称其为 *inode 编号* 或者*索引编号*。
 
 索引编号只是文件相关信息中一项重要的内容 
-
-
-
-
-
-
 
 
 
@@ -353,7 +343,7 @@ dumpe2fs -h /dev/sda2
 
 
 
-![image-20191101112234783](../images/201909/image-20191101112234783.png)
+![image-20191101112234783](../../images/201909/image-20191101112234783.png)
 
 
 
@@ -375,6 +365,8 @@ dumpe2fs -h /dev/sda2
 ### 3. 缓存
 
 - 缓存类型 
+
+  ![image-20191102143152311](../../images/image-20191102143152311.png)
 
 ![缓存类型 ](../../images/201909/image-20191102141216537.png)
 
@@ -654,10 +646,6 @@ chmod 777 nmon
 -  vmtouch
 
  http://ohmycat.me/2017/12/05/vmtouch.html 
-
-
-
-
 
 
 

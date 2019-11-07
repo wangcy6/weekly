@@ -2,27 +2,70 @@
 
  Caffe是一个清晰而高效的深度学习框架 
 
-https://github.com/BVLC/caffe
+- 代码：https://github.com/BVLC/caffe
+
+- 代码阅读 https://github.com/BUPTLdy/Caffe_Code_Analysis 
 
 ## 第一步 部署
 
-系统配置
+#### 安装依赖 
 
-Python 3.6.2
+| gcc    | gcc version 4.8.5   |                                      |
+| ------ | ------------------- | ------------------------------------ |
+| Python | 3.6.2               |                                      |
+| protoc | protobuf-cpp-3.10.0 | 主要用于结构化数据的序列化和反序列化 |
+| hdf5   |                     |                                      |
+|        |                     |                                      |
+
+
+
+> yum 安装
+
+
 
 ~~~shell
 yum install -y  libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler libboost-all-dev libatlas-base-dev libgflags-dev libgoogle-glog-dev liblmdb-dev
 
-
+yum -y install hdf5-devel
+yum y install libprotobuf-dev
+http://caffe.berkeleyvision.org/install_yum.html
 ~~~
 
+> 源码安装
+
+- [libprotobuf-dev](https://github.com/protocolbuffers/protobuf/releases/tag/v3.10.0)
 
 
 
+
+
+#### Compilation
+
+```
+cp Makefile.config.example Makefile.config
+# Adjust Makefile.config (for example, if using Anaconda Python, or if cuDNN is desired)
+make all
+make test
+make runtest
+
+
+https://www.jianshu.com/p/36badc9fbcc2
+https://juejin.im/post/5b2a31e26fb9a00e3970566e
+```
 
 
 
 ### 报错信息：
+
+- older version of protoc
+
+    https://github.com/BVLC/caffe/issues/5645 
+
+   https://github.com/BVLC/caffe/issues/6527 
+
+- 编译不过 gcc版本  https://github.com/BVLC/caffe/issues/6359 
+
+
 
 - yum 不管用了
 

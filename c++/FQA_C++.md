@@ -219,3 +219,48 @@ inline int A::doA() { return 0; }   // 需要显式内联
 > 由于编者水平有限，缺点和疏漏在所难免，恳请大家不吝指正，万分感激 
 
 ### 六、 What is the difference between variable declaration and variable definition? 
+
+
+
+### 七.  sizeof 对齐规则
+
+
+
+//对齐规则 
+
+//1成员有效对齐（min(自身,最大成员长度，pragma pack(n)))的整数倍），
+
+//2 结构体有效对齐（min(最大长度，pragma pack(n))的整数倍）
+
+//相同类型的不需要补齐操作
+
+>  扩展 struct **与** **union** **的区别**
+
+1. 内存对齐方式不一样，
+
+联合体union，成员变量共有同一个地址，sizeof（union）最大成员变量，很easy
+
+~~~c++
+[cce_cpp]
+int endian()
+{
+    union biglittle
+    {
+        int i;
+        char ch;
+    }c;
+    c.i = 1;  //
+    return c.ch==1;//
+}
+//函数返回1则表示c.i写入低字节，也就是小端模式，否则为大端模式。
+//小端模式（Little_endian）：
+//举例来说，数值0x2211使用两个字节储存：高位字节是0x22，低位字节是0x11。
+//大端字节序：高位字节在前，低位字节在后，这是人类读写数值的方法。
+//小端字节序：低位字节在前，高位字节在后，即以0x1122形式储存
+[/cce_cpp]
+~~~
+
+
+
+struct 和类一样，按照sizeof 对齐规则
+
