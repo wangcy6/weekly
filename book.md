@@ -1,4 +1,10 @@
-# 技术类书单（百度网盘）
+# 正在进行（2019-10）
+
+推荐2本书，c++性能优化指南和 提高c++性能编程技术，就像看小说一样，不需要消耗脑细胞，更不需要复杂的语法和理论。我就认为好书阅读需要3天时间。（虽然n前年下载了，到现在才看）。看完也什么没记住，没有后遗症。
+
+
+
+# 第一大类 技术类书单（百度网盘）
 
 # 一 、数据库学习过程
 
@@ -104,7 +110,7 @@
 
   - [好玩又实在的分布式系统理论](http://book.mixu.net/distsys/)是一本简短的书籍，其内容覆盖了分布式系统领域的一些基本议题，包括时间的作用及不同的复制策略。CAP 定理
 
-    ![cap](../images/201909/cap.png)
+    ![cap](/images/201909/cap.png)
 
   - [为分布式系统领域新人整理的笔记](http://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/) - 不是理论对理论地讲述，而是做一个非常好非常实用的平衡，让你对其余材料的阅读能够落地。
 
@@ -161,7 +167,7 @@
 
   
 
-  ![Designing Data-Intensive Applications](../images/201909/Designing Data-Intensive Applications.jpg)
+  ![Designing Data-Intensive Applications](/images/201909/Designing Data-Intensive Applications.jpg)
 
   
 
@@ -177,7 +183,7 @@
 
  和其同事马丁·范·斯蒂恩（Martin van Steen）合力撰写的，是分布式系统方面的经典教材。
 
-![20190927150031](../images/201909/20190927150031.png)
+![20190927150031](/images/201909/20190927150031.png)
 
 - An introduction to distributed systems
 - [FLP Impossibility Result](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)
@@ -194,7 +200,7 @@ FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Pater
 
 ## 阅读产品源码
 
-![mdb](../images/201909/mdb.png)
+![mdb](images/201909/mdb.png)
 
 
 
@@ -216,9 +222,15 @@ FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Pater
 
 - 推荐2本书，c++性能优化指南和 提高c++性能编程技术，就像看小说一样，不需要消耗脑细胞，更不需要复杂的语法和理论。我就认为好书阅读需要3天时间。（虽然n前年下载了，到现在才看）。看完也什么没记住，没有后遗症。
 
+## 操作系统
 
 
 
+- 性能之巅：洞悉 系统，企业，云计算
+- 深入Linux内核架构
+- 深入理解计算机系统
+- 鸟哥的Linux
+- Wireshark 网络分析的艺术
 
 # 四、深度学习 
 
@@ -234,13 +246,6 @@ FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Pater
 
 
 
-##  
-
-## 如果已经失效，请添加微信 书名即刻
-
-
-
-![qrcode__860](../qrcode__860.jpg)
 
 
 
@@ -253,26 +258,11 @@ FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Pater
 
 
 
+# 第二大类 非技术类书单（百度网盘）
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 每周阅读一本书
+# 一、每周阅读一本书
 
 
 
@@ -365,12 +355,4 @@ FLP 不可能性的名称起源于它的三位作者，Fischer、Lynch 和 Pater
 
 
 
-## 操作系统
-
-
-
-- 性能之巅：洞悉 系统，企业，云计算
-- 深入Linux内核架构
-- 深入理解计算机系统
-- 鸟哥的Linux
-- Wireshark 网络分析的艺术
+## 

@@ -109,12 +109,14 @@ Git用`<<<<<<<`，`=======`，`>>>>>>>`标记出不同分支的内容，我们�
 
 ### 常见错误
 
--  git push 提交代码
-**fatal: The current branch daily-branch has no upstream branch.**
+#### git push  失败
+
+fatal: The current branch daily-branch has no upstream branch.**
 To push the current branch and set the remote as upstream, use
 
-    git push --set-upstream origin daily-branch
-    git push origin some-branch
+ git push --set-upstream origin daily-branch
+ git push origin some-branch
+
 -  git pull --修改了冲突文件，但是没有提交代码
 
  git pull --tags origin master
@@ -129,19 +131,9 @@ fatal: Exiting because of an unresolved conflict.
 
 
 
+- git stash
+
+​      git stash apply
 
 
-git status
-
-
-
-```c
-code/c++/378.kth-smallest-element-in-a-sorted-matrix.cpp: needs merge
-code/c++/378.kth-smallest-element-in-a-sorted-matrix.cpp: needs merge
-code/c++/378.kth-smallest-element-in-a-sorted-matrix.cpp: unmerged (a186f7c4def260b570ebb10b91f13dfcf6057488)
-code/c++/378.kth-smallest-element-in-a-sorted-matrix.cpp: unmerged (d21d77c38990a42c3a4cefae2425332ccdddb050)
-code/c++/378.kth-smallest-element-in-a-sorted-matrix.cpp: unmerged (e5cb840c23bfc5b664f22a8679c460da5cac6173)
-fatal: git-write-tree: error building trees
-Cannot save the current index state
-```
 
