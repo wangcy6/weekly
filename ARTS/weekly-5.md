@@ -1,3 +1,14 @@
+---
+title: "ARTS_weekly_5"
+date: 2019-11-12
+description: "GTD践行第五周"
+draft: false
+tags: ["GTD","work"]
+categories: ["ARTS"]
+---
+
+
+
 # 打卡GTD践行第五周（2019-11-6） 
 
 
@@ -38,15 +49,29 @@
 
 
 
+刷题 
+
+【每日一题】-2019-10-29-79. 单词搜索 #13  https://github.com/wangcy6/leetcode/issues/13 
+
+【每日一题】2019-10-28-字符串的排列 #12  https://github.com/wangcy6/leetcode/issues/12 
+
+答案：
+
+ [八皇后问题答案]() 
+
+
+
 ### 2.Review 
 
 > 主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。**所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是[http://Medium.com](https://link.zhihu.com/?target=http%3A//Medium.com)
 
 
 
+- 没有阅读 英文，
 
 
 
+![11月读书清单](https://i.loli.net/2019/11/04/cEGXsJPfy8KWTL4.jpg)
 
 ### 3. Tip
 
@@ -54,9 +79,45 @@
 
 
 
+- 如何在Excel中输入1显示对号“√”，输入0显示错号“X”？
+
+~~~
+1、选中B2到B9单元格，也就是你需要添加"√"和"X"的地方，然后右键并选择【设置单元格格式】。
+
+2、将单元格的格式内容自定义为以下内容：
+
+[=1]"√";[=0]"X"
+
+然后保存。
+~~~
+
+
+
+
+
 ### 4.  Share
 
 >主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。
+
+
+
+【操作系统】-2019-11-02-mysql 有b+作为索引，为什么liunx文件系统不用b+索引结构，采用inode下面一个固定大小数组来表示？ #28
+
+ https://github.com/wangcy6/weekly/issues/28 
+
+
+
+答案：
+
+ [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
+
+
+
+ 文件系统 学习记录 [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
+
+
+
+
 
 
 

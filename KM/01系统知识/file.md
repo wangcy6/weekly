@@ -4,9 +4,13 @@
 
 # 文件系统-知识地图
 
+### 知识卡
+
+
+
  [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
 
-阅读相关书籍
+### 阅读相关书籍
 
 - Linux 0.11内核完全注释
 - Linux内核设计与实现(第三版中文高清带目录)
@@ -22,7 +26,7 @@
 
 
 
-# 第一性原理
+### 第一性原理
 
 - mysql 有b+作为索引，为什么liunx文件系统不用b+索引结构，采用inode下面一个固定大小数组来表示？
 
@@ -34,6 +38,10 @@
 
 - 什么是缓存呀
 
+- cache和buffer   dentry objects and inode object 都在内存里有啥  区别？
+
+  
+  
   
 
 
@@ -440,9 +448,58 @@ dumpe2fs -h /dev/sda2
 
   
 
-  Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。当page cache的数据需要刷新时，page cache中的数据交给buffer cache 
+  Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。
+
+文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。
+
+当page cache的数据需要刷新时，page cache中的数据交给buffer cache 
 
   
+
+来自：Understanding the Linux Kernel 15章节
+
+- 15.1. The Page Cache  
+
+  The page cache is the main disk cache used by the Linux
+kernel  
+
+  15.1.1. The address_space Object  
+
+
+
+  15.1.3. Page Cache Handling Functions  
+
+  15.1.3.3. Removing a page  
+
+  15.1.3.3. Removing a page  
+
+-  15.2. Storing Blocks in the Page Cache  
+
+  15.2.1. Block Buffers and Buffer Heads  
+
+  15.2.2. Managing the Buffer Heads  
+
+  15.2.3. Buffer Pages  
+
+  15.2.4. Allocating Block Device Buffer Pages  
+
+  15.3.1. The pdflush Kernel Threads  
+
+  15.3.3. Retrieving Old Dirty Pages  
+
+  15.3.3. Retrieving Old Dirty Pages  
+
+
+
+- 16.1. Reading and Writing a File  
+
+
+
+
+
+
+
+
 
 # 案例实践
 

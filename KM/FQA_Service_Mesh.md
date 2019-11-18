@@ -29,6 +29,10 @@
 
 # 业务场景
 
+## 高可用
+
+
+
 Q1 假如无法出现单点故障了，该怎么办？
 
 > 例如 接受主播推流的srs，redis，还有proxy，还有普通的无法
@@ -51,6 +55,30 @@ Redis集群方案应该怎么做？
 
 
 
+
+## 主从 数据的一致性（重点，超级重点）
+
+
+
+### 不切换 2pc
+
+
+
+![阻塞的](https://i.loli.net/2019/11/13/5rVZHuK9QLcikEb.png)
+
+### 全部一致  PacificA
+
+![提交不变量](https://i.loli.net/2019/11/13/TYcnjfMLIN2hk97.png)
+
+![image.png](https://i.loli.net/2019/11/13/ZJtYgPRMeo6r3pf.png)
+
+
+
+### 过半一致 raft
+
+![不断的重试，业务不阻塞](https://i.loli.net/2019/11/13/2TSnYU9ur7gf5Xm.png)
+
+### 弱一致（gossip）
 
 
 

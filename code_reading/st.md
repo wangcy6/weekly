@@ -44,10 +44,10 @@ categories: ["threads t"]
 
 # 卡片
 
-| 协程库                | 语言                                                         | 开发者                                               |
-| --------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
-| state threads library | 3000行[C代码](https://github.com/wangcy6/reading_code_note/tree/master/liunx/st) | [历史渊源](https://coolshell.cn/articles/12012.html) |
-|                       |                                                              |                                                      |
+| 协程库                                                       | 语言                                                         | 开发者                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------------- |
+| [state threads library](https://github.com/ossrs/state-threads) | 3000行[C代码](https://github.com/wangcy6/reading_code_note/tree/master/liunx/st) | [历史渊源](https://coolshell.cn/articles/12012.html) |
+| [**Libtask**](https://swtch.com/libtask/)                    | **a Coroutine Library for C and Unix**                       |                                                      |
 
 # 学习记录
 
@@ -72,15 +72,42 @@ categories: ["threads t"]
 
 
 
+关键词：
 
+-  ST scheduler （不懂）
 
+  > the ST scheduler is hidden inside the library and invisible to an application writer. 
 
+-   traditional EDSM (不懂)
+
+  >  event-driven state machines (EDSM)  
+
+-  virtual processor (不懂)
+
+  >  ST的多核架构 
 
 ## 二、动手
 
+- task 编译成动态库和静态库 30分钟
+
+~~~c
+git clone https://github.com/wangcy6/state-threads.git
+cd state-threads
+make linux-debug //不同平台
+state-threads/obj/
+libst.so.1.9
+libst.a
+
+ cd examples/
+ make linux-debug //不同平台
+ EXAMPLES    = $(OBJDIR)/lookupdns $(OBJDIR)/proxy $(OBJDIR)/server  
+    
+    
+./lookupdns www.baidu.com  www.google.com  www.bing.com
+    
+~~~
 
 
-暂无
 
 # 项目应用
 
@@ -88,3 +115,10 @@ categories: ["threads t"]
 
 
 
+参考
+
+-  https://app.yinxiang.com/shard/s39/nl/8226829/8eae84ea-a1ca-4e0e-94c6-cfb3661f913a 
+
+- The C10K problem  http://www.kegel.com/c10k.html 
+
+  
