@@ -51,9 +51,9 @@ categories: ["threads t"]
 
 # 学习记录
 
- ## 一、搜索文档
+ ## 一、doc
 
-#### 阅读文档1 ，累计盘茄次数    耗时 120分钟
+#### 阅读文档1 ，累计盘茄次数 3    耗时 120分钟
 
 
 
@@ -86,7 +86,99 @@ categories: ["threads t"]
 
   >  ST的多核架构 
 
-## 二、动手
+-  ，**ST的threads可以并发地线性地处理I/O事件** （不懂）
+-  execute state   event wait queue  
+
+-  setjmp/longjmp （不懂）
+
+
+
+- 看了一下代码和运行一个例子 懂了
+
+![image.png](https://i.loli.net/2019/11/18/wscU78RMAI6ZDmf.png)
+
+
+
+### 阅读文档2   ，累计盘茄次数 3    耗时 100分钟
+
+  理解  **Libtask: a Coroutine Library for C and Unix**  含义
+
+涉及内容
+
+-  http://swtch.com/libtask/ 
+
+
+
+## 二、 code 
+
+~~~c++
+
+void *_st_idle_thread_start(void *arg)
+{
+    _st_thread_t *me = _ST_CURRENT_THREAD();
+ 
+    while (_st_active_count > 0) {
+        /* Idle vp till I/O is ready or the smallest timeout expired */
+        _ST_VP_IDLE();
+ 
+        /* Check sleep queue for expired threads */
+        _st_vp_check_clock();
+ 
+        me->state = _ST_ST_RUNNABLE;
+        _ST_SWITCH_CONTEXT(me);
+    }
+ 
+    /* No more threads */
+    exit(0);
+ 
+    /* NOTREACHED */
+    return NULL;
+}
+
+/*
+ * Switch away from the current thread context by saving its state 
+ * and calling the thread scheduler
+ */
+#define _ST_SWITCH_CONTEXT(_thread)       \
+    ST_BEGIN_MACRO                        \
+    if (!MD_SETJMP((_thread)->context)) { \
+      _st_vp_schedule();                  \
+    }                                     \
+    ST_END_MACRO
+ 
+/*
+ * Restore a thread context that was saved by _ST_SWITCH_CONTEXT 
+ * or initialized by _ST_INIT_CONTEXT
+ */
+#define _ST_RESTORE_CONTEXT(_thread)   \
+    ST_BEGIN_MACRO                     \
+    _ST_SET_CURRENT_THREAD(_thread);   \
+    MD_LONGJMP((_thread)->context, 1); \
+    ST_END_MACRO
+ 
+void _st_vp_schedule(void)
+{
+    _st_thread_t *thread;
+ 
+    if (_ST_RUNQ.next != &_ST_RUNQ) {
+        /* Pull thread off of the run queue */
+        thread = _ST_THREAD_PTR(_ST_RUNQ.next);
+        _ST_DEL_RUNQ(thread);
+    } else {
+        /* If there are no threads to run, switch to the idle thread */
+        thread = _st_this_vp.idle_thread;
+    }
+    ST_ASSERT(thread->state == _ST_ST_RUNNABLE);
+ 
+    /* Resume the thread */
+    thread->state = _ST_ST_RUNNING;
+    _ST_RESTORE_CONTEXT(thread);
+}
+~~~
+
+
+
+## 三、talk
 
 - task 编译成动态库和静态库 30分钟
 
