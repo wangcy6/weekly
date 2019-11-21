@@ -4,17 +4,31 @@
 
 # 基础
 
-## 来源 性能之巅 
-
-![image-20191029184519958](../images/201909/image-20191029184519958.png)
-
-- 线程的调度
-
-![image-20191029184213633](../images/201909/image-20191029184213633.png)
 
 
 
 
+## 进程通信
+
+
+
+### pipe_read()函数
+
+![image.png](https://i.loli.net/2019/11/21/ncG5hKaUgmtJ4HQ.png)
+
+
+
+![image.png](https://i.loli.net/2019/11/21/gG4YepPwbt1TXZI.png)
+
+![image-20191121150141738](../../images/image-20191121150141738.png)
+
+#### pipe_write()
+
+
+
+![image.png](https://i.loli.net/2019/11/21/Nzy5lTMCju8smBe.png)
+
+![image.png](https://i.loli.net/2019/11/21/hl3ZJyuAmvS5jNY.png)
 
 # 案例
 
