@@ -1,5 +1,7 @@
 # SGI-STL V3.3 源代码的学习
 
+
+
 * SGI-STL V3.3(源代码)
   + STL 标准头文件(无扩展名)，例如 `vector`，`deque`，`list`...
   + C++ Standard 定案前，HP 规范的 STL 头文件(扩展名 .h)
@@ -21,71 +23,40 @@
 
 SGI STL 被归纳到 GNU C++ 标准程序库中，例如 gcc 使用 4.8.4 版本，STL源码 在 Linux 系统的位置是：/usr/include/c++/4.8.4/bits。
 
+ STL另一个重要特性是它不是面向对象的。为了具有足够通用性，STL主要依赖于模板而不是封装，继承和虚函数（多态性）——OOP的三个要素 
+
+提示
+
+确保在编译使用了STL的程序中至少要使用-O优化来保证内联扩展。
+
+STL提供了大量的模板类和函数，可以在OOP和常规编程中使用
+
+
+
+ 注意，模板只是实例化的模式，函数模板根本不是函数，类模板也根本不是类 
+
+
+
+
+
+
+
 ## 参考资料
 
 * <<STL 源代码剖析>> 侯捷
+*  http://net.pku.edu.cn/~yhf/UsingSTL.htm 
 
 --------------------------------------------------------------------------
 
+# stl 特点
 
 
-# allocator 
-
- SGI STL是最流行的版本，我们主要关注SGI STL的allocator实现 
-
- https://zhuanlan.zhihu.com/p/34725232 
-
-
-
-
-
-# 容器
-
-
-STL对定义的通用容器分三类：
-顺序性容器、关联式容器和容器适配器。
-
-- 顺序性容器：vector、list、deque 双向队列
-
-- 关联性容器：set、multiset、map、multimap
-
-- 容器适配器：stack、queue、priority_queue
-
-  stack 模板类的底层容器是:deque/list 容器
-  queue 模板类的底层容器是:deque/list 容器
-  priority_queue 模板类底层容器是array/vector 模拟二叉树
-
-
-
---------------------------------------------------------------------------
-堆排序：
-https://www.cnblogs.com/chengxiao/p/6129630.html
-
-
-
-## string
-
- https://www.oschina.net/translate/performance-improvement-with-the-stringbuilde 
-
-
-
-
-
---------------------------------------------------------------------------
-
-# 适配器
-
-![类型](https://github.com/steveLauwh/SGI-STL/raw/master/The%20Annotated%20STL%20Sources%20V3.3/Other/adapter.PNG)
-
-- 函数适配器
-- 容器适配器
-- 迭代器适配器
 
 
 
 ----------------------------------------------------------------------
 
-![容器适配器](https://upload-images.jianshu.io/upload_images/1837968-341ccb6ba217e986.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 QA
 
@@ -221,8 +192,6 @@ void AnimalShot(Animal & anim)
 
 
 
-几个问题：
-
 ​     
 
 # 为什么STL容器没有虚拟析构函数【QA】
@@ -241,7 +210,7 @@ void AnimalShot(Animal & anim)
 
 
 
-
+![image.png](https://i.loli.net/2019/11/25/tIArW36vhuSp2Fl.png)
 
 - 内联函数是弱符号
 
@@ -253,6 +222,32 @@ void AnimalShot(Animal & anim)
 ```
 
 
+
+# 容器
+
+
+STL对定义的通用容器分三类：
+顺序性容器、关联式容器和容器适配器。
+
+- 顺序性容器：vector、list、deque 双向队列
+
+- 关联性容器：set、multiset、map、multimap
+
+- 容器适配器：stack、queue、priority_queue
+
+  stack 模板类的底层容器是:deque/list 容器
+  queue 模板类的底层容器是:deque/list 容器
+  priority_queue 模板类底层容器是array/vector 模拟二叉树
+
+
+
+
+
+--------------------------------------------------------------------------
+
+# 适配器
+
+- 
 
 # 功能划分
 
@@ -284,75 +279,7 @@ stl_iterator.h
 
 
 
-# 函数对象模块
-
-- 定义：
-
-  重载了“operaotr()”操作符的普通类对象 ，
-
-  这个对象具备了具有函数行为
-
-  > 调用类(), 相当于调用类.成员函数()
-
-```c++
-
- // 大于
-template <class _Tp>
-struct greater : public binary_function<_Tp,_Tp,bool> 
-{
-  bool operator()(const _Tp& __x, const _Tp& __y) const { return __x > __y; }
-};
-//这个函数对象没有数据成员、没有虚函数、没有显示声明的构造函数和析构函数，且对operator()的实现是内联的。用作STL比较器的函数对象一般都很小
-
-greater<int> greaterobj;
-greaterobj(3, 5)//等价于greaterobj.operator(3,5) 效果等价于函数调用function(3, 5); 
-
-    
-```
-
-
-
-- 函数对象作用：1 可调用的表达式
-
-![func_objets](https://github.com/wangcy6/reading_code_note/blob/master/SGI-STL/images/func_object_call.PNG)
-
-> 使用函数对象作为比较器还有一个额外的好处，就是比较操作将被内联处理，
-
-> 而使用函数指针则不允许内联
->
-> 《C++Primer Plus》第16章“函数对象”这一节，发现C++中还有比函数指针更高层次的抽象——functor，中文名为“仿函数”“类函数”或“函数对象”。它的实际就是“重载了'operator()'的类”，并兼容函数指针
-
-
-
-- 函数对象作用： 2以函数对象的临时对象履行函数功能
-
-```c++
-cout << greater<int>()(3, 5) << endl;
-```
-
-- 函数对象作用  ： lambda表达式原理
-
-
-
-Lambda表达式来源于函数式编程，说白就了就是在**使用的地方定义函数**，有的语言叫“闭包”
-
-C++引入Lambda的最主要原因就是
-
-1）可以定义匿名函数，
-
-2）编译器会把其转成**函数对象**
-
-**编译器会把一个lambda表达式生成一个匿名类的匿名对象，并在类中重载函数调用运算符**
-
-![func_objets](https://github.com/wangcy6/reading_code_note/blob/master/SGI-STL/images/func_objets.PNG)
-
-- 函数对象作用:函数适配器【待学习】
-
-![](https://github.com/steveLauwh/SGI-STL/raw/master/The%20Annotated%20STL%20Sources%20V3.3/Other/functionobject.png)
-
-塔山
-
-- https://www.youtube.com/watch?v=482weZjwVHY
+- 
 
 
 
@@ -477,9 +404,29 @@ std::cout << "sum: " << s.sum <<endl;
 
 
 
+ # adapter （ 适配器 设计模式）
+
+![image.png](https://i.loli.net/2019/11/25/R5fdYHSjNIJQok4.png)
+
+ 将一个class的接口转换为另一个class的接口，使原本因接口不兼容而不能合作的classes，可以一起运作 
 
 
-# 适配器模块
+
+
+
+- 函数适配器
+- 容器适配器
+- 迭代器适配器
+
+// **学习STL，设计模式，chromium的源码是最好的教材。** 
+
+![容器适配器](https://upload-images.jianshu.io/upload_images/1837968-341ccb6ba217e986.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![类型](https://github.com/steveLauwh/SGI-STL/raw/master/The%20Annotated%20STL%20Sources%20V3.3/Other/adapter.PNG)
+
+
+
+
 
 #### 说明：
 
@@ -489,15 +436,7 @@ std::cout << "sum: " << s.sum <<endl;
 
 
 
-### 几个问题
 
-如何理解下面这句话【我反正是不理解】
-
-![1548213025843](C:\Users\wangchuanyi\AppData\Roaming\Typora\typora-user-images\1548213025843.png)
-
-
-
-![1548213506553](C:\Users\wangchuanyi\AppData\Roaming\Typora\typora-user-images\1548213506553.png)	
 
 
 
@@ -726,7 +665,18 @@ A[1] A++ A()
 
 函数适配器
 
-# lambda表达式的本质(函数对象)
+## 函数适配器
+
+
+
+### 参考
+
+-  https://www.kancloud.cn/digest/mystl/192544   《STL源码剖析》 P430、P454. 
+- 
+
+
+
+### lambda表达式的本质(函数对象)
 
 **lambda表达式就是一个函数对象**。
 
@@ -771,12 +721,79 @@ https://zybuluo.com/uuprince/note/81709
 
  status = array_each(&ctx->pool, server_pool_each_preconnect, NULL);
 
+## 
 
+### 函数对象模块
+
+- 定义：
+
+  重载了“operaotr()”操作符的普通类对象 ，
+
+  这个对象具备了具有函数行为
+
+  > 调用类(), 相当于调用类.成员函数()
+
+```c++
+ // 大于
+template <class _Tp>
+struct greater : public binary_function<_Tp,_Tp,bool> 
+{
+  bool operator()(const _Tp& __x, const _Tp& __y) const { return __x > __y; }
+};
+//这个函数对象没有数据成员、没有虚函数、没有显示声明的构造函数和析构函数，且对operator()的实现是内联的。用作STL比较器的函数对象一般都很小
+
+greater<int> greaterobj;
+greaterobj(3, 5)//等价于greaterobj.operator(3,5) 效果等价于函数调用function(3, 5); 
+
+    
+```
+
+
+
+- 函数对象作用：1 可调用的表达式
+
+![func_objets](https://github.com/wangcy6/reading_code_note/blob/master/SGI-STL/images/func_object_call.PNG)
+
+> 使用函数对象作为比较器还有一个额外的好处，就是比较操作将被内联处理，
+
+> 而使用函数指针则不允许内联
+>
+> 《C++Primer Plus》第16章“函数对象”这一节，发现C++中还有比函数指针更高层次的抽象——functor，中文名为“仿函数”“类函数”或“函数对象”。它的实际就是“重载了'operator()'的类”，并兼容函数指针
+
+
+
+- 函数对象作用： 2以函数对象的临时对象履行函数功能
+
+```c++
+cout << greater<int>()(3, 5) << endl;
+```
+
+- 函数对象作用  ： lambda表达式原理
+
+
+
+Lambda表达式来源于函数式编程，说白就了就是在**使用的地方定义函数**，有的语言叫“闭包”
+
+C++引入Lambda的最主要原因就是
+
+1）可以定义匿名函数，
+
+2）编译器会把其转成**函数对象**
+
+**编译器会把一个lambda表达式生成一个匿名类的匿名对象，并在类中重载函数调用运算符**
+
+![func_objets](https://github.com/wangcy6/reading_code_note/blob/master/SGI-STL/images/func_objets.PNG)
+
+- 函数对象作用:函数适配器【待学习】
+
+![](https://github.com/steveLauwh/SGI-STL/raw/master/The%20Annotated%20STL%20Sources%20V3.3/Other/functionobject.png)
+
+塔山
+
+- https://www.youtube.com/watch?v=482weZjwVHY
 
 ------------------------------------------------------------------------
 ### std::function
-
-类模版std::function是一种通用、多态的函数封装
 
 C++11中，callable object 包括传统
 1 C函数， 
@@ -821,15 +838,36 @@ _Function for_each(_InputIter __first, _InputIter __last, _Function __f) {
   return __f;
 }
 ~~~
----------------------------------------------s
-
-
-
-#   迭代器  
 
 
 
 
+`std::function`类模板是一种通用的函数包装器，它可以容纳所有可以调用的对象（[Callable](http://en.cppreference.com/w/cpp/concept/Callable)），
+
+包括 **函数**、**函数指针**、**Lambda表达式**、**bind表达式**、成员函数及成员变量或者其他函数对象。
+
+通过 `std::function` 可以储存、拷贝或调用 Callable 对象。它的模板参数如下：
+
+
+
+# std::bind
+
+ 顾名思义，`std::bind`函数用来绑定函数的某些参数并生成一个新的`function`对象。
+`bind`用于实现偏函数（Partial Function），[相当于实现了函数式编程中的 **Currying**](https://www.sczyh30.com/posts/C-C/cpp-stl-functional/)（柯里化）。 
+
+
+
+c++线程函数可以是lambda吗?可以是c++成员函数吗?
+
+
+
+
+
+#   迭代器  (迭代器模式)
+
+![image.png](https://i.loli.net/2019/11/25/6eVPDNxAr9GgtRv.png)
+
+ [http://www.wtango.com/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F17-%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/](http://www.wtango.com/设计模式17-迭代器模式/) 
 
 
 
