@@ -1,8 +1,7 @@
 #include "apue.h"
 #include <pthread.h>
 
-int
-makethread(void *(*fn)(void *), void *arg)
+int makethread(void *(*fn)(void *), void *arg)
 {
 	int				err;
 	pthread_t		tid;

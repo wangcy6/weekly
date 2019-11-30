@@ -7,8 +7,7 @@ static void	f2(void);
 static jmp_buf	jmpbuffer;
 static int		globval;
 
-int
-main(void)
+int main(void)
 {
 	int				autoval;
 	register int	regival;
@@ -32,11 +31,11 @@ main(void)
 	statval = 99;
 
 	f1(autoval, regival, volaval, statval);	/* never returns */
+	printf("func f1 end :\n");
 	exit(0);
 }
 
-static void
-f1(int i, int j, int k, int l)
+static void f1(int i, int j, int k, int l)
 {
 	printf("in f1():\n");
 	printf("globval = %d, autoval = %d, regival = %d,"
@@ -44,8 +43,7 @@ f1(int i, int j, int k, int l)
 	f2();
 }
 
-static void
-f2(void)
+static void f2(void)
 {
 	longjmp(jmpbuffer, 1);
 }

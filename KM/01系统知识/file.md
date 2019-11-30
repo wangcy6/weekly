@@ -40,9 +40,10 @@
 
 - cache和buffer   dentry objects and inode object 都在内存里有啥  区别？
 
-  
-  
-  
+
+
+
+
 
 
 
@@ -498,6 +499,18 @@ kernel
 
 
 
+
+
+
+
+
+# 文件读写
+
+## FQA
+
+### 从Linux文件系统看文件读写过程
+
+ https://github.com/justtreee/blog/issues/18 
 
 
 

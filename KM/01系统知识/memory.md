@@ -24,13 +24,13 @@
 
 - 术语
 
-  ![image-20191029155741853](../images/201909/image-20191029155741853.png)
+  ![image-20191029155741853](../../images/201909/image-20191029155741853.png)
 
 - 虚拟内存是真正的内存，而是模拟出来内存一样功能（不担心竞争）
 
-![image-20191029155920627](../images/201909/image-20191029155920627.png)
+![image-20191029155920627](../../images/201909/image-20191029155920627.png)
 
-![image-20191029144046878](../images/201909/image-20191029144046878.png)
+![image-20191029144046878](../../images/201909/image-20191029144046878.png)
 
  ![进程的角度](https://static001.geekbang.org/resource/image/af/83/afa4beefd380effefb0e54a8d9345c83.jpeg) 
 
@@ -44,17 +44,17 @@
 
  ![img](https://static001.geekbang.org/resource/image/27/9a/274e22b3f5196a4c68bb6813fb643f9a.png) 
 
-![image-20191029161649283](../images/201909/image-20191029161649283.png)
+![image-20191029161649283](..//../images/201909/image-20191029161649283.png)
 
-![image-20191029160324488](../images/201909/image-20191029160324488.png)
+![image-20191029160324488](../../images/201909/image-20191029160324488.png)
 
-![image-20191029160456490](../images/201909/image-20191029160456490.png)
+![image-20191029160456490](../../images/201909/image-20191029160456490.png)
 
 
 
 - 内存回收kswapd
 
-![image-20191029161027376](../images/201909/image-20191029161027376.png)
+![image-20191029161027376](../../images/201909/image-20191029161027376.png)
 
 - 内存分配
 
@@ -74,9 +74,11 @@
 
  ![img](https://static001.geekbang.org/resource/image/52/9b/52bb55fba133401889206d02c224769b.png)  
 
-![image-20191029162958919](../images/201909/image-20191029162958919.png)
+![image-20191029162958919](../../images/201909/image-20191029162958919.png)
 
-- 查看进程的内存布局
+### 查看进程的内存占用情况
+
+
 
 ​    cat /proc/$pid/map
 
@@ -172,7 +174,86 @@ $ dd if=/dev/urandom of=/tmp/file bs=1M count=500k
 
 
 
-- perf - Performance analysis tools for Linux
+###  系统内存占用情况
+
+
+
+~~~shell
+
+cat /proc/meminfo
+MemTotal:       16267884 kB
+MemFree:        10894124 kB
+MemAvailable:   13744648 kB
+Buffers:          347620 kB
+Cached:          3637524 kB
+SwapCached:         9644 kB
+Active:          2514784 kB
+Inactive:        2114072 kB
+Active(anon):     611716 kB
+Inactive(anon):  1389456 kB
+Active(file):    1903068 kB
+Inactive(file):   724616 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       1048572 kB
+SwapFree:         967376 kB
+
+
+cat /proc/slabinfo
+slabinfo - version: 2.1
+# name            <active_objs> <num_objs> <objsize> <objperslab> <pagesperslab> : tunables <limit> <batchcount> <sharedfactor> : slabdata <active_slabs> <num_slabs> <sharedavail>
+nf_conntrack_ffff880234058000     75     75    320   25    2 : tunables    0    0    0 : slabdata      3      3      0
+nf_conntrack_ffffffff81a25e00    728    850    320   25    2 : tunables    0    0    0 : slabdata     34     34      0
+isofs_inode_cache     50     50    640   25    4 : tunables    0    0    0 : slabdata      2      2      0
+ext4_groupinfo_4k   4170   4170    136   30    1 : tunables    0    0    0 : slabdata    139    139      0
+ext4_inode_cache   67022  67022   1048   31    8 : tunables    0    0    0 : slabdata   2162   2162      0
+ext4_xattr           690    690     88   46    1 : tunables    0    0    0 : slabdata     15     15      0
+ext4_free_data      3712   3712     64   64    1 : tunables    0    0    0 : slabdata     58     58      0
+ext4_allocation_context    256    256    128   32    1 : tunables    0    0    0 : slabdata      8      8      0
+ext4_io_end          969   1020     80   51    1 : tunables    0    0    0 : slabdata     20     20      0
+ext4_extent_status  97410  97410     40  102    1 : tunables    0    0    0 : slabdata    955    955      0
+jbd2_journal_handle    680    680     48   85    1 : tunables    0    0    0 : slabdata      8      8      0
+jbd2_journal_head   2052   2052    112   36    1 : tunables    0    0    0 : slabdata     57     57      0
+jbd2_revoke_table_s    256    256     16  256    1 : tunables    0    0    0 : slabdata      1      1      0
+jbd2_revoke_record_s  13184  13184     32  128    1 : tunables    0    0    0 : slabdata    103    103      0
+scsi_cmd_cache       288    288    448   36    4 : tunables    0    0    0 : slabdata      8      8      0
+kcopyd_job             0      0   3312    9    8 : tunables    0    0    0 : slabdata      0      0      0
+dm_uevent              0      0   2608   12    8 : tunables    0    0    0 : slabdata      0      0      0
+dm_rq_target_io        0      0    136   30    1 : tunables    0    0    0 : slabdata      0      0      0
+UDPLITEv6              0      0   1152   28    8 : tunables    0    0    0 : slabdata      0      0      0
+UDPv6                224    224   1152   28    8 : tunables    0    0    0 : slabdata      8      8      0
+tw_sock_TCPv6        128    128    256   32    2 : tunables    0    0    0 : slabdata      4      4      0
+TCPv6                120    120   2112   15    8 : tunables    0    0    0 : slabdata      8      8      0
+uhci_urb_priv       1825   1825     56   73    1 : tunables    0    0    0 : slabdata     25     25      0
+cfq_queue            280    280    232   35    2 : tunables    0    0    0 : slabdata      8      8      0
+bsg_cmd                0      0    312   26    2 : tunables    0    0    0 : slabdata      0      0      0
+mqueue_inode_cache    180    180    896   36    8 : tunables    0    0    0 : slabdata      5      5      0
+hugetlbfs_inode_cache     52     52    608   26    4 : tunables    0    0    0 : slabdata      2      2      0
+configfs_dir_cache    230    230     88   46    1 : tunables    0    0    0 : slabdata      5      5      0
+dquot                768    768    256   32    2 : tunables    0    0    0 : slabdata     24     24      0
+kioctx                 0      0    576   28    4 : tunables    0    0    0 : slabdata      0      0      0
+userfaultfd_ctx_cache      0      0    128   32    1 : tunables    0    0    0 : slabdata      0      0      0
+pid_namespace         60     60   2176   15    8 : tunables    0    0    0 : slabdata      4      4      0
+user_namespace         0      0    280   29    2 : tunables    0    0    0 : slabdata      0      0      0
+posix_timers_cache      0      0    248   33    2 : tunables    0    0    0 : slabdata      0      0      0
+UDP-Lite               0      0   1024   32    8 : tunables    0    0    0 : slabdata      0      0      0
+RAW                 1008   1394    960   34    8 : tunables    0    0    0 : slabdata     41     41      0
+UDP                  256    256   1024   32    8 : tunables    0    0    0 : slabdata      8      8      0
+tw_sock_TCP          288    480    256   32    2 : tunables    0    0    0 : slabdata     15     15      0
+TCP                  361    459   1920   17    8 : tunables    0    0    0 : slabdata     27     27      0
+blkdev_queue         210    300   2088   15    8 : tunables    0    0    0 : slabdata     20     20      0
+blkdev_requests      462    609    384   21    2 : tunables    0    0    0 : slabdata     29     29      0
+blkdev_ioc           312    312    104   39    1 : tunables    0    0    0 : slabdata      8      8      0
+fsnotify_event_holder   1360   1360     24  170    1 : tunables    0    0    0 : slabdata      8      8      0
+fsnotify_event       442    442    120   34    1 : tunables    0    0    0 : slabdata     13     13      0
+sock_inode_cache     890   1000    640   25    4 : tunables    0    0    0 : slabdata     40     40      0
+net_namespace         28     28   4608    7    8 : tunables    0    0    0 : slabdata      4      4      0
+shmem_inode_cache 145887 145896    680   24    4 : tunables    0    0    0 : slabdata   6079   6079      0
+Acpi-ParseExt       3552   3976     72   56    1 : tunables    0    0    0 : slabdata     71     71      0
+Acpi-Namespace      1122   1122     40  102    1 : tunables    0    0    0 : slabdata     11     11      0
+~~~
+
+
 
 
 
