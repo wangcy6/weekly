@@ -8,7 +8,7 @@
 
 ###  第三本 演讲的力量(2019年 第 40周 )
 
-![image.png](https://i.loli.net/2019/10/22/FXobiYqu4lE6fZL.png)
+![image](https://user-images.githubusercontent.com/5937331/70104496-2375d480-1679-11ea-91b0-c5e6d987bead.png)
 
 #### 简介
 
@@ -33,8 +33,6 @@
 
 送人玫瑰+手留余香，给个star
 ~~~
-
-
 
 
 
