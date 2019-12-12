@@ -223,7 +223,271 @@ void AnimalShot(Animal & anim)
 
 
 
-# 容器
+
+
+# 1 分配器（ stl_alloc.h ）
+
+ [栗子](https://gcc.godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAM1QDsCBlZAQwBtMQBGAOgAYB2ACwBOAKyCATAGZhsucIAcpAFZdSrZrVDIApBIBCe/aQDOqAK7FkHAOR6peWslbmsAah1SAwgFtMPkgBPT2wdXgARMIBBe0dnV0wPbwJAgAdMAH0CYmZCExCwyN4YiOjaZj8TVOZrN1opADYGwQ9%2BQ1Lity63An9UjV6kr2dmExM3ABUCjqjutxGxtzZWVBYiYjcQN1TzACNWPGQ3EwJ0EBBl1eZ1zy8pqWxW9qLZ7p39w5BC6Lm58xNHMBjqdzpc1iRbvdsKDWCtwcRPM8fr8ur0fP1rolbgtxgBVaYvFFdE7EczIAhuYiYXaOdBPNz/QFuVAEBCYDaecJLWFXG7efEPRE6fiRKRI4rfTpEnSiQyy2gYPAmFjEdAyyKiLkTNwAKjBmIgJzOIABAC9MhTaKR5nQTm4AG6oPB0nVJLm0cyw1LZACUT0lryJ3TwVBttBOmAAHqkNoaQSAlVliHh7Xg2Bl7ZCQn7heLA0HflSCJZaJsQLRMAB3SYy/S0dVCmYF7rCoqE5tuTCsExYtoBjuFzDF4ilo0wuHXCHeKHj3mYCC0H2N9vN1v96UigPrlGO51uLD63oQbU671kYHGs0Wup%2BhVR6ze/1NjshsMR6OxscJkxJlNp1gZlmDw5n2z4Dl05xYOwvS1uq2zZMuyKrpuYEFl2PZPiu4FfoeU53CEkGYIe85ntai6IVKyFtkhvxrqha5iluqFohigzYhoiwTNaOJuAKoSoY4BwVm4uyoKgrDMukOR8qK4QQLhCLTiEb4EHoDTWgptx8Spam3qg96YI%2BubboOw6ltk5iYBR%2BZ0VhLEDFi3g8Vx8wcXiBI0YJjiJKJ4mSeyk7EGAYCcvJPLwkBjxoOGqkSOp3ITnyXjadFJy6XU%2BmRg%2BFLGahcxFiWbhUGwPbWXMtnRBVEozLETguO4tz2pg5JTvxLwBo4FIAGJkgA1hAIF5nMX5NS1ileJ1ZGNM0s4Rd4nUFA8RVicZm6MahNCoNwVI9sQTUQJwvBLutWGbdwji7QQ1BidwuyYMAjgDdaEjHUN3RnRd7JXWdd0PbQT1uFIr0mQVI7Lagta8HBRjg7WnANidlUoS8Ng%2BuoIA2KINikLQGO8NjqAY14Rgw2Yli1PYnDYwQeOo2jvUgIIvDcA0whSAoDQc5z7NM0orAY4I2O4zY%2BOkITNjYyYIC8KQNMi6jpBwLASBoOieDsGQFAQKrqTq%2ByKAaFoDS8DLVDq70xBSxAuy06QNLlMQgQY1TpCq349AAPK0KwTvy6QWA%2BJowDsLb%2BBUuSKaYFLftRs15i9M72OdV2iey8mPi02jhvaCTBjqHguxS5AaOoN6eC2hjAC0RqcroBhGJw/BuJXHsSJLFhWBwnBZxjWM47b4uRhzlfNK5QduA0fB8G4EC4IQJAeNInDWl4qBqxri9SN3bjE/XBjU5n9MgFIUjcHFQjCEzDT8AoojCI3ojozYgv9374uS9LsuZ4rMCICAFgEB2AQcglAdZ62IGoTA%2BB1hqErDkVIice6YyFgPDGlM3CVkIAgNwQ8GgjxaCMLQE8p6izlvjH0R84p8HZg0KQ/A4p0NENfQQT8X7C1Fu/Uwn8yF0yfm3V%2BHCMYH3lhQ0gTVLbl1xoIIAA%3D)
+
+https://github.com/TsReaper/My-Allocator
+
+
+
+![image.png](https://i.loli.net/2019/12/10/ixyIPrjtXWebF4v.png)
+
+#### 输出
+
+SGI　STL标准库源码 stl_alloc.h 文件209 行到 246行 debug_alloc类模板的设计：
+
+delete []p
+
+### 默认分配debug_alloc
+
+```cpp
+// Allocator adaptor to check size arguments for debugging.
+// Reports errors using assert.  Checking can be disabled with
+// NDEBUG, but it's far better to just use the underlying allocator
+// instead when no checking is desired.
+// There is some evidence that this can confuse Purify.
+template <class _Alloc>
+class debug_alloc {
+
+private:
+
+  enum {_S_extra = 8};  // Size of space used to store size.  Note
+                        // that this must be large enough to preserve
+                        // alignment.
+
+                        //这儿就像它所说的那样
+public:
+
+  static void* allocate(size_t __n)
+  {
+    //这里实际申请的内存大小要多 8 个字节
+    char* __result = (char*)_Alloc::allocate(__n + (int) _S_extra);
+    *(size_t*)__result = __n;//前 4 个字节用于存储区块大小，可以看到，它预留了4个字节的空白区，具体原由 还望大牛能指出，==。
+    return __result + (int) _S_extra;//最后返回相对于原始指针偏移8个字节的新指针
+  }
+
+  static void deallocate(void* __p, size_t __n)
+  {
+    char* __real_p = (char*)__p - (int) _S_extra;//获得原始指针
+    assert(*(size_t*)__real_p == __n);//这里增加了一个断言，防止析构了被破坏的指针
+    _Alloc::deallocate(__real_p, __n + (int) _S_extra);
+  }
+
+  static void* reallocate(void* __p, size_t __old_sz, size_t __new_sz)
+  {
+    char* __real_p = (char*)__p - (int) _S_extra;
+    assert(*(size_t*)__real_p == __old_sz);
+    char* __result = (char*)
+      _Alloc::reallocate(__real_p, __old_sz + (int) _S_extra,
+                                   __new_sz + (int) _S_extra);
+    *(size_t*)__result = __new_sz;
+    return __result + (int) _S_extra;
+  }
+
+};
+
+《深入理解计算机系统》动态存储分配。负荷块之前存在头部，记录负荷大小与标志（是否存储内容），好像共计8字节。
+    
+```
+
+
+再来看看 gcc 下，其实也有类似的设计：
+
+```cpp
+#if(defined(_X86_) && !defined(__x86_64))
+#define _ALLOCA_S_MARKER_SIZE 8
+#elif defined(__ia64__) || defined(__x86_64)
+#define _ALLOCA_S_MARKER_SIZE 16
+#endif
+
+#if !defined(RC_INVOKED)
+  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
+    if(_Ptr) {
+      *((unsigned int*)_Ptr) = _Marker;
+      _Ptr = (char*)_Ptr + _ALLOCA_S_MARKER_SIZE;
+    }
+    return _Ptr;
+  }
+#endif
+#ifndef RC_INVOKED
+#undef _freea
+  static __inline void __cdecl _freea(void *_Memory) {
+    unsigned int _Marker;
+    if(_Memory) {
+      _Memory = (char*)_Memory - _ALLOCA_S_MARKER_SIZE;
+      _Marker = *(unsigned int *)_Memory;
+      if(_Marker==_ALLOCA_S_HEAP_MARKER) {
+	free(_Memory);
+      }
+#ifdef _ASSERTE
+      else if(_Marker!=_ALLOCA_S_STACK_MARKER) {
+	_ASSERTE(("Corrupted pointer passed to _freea",0));
+      }
+#endif
+    }
+  }
+#endif /* RC_INVOKED */
+```
+
+https://stackoverflow.com/questions/1518711/how-does-free-know-how-much-to-free
+
+https://www.zhihu.com/question/25556263
+
+```python
+ ____ The allocated block ____
+/                             \
++--------+--------------------+
+| Header | Your data area ... |
++--------+--------------------+
+          ^
+          |
+          +-- The address you are given
+            
+
+When you call malloc(), you specify the amount of memory to allocate. The amount of memory actually used is slightly more than this, and includes extra information that records (at least) how big the block is.(实际申请大小大于申请的大小)
+```
+
+### 二级配置器__default_alloc_template
+
+~~~c++
+// SGI STL 第二级配置器，GCC 默认使用第二级配置器，其作用是避免太多小额区块造成内存的碎片
+// 无 “template 类型参数”，且第二参数也没有用，其中第一参数用于多线程环境下
+template <bool threads, int inst>
+class __default_alloc _template {
+
+private:
+  // Really we should use static const int x = N
+  // instead of enum { x = N }, but few compilers accept the former.
+#if ! (defined(__SUNPRO_CC) || defined(__GNUC__))
+    enum {_ALIGN = 8};  // 小型区块的上调边界
+    enum {_MAX_BYTES = 128}; // 小区区块的上限
+    enum {_NFREELISTS = 16}; // _MAX_BYTES/_ALIGN  free-list 的个数
+    
+    
+# endif 
+  // 将任何小额区块的内存需求量上调至 8 的倍数
+  static size_t
+  _S_round_up(size_t __bytes) 
+    { return (((__bytes) + (size_t) _ALIGN-1) & ~((size_t) _ALIGN - 1)); }
+    
+    所以有 16 个 free lists，分别为 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128 bytes。例如需要 20 bytes，将会被自动调整为 24 bytes
+
+__PRIVATE:
+  // free-list 的节点结构，降低维护链表 list 带来的额外负担
+  union _Obj {
+        union _Obj* _M_free_list_link;  // 利用联合体特点
+        char _M_client_data[1];    /* The client sees this.        */
+  };
+private:
+# if defined(__SUNPRO_CC) || defined(__GNUC__) || defined(__HP_aCC)
+    static _Obj* __STL_VOLATILE _S_free_list[]; 
+        // Specifying a size results in duplicate def for 4.1
+# else
+    static _Obj* __STL_VOLATILE _S_free_list[_NFREELISTS];  // 维护 16 个空闲链表(free list)，初始化为0，即每个链表中都没有空闲数据块  
+# endif 
+  //根据申请数据块大小找到相应空闲链表的下标，n 从 0 起算
+  static  size_t _S_freelist_index(size_t __bytes) {
+        return (((__bytes) + (size_t)_ALIGN-1)/(size_t)_ALIGN - 1);
+  }
+
+  // Returns an object of size __n, and optionally adds to size __n free list.
+  static void* _S_refill(size_t __n);
+  // Allocates a chunk for nobjs of size size.  nobjs may be reduced
+  // if it is inconvenient to allocate the requested number.
+  static char* _S_chunk_alloc(size_t __size, int& __nobjs);
+
+  // Chunk allocation state.
+  static char* _S_start_free;  // 内存池起始位置。只在 _S_chunk_alloc() 中变化
+  static char* _S_end_free;    // 内存池结束位置。只在 _S_chunk_alloc() 中变化
+  static size_t _S_heap_size;
+
+# ifdef __STL_THREADS
+    static _STL_mutex_lock _S_node_allocator_lock;
+# endif
+
+    // It would be nice to use _STL_auto_lock here.  But we
+    // don't need the NULL check.  And we do need a test whether
+    // threads have actually been started.
+    class _Lock;
+    friend class _Lock;
+    class _Lock {
+        public:
+            _Lock() { __NODE_ALLOCATOR_LOCK; }
+            ~_Lock() { __NODE_ALLOCATOR_UNLOCK; }
+    };
+
+public:
+
+  /* __n must be > 0      */
+  // 申请大小为n的数据块，返回该数据块的起始地址 
+  static void* allocate(size_t __n)
+  {
+    void* __ret = 0;
+
+    // 如果需求区块大于 128 bytes，就转调用第一级配置
+    if (__n > (size_t) _MAX_BYTES) {
+      __ret = malloc_alloc::allocate(__n);
+    }
+    else {
+      // 根据申请空间的大小寻找相应的空闲链表（16个空闲链表中的一个）
+      _Obj* __STL_VOLATILE* __my_free_list
+          = _S_free_list + _S_freelist_index(__n);
+      // Acquire the lock here with a constructor call.
+      // This ensures that it is released in exit or during stack
+      // unwinding.
+#     ifndef _NOTHREADS
+      /*REFERENCED*/
+      _Lock __lock_instance;
+#     endif
+      _Obj* __RESTRICT __result = *__my_free_list;
+      // 空闲链表没有可用数据块，就将区块大小先调整至 8 倍数边界，然后调用 _S_refill() 重新填充
+      if (__result == 0)
+        __ret = _S_refill(_S_round_up(__n));
+      else {
+        // 如果空闲链表中有空闲数据块，则取出一个，并把空闲链表的指针指向下一个数据块  
+        *__my_free_list = __result -> _M_free_list_link;
+        __ret = __result;
+      }
+    }
+
+    return __ret;
+  };
+
+  /* __p may not be 0 */
+  // 空间释放函数 deallocate()
+  static void deallocate(void* __p, size_t __n)
+  {
+    if (__n > (size_t) _MAX_BYTES)   
+      malloc_alloc::deallocate(__p, __n);   // 大于 128 bytes，就调用第一级配置器的释放
+    else {
+      _Obj* __STL_VOLATILE*  __my_free_list
+          = _S_free_list + _S_freelist_index(__n);   // 否则将空间回收到相应空闲链表（由释放块的大小决定）中  
+      _Obj* __q = (_Obj*)__p;
+
+      // acquire lock
+#       ifndef _NOTHREADS
+      /*REFERENCED*/
+      _Lock __lock_instance;
+#       endif /* _NOTHREADS */
+      __q -> _M_free_list_link = *__my_free_list;   // 调整空闲链表，回收数据块
+      *__my_free_list = __q;
+      // lock is released here
+    }
+  }
+
+  static void* reallocate(void* __p, size_t __old_sz, size_t __new_sz);
+
+} ;
+
+    
+~~~
+
+
+
+# 2. 容器
 
 
 STL对定义的通用容器分三类：
@@ -243,11 +507,109 @@ STL对定义的通用容器分三类：
 
 
 
+## vector
+
+### 1、stl_vector.h
+
+~~~c++
+// 默认走这里，vector base 构造函数和析构函数
+// vector 继承 _Vector_base
+template <class _Tp, class _Alloc> 
+class _Vector_base {
+public:
+  typedef _Alloc allocator_type;
+  allocator_type get_allocator() const { return allocator_type(); }
+  
+  // 初始化
+  _Vector_base(const _Alloc&)
+    : _M_start(0), _M_finish(0), _M_end_of_storage(0) {}
+  
+  // 初始化，分配空间 
+  _Vector_base(size_t __n, const _Alloc&)
+    : _M_start(0), _M_finish(0), _M_end_of_storage(0) 
+  {
+    _M_start = _M_allocate(__n);
+    _M_finish = _M_start;
+    _M_end_of_storage = _M_start + __n;
+  }
+  
+  // 释放空间
+  ~_Vector_base() { _M_deallocate(_M_start, _M_end_of_storage - _M_start); }
+
+protected:
+  _Tp* _M_start;  // 表示目前使用空间的头
+  _Tp* _M_finish; // 表示目前使用空间的尾
+  _Tp* _M_end_of_storage; // 表示目前可用空间的尾
+
+  // simple_alloc 是 SGI STL 的空间配置器
+  typedef simple_alloc<_Tp, _Alloc> _M_data_allocator;  // 以元素大小为配置单位
+  _Tp* _M_allocate(size_t __n)
+    { return _M_data_allocator::allocate(__n); }
+  void _M_deallocate(_Tp* __p, size_t __n) 
+    { _M_data_allocator::deallocate(__p, __n); }
+};
+
+
+template <class _Tp, class _Alloc = __STL_DEFAULT_ALLOCATOR(_Tp) >
+class vector : protected _Vector_base<_Tp, _Alloc> 
+    
+    
+doc:
+template < class T, class Alloc = allocator<T> > class vector; // generic template
+
+- 构造函数
+    
+// 构造拥有 n 个有值 value 的元素的容器
+vector(size_type __n, const _Tp& __value,
+         const allocator_type& __a = allocator_type()) 
+    : _Base(__n, __a)
+    { _M_finish = uninitialized_fill_n(_M_start, __n, __value); }
+
+
+http://luodw.cc/2015/10/27/STL-vec/
+http://luodw.cc/2015/10/26/Calloc/#more
+https://wetest.qq.com/lab/view/318.html?from=content_testerhome
+https://www.zhihu.com/question/274802525
+https://www.zhihu.com/question/274802525
+~~~
+
+
+
+- 解析 https://www.kancloud.cn/digest/stl-sources/177263
+
+
+
+
+
+  ### 内存占用统计
+
+https://rextester.com/THGSQZ86778
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --------------------------------------------------------------------------
 
-# 适配器
+# 空间配置器
 
-- 
+https://www.kancloud.cn/digest/stl-sources/177263
+
+
+
+
 
 # 功能划分
 
