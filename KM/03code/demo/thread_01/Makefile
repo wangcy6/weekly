@@ -1,13 +1,10 @@
 # Makefile  exe程序
-TARGET = test demo01_pthread
+TARGET =demo01_pthread
 CC=g++
 #C 编译器的选项
 CFLAGS=-Wall -O2 -g -I. 
 # C++ 编译器的选项
 CXXFLAGS=$CFLAGS
-DEPS=CThread.h
-OBJS += CThread.o
-OBJS += main.o
 OBJS += demo01_pthread.o
 #动态库路径            
 #LIBPATH  = -L./dynamiclib/libs 
@@ -20,7 +17,7 @@ CPPFLAGS   = -I .
 
 # Compiles each of the object files as separate targets
 #%.o: %.cpp把所有的[.cpp]文件都编译成[.o]文件
-%.o: %.cpp $(DEPS)
+%.o: %.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # -o $@ -> Tells make to put the output in a file named after the target

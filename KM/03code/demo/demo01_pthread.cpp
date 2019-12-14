@@ -22,11 +22,15 @@ void* doSomeThing(void *arg)
         printf("\n Second thread processing\n");
     }
 
-    for(i=0; i<(0xFFFFFFFF);i++);
-
+    while (1)
+    {
+        printf("Speaking from the detached thread...\n");
+        sleep(5);
+    }
+	
     return NULL;
 }
-
+////g++  -pthread thread.cpp demo01_pthread.cpp
 int main(void)
 {
     int i = 0;
@@ -43,6 +47,7 @@ int main(void)
         i++;
     }
 
-    sleep(5);
+     sleep(5);
+	 printf("Main thread dying...\n");
     return 0;
 }
