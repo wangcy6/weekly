@@ -172,19 +172,11 @@ promote slave nodes to master（这是node作职责）
 
 
 
-【操作系统】-2019-11-02-mysql 有b+作为索引，为什么liunx文件系统不用b+索引结构，采用inode下面一个固定大小数组来表示？ #28
+如何消除痛苦
 
- https://github.com/wangcy6/weekly/issues/28 
+https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-problems-in-your-mind-d137a36201a7
 
-
-
-答案：
-
- [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
-
-
-
- 文件系统 学习记录 [https://github.com/wangcy6/weekly/blob/master/KM/01%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/file.md](https://github.com/wangcy6/weekly/blob/master/KM/01系统知识/file.md) 
+翻译计划：
 
 
 
