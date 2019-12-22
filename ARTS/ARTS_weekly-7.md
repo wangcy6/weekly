@@ -1,6 +1,6 @@
 ---
 title: "ARTS_weekly_7"
-date: 2019-11-22
+date: 2019-12-19
 description: "GTD践行第七周"
 draft: false
 tags: ["GTD","work"]
@@ -17,23 +17,11 @@ categories: ["ARTS"]
 
 
 
-- 本周沟通2次，无效沟通 2次，全年累计沟通次数2次，无效沟通次数2次
+本周主要问题，没有科学工作和沟通方法，和计划安排。
 
-  
+导致一直在迷茫中
 
-- 本周一共 解决 2个问题
 
-​             
-
-1. 【每日一问】-2019-11-21 [对3PC提交的疑惑](     https://github.com/wangcy6/weekly/issues/32 )？
-2. 【英语阅读】-2019-11-22 2pc提交，[最后一次提交或者回滚失败怎办](  https://github.com/wangcy6/weekly/issues/33 )？ 
-
-​           
-
-- 本周阅读1本书，全年累计5本
-
-- 本周早睡早起0次，全年累计0次
-- 本周电脑工作28小时。 ，手机 34小时。
 
 
 
@@ -61,7 +49,9 @@ categories: ["ARTS"]
 
 
 
+依然停留在这里
 
+https://github.com/wangcy6/leetcode/issues/12
 
 
 
@@ -186,7 +176,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-# 二 . 起床-运动-阅读 -工作 执行情况跟踪
+# 二 . 起床-运动-阅读 
 
 ![image.png](https://i.loli.net/2019/11/04/iPFxvJj1HM2ahtn.png)
 
@@ -198,8 +188,9 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-> 按时睡觉做到了 22点去睡觉，但是本周起床在8点起床，没有改进
+> 晚上因为看书和运动事情从9点延迟到23点，造成第二天造成无法起床
 >
+> 现在主要问题是起床问题，6：00准备起床
 
 
 
@@ -229,9 +220,9 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-### 执行结果
+### 执行结果（变化）
 
-
+![起床](../images/172905_c3c53871_116887.png "屏幕截图.png")
 
 
 
@@ -275,7 +266,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 - 自我救赎-手机--腾讯视频 20-23点 3个小时 尤其是周末
 
-### 执行结果
+### 执行结果(变化)
 
 ![image.png](https://i.loli.net/2019/10/21/sjQhIJbwiT8qeWV.png)
 
@@ -285,23 +276,37 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 鼠标统计:平均每天点击鼠标6167次 39秒点击1次
 
+- 画外音
+
 > 从外人看来，你像傻子一样，打开软件，关闭软件，打开网页关闭网页， 跟小白鼠没区别。
 >
 > 这说明注意力很容易被其事情吸引走，并且你自己发没有发现 已经偏离轨道，很危险
 >
-> 没有人提醒你，
+> 没有人提醒你
 
-### 期望结果:一次只做一件事
+- 潜意识
+
+> 完全靠自己感觉，不从 公司角度和规划角度做失去，这最大问题.
+>
+> 不停点击鼠标，处理问题没有规则流程，去分析业务，架构，技术是什么
+>
+> 纯把自己当成重复地下劳动力呀
+>
+> 一切忙碌，在10分钟，1小时，一天，一星期去没有取得任何进步
 
 
 
-盘茄时间 25分钟工作+5分钟 这个必须严格执行。
+### 期望结果:一次只做一件事，按照计划做事情（繁忙）
 
-这个不要公司去规定，更不害怕别人嘲笑。
+- 盘茄时间 25分钟工作+5分钟 这个必须严格执行。
 
-我自己很清楚，很容易其他事情走神。别人厉害不需要那是他们事情。
+- 这个不要公司去规定，更不害怕别人嘲笑，站起来活动5分钟
 
-### 执行结果
+- 我自己很清楚，很容易其他事情走神。别人厉害不需要那是他们事情。
+
+  
+
+### 执行结果（变化）
 
 ![上周](https://i.loli.net/2019/10/17/8Whlt51RLArsI39.png)
 
@@ -314,29 +319,58 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 ## 2. 运动----掌控跑步，你掌控生活
 ### 目前现状
 
+- 自己每次都妥协
+
 > 发现驼背 ，高低肩 长时间坐姿不正确，不运动导致的  。这谁责任。
 >
 > 说根本时间，平时没时间，周末么总有时间吧。
 
+- 大脑可以屏蔽痛苦，让感受不到这 最可怕的失去
+
+  > 当你走出公司，你才感觉 说不出来疲惫，为什么 自己身心暴躁焦虑，工作没有计划。
+
+### 期望结果：
 
 
-### 期望结果：遵循体温规律
 
-每周跑步三次 ，3公里 5 公里 8公里  
+- 每周跑步三次 ，3公里 5 公里 8公里  
 
-时间周三 周六和周天.
+  时间周三 周六和周天
 
 ![image-20191104121844430](../../images/image-20191104121844430.png)
 
+- 感觉累时候，你休息一下，一天三次机会
+
+  中午吃饭时候
+
+  晚上吃饭时候
+
+
+
 ### 执行结果
 
-![很久之前记录了](https://upload-images.jianshu.io/upload_images/1837968-8ba4b4ffd846ffed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![输入图片说明](../images/174055_63bd7ef7_116887.png "屏幕截图.png")
+
+
 
 ## 3.  阅读 ---科学合理方法
 
+### A-计划
+
+![book](../images/174226_6bc1986c_116887.png "屏幕截图.png")
 
 
 
+### B-行动
+
+- 用读书记录app跟着
+- 用ppt记录分享到抖音上
+
+### C-执行结果（看到变化
+
+自己不敢说话，分享失败
 
 
 
@@ -344,7 +378,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-## 1. 沟通--回沟通人能装下整个世界
+## 1. 沟通--深入剖析
 
 ### 目前现状：
 
@@ -370,9 +404,9 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-## 下周计划 -吃饭的饭碗
+## 下周计划 -意志力实验
 
-### 目前现状：
+### A-目前现状：
 
 > 注意力高度不集中，一个点击8千次鼠标，
 >
@@ -388,7 +422,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 
 
-### 期望结果 
+### B-期望结果 
 
 > 心流状态
 
@@ -408,7 +442,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 ![image.png](https://i.loli.net/2019/11/04/Ro4wSLnXVHQICjb.png)
 
-### 执行结果
+### C-执行结果（看到变化）
 
-![image.png](https://i.loli.net/2019/11/04/iPFxvJj1HM2ahtn.png)
+https://app.yinxiang.com/client/web#?n=671a47c7-fccd-457d-9fc8-69c980997b6a&s=s39&swm=true&
 
