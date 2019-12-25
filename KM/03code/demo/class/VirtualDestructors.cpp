@@ -17,6 +17,11 @@ public:
   ~Derived1() { cout << "~Derived1()\n"; }
 };
 
+
+
+
+
+
 class Base2 {
 public:
   Base2() 
@@ -45,12 +50,12 @@ public:
 int main() {
 
   cout<<" no virtual is static "<<endl;
-  Base1* bp = new Derived1; // Upcast
+  Base1* bp = new Derived1(); // Upcast  out-of-memory 
   delete bp; // 这是一个bug
   
   Base2* b2p = new Derived2; // Upcast
   delete b2p;
-  delete b2p;
+  
 
   cout<<" ref is ok"<<endl;
   Derived2 dd;
@@ -60,7 +65,9 @@ int main() {
   Derived2 d3;
   Base2 *p3 =&dd;
   //delete p3;
-} ///:~
+
+  Derived1 last;
+} 
 
 /**
   ~Base1()
