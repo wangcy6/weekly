@@ -70,6 +70,7 @@ int main() {
 } 
 
 /**
+ * https://stackoverflow.com/questions/461203/when-to-use-virtual-destructors
   ~Base1()
 
    ~Derived2() //自己

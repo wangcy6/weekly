@@ -10,6 +10,8 @@ struct Ticket{
     pthread_rwlock_t rwlock;//读写锁
     pthread_mutex_t mlock;//互斥锁
 }ticket;
+//https://www.youtube.com/watch?v=_vfZhdTgA5A
+//https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-7%3A-The-Reader-Writer-Problem
 
 int lock = 0;
 
