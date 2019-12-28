@@ -1,5 +1,7 @@
 #include "iostream"
 #include <typeinfo>
+#include <stdio.h>      /* puts */
+#include <stdlib.h>     /* atexit */
 using namespace std;
 /***
  * 一个典型的程序运行步骤
@@ -17,7 +19,8 @@ using namespace std;
                 5. 初始化C库的一些数据。
                 6. 调用main并记录返回值。
                 7. 检查错误并将main的返回值返回。
-
+进程的退出：
+当一个进程运行完毕或者因为触发系统异常而退出时，最终会调用到内核中的函数do_exit(),在do_exit()函数中会清理一些进程使用的文件描述符，会释放掉进程用户态使用的相关的物理内存，清理页表，同时进程会调整其子进程的父子关系，会根据实际的情况向父进程发送SIG_CHLD信号。
  *
  * C/C++程序的运行流程
  * Entry Point:
@@ -35,9 +38,43 @@ using namespace std;
  *
  */
 int a;
-a = 3; // error: ‘a’ does not name a type
-// main’ must return ‘int’
-int main(int argc, char *argv[]) {
-  return 0;
-  cout << "main is over ,you can not wait  " << end;
+//a = 3; // error: ‘a’ does not name a type
+
+void fnExit1 (void)
+{
+  puts (" Set function to be executed on exit");
 }
+int main(int argc, char *argv[]) {
+    atexit (fnExit1);
+    cout << "main is over ,you can not wait  " <<endl;
+    int * ptr =new int;
+    //exit(0);//释放掉进程用户态使用的相关的物理内存
+   // pthread_exit();
+    cout << "main  " <<endl;
+    return -1;
+}
+
+/* 
+valgrind ls
+ *  valgrind gcc
+ * valgrind awk
+ * https://www.zhihu.com/question/25563768
+ */
+
+/**
+ * If the FD_CLOEXEC bit is not set, the file descriptor will
+       remain open across an execve(2).
+
+ A single thread can exit in three ways, thereby stopping its flow of control, without
+terminating the entire process.
+1. The thread can simply return from the start routine. The return value is the
+thread’s exit code.
+2. The thread can be canceled by another thread in the same process.
+3. The thread can call pthread_exit
+
+https://www.cnblogs.com/fnlingnzb-learner/p/6959276.html
+但是可以在主线程中显示调用pthread_exit来触发，普通线程会默认调用pthread_exit。
+ If the thread has any thread-specific data,
+       then, after the clean-up handlers have been executed, the corresponding destructor functions are called, in  an
+       unspecified order.
+ */
