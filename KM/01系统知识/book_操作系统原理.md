@@ -22,7 +22,7 @@ categories: ["Book"]
 #### 中断特点
 
 - 中断处理程序不是可[重入](https://zh.wikipedia.org/wiki/%E5%8F%AF%E9%87%8D%E5%85%A5)的。因为屏蔽了中断，根本不会发生切换。同类[自旋锁是不可重入](https://my.oschina.net/anur/blog/1573625)的
-- 中断处理进程，只能采用自旋锁（短期互斥原语），不能长期互斥原语（这会导致进程睡眠）
+- 中断处理进程，只能采用自旋锁（短期互斥原语），不能长期互斥原语（这会导致进程睡眠）【epoll原理 不能长期阻塞】
 - 随时都可能发生，异步的。
 
 
@@ -170,11 +170,48 @@ public class SpinLock {
 
 
 
+## 中断与信号
 
+## [linux可重入、异步信号安全和线程安全](https://www.cnblogs.com/alantu2018/p/8446917.html)
 
-### 塔山
+**不可重入的几种情况**：
+
+使用静态数据结构，比如getpwnam，getpwuid：如果信号发生时正在执行getpwnam，信号处理程序中执行getpwnam可能覆盖原来getpwnam获取的旧值
+
+- 调用malloc或free：如果信号发生时正在malloc（修改堆上存储空间的链接表），信号处理程序又调用malloc，会破坏内核的数据结构 new
+
+- 使用标准IO函数，因为好多标准IO的实现都使用全局数据结构，比如printf(文件偏移是全局的)
+
+- 函数中调用longjmp或siglongjmp：信号发生时程序正在修改一个数据结构，处理程序返回到另外一处，导致数据被部分更新。
+
+  
+
+  2. 不可重入函数不能由多个线程使用。
+
+  **如果将对临界资源的访问加锁，则这个函数是线程安全的；但如果重入函数的话加锁还未释放，则会产生死锁，因此不能重入**。
+
+  
+
+  
+
+### 大家都在讨论
+
+- Java多线程系列——深入重入锁ReentrantLock 【done_很好】
+
+  https://www.cnblogs.com/zhengbin/p/6503412.html
+
+- 深入理解读写锁ReentrantReadWriteLock 【reading】
+
+  [ReentrantLock的实现语义与使用场景](https://www.cnblogs.com/dongguacai/p/5992838.html)[done_good!!!!]
+
+  https://www.cnblogs.com/dongguacai/p/5994381.html
+
+  https://www.jianshu.com/p/4a624281235e
+
+- https://www.cnblogs.com/charlesblc/p/6188364.html
 
 -  https://kanonjz.github.io/2017/12/27/reentrantlock-and-spinlock/ 
 
--  http://www.liuhaihua.cn/archives/608699.html 
+- http://www.liuhaihua.cn/archives/608699.html 
+
 -  https://my.oschina.net/anur/blog/1573625 
