@@ -4,21 +4,7 @@
 #include <vector>
 using namespace std;
 
-/* template <class Key,                  // unordered_map::key_type
-          class T,                    // unordered_map::mapped_type
-          class Hash = hash<Key>,     // unordered_map::hasher
-          class Pred = equal_to<Key>, // unordered_map::key_equal
-          class Alloc =
-              allocator<pair<const Key, T>> // unordered_map::allocator_type
-          >
-class unordered_map */;
-// CPP program to demonstrate working of unordered_map
-// for user defined data types.
 
-// Objects of this class are used as key in hash
-// table. This class must implement operator ==()
-// to handle collisions.
-//https://www.sczyh30.com/posts/C-C/cpp-stl-hashmap/
 struct Person {
   string first, last; // First and last names
 
@@ -45,47 +31,74 @@ public:
 };
 
 // g++ -std=c++11 unordered_map_class.cpp
-typedef std::unordered_map<Person,int> myHashMap;
+typedef std::unordered_map<Person,int,MyHashFunction> myHashMap; //忘记了MyHashFunction报错
+typedef myHashMap::iterator  myiterator;
 
 int main() {
 
         myHashMap mymap;
         //测试自定义类
-        //key_eq
         mymap.rehash(20);
+
+        //key 
         Person p1("kartik", "kapoor");
         Person p2("Ram", "Singh");
         Person p3("Laxman", "Prasad");
-
+       //value
         std::pair <Person,int> item1= make_pair(p1,199);
         std::pair <Person,int> item2= make_pair(p2,299);
         std::pair <Person,int> item3= make_pair(p3,199);
         
 
-        //01 测试插入 
-
+        //01 测试key插入 
+        //http://www.cplusplus.com/reference/unordered_map/unordered_map/operator[]/
+        //http://www.cplusplus.com/reference/unordered_map/unordered_map/insert/
         mymap[p1] = 100;
-        mymap.insert(item1);  // 重复元素不修改
+        pair<myiterator,bool> result1=mymap.insert(item1);  //元素重复,不修改返回false
+        if(result1.second ==true)
+        {
+                cout<< p1.first<< "successfully inserted" <<endl;
+        }else
+        {
+              cout<< p1.first<< " repeated " <<endl;
+        }
+         
 
-        mymap.insert(item2); 
-        mymap[p2] =200;  //重复元素修改
+       pair<myiterator,bool> result2= mymap.insert(item2); 
+       if(result2.second ==true)
+        {
+                cout<< p2.first<< "successfully inserted" <<endl;
+        }else
+        {
+              cout<< p2.first<< " repeated " <<endl;
+        } 
+        mymap[p2] =200;  //元素重复,修改  reference 
 
-        mymap[p3] = 400;
-        mymap[p3] = 400; //unordered_map 不允许重复,
+        mymap[p3] = 400; //new element inserted
+        mymap[p3] = 500; //existing element accessed
 
 
-
-        std::cout << "----------ouput----------"<<endl;
+        std::cout << "-------test::same key insert ----------"<<endl;
         for (auto e : mymap) {
         cout << "[" << e.first.first << ", " << e.first.last << "] = > " << e.second
                 << '\n';
         }
-        //02 测试自定义类
-         std::cout << "----------calss hash function object---------"<<endl;
-        //  myHashMap::hasher fn = mymap.hash_function();
-        //  std::cout << "hash(p1): " << fn (p1) << std::endl;
-        //  std::cout << "hash(p2): " << fn (p2) << std::endl;
+
+        //02 测试自定义类 hash eqal
+         std::cout << "------ test::hash_function  && key_eq---------"<<endl;
+         //http://www.cplusplus.com/reference/unordered_map/unordered_map/hash_function/
+         myHashMap::hasher fn = mymap.hash_function();
+         std::cout << "hash_function(p1): " << fn (p1) << std::endl;
+         std::cout << "hash_function(p2): " << fn (p2) << std::endl;
+         std::cout << "hash_function(p3): " << fn (p3) << std::endl;
+
+      
+        //http://www.cplusplus.com/reference/unordered_map/unordered_map/key_eq/
+        std::cout << "mymap.key_eq() is p1 == p3 " <<mymap.key_eq()(p1,p3)<< std::endl;
+        std::cout << "mymap.key_eq() is p1 == p1 " <<mymap.key_eq()(p1,p1)<< std::endl;
+
         
+
         //03 测试指标
         std::cout << "----------size ----------"<<endl;
         std::cout << "current size: " << mymap.size() << std::endl;
