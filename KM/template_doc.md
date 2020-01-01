@@ -45,19 +45,9 @@ Look for the answer inside your question.
 
 # 知识图谱
 
-## day1 The C10K problem
 
-学习资料
 
- http://www.kegel.com/c10k.html
-
-http://gee.cs.oswego.edu/dl/cpjslides/nio.pdf
-
-https://juejin.im/post/5bea1d2e51882523d3163657
-
-## 输出
-
-### 陈咬金的三板斧
+## 陈咬金的三板斧
 
 
 
@@ -77,24 +67,3 @@ https://juejin.im/post/5bea1d2e51882523d3163657
 
 
 
-## day2 libevent
-
-###  Netty 学习推荐书籍
-
-目前市面上介绍 netty 的文章很多，如果读者希望系统性的学习 Netty，推荐两本书：
-
-1) 《Netty in Action》，建议阅读英文原版。
-
-2) 《Netty 权威指南》，建议通过理论联系实际方式学习。
-
-
-
-## day3 netty 
-
-###  Netty 学习推荐书籍
-
-目前市面上介绍 netty 的文章很多，如果读者希望系统性的学习 Netty，推荐两本书：
-
-1) 《Netty in Action》，建议阅读英文原版。
-
-2) 《Netty 权威指南》，建议通过理论联系实际方式学习。

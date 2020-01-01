@@ -4,7 +4,18 @@
 
 # 基础知识
 
-## 协议格式
+# day1
+
+## 资料
+
+- HTTP权威指南（中文版） 1 ，3章节
+- http://www.ruanyifeng.com/blog/2011/09/curl.html
+
+## 输出
+
+
+
+### 协议格式
 
 ![image-20191105194051987](../../images/image-20191105194051987.png)
 
@@ -22,3 +33,7 @@
 - `404 Not Found` 请求的资源不存在，例如，输入了错误的URL
 - `500 Internal Server Error` 服务器发生不可预期的错误，导致无法完成客户端的请求。
 - `503 Service Unavailable` 服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常。
+
+`-i`参数可以显示http response的头信息，连同网页代码一起。
+
+curl -v  https://wangcy6.github.io/
