@@ -6,7 +6,7 @@
 
 # day1
 
-## 资料
+## 1.1资料
 
 - HTTP权威指南（中文版） 1 ，3，15章节 
 
@@ -20,7 +20,7 @@
 
 - 
 
-## 输出
+## 1.2 输出
 
 
 
@@ -65,6 +65,12 @@ Content-Type: text/html; charset=utf-8
 ### 区别
 
 ![image-20200101142314339](../images/image-20200101142314339.png)
+
+1..message body
+
+2. ```
+   specific semantics
+   ```
 
 The **HTTP `GET` method** requests a representation of the specified resource. Requests using `GET` should only retrieve data.
 
