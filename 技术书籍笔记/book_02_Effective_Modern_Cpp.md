@@ -16,7 +16,7 @@ https://github.com/kelthuzadx/EffectiveModernCppChinese
 
 https://blog.csdn.net/fatalerror99/
 
-
+[https://icehe.me/c++/Effective%20C++%20-%20Reading%20Note%201/](https://icehe.me/c++/Effective C++ - Reading Note 1/)
 
 # Effective C++ TO_DO 
 
@@ -49,8 +49,12 @@ https://blog.csdn.net/fatalerror99/
 #### 三、资源管理 (Resource Management)
 
 - [x] 13. 以对象管理资源 （Item 13: Use objects to manage resources  )
-14. 在资源管理类中小心coping行为 （Think carefully about copying behavior in resource-managing classes)
-15. 在资源管理类中提供对原始资源的访问（Provide access to raw resources in resource-managing classes)
+
+      >Two commonly useful RAII classes are TR1::shared_ptr and auto_ptr.
+      >tr1::shared_ptr is usually the better choice, because its behavior when copied is intuitive.
+      >Copying an auto_ptr sets it to null  
+- [x] 14. 在资源管理类中小心coping行为 （Think carefully about copying behavior in resource-managing classes)
+- [x] 15. 在资源管理类中提供对原始资源的访问（Provide access to raw resources in resource-managing classes)
 16. 成对使用new和delete时要采取相同形式 （Use the same form in corresponding uses of new and delete)
 17. 以独立语句将newed对象置入智能指针 （Store newed objects in smart pointers in standalone statements)
 
@@ -112,6 +116,22 @@ https://blog.csdn.net/fatalerror99/
 55. 让自己熟悉Boost （Familiarize yourself with Boost)
 
 ## 实践--Effective C++
+
+
+
+- RAII 对象的原因 【这个大家熟知的】，但是没有解决copy之后，析构对象的问题，大家都一起释放。
+
+  解决办法：
+
+  a you should prohibit it by making copy constructor private
+
+  b **Copy the underlying resource**
+
+  c **Reference-count the underlying resource**
+
+   
+
+
 
 ## 参考
 
