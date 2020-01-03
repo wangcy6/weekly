@@ -1,3 +1,5 @@
+//https://my.oschina.net/costaxu/blog/103119
+
 //https://www.boost.org/doc/libs/1_71_0/libs/smart_ptr/doc/html/smart_ptr.html
 //https://www.boost.org/doc/libs/1_63_0/libs/smart_ptr/smart_ptr.htm
 //https://github.com/boostorg/smart_ptr

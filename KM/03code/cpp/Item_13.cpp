@@ -54,22 +54,7 @@ void test_int()
 
 
 
-struct Foo
-{
-   Foo(int in) : a(in) {}
-   void print() const
-   {
-      std::cout << "a = " << a << '\n';
-   }
-   int a;
-};
 
-void test_operator()
-{
-    auto ptr = std::make_shared<Foo>(10);
-    ptr->print();
-    (*ptr).print();
-}
 
 struct Base
 {
@@ -216,15 +201,41 @@ int test_lock () {
 
   return 0;
 }
+///usr/include/c++/4.8.2/bits/shared_ptr.h
+struct Foo
+{
+   Foo(int in) : a(in) {}
+   void print() const
+   {
+      std::cout << "a = " << a << '\n';
+   }
+   int a;
+};
+
+void test_operator()
+{
+    auto ptr = std::make_shared<Foo>(10);
+    cout << ptr.use_count() << endl;
+    
+    shared_ptr<Foo> ptr2(ptr);
+    cout << ptr2.use_count() << endl; 
+   
+    shared_ptr<Foo> ptr3; 
+    ptr3=ptr;
+    cout << ptr3.use_count() << endl; 
+
+
+}
 
 // g++ -std=c++11 -g Item_13.cpp -pthread
 int main() 
-{
+{   
+    test_operator();
     // test_int(); 
     // test_operator();  
     // test_thread();
-    test_lock();
-    test_expired();
+    // test_lock();
+    // test_expired();
     return 0;
 }
 
