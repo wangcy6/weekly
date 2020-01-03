@@ -178,6 +178,112 @@ void _st_vp_schedule(void)
 
 
 
+- st_read
+
+~~~c
+ssize_t st_read(_st_netfd_t *fd, void *buf, size_t nbyte, st_utime_t timeout)
+{
+  ssize_t n;
+
+  while ((n = read(fd->osfd, buf, nbyte)) < 0) {
+    if (errno == EINTR)
+      continue;
+    if (!_IO_NOT_READY_ERROR)
+      return -1;
+    /* Wait until the socket becomes readable */
+    if (st_netfd_poll(fd, POLLIN, timeout) < 0)
+      return -1;
+  }
+
+  return n;
+}
+
+/*
+ * Wait for I/O on a single descriptor.
+ */
+int st_netfd_poll(_st_netfd_t *fd, int how, st_utime_t timeout)
+{
+  struct pollfd pd;
+  int n;
+
+  pd.fd = fd->osfd;
+  pd.events = (short) how;
+  pd.revents = 0;
+
+  if ((n = st_poll(&pd, 1, timeout)) < 0)
+    return -1;
+  if (n == 0) {
+    /* Timed out */
+    errno = ETIME;
+    return -1;
+  }
+  if (pd.revents & POLLNVAL) {
+    errno = EBADF;
+    return -1;
+  }
+
+  return 0;
+}
+
+int st_poll(struct pollfd *pds, int npds, st_utime_t timeout)
+{
+  struct pollfd *pd;
+  struct pollfd *epd = pds + npds;
+  _st_pollq_t pq;
+  _st_thread_t *me = _ST_CURRENT_THREAD();
+  int n;
+
+  if (me->flags & _ST_FL_INTERRUPT) {
+    me->flags &= ~_ST_FL_INTERRUPT;
+    printf("********************************eintr point 1\n");
+    errno = EINTR;
+    return -1;
+  }
+
+  if ((*_st_eventsys->pollset_add)(pds, npds) < 0)
+{
+    printf("**************point 3 \n");
+    return -1;
+}
+  pq.pds = pds;
+  pq.npds = npds;
+  pq.thread = me;
+  pq.on_ioq = 1;
+  _ST_ADD_IOQ(pq);
+  if (timeout != ST_UTIME_NO_TIMEOUT)
+    _ST_ADD_SLEEPQ(me, timeout);
+  me->state = _ST_ST_IO_WAIT;
+
+  _ST_SWITCH_CONTEXT(me);
+
+  n = 0;
+  if (pq.on_ioq) {
+    /* If we timed out, the pollq might still be on the ioq. Remove it */
+    _ST_DEL_IOQ(pq);
+    (*_st_eventsys->pollset_del)(pds, npds);
+  } else {
+    /* Count the number of ready descriptors */
+    for (pd = pds; pd < epd; pd++) {
+      if (pd->revents)
+	n++;
+    }
+  }
+
+  if (me->flags & _ST_FL_INTERRUPT) {
+    me->flags &= ~_ST_FL_INTERRUPT;
+    printf("**********************eintr point 2 \n");
+    errno = EINTR;
+    return -1;
+  }
+
+  return n;
+}
+~~~
+
+
+
+
+
 ## 三、talk
 
 - task 编译成动态库和静态库 30分钟
