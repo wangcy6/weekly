@@ -117,23 +117,52 @@ To push the current branch and set the remote as upstream, use
  git push --set-upstream origin daily-branch
  git push origin some-branch
 
--  git pull --修改了冲突文件，但是没有提交代码
+### git pull --冲突
 
- git pull --tags origin master
+#### F1
 
+- 描述
+
+error: Your local changes to the following files would be overwritten by merge:
+        promise/scheduling.go
+        promise/work_balck_hole.go
+Please, commit your changes or stash them before you can merge.
+
+
+
+
+
+git pull
 error: Pull is not possible because you have unmerged files.
-
 hint: Fix them up in the work tree, and then use 'git add/rm <file>'
-
 hint: as appropriate to mark resolution and make a commit.
-
 fatal: Exiting because of an unresolved conflict.
 
 
 
-- git stash
-
-​      git stash apply
 
 
+- 强制覆盖本地文件
 
+```
+git reset --hard
+git reset --hard origin/master
+git pull
+git rm -rf xxx
+```
+
+- 临时修复 (stash)
+
+
+
+```
+git stash
+
+git status
+git commit 
+
+git pull 
+git stash pop
+
+git log --oneline --graph
+```

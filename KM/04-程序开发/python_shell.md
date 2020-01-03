@@ -1,5 +1,16 @@
-## python调用shell命令
-lsof -n | awk '{print $2}' | sort | uniq -c | sort -nr | more
-from subprocess import call
-call(['ls','-l','/boot','/sys'])    #
-call('ls -a /',shell=True)
+
+
+# shell
+
+- pstack 跟踪进程栈
+- strace 跟踪进程中的系统调用
+
+
+
+
+
+
+
+
+
+# python
