@@ -64,13 +64,15 @@ template<class D> D * get_local_deleter( D * /*p*/ ) BOOST_SP_NOEXCEPT
 template<class D> D * get_local_deleter( local_sp_deleter<D> * p ) BOOST_SP_NOEXCEPT;
 
 //
+// sp_counted_base 一个子类
 
 template<class X> class BOOST_SYMBOL_VISIBLE sp_counted_impl_p: public sp_counted_base
 {
 private:
+	/存放指针处
 
     X * px_;
-
+   //// 不可复制
     sp_counted_impl_p( sp_counted_impl_p const & );
     sp_counted_impl_p & operator= ( sp_counted_impl_p const & );
 

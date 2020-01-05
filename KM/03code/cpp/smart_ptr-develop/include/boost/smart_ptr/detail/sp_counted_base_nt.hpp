@@ -28,11 +28,11 @@ namespace boost
 
 namespace detail
 {
-
+//https://www.cnblogs.com/one-piece/archive/2011/09/28/2194890.html
 class BOOST_SYMBOL_VISIBLE sp_counted_base
 {
 private:
-
+   // 不可复制
     sp_counted_base( sp_counted_base const & );
     sp_counted_base & operator= ( sp_counted_base const & );
 
@@ -43,6 +43,7 @@ public:
 
     sp_counted_base() BOOST_SP_NOEXCEPT: use_count_( 1 ), weak_count_( 1 )
     {
+    // 两个成员初始化为1
     }
 
     virtual ~sp_counted_base() /*BOOST_SP_NOEXCEPT*/
