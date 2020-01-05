@@ -3,7 +3,13 @@
 #include <pthread.h>
 using namespace std;
 
+/**
+ * 1 同一个shared_ptr被多个线程“读”是安全的。
 
+2 同一个shared_ptr被多个线程“写”是不安全的。
+
+3 共享引用计数的不同的shared_ptr被多个线程”写“ 是安全的。
+ **/ 
 shared_ptr<int> gp(new int(2000));
 
 shared_ptr<int>  CostaSwapSharedPtr1(shared_ptr<int> & p)
@@ -41,7 +47,7 @@ void* thread_start(void * arg)
 }
 
 
-
+//g++ -std=c++11 -g shared_ptr_safe.cpp  -pthread
 int main()
 {
     pthread_t thread;

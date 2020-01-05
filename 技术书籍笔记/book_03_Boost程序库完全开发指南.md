@@ -4,7 +4,7 @@
 
 https://github.com/chenshuo/documents
 
-# Linux 多线程服务端编程：使用 muduo C++ 网络库
+Linux 多线程服务端编程：使用 muduo C++ 网络库
 
 ![](../images/cover.jpg)
 
@@ -44,9 +44,17 @@ yum install cmake3
 
 ![image-20200103160638457](../images/image-20200103160638457.png)
 
-- shared_ptr.hpp
+- 我在这里
+
+https://github.com/wangcy6/weekly/blob/master/KM/03code/cpp/smart_ptr-develop/include/boost/smart_ptr/shared_ptr.hpp
 
 
 
 
+
+https://github.com/wangcy6/weekly/blob/master/KM/03code/cpp/smart_ptr-develop/include/boost/smart_ptr/detail/shared_count.hpp
+
+
+
+	## Boost与设计模式
 

@@ -46,3 +46,4 @@ gradle/
 .DS_Store
 */.idea/
 .idea/
+core.*
