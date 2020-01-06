@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/Abstraction.cpp
+Abstraction.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/Abstraction.h
+AbstractionImp.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/AbstractionImp.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/Abstraction.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/AbstractionImp.cpp
+AbstractionImp.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/AbstractionImp.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/AbstractionImp.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/main.cpp
+Abstraction.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/Abstraction.h
+AbstractionImp.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Bridge/AbstractionImp.h
+iostream
+-
+

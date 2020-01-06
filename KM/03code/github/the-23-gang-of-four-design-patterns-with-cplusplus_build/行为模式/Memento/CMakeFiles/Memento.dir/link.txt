@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/Memento.dir/main.cpp.o CMakeFiles/Memento.dir/Memento.cpp.o  -o ../../bin/Memento -rdynamic 

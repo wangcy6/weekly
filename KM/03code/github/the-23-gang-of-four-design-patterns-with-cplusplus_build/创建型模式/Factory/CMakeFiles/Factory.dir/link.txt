@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/Factory.dir/main.cpp.o CMakeFiles/Factory.dir/Factory.cpp.o CMakeFiles/Factory.dir/Product.cpp.o  -o ../../bin/Factory -rdynamic 

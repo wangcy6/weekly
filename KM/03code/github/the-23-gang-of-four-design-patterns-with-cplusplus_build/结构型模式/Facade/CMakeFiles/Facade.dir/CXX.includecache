@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Facade/Facade.cpp
+Facade.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Facade/Facade.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Facade/Facade.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Facade/main.cpp
+Facade.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Facade/Facade.h
+iostream
+-
+

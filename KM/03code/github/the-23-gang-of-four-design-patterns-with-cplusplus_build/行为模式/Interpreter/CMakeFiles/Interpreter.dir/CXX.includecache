@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Context.cpp
+Context.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Context.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Context.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Interpret.cpp
+Interpret.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Interpret.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Interpret.h
+Context.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Context.h
+string
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/main.cpp
+Context.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Context.h
+Interpret.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Interpreter/Interpret.h
+iostream
+-
+

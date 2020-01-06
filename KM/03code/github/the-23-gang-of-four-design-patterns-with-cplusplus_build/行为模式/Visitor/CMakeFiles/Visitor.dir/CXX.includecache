@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Element.cpp
+Element.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Element.h
+Visitor.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Visitor.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Element.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Visitor.cpp
+Visitor.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Visitor.h
+Element.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Element.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Visitor.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/main.cpp
+Element.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Element.h
+Visitor.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/Visitor/Visitor.h
+iostream
+-
+
