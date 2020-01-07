@@ -47,3 +47,4 @@ gradle/
 */.idea/
 .idea/
 core.*
+*.o
