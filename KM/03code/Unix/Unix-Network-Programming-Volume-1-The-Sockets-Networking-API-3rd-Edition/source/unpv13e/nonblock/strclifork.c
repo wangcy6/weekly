@@ -1,7 +1,6 @@
 #include	"unp.h"
 
-void
-str_cli(FILE *fp, int sockfd)
+void str_cli(FILE *fp, int sockfd)
 {
 	pid_t	pid;
 	char	sendline[MAXLINE], recvline[MAXLINE];

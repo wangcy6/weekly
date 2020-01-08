@@ -136,8 +136,7 @@ Pipe(int *fds)
 		err_sys("pipe error");
 }
 
-ssize_t
-Read(int fd, void *ptr, size_t nbytes)
+ssize_t Read(int fd, void *ptr, size_t nbytes)
 {
 	ssize_t		n;
 

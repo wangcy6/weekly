@@ -1,8 +1,7 @@
 /* include web1 */
 #include	"web.h"
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int		i, fd, n, maxnconn, flags, error;
 	char	buf[MAXLINE];
@@ -29,6 +28,7 @@ main(int argc, char **argv)
 	nconn = 0;
 /* end web1 */
 /* include web2 */
+    //nlefttoread 需要下载的文件
 	while (nlefttoread > 0) {
 		while (nconn < maxnconn && nlefttoconn > 0) {
 				/* 4find a file to read */
@@ -51,6 +51,7 @@ main(int argc, char **argv)
 			if (flags == 0 || flags & F_DONE)
 				continue;
 			fd = file[i].f_fd;
+			// 刚建立connect，就get
 			if (flags & F_CONNECTING &&
 				(FD_ISSET(fd, &rs) || FD_ISSET(fd, &ws))) {
 				n = sizeof(error);
@@ -65,6 +66,7 @@ main(int argc, char **argv)
 				write_get_cmd(&file[i]);/* write() the GET command */
 
 			} else if (flags & F_READING && FD_ISSET(fd, &rs)) {
+			    // 发起get请求，后返回结果了 这个是阻塞读取
 				if ( (n = Read(fd, buf, sizeof(buf))) == 0) {
 					printf("end-of-file on %s\n", file[i].f_name);
 					Close(fd);

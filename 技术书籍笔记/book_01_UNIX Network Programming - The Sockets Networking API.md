@@ -1,28 +1,80 @@
-# 资料
+### 准备工作
 
-- https://app.yinxiang.com/shard/s39/res/d1ee9365-dfac-47c9-be7e-f36345ae67b2
+- 下载代码
 
-- https://github.com/shichao-an/unpv13e
+Unix-Network-Programming-Volume-1-The-Sockets-Networking-API-3rd-Edition
 
-# 第二部分基本套接口编程
+源码可以从http://www.unpbook.com/src.html下载得到。
 
-
-
-## 2
-
-### 2.9
+解压之后的目录为unpv13e
 
 
 
+- 学习环境搭建
+
+https://www.cnblogs.com/xiehongfeng100/p/4593337.html
+
+```shell
+
+cd  unpv13e
+Execute the following from the src/ directory:
+
+    ./configure    # try to figure out all implementation differences
+
+    cd lib         # build the basic library that all programs need
+    make           # use "gmake" everywhere on BSD/OS systems
+
+    cd ../libfree  # continue building the basic library
+    make
+   //则需要vim inet_ntop.c //将第60行的size_t size改成socklen_t size
+    cd ../intro    # build and test a basic client program
+    make daytimetcpcli
+    ./daytimetcpcli 127.0.0.1
+ 
 
 
-## 第六章 
+cp libunp.a /usr/lib 
+cp libunp.a /usr/lib64 
+cp unp.h /usr/include
+cp config.h /usr/include 
+
+```
+
+- 具体例子 nonblock
+
+server：tcpservselect03 9887
+
+client：./tcpcli01 127.0.0.1 9877
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 第二部分基本套接口编程
+
+
+
+
+
+
+
+
+
+### 第六章 Chapter 6. I/O Multiplexing  
 
 # 
 
 
 
-### 6.6 shutdown Function  
+#### 6.6 shutdown Function  
 
 #### [Linux-socket的close和shutdown区别及应用场景](https://www.cnblogs.com/JohnABC/p/7238241.html)
 
@@ -32,9 +84,9 @@
 
 ### 6.8 TCP Echo Server (阻塞的)  
 
-# 第三部分 高级套接口编程
+### 第三部分 高级套接口编程
 
-## Chapter 14. Advanced I/O Functions  
+#### Chapter 14. Advanced I/O Functions  
 
 
 
@@ -52,12 +104,23 @@ from a read operation until the requested number of bytes have been read
 
 
 
-## Chapter 16. Nonblocking I/O  
+### Chapter 16. Nonblocking I/O  
 
-中文：338页  英文 520页
+中文：355 页  英文 520页  
 
 ### 16.1 Introduction（必看 ）
 
 里面提到章节 
 
 MSG_WAITALL flag (Figure 14.6)   Section 2.11   Section 2.6   
+
+- short count 【send  EWOULDBLOCK   no room  】
+
+> With a nonblocking TCP socket, if there is no room at all in the socket send buffer, we
+> return immediately with an error of EWOULDBLOCK. 
+>
+> If there is some room in the socket
+> send buffer, the return value will be the number of bytes the kernel was able to copy
+> into the buffer. (This is called a short count.)  
+
+- Section 13.4  Web client    

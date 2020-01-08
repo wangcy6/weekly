@@ -1,7 +1,6 @@
 #include	"web.h"
 
-void
-start_connect(struct file *fptr)
+void start_connect(struct file *fptr)
 {
 	int				fd, flags, n;
 	struct addrinfo	*ai;

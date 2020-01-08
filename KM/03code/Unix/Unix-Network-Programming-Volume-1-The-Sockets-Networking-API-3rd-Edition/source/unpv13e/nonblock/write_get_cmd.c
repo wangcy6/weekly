@@ -1,7 +1,6 @@
 #include	"web.h"
 
-void
-write_get_cmd(struct file *fptr)
+void write_get_cmd(struct file *fptr)
 {
 	int		n;
 	char	line[MAXLINE];
