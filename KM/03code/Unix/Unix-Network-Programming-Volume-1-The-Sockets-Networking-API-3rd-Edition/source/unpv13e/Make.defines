@@ -6,12 +6,12 @@
 # The "../" in the pathnames actually refer to this directory, since
 # "make" is executed in all the subdirectories of this directory.
 #
-# System = i386-apple-darwin14.5.0
+# System = x86_64-unknown-linux-gnu
 
 CC = gcc
-CFLAGS = -I../lib -I /usr/local/Cellar/libevent/2.0.22/include -L /usr/local/Cellar/libevent/2.0.22/lib -D_REENTRANT -Wall
-LIBS = ../libunp.a -lresolv -lpthread
-LIBS_XTI = ../libunpxti.a ../libunp.a -lresolv -lpthread
+CFLAGS = -I../lib -g -O2 -D_REENTRANT -Wall
+LIBS = ../libunp.a -lpthread
+LIBS_XTI = ../libunpxti.a ../libunp.a -lpthread
 RANLIB = ranlib
 
 # Following is the main library, built from all the object files

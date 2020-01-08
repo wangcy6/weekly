@@ -50,6 +50,7 @@ SingletonBase *SingletonBase::GetInstance()
     return  m_instance.get();
 }
 auto_ptr<SingletonBase> SingletonBase::m_instance ;
+
 int* SingletonBase::m_main_before =new int(3) ;
 
 int main()
