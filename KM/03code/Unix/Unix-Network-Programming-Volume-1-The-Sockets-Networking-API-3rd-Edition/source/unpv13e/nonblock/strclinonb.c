@@ -1,8 +1,7 @@
 /* include nonb1 */
 #include	"unp.h"
 
-void
-str_cli(FILE *fp, int sockfd)
+void str_cli(FILE *fp, int sockfd)
 {
 	int			maxfdp1, val, stdineof;
 	ssize_t		n, nwritten;
@@ -24,6 +23,7 @@ str_cli(FILE *fp, int sockfd)
 	stdineof = 0;
 
 	maxfdp1 = max(max(STDIN_FILENO, STDOUT_FILENO), sockfd) + 1;
+	
 	for ( ; ; ) {
 		FD_ZERO(&rset);
 		FD_ZERO(&wset);

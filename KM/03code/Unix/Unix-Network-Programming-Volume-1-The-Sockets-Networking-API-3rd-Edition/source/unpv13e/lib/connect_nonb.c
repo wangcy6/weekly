@@ -1,7 +1,6 @@
 #include	"unp.h"
 
-int
-connect_nonb(int sockfd, const SA *saptr, socklen_t salen, int nsec)
+int onnect_nonb(int sockfd, const SA *saptr, socklen_t salen, int nsec)
 {
 	int				flags, n, error;
 	socklen_t		len;

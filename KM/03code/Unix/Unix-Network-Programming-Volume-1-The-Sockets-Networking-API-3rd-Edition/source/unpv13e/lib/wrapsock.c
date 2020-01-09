@@ -220,8 +220,7 @@ Recvmsg(int fd, struct msghdr *msg, int flags)
 	return(n);
 }
 
-int
-Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
+int Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
        struct timeval *timeout)
 {
 	int		n;

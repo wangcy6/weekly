@@ -1,7 +1,6 @@
 #include	"web.h"
 
-void
-home_page(const char *host, const char *fname)
+void home_page(const char *host, const char *fname)
 {
 	int		fd, n;
 	char	line[MAXLINE];
