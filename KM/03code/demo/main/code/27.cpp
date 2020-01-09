@@ -64,10 +64,12 @@ public:
              return NULL;
          }
    
-        TreeNode* head = NULL;
-        TreeNode* currNode =pRootOfTree;
-        TreeNode* preNode =NULL;
+        
         stack<TreeNode*> path;
+        TreeNode* currNode =pRootOfTree;
+        
+        TreeNode* preNode =NULL;
+        TreeNode* head = NULL;
         
         while (currNode !=NULL || !path.empty())
         {
@@ -80,24 +82,24 @@ public:
             if (!path.empty())
             {
                 currNode = path.top();
-                path.pop();
+                path.pop(); 
+                // 当前节点左子tree为null，当前节点pop,
+                //当前currNode->right为null，currNode 上一个节点Pop
 
                 if (preNode == NULL)
                 {  //fist node
-                  
-                  head = currNode;
+                   head = currNode;
                 }
                 else
                 {
-                    // A-->B  B-->A
-
+                    //swap
                     preNode->right =currNode;
                     currNode->left =preNode;
 
                 }
                 
-                preNode =currNode;
-                currNode = currNode->right;
+                preNode =currNode;//change
+                currNode = currNode->right;//change
             }
             
             
@@ -105,6 +107,55 @@ public:
         
         return head;
           
+    }
+
+  /**
+     * [ConvertRecursion 递归的将root为根的二叉排序树专户才能成双向链表]
+     * @AuthorHTL
+     * @DateTime  2020年1月8日 18:15:53
+     * @param     root                     [当前递归的二叉排序树的根节点]
+     * @param     pLastNode                [中序遍历中指向前一个节点的指针]
+     */
+    void ConvertRecursion(TreeNode *root, TreeNode **pLastNode)
+    {
+       if (root == NULL)
+       {
+          return ;
+       }
+
+       TreeNode *pCurrNode = root;
+
+        //////////////////////////
+        /// 首先中序 递归左子树
+        //////////////////////////
+       // if(pCurrNode->left != NULL)
+        //{
+            ConvertRecursion(pCurrNode->left, pLastNode);
+       // }
+        
+        if (*pLastNode == NULL)
+        {
+            //第一个节点
+        }else
+        {
+             (*pLastNode)->left = pCurrNode;
+              pCurrNode->right = *pLastNode;
+        }
+        
+        
+
+        *pLastNode =pCurrNode; //变化
+          
+         //////////////////////////
+         /// 首先中序 递归右子树
+        //////////////////////////
+
+
+        //if(pCurrNode->right != NULL)
+       // {
+            ConvertRecursion(pCurrNode->left, pLastNode);
+        //}
+       
     }
 };
 int main()
