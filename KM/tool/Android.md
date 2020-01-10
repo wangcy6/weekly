@@ -95,3 +95,18 @@ gradle build
 - `/Library/Android/sdk/`
 - `/Users/[USER]/Library/Android/sdk`
 
+### adb命令
+
+mumu
+
+ myandrovm_vbox86.nemu
+
+ <Forwarding name="ADB_PORT" proto="1" hostip="127.0.0.1" hostport="7555" guestport="5555"/>
+
+```css
+adb connect 127.0.0.1:7555
+adb devices
+adb shell pm list package -3 -f com.taou.maimai
+Android Studio连接网易MuMu模拟器
+
+```
