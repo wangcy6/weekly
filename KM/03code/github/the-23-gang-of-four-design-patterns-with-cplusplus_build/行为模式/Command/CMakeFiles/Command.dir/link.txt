@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/Command.dir/main.cpp.o CMakeFiles/Command.dir/Command.cpp.o CMakeFiles/Command.dir/Invoker.cpp.o CMakeFiles/Command.dir/Reciever.cpp.o  -o ../../bin/Command -rdynamic 

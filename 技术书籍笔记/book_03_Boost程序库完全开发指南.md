@@ -56,5 +56,10 @@ https://github.com/wangcy6/weekly/blob/master/KM/03code/cpp/smart_ptr-develop/in
 
 
 
-	## Boost与设计模式
+## Boost与设计模式
 
+
+
+- 单例 https://www.jianshu.com/p/333d4b37db56
+
+阅读：程序员的自我修养—链接、装载与库 第10章 11章 311page 338page 

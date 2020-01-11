@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/ChainofResponsibility/Handle.cpp
+Handle.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/ChainofResponsibility/Handle.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/ChainofResponsibility/Handle.h
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/ChainofResponsibility/main.cpp
+Handle.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/行为模式/ChainofResponsibility/Handle.h
+iostream
+-
+

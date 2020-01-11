@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/Flyweight.cpp
+Flyweight.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/Flyweight.h
+iostream
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/Flyweight.h
+string
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/FlyweightFactory.cpp
+FlyweightFactory.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/FlyweightFactory.h
+iostream
+-
+string
+-
+cassert
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/FlyweightFactory.h
+Flyweight.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/Flyweight.h
+string
+-
+vector
+-
+
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/main.cpp
+Flyweight.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/Flyweight.h
+FlyweightFactory.h
+/home/code/weekly/KM/03code/github/the-23-gang-of-four-design-patterns-with-cplusplus/结构型模式/Flyweight/FlyweightFactory.h
+iostream
+-
+

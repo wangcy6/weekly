@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/AdapterClass.dir/main.cpp.o CMakeFiles/AdapterClass.dir/Adapter.cpp.o  -o ../../../bin/AdapterClass -rdynamic 

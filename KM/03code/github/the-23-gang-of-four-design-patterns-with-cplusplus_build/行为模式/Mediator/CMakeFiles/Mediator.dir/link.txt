@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/Mediator.dir/main.cpp.o CMakeFiles/Mediator.dir/Colleage.cpp.o CMakeFiles/Mediator.dir/Mediator.cpp.o  -o ../../bin/Mediator -rdynamic 

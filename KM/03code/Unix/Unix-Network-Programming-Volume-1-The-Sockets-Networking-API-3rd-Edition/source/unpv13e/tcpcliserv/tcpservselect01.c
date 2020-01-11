@@ -1,7 +1,8 @@
 /* include fig01 */
 #include	"unp.h"
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	int					i, maxi, maxfd, listenfd, connfd, sockfd;
 	int					nready, client[FD_SETSIZE];
@@ -72,7 +73,7 @@ int main(int argc, char **argv)
 					FD_CLR(sockfd, &allset);
 					client[i] = -1;
 				} else
-					Writen(sockfd, buf, n); //阻塞读取
+					Writen(sockfd, buf, n);
 
 				if (--nready <= 0)
 					break;				/* no more readable descriptors */

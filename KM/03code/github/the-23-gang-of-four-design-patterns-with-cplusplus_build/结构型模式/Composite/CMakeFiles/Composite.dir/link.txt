@@ -1,0 +1,1 @@
+/bin/c++       CMakeFiles/Composite.dir/main.cpp.o CMakeFiles/Composite.dir/Component.cpp.o CMakeFiles/Composite.dir/Composite.cpp.o CMakeFiles/Composite.dir/Leaf.cpp.o  -o ../../bin/Composite -rdynamic 
