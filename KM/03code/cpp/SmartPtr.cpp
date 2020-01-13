@@ -169,3 +169,5 @@ int main(){
 //     private:
 //         U_Ptr<T> *rp;  //辅助类对象指针
 //     };
+
+//https://www.cnblogs.com/one-piece/archive/2011/09/28/2194890.html

@@ -1,5 +1,5 @@
 # Makefile  exe程序
-TARGET = test
+TARGET = test demo01_pthread
 CC=g++
 #C 编译器的选项
 CFLAGS=-Wall -O2 -g -I. 
@@ -8,6 +8,7 @@ CXXFLAGS=$CFLAGS
 DEPS=CThread.h
 OBJS += CThread.o
 OBJS += main.o
+OBJS += demo01_pthread.o
 #动态库路径            
 #LIBPATH  = -L./dynamiclib/libs 
 #链接动态库 
