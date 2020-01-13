@@ -341,53 +341,62 @@ https://github.com/PeterRK/DSGO/blob/master/book/pages/08-A.md
 
 ![img](https://img-blog.csdn.net/20130625110817750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvRExVVEJydWNlWmhhbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
-
-
-#### 熟练度: 
-
-
-
-![7da43dc67c70fee803071c83307c18a9](D:/doc/%E5%9B%BD%E7%BE%8E/doc/today/code/weekly/images/7da43dc67c70fee803071c83307c18a9.jpg)
+> 
 
 
 
-
-
-> 目前处于第一想象 自己不知道，别人知道，该如何办呢？ 求讨论
-
-
-
-
-
-扩展阅读：
-
-压力测试：观察缺页中断情况
-
-执行一次只有一个结果
-ps -o majflt,minflt -p 1731
-
-一直监控 知道手工终结
-strace  -T -ttt -c  -p 1731 
-
-pidstat - Report statistics for Linux tasks.
-
-pidstat -r -p 1731  5
-
-
-
-# 求指教
-
-## 微信公共账号：
-
-![qrcode__860](../images/qrcode__860.jpg)
-
-## 知识星球（付费的，不要加入 ）
-
-![知识星球](../images/知识星球.jpg)
+# 
 
 
 
 
 
 
+
+# 第10章信号
+
+
+
+### 缘起
+
+ background process vs background process
+
+
+
+ 
+
+- background process interrupts
+
+  
+
+
+
+# 摘要
+
+## 内存
+
+
+
+slab是Linux操作系统的一种内存分配机制。其工作是针对一些经常分配并释放的对象，如进程描述符等，这些对象的大小一般比较小，如果直接采用伙伴系统来进行分配和释放，不仅会造成大量的内存碎片，而且处理速度也太慢。
+而slab分配器是基于对象进行管理的，**相同类型的对象归为一类** (如进程描述符就是一类)，每当要申请这样一个对象，slab分配器就从一个slab列表中分配一个这样大小的单元出去，而当要释放时，将其重新保存在该列表中，而不是直接返回给伙伴系统，从而避免这些内碎片。slab分配器并不丢弃已分配的对象，而是释放并把它们保存在内存中。当以后又要请求新的对象时，就可以从内存直接获取而不用重复初始化。
+
+Slab机制包括三个层次的数据结构：cache，slab和object
+
+https://wooyun.js.org/drops/深入理解 glibc malloc.html)
+
+
+
+#### 内存碎片
+
+- 什么是内存碎片？（占用了被使用，无法再次分配）
+
+- 如何判断内存碎片是否对我的应用程序有问题？什么样的计划最容易受到影响？
+
+  malloc返回null
+
+- 处理内存碎片的常用方法有哪些？
+
+参考
+
+1. 动不动就 32GB 以上内存的服务器真需要关心内存碎片问题吗？
 

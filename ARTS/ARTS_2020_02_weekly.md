@@ -1,6 +1,6 @@
 ---
-title: "ARTS_weekly_7"
-date: 2019-12-19
+title: "ARTS_2012_weekly_2"
+date: 2020-01-10 
 description: "GTD践行第七周"
 draft: false
 tags: ["GTD","work"]
@@ -9,17 +9,19 @@ categories: ["ARTS"]
 
 
 
-# 打卡GTD践行第七周（2019-12-11） 
+# 打卡GTD践行第10周（2020第2周） 
 
 
 
 # 一周记录
 
+记录你完成事情，计划中的，想法和观点统统不要
 
 
-本周主要问题，没有科学工作和沟通方法，和计划安排。
 
-导致一直在迷茫中
+调整：
+
+晚上21 ：00关闭电脑最合适。
 
 
 
@@ -49,110 +51,42 @@ categories: ["ARTS"]
 
 
 
-依然停留在这里
 
-https://github.com/wangcy6/leetcode/issues/12
+
+[27-二叉搜索树与双向链表](https://wangcy6.github.io/post/leetcode/027-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/)
+
+具体说明 请点击链接
+
+- 通过肉眼观察规律是 三个点 (2,4,5)，这不算法根本，算法每次只能操作一个节点。
+- 一个节点是从1–2，但是不做算法标准，这样pre概念了。
+
+标准 课本上非递归遍历出来了。
 
 
 
 ### 2.Review 
 
-> 主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。**所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是[http://Medium.com](https://link.zhihu.com/?target=http%3A//Medium.com)
+> 主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是[http://Medium.com](https://link.zhihu.com/?target=http%3A//Medium.com)
 
 
 
-#### malloc 如何申请内存的
+[udacity 操作系统课程](https://wangcy6.github.io/post/ToDo/courses/) 
 
-英文：
-
-https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc/
-
-https://sourceware.org/glibc/wiki/MallocInternals
-
-翻译：
-
-[http://pwn4.fun/2016/04/11/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3glibc-malloc/](http://pwn4.fun/2016/04/11/深入理解glibc-malloc/)
-
-[https://wooyun.js.org/drops/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20glibc%20malloc.html](https://wooyun.js.org/drops/深入理解 glibc malloc.html)
+https://wangcy6.github.io/post/ToDo/courses/
 
 
-
-
-
-#### 摘要：
-
-
-
-### redis集群规范
-
-英文：https://redis.io/topics/cluster-spec
-
-翻译：
-
-http://www.redis.cn/topics/cluster-spec.html
-
-http://arloor.com/posts/redis/redis-cluster/
-
-#### 摘要
-
-redis 源码解析：https://github.com/wangcy6/reading_code_note/tree/master/mdb/redis-unstable
-
-- It is useful to note that while the `PFAIL` -> `FAIL` transition uses a form of agreement, the agreement used is weak:(在失败检查方面，是弱一致监测，大多数确认就可以，而不是全部)
-- **The `FAIL` flag is only used as a trigger to run the safe part of the algorithm** for the slave promotion（fatl标记用来触发切换）
-- Masters reply to slave vote request（其他master主机代替哨兵的角色 来做投票判断。）
-
-​      Masters receive requests for votes in form of `FAILOVER_AUTH_REQUEST` requests from slaves.
-
-- slave选举过程
-
-~~~c
-于挂掉的master可能会有多个slave，从而存在多个slave竞争成为master节点的过程， 其过程如下：
-
-1.slave发现自己的master变为FAIL
-2.将自己记录的集群currentEpoch加1，并广播FAILOVER_AUTH_REQUEST信息
-3.其他节点收到该信息，只有master响应，判断请求者的合法性，并发送FAILOVER_AUTH
-
-4.尝试failover的slave收集FAILOVER_AUTH_ACK
-5.超过半数后变成新Master
-6.广播Pong通知其他集群节点。
-
-主节点接收到来自于从节点、要求以 FAILOVER_AUTH_REQUEST 请求的形式投票的请求。 要授予一个投票，必须要满足以下条件：
-
-1) 在一个给定的时段（epoch）里，一个主节点只能投一次票，并且拒绝给以前时段投票：每个主节点都有一个 lastVoteEpoch 域，一旦认证请求数据包（auth request packet）里的 currentEpoch 小于 lastVoteEpoch，那么主节点就会拒绝再次投票。
-  当一个主节点积极响应一个投票请求，那么 lastVoteEpoch 会相应地进行更新。
-2) 一个主节点投票给某个从节点当且仅当该从节点的主节点被标记为 FAIL。
-3) 如果认证请求里的 currentEpoch 小于主节点里的 currentEpoch 的话，那么该请求会被忽视掉。
-    因此，主节点的回应总是带着和认证请求一致的 currentEpoch。
-    如果同一个从节点在增加 currentEpoch 后再次请求投票，那么保证一个来自于主节点的、旧的延迟回复不会被新一轮选举接受。
-~~~
-
-- ## Clients and Servers roles in the Redis Cluster protocol
-
-auto-discover other nodes(自动发起其他节点功能 类似区块的广播协议)
-
-promote slave nodes to master（这是node作职责）
 
 
 
 ### 3. Tip
 
-> 主要是为了总结和归纳你在是常工作中所遇到的知识点**。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。
+> 主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。
 
 
 
-- 如何在Excel中输入1显示对号“√”，输入0显示错号“X”？
+ppt 如何变成mp4 ，window7版本不行，必须升级操作系统window10 这个方法不可行。
 
-~~~
-1、选中B2到B9单元格，也就是你需要添加"√"和"X"的地方，然后右键并选择【设置单元格格式】。
-
-2、将单元格的格式内容自定义为以下内容：
-
-[=1]"√";[=0]"X"
-
-然后保存。
-~~~
-
-
+最后自己动手写demo ，后面分享出来
 
 
 
@@ -162,11 +96,7 @@ promote slave nodes to master（这是node作职责）
 
 
 
-如何消除痛苦
-
-https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-problems-in-your-mind-d137a36201a7
-
-翻译计划：
+ 自控力读书笔记
 
 
 
@@ -178,7 +108,7 @@ https://medium.com/s/story/read-this-if-you-feel-like-you-cant-stop-creating-pro
 
 # 二 . 起床-运动-阅读
 
-![image.png](https://i.loli.net/2019/11/04/iPFxvJj1HM2ahtn.png)
+
 
 
 ## 1. 起床--没有记录就没有进步
