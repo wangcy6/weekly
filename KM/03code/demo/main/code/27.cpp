@@ -157,6 +157,52 @@ public:
         //}
        
     }
+    // A binary search tree (BST) is a node based binary tree data structure which has the following properties.
+    // • The left subtree of a node contains only nodes with keys less than the node’s key.
+    // • The right subtree of a node contains only nodes with keys greater than the node’s key.
+    // • Both the left and right subtrees must also be binary search tre
+    // 我只能保证做子tree，小于，根本无法保证整个子数小于，想deep方式，利用下到上反馈是行的。
+    //pre节点如何获取呀 虽然4-->2 但是4的pre节点根本不是2 是3 
+    bool isBSTRecursion(TreeNode* root)
+    {
+        TreeNode* preNode =NULL;
+        return isBSTRecursion(root,preNode);    
+    }
+
+    bool isBSTRecursion(TreeNode* root,TreeNode* &preNode)
+    {
+        if (NULL == root)
+        {
+            return true;
+        }
+        // 01 整个左子树是BST
+        if ( false ==isBSTRecursion(root->left,preNode))
+        {
+            return false;
+        }
+         
+        // 02 root 大于 前驱(左子树中顺遍历最后一个节点)。
+        
+        if (preNode ==NULL)
+        {
+            //fist
+        }else
+        {
+            if (preNode->val > root->val)
+            {
+                 return false;
+            }
+        }
+        
+        preNode =  root;
+        
+        // 我也是
+        return isBSTRecursion(root->right,preNode);
+    }
+
+    
+
+
 };
 int main()
 {
