@@ -66,13 +66,14 @@ private:
     SingletonBase &operator=(const SingletonBase &) {}
 
 private:
-    static unique_ptr<SingletonBase, SingletonBase::GarbageCollector> m_instance;
-    static GarbageCreate m_mainBefore; //
+    static unique_ptr<SingletonBase, SingletonBase::GarbageCollector> m_instance; //销毁
+    static GarbageCreate m_mainBefore; // 创建 
 };
 
 ///////////////////////////Singleton.cpp////////////////////////
-SingletonBase::GarbageCreate SingletonBase::m_mainBefore;                             //创建单例
-unique_ptr<SingletonBase, SingletonBase::GarbageCollector> SingletonBase::m_instance; //静态变量初始化
+unique_ptr<SingletonBase, SingletonBase::GarbageCollector> SingletonBase::m_instance; //静态变量初始化 内部类之间调用private函数
+SingletonBase::GarbageCreate SingletonBase::m_mainBefore;                             //创建单例 内部类之间调用private函数
+
 
 SingletonBase *SingletonBase::GetInstance()
 {
