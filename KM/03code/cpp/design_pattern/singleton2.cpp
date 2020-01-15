@@ -16,8 +16,8 @@
    2 延迟初始化 
      存在线程安全问题 引入lock 。
 4. 改为为 T 模板 [没有实现]
-5 一个不能被继承的单例类 [没有实现]
-
+5 SingletonBase类可以有子类
+  如果保证 base T
 
 
  ************************************************************************/
@@ -33,7 +33,7 @@ class SingletonBase
 public:
     static SingletonBase *GetInstance(); //对外接口
 
-private:
+protected :
     class GarbageCollector //内部类- 清理数据
     {
     public:
@@ -64,6 +64,7 @@ private:
     SingletonBase() { cout << "singletonBase" << endl; }
     ~SingletonBase() { cout << "~singletonBase" << endl; }
     SingletonBase &operator=(const SingletonBase &) {}
+    ///必须为保护，如果是私有属性，子类无法访问父类的构造函数
 
 private:
     static unique_ptr<SingletonBase, SingletonBase::GarbageCollector> m_instance; //销毁
