@@ -2,8 +2,7 @@
 #include	"unpipc.h"
 #include	"pthread_rwlock.h"
 
-int
-pthread_rwlock_unlock(pthread_rwlock_t *rw)
+int pthread_rwlock_unlock(pthread_rwlock_t *rw)
 {
 	int		result;
 
@@ -12,7 +11,7 @@ pthread_rwlock_unlock(pthread_rwlock_t *rw)
 
 	if ( (result = pthread_mutex_lock(&rw->rw_mutex)) != 0)
 		return(result);
-
+    //如果有人在wirte  rw_refcount =0
 	if (rw->rw_refcount > 0)
 		rw->rw_refcount--;			/* releasing a reader */
 	else if (rw->rw_refcount == -1)
@@ -32,8 +31,7 @@ pthread_rwlock_unlock(pthread_rwlock_t *rw)
 }
 /* end unlock */
 
-void
-Pthread_rwlock_unlock(pthread_rwlock_t *rw)
+void Pthread_rwlock_unlock(pthread_rwlock_t *rw)
 {
 	int		n;
 

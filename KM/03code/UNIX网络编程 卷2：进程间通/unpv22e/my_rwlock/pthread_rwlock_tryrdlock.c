@@ -2,8 +2,7 @@
 #include	"unpipc.h"
 #include	"pthread_rwlock.h"
 
-int
-pthread_rwlock_tryrdlock(pthread_rwlock_t *rw)
+int pthread_rwlock_tryrdlock(pthread_rwlock_t *rw)
 {
 	int		result;
 

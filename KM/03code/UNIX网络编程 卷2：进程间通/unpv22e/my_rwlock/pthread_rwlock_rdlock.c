@@ -2,8 +2,7 @@
 #include	"unpipc.h"
 #include	"pthread_rwlock.h"
 
-int
-pthread_rwlock_rdlock(pthread_rwlock_t *rw)
+int pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 {
 	int		result;
 
@@ -14,7 +13,8 @@ pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 		return(result);
 
 		/* 4give preference to waiting writers */
-	while (rw->rw_refcount < 0 || rw->rw_nwaitwriters > 0) {
+	// rw->rw_refcount < 0 有一个写入。   || rw->rw_nwaitwriters  
+	while ((rw->rw_nwaitwriters ==0 &&rw->rw_refcount < 0) || rw->rw_nwaitwriters > 0) {
 		rw->rw_nwaitreaders++;
 		result = pthread_cond_wait(&rw->rw_condreaders, &rw->rw_mutex);
 		rw->rw_nwaitreaders--;
@@ -29,8 +29,7 @@ pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 }
 /* end rdlock */
 
-void
-Pthread_rwlock_rdlock(pthread_rwlock_t *rw)
+void Pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 {
 	int		n;
 

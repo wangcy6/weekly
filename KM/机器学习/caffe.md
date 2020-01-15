@@ -1,4 +1,16 @@
-## 探索
+# 基础知识
+
+## FQA
+
+### Q1  什么是卷积（what is convolution）
+
+[如何通俗易懂地解释卷积？](https://www.zhihu.com/question/22298352)
+
+
+
+
+
+# 动手
 
  Caffe是一个清晰而高效的深度学习框架 
 

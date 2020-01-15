@@ -2,20 +2,19 @@
 #include	"unpipc.h"
 #include	"pthread_rwlock.h"
 
-int
-pthread_rwlock_wrlock(pthread_rwlock_t *rw)
+int pthread_rwlock_wrlock(pthread_rwlock_t *rw)
 {
 	int		result;
 
 	if (rw->rw_magic != RW_MAGIC)
 		return(EINVAL);
-
+    //01 
 	if ( (result = pthread_mutex_lock(&rw->rw_mutex)) != 0)
 		return(result);
-
+    //02 ohter
 	while (rw->rw_refcount != 0) {
 		rw->rw_nwaitwriters++;
-		result = pthread_cond_wait(&rw->rw_condwriters, &rw->rw_mutex);
+		result = pthread_cond_wait(&rw->rw_condwriters, &rw->rw_mutex); //unlock
 		rw->rw_nwaitwriters--;
 		if (result != 0)
 			break;

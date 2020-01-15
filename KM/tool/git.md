@@ -140,11 +140,15 @@ fatal: Exiting because of an unresolved conflict.
 
 
 
+Automatic merge failed; fix conflicts and then commit the result
+
 
 
 - 强制覆盖本地文件
 
 ```
+git status
+
 git reset --hard
 git reset --hard origin/master
 git pull
@@ -165,4 +169,6 @@ git pull
 git stash pop
 
 git log --oneline --graph
+git log --graph
 ```
+

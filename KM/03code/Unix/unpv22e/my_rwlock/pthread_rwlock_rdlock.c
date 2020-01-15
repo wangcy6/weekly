@@ -1,7 +1,7 @@
 /* include rdlock */
 #include	"unpipc.h"
 #include	"pthread_rwlock.h"
-
+//阻塞读锁
 int
 pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 {

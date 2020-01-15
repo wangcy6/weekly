@@ -14,8 +14,7 @@ struct {
   int				nwriters;
 } shared = { PTHREAD_RWLOCK_INITIALIZER, PTHREAD_MUTEX_INITIALIZER };
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int		c, i;
 	pthread_t	tid_readers[MAXNTHREADS], tid_writers[MAXNTHREADS];

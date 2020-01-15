@@ -13,8 +13,7 @@ rwlock_cancelrdwait(void *arg)
 }
 /* end rwlock_cancelrdwait */
 
-int
-pthread_rwlock_rdlock(pthread_rwlock_t *rw)
+int pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 {
 	int		result;
 
@@ -30,6 +29,9 @@ pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 		pthread_cleanup_push(rwlock_cancelrdwait, (void *) rw);
 		result = pthread_cond_wait(&rw->rw_condreaders, &rw->rw_mutex);
 		pthread_cleanup_pop(0);
+		
+	 //1: 调用pthread_exit()时，而直接return不会出发清理函数；
+	 //2: 相应取消请求pthread_cancel()时；
 		rw->rw_nwaitreaders--;
 		if (result != 0)
 			break;
@@ -37,7 +39,7 @@ pthread_rwlock_rdlock(pthread_rwlock_t *rw)
 	if (result == 0)
 		rw->rw_refcount++;		/* another reader has a read lock */
 
-	pthread_mutex_unlock(&rw->rw_mutex);
+	pthread_mutex_unlock(&rw->rw_mutex); //来不及解锁
 	return (0);
 }
 

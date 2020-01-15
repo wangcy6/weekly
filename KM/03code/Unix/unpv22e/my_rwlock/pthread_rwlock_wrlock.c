@@ -12,7 +12,7 @@ pthread_rwlock_wrlock(pthread_rwlock_t *rw)
 
 	if ( (result = pthread_mutex_lock(&rw->rw_mutex)) != 0)
 		return(result);
-
+    //wait read 
 	while (rw->rw_refcount != 0) {
 		rw->rw_nwaitwriters++;
 		result = pthread_cond_wait(&rw->rw_condwriters, &rw->rw_mutex);
@@ -21,7 +21,7 @@ pthread_rwlock_wrlock(pthread_rwlock_t *rw)
 			break;
 	}
 	if (result == 0)
-		rw->rw_refcount = -1;
+		rw->rw_refcount = -1;//用户不可能在读取了，有多少等待的另外一个变量保存着
 
 	pthread_mutex_unlock(&rw->rw_mutex);
 	return(result);
