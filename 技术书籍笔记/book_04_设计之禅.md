@@ -349,9 +349,11 @@ network *net = factory_store<network>::create(xxx);
 
 
 
-
-
 #### 3.2   问题
+
+- 什么是
+
+![](https://upload-images.jianshu.io/upload_images/93313-b9993038ce689b58.png?imageMogr2/auto-orient/strip|imageView2/2/w/600/format/webp)
 
 #### 3.3 别人怎么解决
 
@@ -360,3 +362,7 @@ network *net = factory_store<network>::create(xxx);
 ### 扩展
 
 https://github.com/luofengmacheng/algorithms
+
+
+
+第三个 Bridge 模式  
