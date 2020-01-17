@@ -2,9 +2,9 @@
 
 # Android 开发环境
 
-##  Ubuntu下全命令行搭建Android开发环境
+###  1 Ubuntu下全命令行搭建Android开发环境
 
-### Contents
+Contents
 
 - [安装 `JDK` 环境](https://qianngchn.github.io/wiki/8.html#安装-jdk-环境)
 - [安装 `Android SDK`](https://qianngchn.github.io/wiki/8.html#安装-android-sdk)
@@ -12,7 +12,7 @@
 - [编译 `Android` 应用](https://qianngchn.github.io/wiki/8.html#编译-android-应用)
 - [安装 `Android Studio`](https://qianngchn.github.io/wiki/8.html#安装-android-studio)
 
-### 安装 `Android SDK`
+安装 `Android SDK`
 
 
 
@@ -23,14 +23,16 @@ sudo apt update && sudo apt install android-sdk
 apt remove  android-sdk   --命令不起作用
 
 # Export the Android SDK path 
-export ANDROID_HOME=/usr/lib/android-sdk
+export ANDROID_HOME=F:\sdk
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 android list sdk --all
-
+F:\sdk\platform-tools;F:\sdk\tools\bin
 ```
 
-### 安装 `Gradle`
+
+
+安装 `Gradle`
 
 使用`Ant`构建项目已经是过去式了，这里我们选用更加强悍和方便的构建工具`gradle`。
 
@@ -78,7 +80,7 @@ To see a list of command-line options, run gradle --help
 BUILD SUCCESSFUL
 ```
 
-### 编译 `Android` 应用
+编译 `Android` 应用
 
 完成以上的环境配置，我们的一个`Android`下的基础构建环境就全部配置好了，接下来做的事情就是尝试使用`gradle` 编译一个`android` 应用出来验证我的编译环境是否`OK`,下载我写的一个`gadle demo`例子进行测试。
 
@@ -95,7 +97,19 @@ gradle build
 - `/Library/Android/sdk/`
 - `/Users/[USER]/Library/Android/sdk`
 
-### adb命令
+
+
+1.6 设置代理
+
+ file -setting
+
+1.7 Terminal
+
+
+
+![image.png](https://i.loli.net/2020/01/17/JCHxn5tygW3OBpr.png)
+
+### 2 adb命令
 
 mumu
 
@@ -108,5 +122,6 @@ adb connect 127.0.0.1:7555
 adb devices
 adb shell pm list package -3 -f com.taou.maimai
 Android Studio连接网易MuMu模拟器
-
+1. AndroidStudio的命令行工具里面输入命令
+    adb connect 127.0.0.1:7555
 ```

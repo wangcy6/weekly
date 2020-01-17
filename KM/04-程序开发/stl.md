@@ -507,7 +507,29 @@ STL对定义的通用容器分三类：
 
 
 
-## vector
+## 1 vector
+
+### 1.1 理解
+
+- vector的 capacity减少内存分配次数（优点）。大小指数级增长，但是
+
+  每次分配，vector内部地址随时被改变。
+
+  - 禁止 用data（）获取首地址来操作数据，因为随时会失效。
+
+     iterator来操作管理
+
+  
+
+  
+
+  
+
+​    https://stackoverflow.com/questions/5232198/about-vectors-growth
+
+
+
+
 
 ### 1、stl_vector.h
 
