@@ -48,3 +48,6 @@ gradle/
 .idea/
 core.*
 *.o
+*.swo
+*.swp
+*.
