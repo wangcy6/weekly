@@ -109,6 +109,21 @@ gradle build
 
 ![image.png](https://i.loli.net/2020/01/17/JCHxn5tygW3OBpr.png)
 
+
+
+1.8 Android Studio 手动配置 Gradle：
+
+
+
+~~~shell
+https://downloads.gradle-dn.com/distributions/gradle-6.1-bin.zip
+最后在 [Build, Execution, Deployment] -> [Build Tools] -> [Gradle] 的 [Gradle home:] 框里选你刚才准备的 Gradle
+~~~
+
+
+
+
+
 ### 2 adb命令
 
 mumu
@@ -124,4 +139,11 @@ adb shell pm list package -3 -f com.taou.maimai
 Android Studio连接网易MuMu模拟器
 1. AndroidStudio的命令行工具里面输入命令
     adb connect 127.0.0.1:7555
+
+
 ```
+
+2.2 *Android Studio*连接真机
+
+
+

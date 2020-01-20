@@ -50,4 +50,10 @@ core.*
 *.o
 *.swo
 *.swp
-*.
+*.a
+*.s
+*.ii
+*.so
+#window
+*.exe
+*.out
