@@ -43,6 +43,11 @@ curl -v -X GET  https://wangcy6.github.io/
 curl -v -X POST  https://wangcy6.github.io/ 
 405 Not Allowed
 出现405错误的原因是nginx不允许post静态页
+
+
+Apache、IIS、Nginx等绝大多数web服务器，都不允许静态文件响应POST请求，
+否则会返回“HTTP/1.1 405 Method not allowed”错误。
+
 ~~~
 
 
