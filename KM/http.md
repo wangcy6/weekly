@@ -324,3 +324,103 @@ int dns_down_httpserver::SendRegistInfo(st_netfd_t _fd)
 }
 ~~~
 
+# day2 header
+
+
+
+
+
+
+
+- Content-Range
+
+```
+The following are examples of Content-Range values in which the
+   selected representation contains a total of 1234 bytes:
+
+   o  The first 500 bytes:
+
+        Content-Range: bytes 0-499/1234
+
+   o  The second 500 bytes:
+
+        Content-Range: bytes 500-999/1234
+
+   o  All except for the first 500 bytes:
+
+        Content-Range: bytes 500-1233/1234
+
+   o  The last 500 bytes:
+
+        Content-Range: bytes 734-1233/1234
+```
+
+
+
+
+
+
+
+
+
+
+
+## [从服务器端请求特定的范围](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Range_requests)
+
+
+
+
+
+HTTP 协议范围请求允许服务器只发送 HTTP 消息的一部分到客户端。范围请求在传送大的媒体文件，或者与文件下载的断点续传功能搭配使用时非常有用
+
+
+
+
+
+假如服务器支持范围请求的话，你可以使用 [`Range`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range) 首部来生成该类请求。该首部指示服务器应该返回文件的哪一或哪几部分。
+
+### 单一范围
+
+
+
+我们可以请求资源的某一部分。这次我们依然用 cURL 来进行测试。"-H" 选项可以在请求中追加一个首部行，在这个例子中，是用 Range 首部来请求图片文件的前 1024 个字节。
+
+```html
+curl http://i.imgur.com/z4d4kWk.jpg -i -H "Range: bytes=0-1023"
+```
+
+这样生成的请求如下：
+
+```html
+GET /z4d4kWk.jpg HTTP/1.1
+Host: i.imgur.com
+Range: bytes=0-1023
+```
+
+服务器端会返回状态码为 [`206`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/206) `Partial Content` 的响应：
+
+```html
+HTTP/1.1 206 Partial Content
+Content-Range: bytes 0-1023/146515
+Content-Length: 1024
+...
+(binary content)
+```
+
+在这里，[`Content-Length`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Length) 首部现在用来表示先前请求范围的大小（而不是整张图片的大小）。[`Content-Range`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Range) 响应首部则表示这一部分内容在整个资源中所处的位置
+
+
+
+https://tools.ietf.org/html/rfc7233#section-3.2
+
+
+
+
+
+## 参考
+
+
+
+[IE 浏览器中的断点续传功能](https://blogs.msdn.microsoft.com/ieinternals/2011/06/03/download-resumption-in-internet-explorer/)
+
+[第十二节 If-Range 字段](http://http.kancloud.spiritling.cn/851903)
