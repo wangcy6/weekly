@@ -1,6 +1,6 @@
 ---
 title: "ARTS_2012_weekly_5"
-date: 2020-01-28 
+date: 2020-02-26 
 description: "GTD践行第13周"
 draft: false
 tags: ["GTD","work"]
@@ -9,7 +9,7 @@ categories: ["ARTS"]
 
 
 
-# 打卡GTD践行第13周（2020第5周） 
+# GTD践行第13周（2020第5周） 
 
 
 
@@ -65,7 +65,7 @@ categories: ["ARTS"]
 
 
 
-### 1.Algorithm
+### 1. Algorithm
 
 > **主要是为了编程训练和学习。**每周至少做一个 leetcode 的算法题（先从Easy开始，然后再Medium，最后才Hard）。进行编程训练，如果不训练你看再多的算法书，你依然不会做算法题，看完书后，你需要训练。。
 
@@ -77,9 +77,15 @@ categories: ["ARTS"]
 
 
 
-### 2.Review 
+### 2. Review 
 
 > 主要是为了学习英文，如果你的英文不行，你基本上无缘技术高手。所以，需要你阅读并点评至少一篇英文技术文章，我个人最喜欢去的地方是[http://Medium.com](https://link.zhihu.com/?target=http%3A//Medium.com)
+
+
+
+阅读：https://selenium-python.readthedocs.io/locating-elements.html#locating-elements
+
+
 
 
 
@@ -91,7 +97,11 @@ categories: ["ARTS"]
 
 
 
-读写锁：
+
+
+
+
+
 
 ### 4.  Share
 
@@ -115,7 +125,7 @@ categories: ["ARTS"]
 
  ## 意志力实验
 
-### step1 思想准备：
+### step 1 思想准备：
 
 - 为了不在收外界诱惑，你彻底放下对电视剧，综艺节目，电影，动漫
 
@@ -143,7 +153,7 @@ categories: ["ARTS"]
 
 
 
-### step2 具体行动：
+### step 2 具体行动：
 
 吃饭时候去吃饭（盯着手机不吃饭）
 
@@ -158,7 +168,7 @@ categories: ["ARTS"]
 
 
 
-### step3 预期结果：
+### step 3 预期结果：
 
 你完全隔离手机不行的，你上下班，你在工作，你任何地方看到各种印象 这在方面必然失败。
 
@@ -173,6 +183,19 @@ categories: ["ARTS"]
 这个才是你要做事情。
 
 这个才是你要做事情。
+
+| 日期     | 晚上床不看看手机 去睡觉                          | 内容 |
+| -------- | ------------------------------------------------ | ---- |
+| 第一天   | 没有做到                                         | 小说 |
+| 第二天   | 没有做到                                         | 小说 |
+| 第三天   | 没有做到                                         | 小说 |
+| 第四天   | 没有做到                                         | 小说 |
+| 第五天   | 没有做到                                         | 小说 |
+| check in | 这么简单事情自己，如果不去可否，依然没问题搬到。 |      |
+
+
+
+
 
 
 
@@ -232,19 +255,19 @@ categories: ["ARTS"]
 
 
 
-### 执行结果（变化）
+### 执行结果（统计）
 
 ### Week 5, 2020
 
-| week      | Put down your phone | Keep | Give a stretch | Dressing clothes | Reading |
-| --------- | ------------------- | :--- | -------------- | ---------------- | ------- |
-| Friday    | 02： 00             | no   | 10： 00        | 10： 00          | no      |
-| Saturday  | 05： 00             | no   | 10： 00        | 11： 00          | no      |
-| Sunday    |                     |      |                |                  |         |
-| Monday    |                     |      |                |                  |         |
-| Tuesday   |                     |      |                |                  |         |
-| Wednesday |                     |      |                |                  |         |
-| Thursday  |                     |      |                |                  |         |
+| week      | Put down your phone | Keep     | Give a stretch | Dressing clothes | Reading          |
+| --------- | ------------------- | :------- | -------------- | ---------------- | ---------------- |
+| Friday    | 02： 00             | no       | 10： 00        | 10： 00          | no               |
+| Saturday  | 05： 00             | no       | 10： 00        | 11： 00          | no               |
+| Sunday    |                     |          |                |                  |                  |
+| Monday    |                     |          |                |                  |                  |
+| Tuesday   | 22： 30  手机       | 没有执行 | 21：00         | 09： 30          | 早起计划没有执行 |
+| Wednesday | 22： 30  看小说了   | 没有执行 | 09： 00        | 09： 30          | 来不及           |
+| Thursday  |                     |          |                |                  |                  |
 
 
 
@@ -342,19 +365,19 @@ categories: ["ARTS"]
 
 
 
-### 执行结果：饭前 饭后要运动
+### 执行结果：（今天状态如何）
 
 ### Week 5, 2020
 
-| week             | Breakfast（6：30-7：30） | Lunch(11:30-12:30) | Dinner(5:30-6:30) |
-| ---------------- | ------------------------ | ------------------ | ----------------- |
-| Monday           |                          |                    |                   |
-| Tuesday          |                          |                    |                   |
-| Wednesday        |                          |                    |                   |
-| Thursday         |                          |                    |                   |
-| Friday           |                          |                    |                   |
-| Saturday （2.1） |                          |                    |                   |
-| Sunday           |                          |                    |                   |
+| week      | Breakfast（6：30-7：30） | Lunch(11:30-12:30) | Dinner(5:30-6:30) |
+| --------- | ------------------------ | ------------------ | ----------------- |
+| Monday    | 状态不好                 | 状态不好           | 状态不好          |
+| Tuesday   | 状态不好                 | 状态不好           | 状态不好          |
+| Wednesday | 状态不好                 | 什么都不干就累     | 状态不好          |
+| Thursday  | 什么都不干就累           | 什么都不干就累     | 什么都不干就累    |
+| Friday    |                          |                    |                   |
+| Saturday  |                          |                    |                   |
+| Sunday    |                          |                    |                   |
 
 
 
@@ -456,13 +479,12 @@ categories: ["ARTS"]
 
 ### 执行结果（没有变化）
 
-- 自己根本没有按照盘茄时间 25分钟工作+5分钟执行，不然不会出现这样结果
-
-![8413](https://i.loli.net/2020/01/03/RVCrbtWE3AkYXHq.png)
 
 
 
-![上周](https://i.loli.net/2019/10/17/8Whlt51RLArsI39.png)
+
+- 今天写一天python，但是偏离你计划，你准备知识，准备。你其实浪费一天的时间做其他事情。
+- 
 
 
 
@@ -510,5 +532,7 @@ categories: ["ARTS"]
 
 ### C-执行结果（看到变化）
 
-https://app.yinxiang.com/client/web#?n=671a47c7-fccd-457d-9fc8-69c980997b6a&s=s39&swm=true&
+
+
+连续三天没有写算法了。
 
