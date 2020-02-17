@@ -44,12 +44,22 @@ categories: ["threads t"]
 
 # 卡片
 
+> 核心总结，看到这里就可以结束了。如果你不明白，说明我写的还不正确
+
 | 协程库                                                       | 语言                                                         | 开发者                                               |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------------- |
 | [state threads library](https://github.com/ossrs/state-threads) | 3000行[C代码](https://github.com/wangcy6/reading_code_note/tree/master/liunx/st) | [历史渊源](https://coolshell.cn/articles/12012.html) |
 | [**Libtask**](https://swtch.com/libtask/)                    | **a Coroutine Library for C and Unix**                       |                                                      |
 
-![image-20200212071303847](../images/201909/image-20200212071303847.png)
+
+
+## How does ST take advantage of multiple CPUs?
+
+
+
+>  你根本回答不了，哑口无言，你解决方式看libevent多线程的例子
+
+
 
 
 
@@ -300,9 +310,47 @@ State Threads library
 
 
 
+st源码VP等全局变量使得，st只支持单线程。
+
+由于团队业务的一些特殊性，需要st支持多线程，将st的全局变量进行响应的封装，可以将st改造成多线程版本
 
 
-## 三、talk
+
+我自己根本不明白，只能查看文章
+
+[Multi-Threaded Libevent Server Example](https://roncemer.com/software-development/multi-threaded-libevent-server-example/)
+
+[libevent / epoll number of worker threads?](https://stackoverflow.com/questions/20915738/libevent-epoll-number-of-worker-threads)
+
+http://darmawan-salihun.blogspot.com/2015/09/multithreaded-libeventlibevent2-server.html
+
+https://github.com/gambellhq/samples/tree/master/libevent2-thread-code
+
+https://github.com/gambellhq/samples/tree/master/libevent2-thread-code
+
+
+
+
+
+
+
+## 4 How is ST different from POSIT threads/user-level thread libraries?
+
+
+
+4. 多线程
+
+   
+
+最近在看memcached的源码，觉得它那种libevent+多线程的服务器模型真的很不错，我将这个模型封装成一个C++类，根据我的简单测试，这个模型的效率真的很
+
+
+
+
+
+
+
+# 三、项目
 
 - task 编译成动态库和静态库 30分钟
 
@@ -325,13 +373,33 @@ libst.a
 
 
 
-# 项目应用
-
-暂无
+# 
 
 
 
-参考
+
+
+
+
+
+
+
+
+# 参考
+
+Libevent手册
+
+   http://www.wangafu.net/~nickm/libevent-book/
+
+
+
+多核
+
+1 http://www.cppblog.com/converse/archive/2015/05/11/71809.html
+
+2 https://cloud.tencent.com/developer/article/1194247
+
+
 
 -  https://app.yinxiang.com/shard/s39/nl/8226829/8eae84ea-a1ca-4e0e-94c6-cfb3661f913a 
 

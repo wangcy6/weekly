@@ -119,9 +119,31 @@ HTTP是libevent的一个轻量级http实现，包括服务器和客户端。libe
 
 
 
-## 二、动手
+# 二、动手实验
+
+2.1 Libevent编译
+
+```
+wget https://github.com/libevent/libevent/archive/release-2.1.11-stable.tar.gz
+
+cd libevent-release-2.1.11-stable
+./autogen.sh 
+./configure
+/usr/local/include
+
+	
+补充：Linux下使用automake、autoconf生成configure文件
+```
+
+
 
 http://senlinzhan.github.io/2017/08/20/libevent-buffer/
+
+
+
+
+
+
 
 # 项目应用
 
@@ -148,3 +170,9 @@ https://github.com/Qihoo360/evpp
 [https://hellogithub.com/periodical/category/C%2B%2B%20%E9%A1%B9%E7%9B%AE/](https://hellogithub.com/periodical/category/C%2B%2B 项目/)
 
 https://github.com/anhkgg/SuperWeChatPC/tree/master/sdk
+
+## 参考
+
+https://github.com/hungminhtran/daemon-demo/blob/master/libevent-http-demo.cpp
+
+https://blog.csdn.net/lishenglong666/article/details/32111829

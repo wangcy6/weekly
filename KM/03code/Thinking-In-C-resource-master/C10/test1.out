@@ -1,6 +1,0 @@
-before g():
-1
-1
-after	g():
-1
-2
