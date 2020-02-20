@@ -116,7 +116,6 @@ private:
 
 };
 
-
 int main()
 {   
 
@@ -131,14 +130,26 @@ int main()
         cout << "I am many instances " << endl;
     }
 }
+//声明和定义的区别
+//https://www.nowcoder.com/questionTerminal/5b25d82adaed44059c7bb3a77ea9b508
+//静态数据成员要在类外定义和初始化
+//未定义的引用
+//在链接为可执行文件的时候就必须要具体的实现了
+//未声明的引用
+https://blog.nowcoder.net/n/11260b9431fb4ddbb15b4d8c7f252eb3
+//https://www.theimpossiblecode.com/blog/c11-generic-singleton-pattern/
+
+
+
 
 //设计问题 
 //http://www.justdojava.com/2019/08/21/Java-single-destroy-prevent/
 //https://www.interviewsansar.com/singleton-class-design-with-an-example/ 错误的设计
 //https://liam.page/2016/08/14/copy-control-in-Cpp/
 //拷贝构造函数没有处理静态数据成员
+
+
 //遇到的语法问题
 //https://stackoverflow.com/questions/317450/why-override-operator
 //https://stackoverflow.com/questions/48780550/why-make-unique-fails-with-private-constructor
 //https://en.cppreference.com/w/cpp/language/pimpl
-//https://stackoverflow.com/questions/24095071/incomplete-type-in-nested-name-specifiers

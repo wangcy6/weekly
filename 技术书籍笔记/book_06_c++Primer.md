@@ -71,3 +71,13 @@ as a **reference count**. Whenever we copy a shared_ptr, the count is **incremen
 
 Once a shared_ptr’s counter goes to zero, the shared_ptr automatically frees
 the object that it manages:  
+
+
+
+
+
+## Chapter 16. Templates and GenericProgramming
+
+The distinction between the
+two is that OOP deals with types that are not known until run time, whereas in
+generic programming the types become known during compilation  

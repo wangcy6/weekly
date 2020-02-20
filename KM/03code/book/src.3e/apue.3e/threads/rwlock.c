@@ -68,8 +68,7 @@ job_append(struct queue *qp, struct job *jp)
 /*
  * Remove the given job from a queue.
  */
-void
-job_remove(struct queue *qp, struct job *jp)
+void job_remove(struct queue *qp, struct job *jp)
 {
 	pthread_rwlock_wrlock(&qp->q_lock);
 	if (jp == qp->q_head) {
@@ -91,8 +90,7 @@ job_remove(struct queue *qp, struct job *jp)
 /*
  * Find a job for the given thread ID.
  */
-struct job *
-job_find(struct queue *qp, pthread_t id)
+struct job *job_find(struct queue *qp, pthread_t id)
 {
 	struct job *jp;
 
