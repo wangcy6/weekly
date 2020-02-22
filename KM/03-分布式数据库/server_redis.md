@@ -1,4 +1,5 @@
 ---
+
 title: "redis必须掌握几个知识点"
 date: 2019-12-02
 description: "redis学习过程"
@@ -22,6 +23,8 @@ categories: ["数据库"]
 | **Redis5.0**           | 2018年10月17 |                                 |
 | **Redis6.0**           |              | 多线程                          |
 
+
+
 ### 源码阅读参考
 
 - https://github.com/huangz1990/redis-3.0-annotated
@@ -29,7 +32,9 @@ categories: ["数据库"]
 
 
 
-## FQA
+# FQA
+
+![image.png](https://i.loli.net/2019/11/16/95JQiMS2gUjWVsN.png)
 
 - 一个key的类型和编码类型是什么？
 - redis集群方案
@@ -823,7 +828,419 @@ malloc_trim
 
 
 
+
+
+
+
+# 第七天  Set编码方式有哪些？
+
+## 7.1 输出
+
+----------begin - 精华的三句话---
+
+#陈咬金第一斧  如何解决
+
+> task: 通过[阅读Redis设计](http://redisbook.com/preview/object/object.html)，然后延伸到后面的每个章节。
+>
+> 
+
+##### #陈咬金第二斧  给出有几种，不多不漏？
+
+> intset：就是有序的数组
+>
+> hashtable：二维数组
+
+#陈咬金第三斧  看源码
+
+~~~c
+127.0.0.1:6379> SADD fruits "apple" "banana" "cherry"
+(integer) 3
+127.0.0.1:6379> object encoding fruits 
+"hashtable"
+ 
+127.0.0.1:6379>  SADD numbers 1 3 5
+(integer) 0
+127.0.0.1:6379> object encoding numbers
+"intset"
+    
+集合对象的编码可以是 intset 或者 hashtable
+ redis> EVAL "for i=1, 512 do redis.call('SADD', KEYS[1], i) end" 1 integers
+(nil)
+
+redis> SCARD integers
+(integer) 512
+
+redis> OBJECT ENCODING integers
+"intset"   
+ 
+    redis> SADD integers 10086
+(integer) 1
+
+redis> SCARD integers
+(integer) 513
+
+redis> OBJECT ENCODING integers
+"hashtable"
+    
+当集合对象可以同时满足以下两个条件时， 对象使用 intset 编码：
+集合对象保存的所有元素都是整数值；
+集合对象保存的元素数量不超过 512 个；
+~~~
+
+
+
+----------end - 精华的在上面 ---
+
+## 7.2 记录过程，完全乱序，大家跳过
+
+
+
+### 陈咬金第一斧  如何解决
+
+>  进展1 :看1-6章节 编码方式 就是底层数据结构
+
+
+
+#### 第四章 字典
+
+~~~c++
+/*
+ * 哈希表
+ *
+ * 每个字典都使用两个哈希表，从而实现渐进式 rehash 。
+ */
+typedef struct dictht {
+    
+    // 哈希表数组
+    dictEntry **table;
+
+    // 哈希表大小
+    unsigned long size;
+    
+    // 哈希表大小掩码，用于计算索引值
+    // 总是等于 size - 1
+    unsigned long sizemask;
+
+    // 该哈希表已有节点的数量
+    unsigned long used;
+
+} dictht;
+
+
+/*
+ * 字典
+ */
+typedef struct dict {
+
+    // 类型特定函数
+    dictType *type;
+
+    // 私有数据
+    void *privdata;
+
+    // 哈希表
+    dictht ht[2];
+
+    // rehash 索引
+    // 当 rehash 不在进行时，值为 -1
+    int rehashidx; /* rehashing not in progress if rehashidx == -1 */
+
+    // 目前正在运行的安全迭代器的数量
+    int iterators; /* number of iterators currently running */
+
+} dict;
+
+~~~
+
+
+
+![image-20200221101528024](../images/201909/image-20200221101528024.png)
+
+#### 5 章跳跃表
+
+
+
+~~~c++
+
+/*
+ * 跳跃表
+ */
+typedef struct zskiplist {
+
+    // 表头节点和表尾节点
+    struct zskiplistNode *header, *tail;
+
+    // 表中节点的数量
+    unsigned long length;
+
+    // 表中层数最大的节点的层数
+    int level;
+
+} zskiplist;
+
+/* ZSETs use a specialized version of Skiplists */
+/*
+ * 跳跃表节点
+ */
+typedef struct zskiplistNode {
+
+    // 成员对象
+    robj *obj;
+
+    // 分值
+    double score;
+
+    // 后退指针
+    struct zskiplistNode *backward;
+
+    // 层
+    struct zskiplistLevel {
+
+        // 前进指针
+        struct zskiplistNode *forward;
+
+        // 跨度
+        unsigned int span;
+
+    } level[];
+
+} zskiplistNode;
+
+typedef struct zset {
+
+    // 字典，键为成员，值为分值
+    // 用于支持 O(1) 复杂度的按成员取分值操作
+    dict *dict;
+
+    // 跳跃表，按分值排序成员
+    // 用于支持平均复杂度为 O(log N) 的按分值定位成员操作
+    // 以及范围操作
+    zskiplist *zsl;
+
+} zset;
+~~~
+
+![image-20200221145134658](../images/201909/image-20200221145134658.png)
+
+
+
+
+
+zskiplistNode *zslInsert(
+
+// 获取一个随机值作为新节点的层数
+    // T = O(N)
+    level = zslRandomLevel();
+
+~~~ c++
+
+/* Returns a random level for the new skiplist node we are going to create.
+ *
+ * 返回一个随机值，用作新跳跃表节点的层数。
+ *
+ * The return value of this function is between 1 and ZSKIPLIST_MAXLEVEL
+ * (both inclusive), with a powerlaw-alike distribution where higher
+ * levels are less likely to be returned. 
+ *
+ * 返回值介乎 1 和 ZSKIPLIST_MAXLEVEL 之间（包含 ZSKIPLIST_MAXLEVEL），
+ * 根据随机算法所使用的幂次定律，越大的值生成的几率越小。
+ *
+ * T = O(N)
+ */
+int zslRandomLevel(void) {
+    int level = 1;
+
+    while ((random()&0xFFFF) < (ZSKIPLIST_P * 0xFFFF))
+        level += 1;
+
+    return (level<ZSKIPLIST_MAXLEVEL) ? level : ZSKIPLIST_MAXLEVEL;
+}
+//#define ZSKIPLIST_P 0.25      /* Skiplist P = 1/4 */
+~~~
+
+
+
+
+
+#### 6章节 整数集合
+
+
+
+整数集合（intset）是集合键的底层实现之一：
+
+ 当一个集合只包含整数值元素， 并且这个集合的元素数量不多时， Redis 就会使用整数集合作为集合键的底层实现。
+
+- 相同类型
+
+
+
+~~~c++
+127.0.0.1:6379> SADD numbers 1 2 3 4 5
+(integer) 5
+127.0.0.1:6379> object encoding numbers
+"intset"
+ 
+    
+127.0.0.1:6379> SADD str "1" "2" "399999999999999999999999999999999999999999999999999999999999"
+(integer) 1
+127.0.0.1:6379> object encoding str
+"hashtable"
+    
+    
+阅读：
+typedef struct intset {
+    
+    // 编码方式
+    uint32_t encoding;
+
+    // 集合包含的元素数量
+    uint32_t length;
+
+    // 保存元素的数组
+    int8_t contents[];
+
+} intset;
+    
+intset *intsetAdd(intset *is, int64_t value, uint8_t *success) {
+   
+    
+    
+~~~
+
+
+
+![image-20200221095410907](../images/201909/image-20200221095410907.png)
+
+第七章 压缩列表
+
+```
+SADD fruits "apple" "banana" "cherry"
+```
+
+http://zhangtielei.com/posts/blog-redis-ziplist.html
+
+- 里面数据有不同类型，不能数组表述
+- /* Zip structure related defaults */
+  #define REDIS_HASH_MAX_ZIPLIST_ENTRIES 512
+  #define REDIS_HASH_MAX_ZIPLIST_VALUE 64
+  #define REDIS_LIST_MAX_ZIPLIST_ENTRIES 512
+  #define REDIS_LIST_MAX_ZIPLIST_VALUE 64
+  #define REDIS_SET_MAX_INTSET_ENTRIES 512
+  #define REDIS_ZSET_MAX_ZIPLIST_ENTRIES 128
+  #define REDIS_ZSET_MAX_ZIPLIST_VALUE 64
+
+
+
+
+
+### 陈咬金第二斧  给出有几种，不多不漏？
+
+ 
+
+### 陈咬金第三斧  看源码
+
+
+
+
+
+| 对象所使用的底层数据结构             | 编码常量                    | OBJECT ENCODING 命令输出 |
+| :----------------------------------- | :-------------------------- | :----------------------- |
+| 整数                                 | `REDIS_ENCODING_INT`        | `"int"`                  |
+| `embstr` 编码的简单动态字符串（SDS） | `REDIS_ENCODING_EMBSTR`     | `"embstr"`               |
+| 简单动态字符串                       | `REDIS_ENCODING_RAW`        | `"raw"`                  |
+| 字典                                 | `REDIS_ENCODING_HT`         | `"hashtable"`            |
+| 双端链表                             | `REDIS_ENCODING_LINKEDLIST` | `"linkedlist"`           |
+| 压缩列表                             | `REDIS_ENCODING_ZIPLIST`    | `"ziplist"`              |
+| 整数集合                             | `REDIS_ENCODING_INTSET`     | `"intset"`               |
+| 跳跃表和字典                         | `REDIS_ENCODING_SKIPLIST`   | `"skiplist"`             |
+
+
+
+
+
+~~~c++
+/* Objects encoding. Some kind of objects like Strings and Hashes can be
+ * internally represented in multiple ways. The 'encoding' field of the object
+ * is set to one of this fields for this object. */
+#define OBJ_ENCODING_RAW 0        /* Raw representation */
+#define OBJ_ENCODING_INT 1        /* Encoded as integer */
+#define OBJ_ENCODING_HT 2         /* Encoded as hash table */
+#define OBJ_ENCODING_ZIPMAP 3     /* Encoded as zipmap */
+#define OBJ_ENCODING_LINKEDLIST 4 /* No longer used: old list encoding. */
+#define OBJ_ENCODING_ZIPLIST 5    /* Encoded as ziplist */
+#define OBJ_ENCODING_INTSET 6     /* Encoded as intset */
+#define OBJ_ENCODING_SKIPLIST 7   /* Encoded as skiplist */
+#define OBJ_ENCODING_EMBSTR 8     /* Embedded sds string encoding */
+#define OBJ_ENCODING_QUICKLIST 9  /* Encoded as linked list of ziplists */
+#define OBJ_ENCODING_STREAM 10    /* Encoded as a radix tree of listpacks *
+~~~
+
+
+
+
+
+## 7.3 扩展 Zset编码类型
+
+#陈咬金第一斧  如何解决
+
+> task: 通过[阅读Redis设计](http://redisbook.com/preview/object/object.html)，然后延伸到后面的每个章节。
+
+##### #陈咬金第二斧  编码和底层实现？
+
+> ziplist
+
+#陈咬金第三斧  看源码
+
+| 类型           | 编码                      | 对象                                                 |
+| :------------- | :------------------------ | :--------------------------------------------------- |
+| `REDIS_STRING` | `REDIS_ENCODING_INT`      | 使用整数值实现的字符串对象。                         |
+| `REDIS_STRING` | `REDIS_ENCODING_EMBSTR`   | 使用 `embstr` 编码的简单动态字符串实现的字符串对象。 |
+| `REDIS_STRING` | `REDIS_ENCODING_RAW`      | 使用简单动态字符串实现的字符串对象。                 |
+| `REDIS_LIST`   | quicklist                 | 使用压缩列表实现的列表对象。                         |
+| `REDIS_LIST`   | `quicklist`               | 使用双端链表实现的列表对象。                         |
+| `REDIS_HASH`   | `REDIS_ENCODING_ZIPLIST`  | 使用压缩列表实现的哈希对象。                         |
+| `REDIS_HASH`   | `REDIS_ENCODING_HT`       | 使用字典实现的哈希对象。                             |
+| `REDIS_SET`    | `REDIS_ENCODING_INTSET`   | 使用整数集合实现的集合对象。                         |
+| `REDIS_SET`    | `REDIS_ENCODING_HT`       | 使用字典实现的集合对象。                             |
+| `REDIS_ZSET`   | `REDIS_ENCODING_ZIPLIST`  | 使用压缩列表实现的有序集合对象。                     |
+| `REDIS_ZSET`   | `REDIS_ENCODING_SKIPLIST` | 使用跳跃表和字典实现的有序集合对象。                 |
+
+【是列表 不是链表】
+
+~~~shell
+ZADD price 8.5 apple 5.0 banana 6.0 cherry
+OBJECT encoding price
+"ziplist"
+~~~
+
+
+
+##### 为什么有序集合需要同时使用跳跃表和字典来实现？
+
+在理论上来说， 有序集合可以单独使用字典或者跳跃表的其中一种数据结构来实现， 但无论单独使用字典还是跳跃表， 在性能上对比起同时使用字典和跳跃表都会有所降低。
+
+举个例子， 如果我们只使用字典来实现有序集合， 那么虽然以 O(1) 复杂度查找成员的分值这一特性会被保留， 但是， 因为字典以**无序**的方式来保存集合元素， 
+
+所以每次在执行范围型操作 —— 比如 ZRANK 、 ZRANGE 等命令时， 程序都需要对字典保存的所有元素进行排序， 完成这种排序需要至少 O(N \log N) 时间复杂度， 以及额外的 O(N) 内存空间 （因为要创建一个数组来保存排序后的元素）。
+
+另一方面， 如果我们只使用跳跃表来实现有序集合， 那么跳跃表执行范围型操作的所有优点都会被保留， 但因为没有了字典， 所以根据成员查找分值这一操作的复杂度将从 O(1) 上升为 O(\log N) 。
+
+因为以上原因， 为了让有序集合的查找和范围型操作都尽可能快地执行，
+
+ Redis 选择了同时使用字典和跳跃表两种数据结构来实现有序集合。
+
+
+
 ## 参考
+
+
+
+
+
+- 8
+- http://redisbook.com/preview/object/hash.html
+
+http://redisbook.com/preview/object/set.html
 
 - glibc STL 造成的疑似“内存泄漏
 
