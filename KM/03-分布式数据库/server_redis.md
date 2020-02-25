@@ -16,12 +16,12 @@ categories: ["数据库"]
 
 > 最新特性是什么
 
-| 版本                   | 发布日期     | 其中一个特性                    |
-| ---------------------- | ------------ | ------------------------------- |
-| **Redis2.8**           | 2013年11月22 | 一个key的类型和编码类型是什么？ |
-| **Redis3.0（里程碑）** | 2015年4月1日 | 集群方案是什么                  |
-| **Redis5.0**           | 2018年10月17 |                                 |
-| **Redis6.0**           |              | 多线程                          |
+| 版本                   | 发布日期     | 其中一个特性                        |
+| ---------------------- | ------------ | ----------------------------------- |
+| **Redis2.8**           | 2013年11月22 | 一个key的类型和编码类型是什么？save |
+| **Redis3.0（里程碑）** | 2015年4月1日 | 集群方案是什么                      |
+| **Redis5.0**           | 2018年10月17 |                                     |
+| **Redis6.0**           |              | 多线程                              |
 
 
 
@@ -38,6 +38,8 @@ categories: ["数据库"]
 
 - 一个key的类型和编码类型是什么？
 - redis集群方案
+-  save 与 bgsave？
+- 
 
 
 
@@ -844,11 +846,13 @@ malloc_trim
 >
 > 
 
-##### #陈咬金第二斧  给出有几种，不多不漏？
+##### #陈咬金第二斧  一共2中
 
 > intset：就是有序的数组
 >
 > hashtable：二维数组
+>
+> 你说quiklis错误，错误 问集合不是有序集合。
 
 #陈咬金第三斧  看源码
 
@@ -1154,7 +1158,13 @@ http://zhangtielei.com/posts/blog-redis-ziplist.html
 | 整数集合                             | `REDIS_ENCODING_INTSET`     | `"intset"`               |
 | 跳跃表和字典                         | `REDIS_ENCODING_SKIPLIST`   | `"skiplist"`             |
 
+实现了**基于链表的“二分查找”。跳表是一种动态数据结构，支持快速的插入、删除、查找操作，时间复杂度都是 O(logn)。**
 
+
+
+跳表使用**空间换时间**的设计思路，通过构建**多级索引**来提高查询的效率，实现了**基于链表的“二分查找”。跳表是一种动态数据结构，支持快速的插入、删除、查找操作，时间复杂度都是 O(logn)。**
+
+**跳表的空间复杂度是 O(n)。**不过，跳表的实现非常灵活，可以通过**改变索引构建策略，有效平衡执行效率和内存消耗。**虽然跳表的代码实现并不简单，但是作为一种动态数据结构，比起红黑树来说，实现要简单多了。所以很多时候，我们**为了代码的简单、易读，比起红黑树，我们更倾向用跳表。**
 
 
 
@@ -1185,9 +1195,13 @@ http://zhangtielei.com/posts/blog-redis-ziplist.html
 
 > task: 通过[阅读Redis设计](http://redisbook.com/preview/object/object.html)，然后延伸到后面的每个章节。
 
-##### #陈咬金第二斧  编码和底层实现？
+##### #陈咬金第二斧  一个工2个
 
 > ziplist
+>
+> qucklist
+>
+> 你说ht错误的，你object encoding xx，根本ht这个类型。
 
 #陈咬金第三斧  看源码
 
@@ -1211,9 +1225,32 @@ http://zhangtielei.com/posts/blog-redis-ziplist.html
 ZADD price 8.5 apple 5.0 banana 6.0 cherry
 OBJECT encoding price
 "ziplist"
+
+"ziplist"
+127.0.0.1:6379> SET number 10086
+OK
+127.0.0.1:6379> type number
+string
+127.0.0.1:6379> object encoding number
+"int"
+
+ SET story "Long, long, long ago there lived a king ..."
+OK
+127.0.0.1:6379> OBJECT ENCODING story
+"embstr"
 ~~~
 
+`embstr` 编码的字符串对象在执行命令时， 产生的效果和 `raw` 编码的字符串对象执行命令时产生的效果是相同的， 但使用 `embstr` 编码的字符串对象来保存短字符串值有以下好处：
 
+1. `embstr` 编码将创建字符串对象所需的内存分配次数从 `raw` 编码的两次降低为一次。
+2. 释放 `embstr` 编码的字符串对象只需要调用一次内存释放函数， 而释放 `raw` 编码的字符串对象需要调用两次内存释放函数。
+3. 因为 `embstr` 编码的字符串对象的所有数据都保存在一块连续的内存里面， 所以这种编码的字符串对象比起 `raw` 编码的字符串对象能够更好地利用缓存带来的优势。
+
+| 值                                                           | 编码                |
+| :----------------------------------------------------------- | :------------------ |
+| 可以用 `long` 类型保存的整数。                               | `int`               |
+| 可以用 `long double` 类型保存的浮点数。                      | `embstr` 或者 `raw` |
+| 字符串值， 或者因为长度太大而没办法用 `long` 类型表示的整数， 又或者因为长度太大而没办法用 `long double` 类型表示的浮点数。 |                     |
 
 ##### 为什么有序集合需要同时使用跳跃表和字典来实现？
 
@@ -1231,7 +1268,597 @@ OBJECT encoding price
 
 
 
+举个例子， 在列表对象包含的元素比较少时， Redis 使用压缩列表作为列表对象的底层实现：
+
+- 因为压缩列表比双端链表更节约内存， 并且在元素数量较少时， 在内存中以连续块方式保存的压缩列表比起双端链表可以更快被载入到缓存中；
+- 随着列表对象包含的元素越来越多， 使用压缩列表来保存元素的优势逐渐消失时， 对象就会将底层实现从压缩列表转向功能更强、也更适合保存大量元素的双端链表上面；
+
+字符串对象的编码可以是 `int` 、 `raw` 或者 `embstr` 
+
+哈希对象的编码可以是 `ziplist` 或者 `hashtable` 。
+
+集合对象的编码可以是 `intset` 或者 `hashtable` 。
+
+
+
+```
+ziplist
+skiplist
+```
+
+
+
+
+
+## 7.4 一句话总结
+
+~~~c++
+/* Object types */
+// 对象类型
+#define REDIS_STRING 0
+#define REDIS_LIST 1
+#define REDIS_SET 2
+#define REDIS_ZSET 3
+#define REDIS_HASH 4
+
+/* Objects encoding. Some kind of objects like Strings and Hashes can be
+ * internally represented in multiple ways. The 'encoding' field of the object
+ * is set to one of this fields for this object. */
+// 对象编码
+#define REDIS_ENCODING_RAW 0     /* Raw representation */
+#define REDIS_ENCODING_INT 1     /* Encoded as integer */
+#define REDIS_ENCODING_HT 2      /* Encoded as hash table */
+#define REDIS_ENCODING_ZIPMAP 3  /* Encoded as zipmap */
+#define REDIS_ENCODING_LINKEDLIST 4 /* Encoded as regular linked list */
+#define REDIS_ENCODING_ZIPLIST 5 /* Encoded as ziplist */
+#define REDIS_ENCODING_INTSET 6  /* Encoded as intset */
+#define REDIS_ENCODING_SKIPLIST 7  /* Encoded as skiplist */
+#define REDIS_ENCODING_EMBSTR 8  /* Embedded sds string encoding */
+~~~
+
+http://redisbook.com/preview/object/set.html
+
+集合对象的编码可以是 `intset` 或者 `hashtable` 。
+
+有序集合的编码可以是 `ziplist` 或者 `skiplist` 。
+
+
+
+# 第八天： save
+
+## 8.1 任务与输出
+
+\#陈咬金第一斧： 如何解决？，思路必须正确。
+
+• 阅读redis设计第10章节 RDB 持久化，第11章节 AOF 持久化
+
+• rdbSaveBackground
+
+#陈咬金第二斧 **：实际操作中最关心的一个？不知道根本无法操作**
+
+-Redis 服务器保存和载入 RDB 文件的方法
+
+-不同类型不同编码是如何存储的。
+
+\-
+
+\# 陈咬金第三斧：解决了一个什么问题？最值得学习一点是，是你不清楚，不是别人。
+
+  持久化过中，如果有新业务来怎么办？
+
+
+
+
+
+## 8.2  过程
+
+
+
+
+
+- save：会阻塞redis服务器进程，直到创建RDB文件完毕为止；（在此期间进程不能处理任何请求）
+- bgsave：fork一个子进程来创建RDB文件，父进程可以继续处理命令请求
+
+
+
+
+
+其中 `SAVE` 命令在执行时会直接阻塞当前的线程，由于 Redis 是 [单线程](https://draveness.me/whys-the-design-redis-single-thread) 的，
+
+所以 `SAVE` 命令会直接阻塞来自客户端的所有其他请求，这在很多时候对于需要提供较强可用性保证的 Redis 服务都是无法接受的。
+
+
+
+我们往往需要 `BGSAVE` 命令在后台生成 Redis 全部数据对应的 RDB 文件，当我们使用 `BGSAVE` 命令时，Redis 会立刻 `fork` 出一个子进程，子进程会执行『将内存中的数据以 RDB 格式保存到磁盘中』这一过程，
+
+
+
+而 Redis 服务在 `BGSAVE` 工作期间仍然可以处理来自客户端的请求。
+
+
+
+1. 为什么 `fork` 之后的子进程能够获取父进程内存中的数据？
+2. `fork` 函数是否会带来额外的性能开销，这些开销我们怎么样才可以避免？
+
+既然 Redis 选择使用了 `fork` 的方式来解决快照持久化的问题，那就说明这两个问题已经有了答案，首先 `fork` 之后的子进程是可以获取父进程内存中的数据的，而 `fork` 带来的额外性能开销相比阻塞主线程也一定是可以接受的，只有同时具备这两点，Redis 最终才会选择这样的方案。
+
+
+
+
+
+
+
+
+
+- `fork` 发生时两者的内存空间有着完全相同的内容，对内存的写入和修改、文件的映射都是独立的，两个进程不会相互影响
+
+- 【你对别人这么说，别人根本不去理会，别人根本不懂，他们上面】
+
+写时拷贝（Copy-on-Write）的出现就是为了解决这一问题，就像我们在这一节开头介绍的，写时拷贝的主要作用就是**将拷贝推迟到写操作真正发生时** 【这个优化测试，别忘记fork本质，这个特性可以不知道】
+
+
+
+~~~c++
+void saveCommand(redisClient *c) {
+
+    // 执行 
+    if (rdbSave(server.rdb_filename) == REDIS_OK) {
+        addReply(c,shared.ok);
+    } else {
+        addReply(c,shared.err);
+    }
+}
+
+void bgsaveCommand(redisClient *c) {
+
+    // 执行 BGSAVE
+ if (rdbSaveBackground(server.rdb_filename) == REDIS_OK) {
+        addReplyStatus(c,"Background saving started");
+
+    } else {
+        addReply(c,shared.err);
+    }
+}
+
+
+int rdbSaveBackground(char *filename) {
+    pid_t childpid;
+    long long start;
+
+    // 如果 BGSAVE 已经在执行，那么出错
+    if (server.rdb_child_pid != -1) return REDIS_ERR;
+       //child 
+    if ((childpid = fork()) == 0) {
+        int retval;
+
+        /* Child */
+
+        // 关闭网络连接 fd
+        closeListeningSockets(0);
+
+        // 设置进程的标题，方便识别
+        redisSetProcTitle("redis-rdb-bgsave");
+
+        // 执行保存操作
+        retval = rdbSave(filename);
+
+        // 打印 copy-on-write 时使用的内存数
+        if (retval == REDIS_OK) {
+            size_t private_dirty = zmalloc_get_private_dirty();
+
+            if (private_dirty) {
+                redisLog(REDIS_NOTICE,
+                    "RDB: %zu MB of memory used by copy-on-write",
+                    private_dirty/(1024*1024));
+            }
+        }
+
+        // 向父进程发送信号
+        exitFromChild((retval == REDIS_OK) ? 0 : 1);
+
+    } else {
+
+        /* Parent */
+
+        // 计算 fork() 执行的时间
+        server.stat_fork_time = ustime()-start;
+
+        // 如果 fork() 出错，那么报告错误
+        if (childpid == -1) {
+            server.lastbgsave_status = REDIS_ERR;
+            redisLog(REDIS_WARNING,"Can't save in background: fork: %s",
+                strerror(errno));
+            return REDIS_ERR;
+        }
+
+        // 打印 BGSAVE 开始的日志
+        redisLog(REDIS_NOTICE,"Background saving started by pid %d",childpid);
+
+     
+
+        // 关闭自动 rehash
+        updateDictResizePolicy();
+
+        return REDIS_OK;
+    }
+
+    return REDIS_OK; /* unreached */
+}
+* Save a key-value pair, with expire time, type, key, value.
+ *
+ * 将键值对的键、值、过期时间和类型写入到 RDB 中。
+ *
+ * On error -1 is returned.
+ *
+ * 出错返回 -1 。
+ *
+ * On success if the key was actually saved 1 is returned, otherwise 0
+ * is returned (the key was already expired). 
+ *
+ * 成功保存返回 1 ，当键已经过期时，返回 0 。
+ */
+int rdbSaveKeyValuePair(rio *rdb, robj *key, robj *val,
+                        long long expiretime, long long now)
+{
+
+
+    /* Save type, key, value 
+     *
+     * 保存类型，键，值
+     */
+    if (rdbSaveObjectType(rdb,val) == -1) return -1;
+    if (rdbSaveStringObject(rdb,key) == -1) return -1;
+    if (rdbSaveObject(rdb,val) == -1) return -1;
+~~~
+
+~~~c
+
+
+
+~~~
+
+### rdbSaveObjectType
+
+~~~c++
+
+/* Save the object type of object "o". 
+ *
+ * 将对象 o 的类型写入到 rdb 中
+ */
+int rdbSaveObjectType(rio *rdb, robj *o) {
+
+    switch (o->type) {
+
+    case REDIS_STRING:
+        return rdbSaveType(rdb,REDIS_RDB_TYPE_STRING);
+
+    case REDIS_LIST:
+        if (o->encoding == REDIS_ENCODING_ZIPLIST)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_LIST_ZIPLIST);
+        else if (o->encoding == REDIS_ENCODING_LINKEDLIST)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_LIST);
+        else
+            redisPanic("Unknown list encoding");
+
+    case REDIS_SET:
+        if (o->encoding == REDIS_ENCODING_INTSET)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_SET_INTSET);
+        else if (o->encoding == REDIS_ENCODING_HT)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_SET);
+        else
+            redisPanic("Unknown set encoding");
+
+    case REDIS_ZSET:
+        if (o->encoding == REDIS_ENCODING_ZIPLIST)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_ZSET_ZIPLIST);
+        else if (o->encoding == REDIS_ENCODING_SKIPLIST)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_ZSET);
+        else
+            redisPanic("Unknown sorted set encoding");
+
+    case REDIS_HASH:
+        if (o->encoding == REDIS_ENCODING_ZIPLIST)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_HASH_ZIPLIST);
+        else if (o->encoding == REDIS_ENCODING_HT)
+            return rdbSaveType(rdb,REDIS_RDB_TYPE_HASH);
+        else
+            redisPanic("Unknown hash encoding");
+
+    default:
+        redisPanic("Unknown object type");
+    }
+
+    return -1; /* avoid warning */
+}
+~~~
+
+
+
+### rdbSaveObject
+
+~~~c
+/* Save a Redis object. Returns -1 on error, 0 on success. 
+ *
+ * 将给定对象 o 保存到 rdb 中。
+ *
+ * 保存成功返回 rdb 保存该对象所需的字节数 ，失败返回 0 。
+ *
+ * p.s.上面原文注释所说的返回值是不正确的
+ */
+int rdbSaveObject(rio *rdb, robj *o) {
+    int n, nwritten = 0;
+
+    // 保存字符串对象
+    if (o->type == REDIS_STRING) {
+        /* Save a string value */
+        if ((n = rdbSaveStringObject(rdb,o)) == -1) return -1;
+        nwritten += n;
+
+    // 保存列表对象
+    } else if (o->type == REDIS_LIST) {
+        /* Save a list value */
+        if (o->encoding == REDIS_ENCODING_ZIPLIST) {
+            size_t l = ziplistBlobLen((unsigned char*)o->ptr);
+
+            // 以字符串对象的形式保存整个 ZIPLIST 列表
+            if ((n = rdbSaveRawString(rdb,o->ptr,l)) == -1) return -1;
+            nwritten += n;
+        } else if (o->encoding == REDIS_ENCODING_LINKEDLIST) {
+            list *list = o->ptr;
+            listIter li;
+            listNode *ln;
+
+            if ((n = rdbSaveLen(rdb,listLength(list))) == -1) return -1;
+            nwritten += n;
+
+            // 遍历所有列表项
+            listRewind(list,&li);
+            while((ln = listNext(&li))) {
+                robj *eleobj = listNodeValue(ln);
+                // 以字符串对象的形式保存列表项
+                if ((n = rdbSaveStringObject(rdb,eleobj)) == -1) return -1;
+                nwritten += n;
+            }
+        } else {
+            redisPanic("Unknown list encoding");
+        }
+
+    // 保存集合对象
+    } else if (o->type == REDIS_SET) {
+        /* Save a set value */
+        if (o->encoding == REDIS_ENCODING_HT) {
+            dict *set = o->ptr;
+            dictIterator *di = dictGetIterator(set);
+            dictEntry *de;
+
+            if ((n = rdbSaveLen(rdb,dictSize(set))) == -1) return -1;
+            nwritten += n;
+
+            // 遍历集合成员
+            while((de = dictNext(di)) != NULL) {
+                robj *eleobj = dictGetKey(de);
+                // 以字符串对象的方式保存成员
+                if ((n = rdbSaveStringObject(rdb,eleobj)) == -1) return -1;
+                nwritten += n;
+            }
+            dictReleaseIterator(di);
+        } else if (o->encoding == REDIS_ENCODING_INTSET) {
+            size_t l = intsetBlobLen((intset*)o->ptr);
+
+            // 以字符串对象的方式保存整个 INTSET 集合
+            if ((n = rdbSaveRawString(rdb,o->ptr,l)) == -1) return -1;
+            nwritten += n;
+        } else {
+            redisPanic("Unknown set encoding");
+        }
+
+    // 保存有序集对象
+    } else if (o->type == REDIS_ZSET) {
+        /* Save a sorted set value */
+        if (o->encoding == REDIS_ENCODING_ZIPLIST) {
+            size_t l = ziplistBlobLen((unsigned char*)o->ptr);
+
+            // 以字符串对象的形式保存整个 ZIPLIST 有序集
+            if ((n = rdbSaveRawString(rdb,o->ptr,l)) == -1) return -1;
+            nwritten += n;
+        } else if (o->encoding == REDIS_ENCODING_SKIPLIST) {
+            zset *zs = o->ptr;
+            dictIterator *di = dictGetIterator(zs->dict);
+            dictEntry *de;
+
+            if ((n = rdbSaveLen(rdb,dictSize(zs->dict))) == -1) return -1;
+            nwritten += n;
+
+            // 遍历有序集
+            while((de = dictNext(di)) != NULL) {
+                robj *eleobj = dictGetKey(de);
+                double *score = dictGetVal(de);
+
+                // 以字符串对象的形式保存集合成员
+                if ((n = rdbSaveStringObject(rdb,eleobj)) == -1) return -1;
+                nwritten += n;
+
+                // 成员分值（一个双精度浮点数）会被转换成字符串
+                // 然后保存到 rdb 中
+                if ((n = rdbSaveDoubleValue(rdb,*score)) == -1) return -1;
+                nwritten += n;
+            }
+            dictReleaseIterator(di);
+        } else {
+            redisPanic("Unknown sorted set encoding");
+        }
+
+    // 保存哈希表
+    } else if (o->type == REDIS_HASH) {
+
+        /* Save a hash value */
+        if (o->encoding == REDIS_ENCODING_ZIPLIST) {
+            size_t l = ziplistBlobLen((unsigned char*)o->ptr);
+
+            // 以字符串对象的形式保存整个 ZIPLIST 哈希表
+            if ((n = rdbSaveRawString(rdb,o->ptr,l)) == -1) return -1;
+            nwritten += n;
+
+        } else if (o->encoding == REDIS_ENCODING_HT) {
+            dictIterator *di = dictGetIterator(o->ptr);
+            dictEntry *de;
+
+            if ((n = rdbSaveLen(rdb,dictSize((dict*)o->ptr))) == -1) return -1;
+            nwritten += n;
+
+            // 迭代字典
+            while((de = dictNext(di)) != NULL) {
+                robj *key = dictGetKey(de);
+                robj *val = dictGetVal(de);
+
+                // 键和值都以字符串对象的形式来保存
+                if ((n = rdbSaveStringObject(rdb,key)) == -1) return -1;
+                nwritten += n;
+                if ((n = rdbSaveStringObject(rdb,val)) == -1) return -1;
+                nwritten += n;
+            }
+            dictReleaseIterator(di);
+
+        } else {
+            redisPanic("Unknown hash encoding");
+        }
+
+    } else {
+        redisPanic("Unknown object type");
+    }
+
+    return nwritten;
+}
+~~~
+
+
+
+得到：
+
+>  遍历这个结构，然后获取每个元素顺序存起来
+
+
+
+
+
+~~~c
+/* Write a sequence of commands able to fully rebuild the dataset into
+ * "filename". Used both by REWRITEAOF and BGREWRITEAOF.
+ *
+ * 将一集足以还原当前数据集的命令写入到 filename 指定的文件中。
+ *
+ * 这个函数被 REWRITEAOF 和 BGREWRITEAOF 两个命令调用。
+ * （REWRITEAOF 似乎已经是一个废弃的命令）
+ *
+ * In order to minimize the number of commands needed in the rewritten
+ * log Redis uses variadic commands when possible, such as RPUSH, SADD
+ * and ZADD. However at max REDIS_AOF_REWRITE_ITEMS_PER_CMD items per time
+ * are inserted using a single command. 
+ *
+ * 为了最小化重建数据集所需执行的命令数量，
+ * Redis 会尽可能地使用接受可变参数数量的命令，比如 RPUSH 、SADD 和 ZADD 等。
+ *
+ * 不过单个命令每次处理的元素数量不能超过 REDIS_AOF_REWRITE_ITEMS_PER_CMD 。
+ */
+int rewriteAppendOnlyFile(char *filename) {
+   
+ if (o->type == REDIS_STRING) {
+                /* Emit a SET command */
+                char cmd[]="*3\r\n$3\r\nSET\r\n";
+                if (rioWrite(&aof,cmd,sizeof(cmd)-1) == 0) goto werr;
+                /* Key and value */
+                if (rioWriteBulkObject(&aof,&key) == 0) goto werr;
+                if (rioWriteBulkObject(&aof,o) == 0) goto werr;
+            } else if (o->type == REDIS_LIST) {
+                if (rewriteListObject(&aof,&key,o) == 0) goto werr;
+            } else if (o->type == REDIS_SET) {
+                if (rewriteSetObject(&aof,&key,o) == 0) goto werr;
+            } else if (o->type == REDIS_ZSET) {
+                if (rewriteSortedSetObject(&aof,&key,o) == 0) goto werr;
+            } else if (o->type == REDIS_HASH) {
+                if (rewriteHashObject(&aof,&key,o) == 0) goto werr;
+            } else {
+                redisPanic("Unknown object type");
+            }
+~~~
+
+
+
+### AOF
+
+- 你不可能写入个key ，做一次快照，系统也收不了呀？如果一直写呢
+
+1. AOF 文件写入流程
+   - 客户度请求写入aof_buf 
+   - 文本事件和网络事件循环处理
+
+
+
+2. AOF and RDB persistence can be enabled at the same time without problems.
+
+3 AOF 重写
+
+我一直以为是对历史的aof文件进行整理感到困惑，自己一直想不通历史aof 文件不能随机
+
+前后运动。排序等操作，不然怎么合并
+
+现在aof重写 直接从内存读取，然后copy一次的。
+
+4、 bgrewriteaof",bgrewriteaofCommand,
+
+
+
+AOF 重写事件 属于 redis AE循环事件吗？
+
+真正情况是我不清楚，不知道。但
+
+但是你意识上，对别表述上 把当成定时事件了。
+
+最后造成天壤之别的 理解，完全理解错误了。
+
+不清楚，然后想当然做法，让停止过去无法进步。
+
+说明：不敢独自探索，完全听别人告诉什么是什么。
+
+网上文章怎么说技术什么。
+
+---起码停下来，思考，不着急回答，
+
+浮躁心理，感觉太难自己跳过了
+
+忽视很多东西。
+
+你任务不可能不管用。
+
+
+
+
+
+
+
+## 8.3 蚊帐
+
+https://redis.io/topics/persistence
+
+
+
+# 解密Redis持久化
+
+https://justjavac.com/nosql/2012/04/13/redis-persistence-demystified.html
+
+https://justjavac.com/nosql/2012/04/13/redis-persistence-demystified.html
+
+同时，Redis的RDB文件也是Redis主从同步内部实现中的一环。
+
+但是，我们可以很明显的看到，RDB有他的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的，从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。在某些业务下，这是可以忍受的，我们也推荐这些业务使用RDB的方式进行持久化，因为开启RDB的代价并不高。但是对于另外一些对数据安全性要求极高的应用，无法容忍数据丢失的应用，RDB就无能为力了，所以Redis引入了另一个重要的持久化机制：AOF 日志。
+
+
+
+
+
 ## 参考
+
+
 
 
 
