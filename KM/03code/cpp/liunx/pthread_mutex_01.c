@@ -2,12 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-//https://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_mutex_lock.html
 
-//本线程 反复加锁出现什么情况
-//https://linux.die.net/man/3/pthread_mutexattr_settype
-// PTHREAD_MUTEX_NORMAL deadlock 
-// PTHREAD_MUTEX_ERRORCHECK err
 int myglobal;
 pthread_mutex_t mymutex=PTHREAD_MUTEX_INITIALIZER;
 
@@ -20,12 +15,9 @@ void *thread_function(void *arg)
     //https://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_mutex_lock.html
     if (pthread_mutex_lock(&mymutex) >0)
     {
-      cout<<"lock success"<<endl;
+    
     }else
     {
-      // [EBUSY] The mutex could not be acquired because it was already locked.
-      //[EAGAIN] The mutex could not be acquired because the maximum number of recursive locks for mutex has been exceede
-      //https://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_mutex_lock.html
     }
     
     

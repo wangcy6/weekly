@@ -345,9 +345,71 @@ https://github.com/PeterRK/DSGO/blob/master/book/pages/08-A.md
 
 
 
-# 
+- 看1个文章 关于linux进程间的close-on-exec机制
+
+https://unix.stackexchange.com/questions/248408/file-descriptors-across-exec
+
+O_CLOEXEC 
+
+FD_CLOEXEC
+
+，一般我们会调用exec执行另一个程序，此时会用全新的程序替换子进程的正文，数据，堆和栈等。此时保存文件描述符的变量当然也不存在了，我们就无法关闭无用的文件描述符了。所以通常我们会fork子进程后在子进程中直接执行close关掉无用的文件描述符，然后再执行exec
 
 
+
+rk子进程中执行exec的时候，会清理掉父进程创建的socket。
+
+```javascript
+#ifdef WIN32
+	SOCKET ss = ::socket(PF_INET, SOCK_STREAM, 0);
+#else
+	SOCKET ss = ::socket(PF_INET, SOCK_STREAM | SOCK_CLOEXEC, 0);
+#endif
+
+在 fork 子进程中执行 exec 的时候，会清理掉父进程创建的 socket。
+
+```
+
+ 当然，其他的文件描述符也有类似的功能，例如文件，可以在打开的时候使用O_CLOEXEC标识（linux 2.6.23才开始支持此标记），达到和上面一样的效果。或者使用系统的fcntl函数设置FD_CLOEXEC即可。
+
+```javascript
+//方案A
+int fd = open(“foo.txt”,O_RDONLY);
+int flags = fcntl(fd, F_GETFD);
+flags |= FD_CLOEXEC;
+fcntl(fd, F_SETFD, flags);
+//方案B，linux 2.6.23后支持
+int fd = open(“foo.txt”,O_RDONLY | O_CLOEXEC);
+```
+
+这个句柄我在fork子进程后执行exec时就关闭”。其实时有这样的方法的：即所谓 的 close-on-exec。
+
+
+
+# [what is the purpose to set SOCK_CLOEXEC flag with accept4() same as O_CLOEXEC](https://stackoverflow.com/questions/22304631/what-is-the-purpose-to-set-sock-cloexec-flag-with-accept4-same-as-o-cloexec)
+
+
+
+*SOCK_CLOEXEC* : 为新打开的文件描述符设置 FD_CLOEXEC 标志位，该标志位的作用是在进程使用 fork() 加上 execve() 的时候自动关闭打开的
+
+
+
+- 看2个文章：[Share a file descriptor between parent and child after fork and exec](https://stackoverflow.com/questions/21512334/share-a-file-descriptor-between-parent-and-child-after-fork-and-exec)
+
+记录：
+
+通过fork 传递文件描述符
+
+```
+File descriptors are always passed between a parent and child process
+```
+
+# 2  线程
+
+
+
+A thread’s underlying storage can be reclaimed immediately on
+termination if the thread has been detached.   
 
 
 
@@ -400,3 +462,94 @@ https://wooyun.js.org/drops/深入理解 glibc malloc.html)
 
 1. 动不动就 32GB 以上内存的服务器真需要关心内存碎片问题吗？
 
+
+
+# Chapter 11. Threads
+
+
+
+A single thread can exit in three ways, thereby stopping its flow of control, without
+terminating the entire process.
+
+1. The thread can simply return from the start routine. The return value is the
+   thread’s exit code.
+
+2. The thread can be canceled by another thread in the same process.
+
+   
+
+3. The thread can call pthread_exit.  
+
+
+
+### 11.6 Thread Synchronization
+
+Three states are possible with a reader–writer lock: locked in read
+mode, locked in write mode, and unlocked  
+
+
+
+# Chapter 12. Thread Control
+
+thread synchronization  
+
+12.3 Thread Attributes
+
+![image-20200219111814672](../images/201909/image-20200219111814672.png)
+
+
+
+
+
+https://stackoverflow.com/questions/39319552/what-happens-to-a-detached-thread-inside-a-forked-process-when-the-process-dies
+
+
+
+# Chapter 13. Daemon Processes
+
+
+
+## SIGHUP
+
+### SIGHUP[[编辑](https://zh.wikipedia.org/w/index.php?title=Unix信号&action=edit&section=7)]
+
+当正操作的终端终了时，将发送 SIGHUP 信号至程序。初始目的待补充翻译 现在操作系统，该信号通常意味着使用的 [虚拟终端](https://zh.wikipedia.org/wiki/虚拟终端) 已经被关闭。许多 [守护进程](https://zh.wikipedia.org/wiki/守护进程) 在接收到该信号时，会重载他们的设置和重新打开 日志文件（logfiles），而不是去退出程序。[nohup](https://zh.wikipedia.org/wiki/Nohup) 命令用于无视该信号。
+
+### SIGHUP信号的作用：
+
+比如修改了 nginx 配置文件，希望不重启 nginx 就让配置生效，可以往 nginx 进程发一个 SIGHUP信号。
+
+
+
+### 守护进程为什么要忽略SIGHUP信号？
+
+首先创建一个会话leader进程A，接着用A创建子进程B，然后退出A，之后所有进程从B创建，保证所有以后新创建进程都不是会话 leader进程（这是为了防止终端取得进程控制权而采取的保证措施），但是，由于有一个exit进程A的操作，当A退出时，会对本会话的所有进程发送 SIGHUP信号，默认操作是全部退出，而此时是在创建守护进程过程中，必须防止B收到SIGHUP而退出，否则下面的操作就无法进行，所以这里必须对 SIGHUP进行忽略！
+
+# 从实战出发，谈谈 nginx 信号集
+
+https://linux.cn/article-9141-1.html
+
+| operation  | signal                       |
+| :--------- | :--------------------------- |
+| reload     | SIGHUP                       |
+| reopen     | SIGUSR1                      |
+| stop       | SIGTERM                      |
+| quit       | SIGQUIT                      |
+| hot update | SIGUSR2 & SIGWINCH & SIGQUIT |
+
+master 进程收到 `SIGHUP` 后，会重新进行配置文件解析、共享内存申请，等一系列其他的工作，然后产生一批新的 worker 进程，最后向旧的 worker 进程发送 `SIGQUIT` 对应的消息，最终无缝实现了重启操作
+
+master 进程收到 `SIGHUP` 后，会重新进行配置文件解析、共享内存申请，等一系列其他的工作，然后产生一批新的 worker 进程，最后向旧的 worker 进程发送 `SIGQUIT` 对应的消息，最终无缝实现了重启操作
+
+另外，通过这次的经验教训和对 nginx 信号集的认知，我们认为以下几点是比较重要的：
+
+- 慎用 `nginx -s stop`，尽可能使用 `nginx -s quit`
+- 热更新之后，如果确定业务没问题，尽可能让旧的 master 进程退出
+- 关键性的信号操作完成后，等待一段时间，避免时间窗口的影响
+- 不要直接向 worker 进程发送信号
+
+[http://www.luwenpeng.cn/2018/11/24/nginx%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8/](http://www.luwenpeng.cn/2018/11/24/nginx信号处理原理及应用/)
+
+https://www.freebsd.org/doc/zh_CN/books/handbook/basics-daemons.html
+
+http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html

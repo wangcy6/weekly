@@ -5,7 +5,6 @@
 # 特色：依赖 linux 让 crontab  -e
 # 0 18 * * * sh /home/code/weekly/autoCommit.sh
 #--------------------------------------------
-cd /home/code/weekly
 git pull
 git add -A .
 git commit -m "update"

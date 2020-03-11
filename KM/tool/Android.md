@@ -140,7 +140,7 @@ Android Studio连接网易MuMu模拟器
 1. AndroidStudio的命令行工具里面输入命令
     adb connect 127.0.0.1:7555
 
-
+adb install -t D:\MySDKDemo_.apk
 ```
 
 2.2 *Android Studio*连接真机

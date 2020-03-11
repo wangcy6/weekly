@@ -1,0 +1,604 @@
+---- shared_ptr Matches (632 in 118 files) ----
+abi_test_lib.cpp (smart_ptr-develop\test) line 8 : #include <boost/shared_ptr.hpp>
+abi_test_lib.cpp (smart_ptr-develop\test) line 24 : void abi_test_1( boost::shared_ptr<void> & p )
+abi_test_lib.cpp (smart_ptr-develop\test) line 33 : boost::shared_ptr<void> abi_test_2( boost::shared_ptr<void> const & p )
+abi_test_lib.cpp (smart_ptr-develop\test) line 40 : boost::shared_ptr<void> abi_test_3()
+abi_test_lib.cpp (smart_ptr-develop\test) line 42 :     return boost::shared_ptr<void>( static_cast<int*>( 0 ) );
+abi_test_main.cpp (smart_ptr-develop\test) line 8 : #include <boost/shared_ptr.hpp>
+abi_test_main.cpp (smart_ptr-develop\test) line 24 : void abi_test_1( boost::shared_ptr<void> & p );
+abi_test_main.cpp (smart_ptr-develop\test) line 25 : boost::shared_ptr<void> abi_test_2( boost::shared_ptr<void> const & p );
+abi_test_main.cpp (smart_ptr-develop\test) line 26 : boost::shared_ptr<void> abi_test_3();
+abi_test_main.cpp (smart_ptr-develop\test) line 40 :         boost::shared_ptr<void> p( static_cast<void*>( 0 ), deleter );
+abi_test_main.cpp (smart_ptr-develop\test) line 53 :         boost::shared_ptr<void> p1( static_cast<void*>( 0 ), deleter );
+abi_test_main.cpp (smart_ptr-develop\test) line 57 :         boost::shared_ptr<void> p2 = abi_test_2( p1 );
+abi_test_main.cpp (smart_ptr-develop\test) line 72 :         boost::shared_ptr<void> p = abi_test_3();
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 12 : #include <boost/smart_ptr/local_shared_ptr.hpp>
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 72 :     local_shared_ptr<T> >::type
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 86 :     return local_shared_ptr<T>(detail::lsp_internal_constructor_tag(), start,
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 92 :     local_shared_ptr<T> >::type
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 109 :     return local_shared_ptr<T>(detail::lsp_internal_constructor_tag(), start,
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 115 :     local_shared_ptr<T> >::type
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 130 :     return local_shared_ptr<T>(detail::lsp_internal_constructor_tag(), start,
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 136 :     local_shared_ptr<T> >::type
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 154 :     return local_shared_ptr<T>(detail::lsp_internal_constructor_tag(), start,
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 160 :     local_shared_ptr<T> >::type
+allocate_local_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 169 :     local_shared_ptr<T> >::type
+allocate_local_shared_arrays_test.cpp (smart_ptr-develop\test) line 55 :         boost::local_shared_ptr<int[][2]> result =
+allocate_local_shared_arrays_test.cpp (smart_ptr-develop\test) line 63 :         boost::local_shared_ptr<int[2][2]> result =
+allocate_local_shared_arrays_test.cpp (smart_ptr-develop\test) line 71 :         boost::local_shared_ptr<const int[][2]> result =
+allocate_local_shared_arrays_test.cpp (smart_ptr-develop\test) line 79 :         boost::local_shared_ptr<const int[2][2]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 87 :         boost::local_shared_ptr<type[]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 96 :         boost::local_shared_ptr<type[3]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 105 :         boost::local_shared_ptr<type[][2]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 114 :         boost::local_shared_ptr<type[2][2]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 123 :         boost::local_shared_ptr<const type[]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 132 :         boost::local_shared_ptr<const type[3]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 141 :         boost::local_shared_ptr<const type[][2]> result =
+allocate_local_shared_array_construct_test.cpp (smart_ptr-develop\test) line 150 :         boost::local_shared_ptr<const type[2][2]> result =
+allocate_local_shared_array_esft_test.cpp (smart_ptr-develop\test) line 76 :         boost::local_shared_ptr<type[]> result =
+allocate_local_shared_array_esft_test.cpp (smart_ptr-develop\test) line 87 :         boost::local_shared_ptr<type[]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 87 :         boost::local_shared_ptr<int[]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 95 :         boost::local_shared_ptr<int[3]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 103 :         boost::local_shared_ptr<int[][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 111 :         boost::local_shared_ptr<int[2][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 119 :         boost::local_shared_ptr<const int[]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 127 :         boost::local_shared_ptr<const int[3]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 135 :         boost::local_shared_ptr<const int[][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 143 :         boost::local_shared_ptr<const int[2][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 151 :         boost::local_shared_ptr<type[]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 163 :         boost::local_shared_ptr<type[3]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 175 :         boost::local_shared_ptr<type[][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 187 :         boost::local_shared_ptr<type[2][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 199 :         boost::local_shared_ptr<const type[]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 211 :         boost::local_shared_ptr<const type[3]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 223 :         boost::local_shared_ptr<const type[][2]> result =
+allocate_local_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 236 :         boost::local_shared_ptr<const type[2][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 87 :         boost::local_shared_ptr<int[]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 98 :         boost::local_shared_ptr<int[3]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 109 :         boost::local_shared_ptr<int[][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 121 :         boost::local_shared_ptr<int[2][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 133 :         boost::local_shared_ptr<const int[]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 144 :         boost::local_shared_ptr<const int[3]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 155 :         boost::local_shared_ptr<const int[][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 167 :         boost::local_shared_ptr<const int[2][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 179 :         boost::local_shared_ptr<type[]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 191 :         boost::local_shared_ptr<type[3]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 203 :         boost::local_shared_ptr<type[][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 214 :         boost::local_shared_ptr<type[2][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 225 :         boost::local_shared_ptr<const type[]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 236 :         boost::local_shared_ptr<const type[3]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 247 :         boost::local_shared_ptr<const type[][2]> result =
+allocate_local_shared_array_test.cpp (smart_ptr-develop\test) line 258 :         boost::local_shared_ptr<const type[2][2]> result =
+allocate_local_shared_array_value_test.cpp (smart_ptr-develop\test) line 54 :         boost::local_shared_ptr<int[]> result =
+allocate_local_shared_array_value_test.cpp (smart_ptr-develop\test) line 62 :         boost::local_shared_ptr<int[4]> result =
+allocate_local_shared_array_value_test.cpp (smart_ptr-develop\test) line 70 :         boost::local_shared_ptr<const int[]> result =
+allocate_local_shared_array_value_test.cpp (smart_ptr-develop\test) line 78 :         boost::local_shared_ptr<const int[4]> result =
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 21 : #include <boost/shared_ptr.hpp>
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 54 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>() );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 59 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 76 :         boost::shared_ptr< X > px = boost::allocate_local_shared_noinit< X >( std::allocator<void>() );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 81 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 98 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 103 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 120 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 125 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 142 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 147 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 164 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 169 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 186 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 191 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 208 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 213 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 230 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 235 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 252 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 257 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 274 :         boost::shared_ptr< X > px = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+allocate_local_shared_esft_test.cpp (smart_ptr-develop\test) line 279 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 21 : #include <boost/smart_ptr/local_shared_ptr.hpp>
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 68 :         boost::local_shared_ptr< int > pi = boost::allocate_local_shared< int >( std::allocator<int>() );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 75 :         boost::local_shared_ptr< int > pi = boost::allocate_local_shared_noinit< int >( std::allocator<int>() );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 81 :         boost::local_shared_ptr< int > pi = boost::allocate_local_shared< int >( std::allocator<int>(), 5 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 90 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>() );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 103 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared_noinit< X >( std::allocator<void>() );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 116 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 129 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 142 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 155 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 168 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 181 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 194 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 207 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_local_shared_test.cpp (smart_ptr-develop\test) line 220 :         boost::local_shared_ptr< X > pi = boost::allocate_local_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 13 : #include <boost/shared_ptr.hpp>
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 86 :         boost::shared_ptr< int > pi = boost::allocate_shared< int >( cxx11_allocator<int>() );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 93 :         boost::shared_ptr< int > pi = boost::allocate_shared< int >( cxx11_allocator<int>(), 5 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 102 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>() );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 115 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 128 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 141 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 154 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 167 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 180 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 193 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 206 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_shared_alloc11_test.cpp (smart_ptr-develop\test) line 219 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 13 : #include <boost/smart_ptr/shared_ptr.hpp>
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 271 : inline typename enable_if_<is_unbounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 283 :     return shared_ptr<T>(detail::sp_internal_constructor_tag(), start,
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 288 : inline typename enable_if_<is_bounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 303 :     return shared_ptr<T>(detail::sp_internal_constructor_tag(), start,
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 308 : inline typename enable_if_<is_unbounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 321 :     return shared_ptr<T>(detail::sp_internal_constructor_tag(), start,
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 326 : inline typename enable_if_<is_bounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 342 :     return shared_ptr<T>(detail::sp_internal_constructor_tag(), start,
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 347 : inline typename enable_if_<is_unbounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_array.hpp (smart_ptr-develop\include\boost\smart_ptr) line 354 : inline typename enable_if_<is_bounded_array<T>::value, shared_ptr<T> >::type
+allocate_shared_arrays_test.cpp (smart_ptr-develop\test) line 53 :         boost::shared_ptr<int[][2]> result =
+allocate_shared_arrays_test.cpp (smart_ptr-develop\test) line 61 :         boost::shared_ptr<int[2][2]> result =
+allocate_shared_arrays_test.cpp (smart_ptr-develop\test) line 69 :         boost::shared_ptr<const int[][2]> result =
+allocate_shared_arrays_test.cpp (smart_ptr-develop\test) line 77 :         boost::shared_ptr<const int[2][2]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 85 :         boost::shared_ptr<type[]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 94 :         boost::shared_ptr<type[3]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 103 :         boost::shared_ptr<type[][2]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 112 :         boost::shared_ptr<type[2][2]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 121 :         boost::shared_ptr<const type[]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 130 :         boost::shared_ptr<const type[3]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 139 :         boost::shared_ptr<const type[][2]> result =
+allocate_shared_array_construct_test.cpp (smart_ptr-develop\test) line 148 :         boost::shared_ptr<const type[2][2]> result =
+allocate_shared_array_esft_test.cpp (smart_ptr-develop\test) line 73 :         boost::shared_ptr<type[]> result =
+allocate_shared_array_esft_test.cpp (smart_ptr-develop\test) line 84 :         boost::shared_ptr<type[]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 84 :         boost::shared_ptr<int[]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 92 :         boost::shared_ptr<int[3]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 100 :         boost::shared_ptr<int[][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 108 :         boost::shared_ptr<int[2][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 116 :         boost::shared_ptr<const int[]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 124 :         boost::shared_ptr<const int[3]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 132 :         boost::shared_ptr<const int[][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 140 :         boost::shared_ptr<const int[2][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 148 :         boost::shared_ptr<type[]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 160 :         boost::shared_ptr<type[3]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 172 :         boost::shared_ptr<type[][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 184 :         boost::shared_ptr<type[2][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 196 :         boost::shared_ptr<const type[]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 208 :         boost::shared_ptr<const type[3]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 220 :         boost::shared_ptr<const type[][2]> result =
+allocate_shared_array_noinit_test.cpp (smart_ptr-develop\test) line 233 :         boost::shared_ptr<const type[2][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 84 :         boost::shared_ptr<int[]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 95 :         boost::shared_ptr<int[3]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 106 :         boost::shared_ptr<int[][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 118 :         boost::shared_ptr<int[2][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 130 :         boost::shared_ptr<const int[]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 141 :         boost::shared_ptr<const int[3]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 152 :         boost::shared_ptr<const int[][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 164 :         boost::shared_ptr<const int[2][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 176 :         boost::shared_ptr<type[]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 188 :         boost::shared_ptr<type[3]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 200 :         boost::shared_ptr<type[][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 211 :         boost::shared_ptr<type[2][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 222 :         boost::shared_ptr<const type[]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 233 :         boost::shared_ptr<const type[3]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 244 :         boost::shared_ptr<const type[][2]> result =
+allocate_shared_array_test.cpp (smart_ptr-develop\test) line 255 :         boost::shared_ptr<const type[2][2]> result =
+allocate_shared_array_value_test.cpp (smart_ptr-develop\test) line 51 :         boost::shared_ptr<int[]> result =
+allocate_shared_array_value_test.cpp (smart_ptr-develop\test) line 59 :         boost::shared_ptr<int[4]> result =
+allocate_shared_array_value_test.cpp (smart_ptr-develop\test) line 67 :         boost::shared_ptr<const int[]> result =
+allocate_shared_array_value_test.cpp (smart_ptr-develop\test) line 75 :         boost::shared_ptr<const int[4]> result =
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 13 : #include <boost/shared_ptr.hpp>
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 101 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>() );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 114 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 127 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 140 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 153 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 166 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 179 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 192 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 205 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_shared_construct11_test.cpp (smart_ptr-develop\test) line 218 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( cxx11_allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 11 : #include <boost/shared_ptr.hpp>
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 44 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>() );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 49 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 66 :         boost::shared_ptr< X > px = boost::allocate_shared_noinit< X >( std::allocator<void>() );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 71 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 88 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 93 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 110 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 115 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 132 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 137 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 154 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 159 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 176 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 181 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 198 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 203 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 220 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 225 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 242 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 247 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 264 :         boost::shared_ptr< X > px = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+allocate_shared_esft_test.cpp (smart_ptr-develop\test) line 269 :             boost::shared_ptr< X > qx = px->shared_from_this();
+allocate_shared_test.cpp (smart_ptr-develop\test) line 11 : #include <boost/shared_ptr.hpp>
+allocate_shared_test.cpp (smart_ptr-develop\test) line 58 :         boost::shared_ptr< int > pi = boost::allocate_shared< int >( std::allocator<int>() );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 65 :         boost::shared_ptr< int > pi = boost::allocate_shared_noinit< int >( std::allocator<int>() );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 71 :         boost::shared_ptr< int > pi = boost::allocate_shared< int >( std::allocator<int>(), 5 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 80 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>() );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 93 :         boost::shared_ptr< X > pi = boost::allocate_shared_noinit< X >( std::allocator<void>() );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 106 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 119 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 132 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 145 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 158 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 171 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 184 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 197 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8 );
+allocate_shared_test.cpp (smart_ptr-develop\test) line 210 :         boost::shared_ptr< X > pi = boost::allocate_shared< X >( std::allocator<void>(), 1, 2, 3, 4, 5, 6, 7, 8, 9 );
+AppManager.h (chenshuo\muduo-protorpc\examples\zurg\slave) line 7 : #include <boost/shared_ptr.hpp>
+AppManager.h (chenshuo\muduo-protorpc\examples\zurg\slave) line 27 : //typedef boost::shared_ptr<Application> ApplicationPtr;
+AppManager.h (chenshuo\muduo-protorpc\examples\zurg\slave) line 29 : typedef boost::shared_ptr<Process> ProcessPtr;
+array_fail_ap_spa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_ap_spa_a.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X[]> px2; px2 = px;
+array_fail_ap_spa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_ap_spa_c.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X[]> px2( px );
+array_fail_ap_spa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_ap_spa_ma.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2; px2 = std::auto_ptr<X>();
+array_fail_ap_spa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_ap_spa_mc.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2(( std::auto_ptr<X>() ));
+array_fail_array_access.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_array_access.cpp (smart_ptr-develop\test) line 21 :     boost::shared_ptr<X> px( new X );
+array_fail_dereference.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_dereference.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X[]> px( new X[ 1 ] );
+array_fail_member_access.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_member_access.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px( new X[ 1 ] );
+array_fail_spa_spa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_spa_a.cpp (smart_ptr-develop\test) line 21 :     boost::shared_ptr<Y[]> px;
+array_fail_spa_spa_a.cpp (smart_ptr-develop\test) line 22 :     boost::shared_ptr<X[]> px2; px2 = px;
+array_fail_spa_spa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_spa_c.cpp (smart_ptr-develop\test) line 21 :     boost::shared_ptr<Y[]> px;
+array_fail_spa_spa_c.cpp (smart_ptr-develop\test) line 22 :     boost::shared_ptr<X[]> px2( px );
+array_fail_spa_spa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_spa_ma.cpp (smart_ptr-develop\test) line 21 :     boost::shared_ptr<X[]> px2; px2 = boost::shared_ptr<Y[]>();
+array_fail_spa_spa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_spa_mc.cpp (smart_ptr-develop\test) line 21 :     boost::shared_ptr<X[]> px2(( boost::shared_ptr<Y[]>() ));
+array_fail_spa_sp_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_sp_a.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X[]> px;
+array_fail_spa_sp_a.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px2; px2 = px;
+array_fail_spa_sp_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_sp_c.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X[]> px;
+array_fail_spa_sp_c.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px2( px );
+array_fail_spa_sp_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_sp_ma.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X> px2; px2 = boost::shared_ptr<X[]>();
+array_fail_spa_sp_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_sp_mc.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X> px2(( boost::shared_ptr<X[]>() ));
+array_fail_spa_wpa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wpa_a.cpp (smart_ptr-develop\test) line 22 :     boost::shared_ptr<Y[]> px;
+array_fail_spa_wpa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wpa_c.cpp (smart_ptr-develop\test) line 22 :     boost::shared_ptr<Y[]> px;
+array_fail_spa_wpa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wpa_ma.cpp (smart_ptr-develop\test) line 22 :     boost::weak_ptr<X[]> px2; px2 = boost::shared_ptr<Y[]>();
+array_fail_spa_wpa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wpa_mc.cpp (smart_ptr-develop\test) line 22 :     boost::weak_ptr<X[]> px2(( boost::shared_ptr<Y[]>() ));
+array_fail_spa_wp_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wp_a.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px;
+array_fail_spa_wp_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wp_c.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px;
+array_fail_spa_wp_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wp_ma.cpp (smart_ptr-develop\test) line 18 :     boost::weak_ptr<X> px2; px2 = boost::shared_ptr<X[]>();
+array_fail_spa_wp_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_spa_wp_mc.cpp (smart_ptr-develop\test) line 18 :     boost::weak_ptr<X> px2(( boost::shared_ptr<X[]>() ));
+array_fail_sp_spa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_spa_a.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X> px;
+array_fail_sp_spa_a.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2; px2 = px;
+array_fail_sp_spa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_spa_c.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X> px;
+array_fail_sp_spa_c.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2( px );
+array_fail_sp_spa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_spa_ma.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X[]> px2; px2 = boost::shared_ptr<X>();
+array_fail_sp_spa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_spa_mc.cpp (smart_ptr-develop\test) line 17 :     boost::shared_ptr<X[]> px2(( boost::shared_ptr<X>() ));
+array_fail_sp_wpa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_wpa_a.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px;
+array_fail_sp_wpa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_wpa_c.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px;
+array_fail_sp_wpa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_wpa_ma.cpp (smart_ptr-develop\test) line 18 :     boost::weak_ptr<X[]> px2; px2 = boost::shared_ptr<X>();
+array_fail_sp_wpa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_sp_wpa_mc.cpp (smart_ptr-develop\test) line 18 :     boost::weak_ptr<X[]> px2(( boost::shared_ptr<X>() ));
+array_fail_upa_sp_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_upa_sp_a.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X> px2; px2 = px;
+array_fail_upa_sp_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_upa_sp_c.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X> px2( px );
+array_fail_upa_sp_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_upa_sp_ma.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px2; px2 = std::unique_ptr<X[]>();
+array_fail_upa_sp_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_upa_sp_mc.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X> px2(( std::unique_ptr<X[]>() ));
+array_fail_up_spa_a.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_up_spa_a.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X[]> px2; px2 = px;
+array_fail_up_spa_c.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_up_spa_c.cpp (smart_ptr-develop\test) line 19 :     boost::shared_ptr<X[]> px2( px );
+array_fail_up_spa_ma.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_up_spa_ma.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2; px2 = std::unique_ptr<X>();
+array_fail_up_spa_mc.cpp (smart_ptr-develop\test) line 9 : #include <boost/shared_ptr.hpp>
+array_fail_up_spa_mc.cpp (smart_ptr-develop\test) line 18 :     boost::shared_ptr<X[]> px2(( std::unique_ptr<X>() ));
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 1 : #ifndef BOOST_SMART_PTR_ATOMIC_SHARED_PTR_HPP_INCLUDED
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 2 : #define BOOST_SMART_PTR_ATOMIC_SHARED_PTR_HPP_INCLUDED
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 5 : //  atomic_shared_ptr.hpp
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 16 : #include <boost/smart_ptr/shared_ptr.hpp>
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 23 : template<class T> class atomic_shared_ptr
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 27 :     boost::shared_ptr<T> p_;
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 31 :     atomic_shared_ptr(const atomic_shared_ptr&);
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 32 :     atomic_shared_ptr& operator=(const atomic_shared_ptr&);
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 36 :     bool compare_exchange( shared_ptr<T>& v, shared_ptr<T> w ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 49 :             shared_ptr<T> tmp( p_ );
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 62 :     constexpr atomic_shared_ptr() BOOST_SP_NOEXCEPT: l_ BOOST_DETAIL_SPINLOCK_INIT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 66 :     atomic_shared_ptr( shared_ptr<T> p ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 73 :     atomic_shared_ptr() BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 79 :     atomic_shared_ptr( shared_ptr<T> p ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 92 :     atomic_shared_ptr& operator=( shared_ptr<T> r ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 105 :     shared_ptr<T> load() const BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 111 :     template<class M> shared_ptr<T> load( M ) const BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 117 :     operator shared_ptr<T>() const BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 123 :     void store( shared_ptr<T> r ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 129 :     template<class M> void store( shared_ptr<T> r, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 135 :     shared_ptr<T> exchange( shared_ptr<T> r ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 153 :     template<class M> shared_ptr<T> exchange( shared_ptr<T> r, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 171 :     template<class M> bool compare_exchange_weak( shared_ptr<T>& v, const shared_ptr<T>& w, M, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 176 :     template<class M> bool compare_exchange_weak( shared_ptr<T>& v, const shared_ptr<T>& w, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 181 :     bool compare_exchange_weak( shared_ptr<T>& v, const shared_ptr<T>& w ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 186 :     template<class M> bool compare_exchange_strong( shared_ptr<T>& v, const shared_ptr<T>& w, M, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 191 :     template<class M> bool compare_exchange_strong( shared_ptr<T>& v, const shared_ptr<T>& w, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 196 :     bool compare_exchange_strong( shared_ptr<T>& v, const shared_ptr<T>& w ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 203 :     template<class M> bool compare_exchange_weak( shared_ptr<T>& v, shared_ptr<T>&& w, M, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 208 :     template<class M> bool compare_exchange_weak( shared_ptr<T>& v, shared_ptr<T>&& w, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 213 :     bool compare_exchange_weak( shared_ptr<T>& v, shared_ptr<T>&& w ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 218 :     template<class M> bool compare_exchange_strong( shared_ptr<T>& v, shared_ptr<T>&& w, M, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 223 :     template<class M> bool compare_exchange_strong( shared_ptr<T>& v, shared_ptr<T>&& w, M ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 228 :     bool compare_exchange_strong( shared_ptr<T>& v, shared_ptr<T>&& w ) BOOST_SP_NOEXCEPT
+atomic_shared_ptr.hpp (smart_ptr-develop\include\boost\smart_ptr) line 238 : #endif  // #ifndef BOOST_SMART_PTR_ATOMIC_SHARED_PTR_HPP_INCLUDED
+atomic_sp_constexpr_test.cpp (smart_ptr-develop\test) line 46 : #include <boost/smart_ptr/atomic_shared_ptr.hpp>
+atomic_sp_constexpr_test.cpp (smart_ptr-develop\test) line 60 : static boost::atomic_shared_ptr<X> p1;
+atomic_sp_constexpr_test.cpp (smart_ptr-develop\test) line 64 :     p1 = boost::shared_ptr<X>( new X );
+atomic_sp_constexpr_test.cpp (smart_ptr-develop\test) line 69 :     boost::shared_ptr<X> p2 = p1;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 12 : #include <boost/smart_ptr/atomic_shared_ptr.hpp>
+atomic_sp_test.cpp (smart_ptr-develop\test) line 29 :         boost::atomic_shared_ptr<X> apx;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 31 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 37 :     // shared_ptr constructor
+atomic_sp_test.cpp (smart_ptr-develop\test) line 40 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 41 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 43 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 50 :     // shared_ptr assignment
+atomic_sp_test.cpp (smart_ptr-develop\test) line 53 :         boost::shared_ptr<X> px0( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 54 :         boost::atomic_shared_ptr<X> apx( px0 );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 56 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 59 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 69 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 70 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 72 :         boost::shared_ptr<X> p2 = apx.load( boost::memory_order_acquire );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 79 :     // operator shared_ptr
+atomic_sp_test.cpp (smart_ptr-develop\test) line 82 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 83 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 85 :         boost::shared_ptr<X> p2 = apx;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 95 :         boost::shared_ptr<X> px0( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 96 :         boost::atomic_shared_ptr<X> apx( px0 );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 98 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 101 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 111 :         boost::shared_ptr<X> px0( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 112 :         boost::atomic_shared_ptr<X> apx( px0 );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 114 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 117 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 127 :         boost::shared_ptr<X> px0( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 128 :         boost::atomic_shared_ptr<X> apx( px0 );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 130 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 131 :         boost::shared_ptr<X> p1 = apx.exchange( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 137 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 147 :         boost::shared_ptr<X> px0( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 148 :         boost::atomic_shared_ptr<X> apx( px0 );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 150 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 151 :         boost::shared_ptr<X> p1 = apx.exchange( px, boost::memory_order_acq_rel );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 157 :         boost::shared_ptr<X> p2 = apx.load();
+atomic_sp_test.cpp (smart_ptr-develop\test) line 167 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 168 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 170 :         boost::shared_ptr<X> px2( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 171 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 186 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 187 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 189 :         boost::shared_ptr<X> px2( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 190 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 205 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 206 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 208 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 210 :         bool r = apx.compare_exchange_weak( cmp, boost::shared_ptr<X>() );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 216 :         r = apx.compare_exchange_weak( cmp, boost::shared_ptr<X>() );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 226 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 227 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 229 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 231 :         bool r = apx.compare_exchange_weak( cmp, boost::shared_ptr<X>(), boost::memory_order_seq_cst, boost::memory_order_seq_cst );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 237 :         r = apx.compare_exchange_weak( cmp, boost::shared_ptr<X>(), boost::memory_order_seq_cst, boost::memory_order_seq_cst );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 247 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 248 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 250 :         boost::shared_ptr<X> px2( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 251 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 266 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 267 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 269 :         boost::shared_ptr<X> px2( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 270 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 285 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 286 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 288 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 290 :         bool r = apx.compare_exchange_strong( cmp, boost::shared_ptr<X>() );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 296 :         r = apx.compare_exchange_strong( cmp, boost::shared_ptr<X>() );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 306 :         boost::shared_ptr<X> px( new X );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 307 :         boost::atomic_shared_ptr<X> apx( px );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 309 :         boost::shared_ptr<X> cmp;
+atomic_sp_test.cpp (smart_ptr-develop\test) line 311 :         bool r = apx.compare_exchange_strong( cmp, boost::shared_ptr<X>(), boost::memory_order_seq_cst, boost::memory_order_seq_cst );
+atomic_sp_test.cpp (smart_ptr-develop\test) line 317 :         r = apx.compare_exchange_strong( cmp, boost::shared_ptr<X>(), boost::memory_order_seq_cst, boost::memory_order_seq_cst );
+auto_ptr_lv_fail.cpp (smart_ptr-develop\test) line 11 : //  auto_ptr_lv_fail.cpp - a negative test for converting an auto_ptr to shared_ptr
+auto_ptr_lv_fail.cpp (smart_ptr-develop\test) line 20 : #include <boost/shared_ptr.hpp>
+auto_ptr_lv_fail.cpp (smart_ptr-develop\test) line 23 : void f( boost::shared_ptr<int> )
+auto_ptr_rv_test.cpp (smart_ptr-develop\test) line 21 : #include <boost/shared_ptr.hpp>
+auto_ptr_rv_test.cpp (smart_ptr-develop\test) line 57 :         boost::shared_ptr<X> p( X::create() );
+auto_ptr_rv_test.cpp (smart_ptr-develop\test) line 73 :         boost::shared_ptr<X const> p( X::create() );
+auto_ptr_rv_test.cpp (smart_ptr-develop\test) line 89 :         boost::shared_ptr<void> p( X::create() );
+auto_ptr_rv_test.cpp (smart_ptr-develop\test) line 105 :         boost::shared_ptr<void const> p( X::create() );
+Callbacks.h (chenshuo\muduo\muduo\net) line 15 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\muduo\muduo\net) line 25 : inline ::boost::shared_ptr<To> down_pointer_cast(const ::boost::shared_ptr<From>& f) {
+Callbacks.h (chenshuo\muduo\muduo\net) line 43 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s02) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s03) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s04) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s05) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s05) line 22 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s06) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s06) line 22 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s07) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s07) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s08) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s08) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s09) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s09) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s10) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s10) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s11) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s11) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s12) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s12) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Callbacks.h (chenshuo\recipes\reactor\s13) line 12 : #include <boost/shared_ptr.hpp>
+Callbacks.h (chenshuo\recipes\reactor\s13) line 23 : typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
+Channel.cc (chenshuo\muduo\muduo\net) line 41 : void Channel::tie(const boost::shared_ptr<void>& obj)
+Channel.cc (chenshuo\muduo\muduo\net) line 60 :   boost::shared_ptr<void> guard;
+Channel.h (chenshuo\muduo\muduo\net) line 16 : #include <boost/shared_ptr.hpp>
+Channel.h (chenshuo\muduo\muduo\net) line 53 :   /// Tie this channel to the owner object managed by shared_ptr,
+Channel.h (chenshuo\muduo\muduo\net) line 55 :   void tie(const boost::shared_ptr<void>&);
+client.cc (chenshuo\muduo-protorpc\examples\resolver) line 64 :   void resolved(const boost::shared_ptr<resolver::ResolveResponse>& resp, std::string host)
+client.cc (chenshuo\muduo-protorpc\examples\rpcbench2) line 68 :   void replied(const boost::shared_ptr<echo::EchoResponse>& resp)
+client.cc (chenshuo\muduo-protorpc\examples\sudoku) line 51 :   void solved(const boost::shared_ptr<sudoku::SudokuResponse>& resp)
+client.cc (chenshuo\muduo\examples\protobuf\codec) line 17 : typedef boost::shared_ptr<muduo::Empty> EmptyPtr;
+client.cc (chenshuo\muduo\examples\protobuf\codec) line 18 : typedef boost::shared_ptr<muduo::Answer> AnswerPtr;
+CMakeLists.txt (chenshuo\muduo-protorpc\muduo\protorpc2) line 13 :   ARGS -i  "/protoc_insertion_point.includes./i#include <boost/shared_ptr.hpp>" muduo/protorpc2/rpc2.pb.h
+codec.h (chenshuo\muduo\examples\protobuf\codec) line 17 : #include <boost/shared_ptr.hpp>
+codec.h (chenshuo\muduo\examples\protobuf\codec) line 30 : typedef boost::shared_ptr<google::protobuf::Message> MessagePtr;
+codec_test.cc (chenshuo\muduo\examples\protobuf\codec) line 43 :   boost::shared_ptr<muduo::Query> newQuery = down_pointer_cast<muduo::Query>(message);
+codec_test.cc (chenshuo\muduo\examples\protobuf\codec) line 70 :   boost::shared_ptr<muduo::Answer> newAnswer = down_pointer_cast<muduo::Answer>(message);
+collector_test.cpp (smart_ptr-develop\test) line 11 : #include <boost/shared_ptr.hpp>
+collector_test.cpp (smart_ptr-develop\test) line 25 :     boost::shared_ptr<X> p;
+collector_test.cpp (smart_ptr-develop\test) line 57 :     std::vector< boost::shared_ptr<X> > v1, v2;
+collector_test.cpp (smart_ptr-develop\test) line 65 :         v1.push_back(boost::shared_ptr<X>(new X));
+collector_test.cpp (smart_ptr-develop\test) line 66 :         v2.push_back(boost::shared_ptr<X>(new X));
+Connector.cc (chenshuo\muduo\muduo\net) line 141 :   // as channel_ is not managed by shared_ptr
+Connector.cc (chenshuo\recipes\reactor\s11) line 128 :   // as channel_ is not managed by shared_ptr
+Connector.cc (chenshuo\recipes\reactor\s12) line 128 :   // as channel_ is not managed by shared_ptr
+Connector.cc (chenshuo\recipes\reactor\s13) line 128 :   // as channel_ is not managed by shared_ptr
+Connector.h (chenshuo\recipes\reactor\s11) line 66 : typedef boost::shared_ptr<Connector> ConnectorPtr;
+Connector.h (chenshuo\recipes\reactor\s12) line 66 : typedef boost::shared_ptr<Connector> ConnectorPtr;
+Connector.h (chenshuo\recipes\reactor\s13) line 66 : typedef boost::shared_ptr<Connector> ConnectorPtr;
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 2 : //  cpp11_pointer_cast_test.cpp - a test for boost/pointer_cast.hpp with std::shared_ptr and std::unique_ptr
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 16 : #include <boost/shared_ptr.hpp>
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 192 :    std::shared_ptr<base> std_shared(new derived);
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 193 :    boost::shared_ptr<base> boost_shared(new derived);
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 196 :    // plain & boost::shared_ptr moving pointer_cast checks; there
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 201 :    check_all_moving_casts<boost::shared_ptr<base>>([&boost_shared]() {
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 209 :    // std::shared_ptr casts
+cpp11_pointer_cast_test.cpp (smart_ptr-develop\test) line 212 :    check_all_moving_casts<std::shared_ptr<base>>([&std_shared]() {
+Curl.cc (chenshuo\muduo\examples\curl) line 14 : static void dummy(const boost::shared_ptr<Channel>&)
+Curl.h (chenshuo\muduo\examples\curl) line 8 : #include <boost/shared_ptr.hpp>
+Curl.h (chenshuo\muduo\examples\curl) line 88 :   boost::shared_ptr<muduo::net::Channel> channel_;
+Curl.h (chenshuo\muduo\examples\curl) line 94 : typedef boost::shared_ptr<Request> RequestPtr;
+demux.cc (chenshuo\muduo\examples\multiplexer) line 19 : typedef boost::shared_ptr<TcpClient> TcpClientPtr;
+dispatcher.cc (chenshuo\recipes\protobuf) line 5 : #include <boost/shared_ptr.hpp>
+dispatcher.cc (chenshuo\recipes\protobuf) line 71 :     boost::shared_ptr<CallbackT<T> > pd(new CallbackT<T>(callback));
+dispatcher.cc (chenshuo\recipes\protobuf) line 75 :   typedef std::map<const google::protobuf::Descriptor*, boost::shared_ptr<Callback> > CallbackMap;
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 20 : #include <boost/shared_ptr.hpp>
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 27 : typedef boost::shared_ptr<google::protobuf::Message> MessagePtr;
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 46 :                                 const boost::shared_ptr<T>& message,
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 58 :     boost::shared_ptr<T> concrete = muduo::down_pointer_cast<T>(message);
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 97 :     boost::shared_ptr<CallbackT<T> > pd(new CallbackT<T>(callback));
+dispatcher.h (chenshuo\muduo\examples\protobuf\codec) line 102 :   typedef std::map<const google::protobuf::Descriptor*, boost::shared_ptr<Callback> > CallbackMap;
+dispatcher_lite.h (chenshuo\muduo\examples\protobuf\codec) line 20 : #include <boost/shared_ptr.hpp>
+dispatcher_lite.h (chenshuo\muduo\examples\protobuf\codec) line 22 : typedef boost::shared_ptr<google::protobuf::Message> MessagePtr;
+dispatcher_lite_test.cc (chenshuo\muduo\examples\protobuf\codec) line 22 :   boost::shared_ptr<muduo::Query> query = muduo::down_pointer_cast<muduo::Query>(message);
+dispatcher_lite_test.cc (chenshuo\muduo\examples\protobuf\codec) line 31 :   boost::shared_ptr<muduo::Answer> answer = muduo::down_pointer_cast<muduo::Answer>(message);
+dispatcher_lite_test.cc (chenshuo\muduo\examples\protobuf\codec) line 46 :   boost::shared_ptr<muduo::Query> query(new muduo::Query);
+dispatcher_lite_test.cc (chenshuo\muduo\examples\protobuf\codec) line 47 :   boost::shared_ptr<muduo::Answer> answer(new muduo::Answer);
+dispatcher_lite_test.cc (chenshuo\muduo\examples\protobuf\codec) line 48 :   boost::shared_ptr<muduo::Empty> empty(new muduo::Empty);
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 10 : typedef boost::shared_ptr<muduo::Query> QueryPtr;
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 11 : typedef boost::shared_ptr<muduo::Answer> AnswerPtr;
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 15 :   ::boost::shared_ptr<google::protobuf::Message> msg(new muduo::Query);
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 16 :   ::boost::shared_ptr<muduo::Query> query(muduo::down_pointer_cast<muduo::Query>(msg));
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 57 :   boost::shared_ptr<muduo::Query> query(new muduo::Query);
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 58 :   boost::shared_ptr<muduo::Answer> answer(new muduo::Answer);
+dispatcher_test.cc (chenshuo\muduo\examples\protobuf\codec) line 59 :   boost::shared_ptr<muduo::Empty> empty(new muduo::Empty);
+dll_test_lib.cpp (smart_ptr-develop\test) line 8 : #include <boost/shared_ptr.hpp>
+dll_test_lib.cpp (smart_ptr-develop\test) line 19 : EXPORT boost::shared_ptr<int> dll_test_41()
+dll_test_lib.cpp (smart_ptr-develop\test) line 21 :     return boost::shared_ptr<int>( new int( 41 ) );
+dll_test_lib.cpp (smart_ptr-develop\test) line 24 : EXPORT boost::shared_ptr<int> dll_test_42()
+dll_test_lib.cpp (smart_ptr-develop\test) line 29 : EXPORT boost::shared_ptr<int> dll_test_43()
+dll_test_lib.cpp (smart_ptr-develop\test) line 34 : EXPORT boost::shared_ptr<int[]> dll_test_44()
+dll_test_lib.cpp (smart_ptr-develop\test) line 39 : EXPORT boost::shared_ptr<int[]> dll_test_45()
+dll_test_main.cpp (smart_ptr-develop\test) line 8 : #include <boost/shared_ptr.hpp>
+dll_test_main.cpp (smart_ptr-develop\test) line 11 : boost::shared_ptr<int> dll_test_41();
+dll_test_main.cpp (smart_ptr-develop\test) line 12 : boost::shared_ptr<int> dll_test_42();
+dll_test_main.cpp (smart_ptr-develop\test) line 13 : boost::shared_ptr<int> dll_test_43();
+dll_test_main.cpp (smart_ptr-develop\test) line 14 : boost::shared_ptr<int[]> dll_test_44();
+dll_test_main.cpp (smart_ptr-develop\test) line 15 : boost::shared_ptr<int[]> dll_test_45();
+dll_test_main.cpp (smart_ptr-develop\test) line 20 :         boost::shared_ptr<int> p = dll_test_41();
+dll_test_main.cpp (smart_ptr-develop\test) line 25 :         boost::shared_ptr<int> p = dll_test_42();
+dll_test_main.cpp (smart_ptr-develop\test) line 30 :         boost::shared_ptr<int> p = dll_test_43();
+dll_test_main.cpp (smart_ptr-develop\test) line 35 :         boost::shared_ptr<int[]> p = dll_test_44();
+dll_test_main.cpp (smart_ptr-develop\test) line 40 :         boost::shared_ptr<int[]> p = dll_test_45();
+download.cc (chenshuo\muduo\examples\curl) line 14 : typedef boost::shared_ptr<FILE> FilePtr;
+download3.cc (chenshuo\muduo\examples\filetransfer) line 5 : #include <boost/shared_ptr.hpp>
+download3.cc (chenshuo\muduo\examples\filetransfer) line 19 : typedef boost::shared_ptr<FILE> FilePtr;
+echo.h (chenshuo\muduo\examples\idleconnection) line 15 : inline size_t hash_value(const boost::shared_ptr<T>& x)
+echo.h (chenshuo\muduo\examples\idleconnection) line 63 :   typedef boost::shared_ptr<Entry> EntryPtr;
+effective-cpp-29.cpp line 12 :     shared_ptr<Image> bg1;
+effective-cpp-29.cpp line 33 :     Lock m1(&m); // shared_ptr
+effective-cpp-29.cpp line 35 :     bg1.reset(new Image(src)); //shared_ptr
+effective-cpp-29.cpp line 42 :     shared_ptr<Image> bgImage; // Impl."; see below for
+effective-cpp-29.cpp line 51 :     shared_ptr<PMImpl> pImpl;
+effective-cpp-29.cpp line 59 :     std::shared_ptr<PMImpl> // copy obj. data
+enable_shared_from.hpp (smart_ptr-develop\include\boost\smart_ptr) line 25 : template<class T> shared_ptr<T> shared_from( T * p )
+enable_shared_from.hpp (smart_ptr-develop\include\boost\smart_ptr) line 27 :     return shared_ptr<T>( p->enable_shared_from::shared_from_this(), p );
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 16 : #include <boost/shared_ptr.hpp>
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 23 : template<typename T> boost::shared_ptr<T> shared_from_raw(T *);
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 28 : template< class X, class Y > inline void sp_enable_shared_from_this( boost::shared_ptr<X> * ppx, Y const * py, boost::enable_shared_from_raw const * pe );
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 51 :         BOOST_ASSERT( shared_this_.use_count() <= 1 ); // make sure no dangling shared_ptr objects exist
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 78 :     template<class Y> friend class shared_ptr;
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 79 :     template<typename T> friend boost::shared_ptr<T> shared_from_raw(T *);
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 81 :     template< class X, class Y > friend inline void detail::sp_enable_shared_from_this( boost::shared_ptr<X> * ppx, Y const * py, boost::enable_shared_from_raw const * pe );
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 84 :     shared_ptr<void const volatile> shared_from_this() const
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 87 :         return shared_ptr<void const volatile>( weak_this_ );
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 90 :     shared_ptr<void const volatile> shared_from_this() const volatile
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 106 :     // Note: invoked automatically by shared_ptr; do not call
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 107 :     template<class X, class Y> void _internal_accept_owner( shared_ptr<X> * ppx, Y * ) const
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 133 :     mutable shared_ptr<void const volatile> shared_this_;
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 137 : boost::shared_ptr<T> shared_from_raw(T *p)
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 140 :     return boost::shared_ptr<T>(p->enable_shared_from_raw::shared_from_this(), p);
+enable_shared_from_raw.hpp (smart_ptr-develop\include\boost\smart_ptr) line 153 :     template< class X, class Y > inline void sp_enable_shared_from_this( boost::shared_ptr<X> * ppx, Y const * py, boost::enable_shared_from_raw const * pe )
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 17 : #include <boost/smart_ptr/shared_ptr.hpp>
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 48 :     shared_ptr<T> shared_from_this()
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 50 :         shared_ptr<T> p( weak_this_ );
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 55 :     shared_ptr<T const> shared_from_this() const
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 57 :         shared_ptr<T const> p( weak_this_ );
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 74 :     // Note: invoked automatically by shared_ptr; do not call
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 75 :     template<class X, class Y> void _internal_accept_owner( shared_ptr<X> const * ppx, Y * py ) const BOOST_SP_NOEXCEPT
+enable_shared_from_this.hpp (smart_ptr-develop\include\boost\smart_ptr) line 79 :             weak_this_ = shared_ptr<T>( *ppx, py );
+esft_regtest.cpp (smart_ptr-develop\test) line 15 : #include <boost/shared_ptr.hpp>
+esft_regtest.cpp (smart_ptr-develop\test) line 93 :         boost::shared_ptr<X> px( new X( 0 ) );
+esft_regtest.cpp (smart_ptr-develop\test) line 108 :         boost::shared_ptr<X> px( &x, X::deleter );
+esft_regtest.cpp (smart_ptr-develop\test) line 125 :         boost::shared_ptr<X> px( new X( 1 ), X::deleter2 );
+esft_regtest.cpp (smart_ptr-develop\test) line 160 :     boost::shared_ptr<W> p( new W );
+esft_regtest.cpp (smart_ptr-develop\test) line 166 :     boost::shared_ptr<void> pv( p );
+esft_regtest.cpp (smart_ptr-develop\test) line 178 :     boost::shared_ptr<V> pv( new V );
+esft_regtest.cpp (smart_ptr-develop\test) line 179 :     boost::shared_ptr<V> pv2( pv.get(), null_deleter() );
+esft_regtest.cpp (smart_ptr-develop\test) line 188 :     boost::shared_ptr<V> p1( &v, null_deleter() );
+esft_regtest.cpp (smart_ptr-develop\test) line 203 :     boost::shared_ptr<V> p2( &v, null_deleter() );
+esft_second_ptr_test.cpp (smart_ptr-develop\test) line 16 : #include <boost/shared_ptr.hpp>
+esft_second_ptr_test.cpp (smart_ptr-develop\test) line 31 :     boost::shared_ptr<X> px( new X );
+esft_second_ptr_test.cpp (smart_ptr-develop\test) line 34 :         boost::shared_ptr<X> px2( px.get(), null_deleter );
+esft_second_ptr_test.cpp (smart_ptr-develop\test) line 40 :         boost::shared_ptr< X > qx = px->shared_from_this();
+esft_void_test.cpp (smart_ptr-develop\test) line 13 : #include <boost/shared_ptr.hpp>
+esft_void_test.cpp (smart_ptr-develop\test) line 24 :     boost::shared_ptr< void const volatile > pv( new X );
+esft_void_test.cpp (smart_ptr-develop\test) line 25 :     boost::shared_ptr< void > pv2 = boost::const_pointer_cast< void >( pv );
+esft_void_test.cpp (smart_ptr-develop\test) line 26 :     boost::shared_ptr< X > px = boost::static_pointer_cast< X >( pv2 );
+esft_void_test.cpp (smart_ptr-develop\test) line 30 :         boost::shared_ptr< X > qx = px->shared_from_this();

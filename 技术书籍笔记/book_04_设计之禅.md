@@ -57,6 +57,8 @@ https://blog.gocalf.com/cpp-singleton
 
 https://www.cnblogs.com/faith0217/articles/4083484.html
 
+https://www.jianshu.com/p/333d4b37db56
+
 
 
 ### 1.4 代码
@@ -201,7 +203,7 @@ int main()
 
 
 
-## 第二个 工厂
+## 第二个 工厂（三个 简单，方法，抽象）
 
 ### 2.1 意图
 
@@ -266,6 +268,12 @@ public:
 ### 2.3 别人怎么解决
 
 
+
+阅读 https://www.jianshu.com/p/b2a06667b63a   10分钟 3个方式
+
+阅读  https://www.jianshu.com/p/1a74c6ad1b58 10分钟
+
+https://www.jianshu.com/p/5efb80654a1c
 
 #### to_do  正在消化
 

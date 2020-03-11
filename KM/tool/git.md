@@ -20,6 +20,8 @@ git remote -v
 
 git remote add upstream https://github.com/azl397985856/leetcode.git
 
+git remote add upstream https://github.com/pingcap-incubator/tidb-in-action.git
+
 git fetch upstream
 
 
@@ -28,11 +30,11 @@ master分支一般用来发布稳定版本，dev分支（开发分支）用来�
 
 
 
-git merge upstream/master// 稳定版本分支
+git merge upstream/master   // 稳定版本分支
 
 git merge upstream/daily-branch //开发版本分支
 
-
+git merge upstream/wangcy
 
 
 
@@ -59,15 +61,21 @@ Pull Request 的流程:
   git checkout -b daily-branch
   git branch
   
+  git checkout -b wangcy
+  
 - 添加代码 
   git add 2019-06-14.md 
   git commit  -am "#add"
   
 - 提交代码
-  
+
   git checkout daily-branch
-  
+
   git push --set-upstream origin daily-branch
+
+  git push --set-upstream origin  wangcy6
+
+  
 
 ​       git push origin daily-branch //分支提交到主干
 

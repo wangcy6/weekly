@@ -1,6 +1,20 @@
+# FQA
+
+- 如主播推流到源站节点A, 节点A宕机了,  推流到节点B. 此时有一个源站切换, 用户会感知到卡  
+
+  https://github.com/ossrs/srs/issues/938 ?
+  
+  https://github.com/ossrs/srs/issues/464
+  
+  https://github.com/ossrs/srs/wiki/v3_CN_OriginCluster
+  
+  
+
+
+
 # 基本用法
 
-## 负载均衡
+## 一. 负载均衡
 
 ### 1 负载均衡概念是什么
 
@@ -75,17 +89,7 @@
 
    
 
-
-
-
-
-
-
-
-
-
-
-### 2 负载均衡策略
+2 负载均衡策略
 
 >如果你上来说这个肯定是错误的，理解不正确，从架构上设计上来体会 回到#四层负载均衡和七层负载均衡
 
@@ -96,143 +100,6 @@
 -  least_conn    
 
   
-
-#### http 协议（3次腾讯，滴滴，陌陌）
-
-#### http协议格式
-
-一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成，下图给出了请求报文的一般格式。
-
-![img](https://pic002.cnblogs.com/images/2012/426620/2012072810301161.png)
-
- https://my.oschina.net/manmao/blog/549123 
-
-![image-20191105193926198](../../images/image-20191105193926198.png)
-
-![image-20191105194051987](../../images/image-20191105194051987.png)
-
-~~~
-(1)请求方法  URI 协议/版本
-  请求的第一行是“方法URL协议版本”：
-
-GET/sample.jsp HTTP/1.1
- 以上代码中“GET”代表请求方法，“/sample.jsp”表示URI，“HTTP/1.1代表协议和协议的版本。
-
-  根据HTTP标准，HTTP请求可以使用多种请求方法。例如：HTTP1.1支持7种请求方法：GET、POST、HEAD、OPTIONS、 PUT、DELETE和TARCE。在Internet应用中，最常用的方法是GET和POST。
-
- URL完整地指定了要访问的网络资源，通常只要给出相对于服务器的根目录的相对目录即可，因此总是以“/”开头，最后，协议版本 声明了通信过程中使用HTTP的版本。
-
-(2)请求头(Request Header)
-请求头包含许多有关的客户端环境和请求正文的有用信息。例如，请求头可以声明浏览器所用的语言，请求正文的长度等。
-
-Accept:image/gif.image/jpeg.*/*
-Accept-Language:zh-cn
-Connection:Keep-Alive
-Host:localhost
-User-Agent:Mozila/4.0(compatible:MSIE5.01:Windows NT5.0)
-Accept-Encoding:gzip,deflate.
-
-
-(3)请求正文
-请求头和请求正文之间是一个空行，这个行非常重要，它表示请求头已经结束，接下来的是请求正文。请求正文中可以包含客户提 交的查询字符串信息：
-
-username=jinqiao&password=1234
-~~~
-
-![image-20191105194352975](../../images/image-20191105194352975.png)
-
-~~~asp
-HTTP/1.0 200 OK 
-Content-Type: text/plain
-Content-Length: 137582
-Expires: Thu, 05 Dec 1997 16:00:00 GMT
-Last-Modified: Wed, 5 August 1996 15:55:28 GMT
-Server: Apache 0.84
-
-<html>
-  <body>Hello World</body>
-</html>
-
-~~~
-
-![image-20191105200334270](../../images/image-20191105200334270.png)
-
-- Wireshark：抓取 HTTP 包
--  *tcpdump*  
-
-#### HTTP请求方法介绍区别
-
- http://liufeize.com/2017/11/10/The-difference-between-the-GET-and-POST/ 
-
-#### get和post区别
-
-
-
-> 错误的回答
-
-~~~shell
-曾经有一个研读了HTTP协议的人去一家公司面试，面试官问他这个问题时，
-他回答“GET是用于获取数据的，POST一般用于将数据发给服务器。其他GET和POST没什么区别”，
-于是被刷了。
-因为有些面试官心中也只有那一个“标准答案”。
-谁说 HTTP GET 就不能通过 Body 来发送数据呢？
-
-GET和POST还有一个重大区别，简单的说：
-
-GET产生一个TCP数据包；POST产生两个TCP数据包。
-
- 一个实体由实体报头域和实体正文组成，但并不是说实体报头域和实体正文要在一起发送，
-
-可以只发送实体报头域 
-
-长的说：
-
-对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
-
-而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
-
-也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。
-
-关于『GET 发一个包，POST 发两个包』
-
-对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
-而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
-
-测试结果如下：
-
-Chrome 55.0.2883.95，two packets: YES
-Safari 10.0.2, two packets: YES
-Firefox 49.0, two packets: NO
-~~~
-
-> 正确回答
-
-
-
-> curl -v -X GET  www.baidu.com -d "test" 
-
- 
-
-
-
-#### 如何防范 POST 重复提交
-
-编程中，一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同 
-
-假设有一个从账户取钱的远程 API（可以是 HTTP 的，也可以不是），我们暂时用类函数的方式记为：
-
-bool withdraw(account_id, amount)
-
-![https://img3.fanhaobai.com/2017/05/api-idempotence/033718EYW.png](https://img3.fanhaobai.com/2017/05/api-idempotence/033718EYW.png)
-
-把分布式事务分解为具有幂等性的异步消息处理
-
-> 利用 Web API 的形式实现前面所提到的取款功能。
-
-1、用 POST /tickets 来实现 create_ticket；
-2、用 PUT /accounts/account_id/ticket_id&amount=xxx 来实现 idempotent_withdraw；
-
-值得注意的是严格来讲 amount 参数不应该作为 URI 的一部分，真正的 URI 应该是 /accounts/account_id/ticket_id，而 amount 应该放在请求的 body 中。这种模式可以应用于很多场合，比如：论坛网站中防止意外的重复发帖。
 
 ### 3. 案例
 
@@ -310,11 +177,344 @@ vhost __defaultVhost__ {
 
 
 
+图片有热备，静态资源。没有问题。正在推送的流呢?不可能有2个吧？
 
+
+
+
+
+
+
+
+
+
+
+
+
+##  二.  Nginx平滑升级源码分析
+
+### 2. 1 解决问题
+
+如果需要升级Nginx或者更改编译配置，不需要kill掉Nginx的master进程，
+
+这样会断开正在连接中的TCP请求，造成短时间内服务器不可用
+
+
+
+### 2.2 平滑升级步骤
+
+
+
+**一、平滑升级操作步骤**
+
+
+
+1、备份原Nginx二进制文件；
+
+2、编译新Nginx源码，安装路径需与旧版一致；
+
+3、向主进程发送`USR2`信号，Nginx会启动一个新版本的master进程和工作进程，和旧版一起处理请求：
+
+```powershell
+prey:~ root# ps -ef|grep nginx
+ 127     1   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+ 129   127   nginx: worker process
+prey:~ root# kill -USR2 127
+prey:~ root# ps -ef|grep nginx
+ 127     1   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+ 129   127   nginx: worker process  
+5180   127   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+5182  5180   nginx: worker process
+```
+
+**这个时候新老Nginx都会接收请求，看那一个进程能抢到锁，抢到锁的worker进程可以accept新请求**
+
+
+
+4、向原Nginx主进程发送`WINCH`信号，它会逐步关闭旗下的工作进程（主进程不退出），这时所有请求都会由新版Nginx处理：
+
+```
+prey:~ root# kill -WINCH 127
+prey:~ root# ps -ef|grep nginx
+ 127     1   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+5180   127   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+5182  5180   nginx: worker process
+```
+
+5、如果这时需要回退，可向原Nginx主进程发送`HUP`信号，它会重新启动工作进程， **仍使用旧版配置文件** 。尔后可以将新版Nginx进程杀死（使用`QUIT`、`TERM`、或者`KILL`）：
+
+6、如果不需要回滚，可以将原Nginx主进程杀死，至此完成热升级。
+
+```
+prey:~ root# kill 127
+prey:~ root# ps -ef|grep nginx
+5180     1   nginx: master process /usr/local/nginx-1.2.4/sbin/nginx
+5182  5180   nginx: worker process
+```
+
+切换过程中，Nginx会将旧的`.pid`文件重命名为`.pid.oldbin`文件，并在旧进程退出后删除。
+
+
+
+热升级过程:
+
+可以先思考一下一些难点:
+
+- 在操作系统层面是不允许两个进程监听同一个端口的,那么优雅升级时如何让新旧进程同时处理监听端口上的请求
+
+- 如何让旧的worker process 不再接收请求,并且处理完当前请求后退出
+
+  
+
+### 3.3 部分代码
+
+ ngx_process_cycle.c
+
+   ngx_signal_handler  
+
+
+
+```c
+#define NGX_REOPEN_SIGNAL        USR1
+#define NGX_CHANGEBIN_SIGNAL     USR2
+#define NGX_SHUTDOWN_SIGNAL      QUIT
+#define NGX_TERMINATE_SIGNAL     TERM
+#define NGX_NOACCEPT_SIGNAL      WINCH
+#define NGX_RECONFIGURE_SIGNAL   HUP
+
+             
+```
+
+
+
+
+
+
+
+
+
+ngx_signal_handler -->ngx_change_binary -->ngx_master_process_cycle
+
+#### ngx_signal_handler
+
+case SIGCHLD:
+            ngx_reap = 1;
+
+
+
+if (signo == SIGCHLD) {
+        ngx_process_get_status();
+
+
+
+   
+
+​    }
+
+
+
+
+
+#### ngx_master_process_cycle  创建完成后，主要停留在这里接受信号
+
+~~~c
+150行代码
+    
+for ( ;; ) {
+      
+        sigsuspend(&set); //每次处理完一个信号，master进程会被挂起，直到有新的信号到来
+
+        ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
+                       "wake up, sigio %i", sigio);
+        /**
+		 * 回收子进程,这里的回收是针对全局数组 ngx_processes, 
+		 * 操作系统层面的进程回收已经在信号处理函数 ngx_signal_handler() 中完成, 
+		 * 并对ngx_processes 的相应条目中进行了标记
+		 */
+        if (ngx_reap) {
+            ngx_reap = 0;
+            ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "reap children");
+
+            live = ngx_reap_children(cycle);
+        }
+        /* 没有worker进程存活时，master进程才退出*/
+        if (!live && (ngx_terminate || ngx_quit)) {
+            ngx_master_process_exit(cycle);
+        }
+
+        if (ngx_terminate) {
+            if (delay == 0) {
+                delay = 50;
+            }
+
+            if (sigio) {
+                sigio--;
+                continue;
+            }
+
+            sigio = ccf->worker_processes + 2 /* cache processes */;
+
+            if (delay > 1000) {
+                ngx_signal_worker_processes(cycle, SIGKILL);
+            } else {
+                ngx_signal_worker_processes(cycle,
+                                       ngx_signal_value(NGX_TERMINATE_SIGNAL));
+            }
+
+            continue;
+        }
+
+        if (ngx_quit) {
+            ngx_signal_worker_processes(cycle,
+                                        ngx_signal_value(NGX_SHUTDOWN_SIGNAL));
+
+            ls = cycle->listening.elts;
+            ////关闭所有socket套接字
+            for (n = 0; n < cycle->listening.nelts; n++) {
+                if (ngx_close_socket(ls[n].fd) == -1) {
+                    ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_socket_errno,
+                                  ngx_close_socket_n " %V failed",
+                                  &ls[n].addr_text);
+                }
+            }
+            cycle->listening.nelts = 0;
+
+            continue;
+        }
+       //收到SIGHUP信号，
+        if (ngx_reconfigure) {
+            ngx_reconfigure = 0;
+              //如果是平滑升级程序，则重启worker进程，不需要重新初始化配置
+            if (ngx_new_binary) {
+                   //启动ccf->worker_processes个worker子进程，并设置好每个子进程与
+                //master父进程之间使用socketpair系统调用建立起来的socket句柄通信机制
+                //启动方式为NGX_PROCESS_RESPAWN,该值影响ngx_process_t结构体的respawn
+                ngx_start_worker_processes(cycle, ccf->worker_processes,
+                                           NGX_PROCESS_RESPAWN);
+
+                //执行缓存管理工作的循环方法
+                ngx_start_cache_manager_processes(cycle, 0);
+                ngx_noaccepting = 0;
+
+                continue;
+            }
+
+            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reconfiguring");
+          //不是平滑升级，重新读取配置
+            cycle = ngx_init_cycle(cycle);
+            if (cycle == NULL) {
+                cycle = (ngx_cycle_t *) ngx_cycle;
+                continue;
+            }
+ 
+            ngx_cycle = cycle;
+            ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx,
+                                                   ngx_core_module);
+            ngx_start_worker_processes(cycle, ccf->worker_processes,
+                                       NGX_PROCESS_JUST_RESPAWN);
+            ngx_start_cache_manager_processes(cycle, 1);
+            live = 1;
+            ngx_signal_worker_processes(cycle,
+                                        ngx_signal_value(NGX_SHUTDOWN_SIGNAL));
+        }
+
+        if (ngx_restart) {
+            ngx_restart = 0;
+            ngx_start_worker_processes(cycle, ccf->worker_processes,
+                                       NGX_PROCESS_RESPAWN);
+            ngx_start_cache_manager_processes(cycle, 0);
+            live = 1;
+        }
+
+        if (ngx_reopen) {
+            ngx_reopen = 0;
+            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
+            ngx_reopen_files(cycle, ccf->user);
+            ngx_signal_worker_processes(cycle,
+                                        ngx_signal_value(NGX_REOPEN_SIGNAL));
+        }
+
+        if (ngx_change_binary) {
+            ngx_change_binary = 0;
+            ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "changing binary");
+            ngx_new_binary = ngx_exec_new_binary(cycle, ngx_argv);
+        }
+
+        if (ngx_noaccept) {
+            ngx_noaccept = 0;
+            ngx_noaccepting = 1;
+            ngx_signal_worker_processes(cycle,
+                                              ngx_signal_value(NGX_SHUTDOWN_SIGNAL));
+        }
+~~~
+
+![](https://ask.qcloudimg.com/http-save/yehe-1215266/dkmy8wwqsr.png?imageView2/2/w/1620)
+
+## 三  SRS
+
+我们给出了一个例子，部署了两个源站做集群，还部署了一个边缘
+
+https://github.com/ossrs/srs/wiki/v3_CN_SampleOriginCluster
+
+**SRS边缘配置文件，从多个源站拉流，实现热备和负载均衡。**
+
+https://github.com/ossrs/srs/wiki/v1_CN_Forward
+
+
+
+forward也可以用作搭建小型集群。架构图如下：
+
+```
+                                   +-------------+    +---------------+
+                               +-->+ Slave(1935) +->--+  Player(3000) +
+                               |   +-------------+    +---------------+
+                               |   +-------------+    +---------------+
+                               |-->+ Slave(1936) +->--+  Player(3000) +
+         publish       forward |   +-------------+    +---------------+
++-----------+    +--------+    |     192.168.1.6                       
+|  Encoder  +-->-+ Master +-->-|                                       
++-----------+    +--------+    |   +-------------+    +---------------+
+ 192.168.1.3    192.168.1.5    +-->+ Slave(1935) +->--+  Player(3000) +
+                               |   +-------------+    +---------------+
+                               |   +-------------+    +---------------+
+                               +-->+ Slave(1936) +->--+  Player(3000) +
+                                   +-------------+    +---------------+
+                                     192.168.1.7                          
+```
+
+
+
+## Forward VS Edge
+
+单台服务器做直播，总归有单点风险，利用SRS的[Forward机制][1] + [Edge Server][2]设计，可以很容易搭建一个大规模的高可用集群，
+
+![image.png](https://i.loli.net/2020/02/11/LDydeYKwh8zjtIg.png)
 
 
 
 # 参考
+
+- srs集群
+
+  https://chihiro.org.cn/blogs/1651636328.html
+
+
+
+[ now ] https://cloud.tencent.com/developer/article/1037784   []
+
+​        https://www.jianshu.com/p/e4acfd06d289
+
+​          https://erpeng.github.io/2019/09/17/NGINX-graceful-stop-or-upgrade/ 
+
+​          http://shzhangji.com/cnblogs/2012/12/23/nginx-live-upgrade/ [ OK]
+
+​         https://blog.csdn.net/chaoren2007113025/article/details/84400105 [ok]
+
+
+
+
+
+make [upgrade](https://www.centos.bz/tag/upgrade/)
 
 [1] 图解HTTP 第三章 第四章节（第一次看发现全部都是解释字段含义，产生没有什么学的感觉。第二次看http协议格式）c
 
