@@ -99,13 +99,77 @@ categories: ["threads t"]
 
 
 
-### 阅读文档2   ，累计盘茄次数 3    耗时 100分钟
+The entire application is free to use all the static variables and non-reentrant library functions it wants, greatly simplifying programming and debugging while increasing performance.
+
+ 整个应用程序可以自由地使用它想要的所有静态变量和不可重入库函数，这大大简化了编程和调试，同时提高了性能。
+
+
+
+ Process management is not in the ST's scope but instead is left up to the application.
+
+ The application designer has full control of how many processes to create and what resources, if any, to share among them via standard inter-process communication (IPC) facilities
+
+
+
+进程管理不在 ST 的范围内，而是留给应用程序处理。 用户来决定fork多少进程，每个进程分配多少资源，如何进行IPC等
+
+ This multi-process multi-threaded architecture also increases an application's availability because each process works as a fault container. If one of the processes crashes, only a fraction of all threads (user connections) will be lost
+
+如果其中一个进程崩溃，则只有一小部分线程(用户连接)将丢失
+
+
+
+
+
+We assume that the performance of an IA is constrained by available CPU cycles rather than network bandwidth or disk I/O (that is, CPU is a bottleneck resource).
+
+there are two types of scalability: *load scalability* and *system scalability*
+
+
+
+
+
+The State Threads library combines the advantages of all of the above architectures. 
+
+----Multi-Process, Multi-Threaded, and Event-Driven State Machine architectures.
+
+
+
+application should create multiple processes to take advantage of hardware parallelism，but
+
+Process management is not in the ST's scope but instead is left up to the application.
+
+ The application designer has full control of how many processes to create and what resources, if any, to share among them via standard inter-process communication (IPC) facilities
+
+
+
+
+
+
+
+
+
+### 2 阅读文档2   ，累计盘茄次数 3    耗时 100分钟
 
   理解  **Libtask: a Coroutine Library for C and Unix**  含义
 
 涉及内容
 
 -  http://swtch.com/libtask/ 
+
+
+
+### 3 阅读文档3
+
+https://github.com/ossrs/srs
+
+https://github.com/ossrs/srs/wiki/v2_CN_Architecture
+
+https://blog.csdn.net/win_lin/article/details/8242653
+
+http://state-threads.sourceforge.net/docs/notes.html#signals
+
+[http://kexianda.info/2017/05/19/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/](http://kexianda.info/2017/05/19/进程-线程-协程的实现原理/)
 
 
 
@@ -284,7 +348,7 @@ int st_poll(struct pollfd *pds, int npds, st_utime_t timeout)
 
 
 
-## 三、talk
+## 三、动手实验
 
 - task 编译成动态库和静态库 30分钟
 
@@ -298,18 +362,63 @@ libst.a
 
  cd examples/
  make linux-debug //不同平台
- EXAMPLES    = $(OBJDIR)/lookupdns $(OBJDIR)/proxy $(OBJDIR)/server  
-    
-    
+ EXAMPLES    = $(OBJDIR)/lookupdns $(OBJDIR)/proxy $(OBJDIR)/server	
 ./lookupdns www.baidu.com  www.google.com  www.bing.com
+  
+ cd /root/cpp/state-threads/obj
+     
+server -l /root/cpp/state-threads -p 3
+FILES
+    server.c
+    error.c
+USAGE
+
+    server -l <log_directory> [<options>]
+
+    -l <log_directory>      open all log files in specified directory.
+
+    Possible options:
+
+    -b <host>:<port>        bind to specified address (multiple addresses
+                            are permitted)
+    -p <num_processes>      create specified number of processes
+    -t <min_thr>:<max_thr>  specify thread limits per listening socket
+                            across all processes
+    -u <user>               change server's user id to specified value
+    -q <backlog>            set max length of pending connections queue
+    -a                      enable access logging
+    -i                      run in interactive mode (useful for debugging)
+    -S                      serialize accept() calls from different processes
+                            on the same listening socket (if needed).
+
+DESCRIPTION
+
+    This program is a general server example.  It accepts a client connection
+    and outputs a short
+        
+0.0.0.0:8000            0.0.0.0:*      LISTEN   11829/./server
     
+root     11829     1  0 09:53 ?        00:00:00 ./server -l /root/cpp/state-threads -p 3
+root     11830 11829  0 09:53 ?        00:00:00 ./server -l /root/cpp/state-threads -p 3
+root     11831 11829  0 09:53 ?        00:00:00 ./server -l /root/cpp/state-threads -p 3
+root     11832 11829  0 09:53 ?        00:00:00 ./server -l /root/cpp/state-threads -p 3
 ~~~
 
 
 
 # 项目应用
 
-暂无
+
+
+
+
+
+
+
+
+
+
+
 
 
 

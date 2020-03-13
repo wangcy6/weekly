@@ -70,7 +70,27 @@ Windows操作系统提供的轻型[读写锁](https://zh.wikipedia.org/wiki/读�
 
 
 
+### 思路4
 
+  scalability: *load scalability* and *system scalability*
+
+On the other hand, MP applications have very good system scalability, because no resources are shared among different processes and there is no synchronization overhead.
+
+Driven State Machine Architecture
+
+#### 2.2 Multi-Threaded Architecture
+
+#### 2.1 Multi-Process Architecture
+
+#### 2.3 Event-Driven State Machine Architecture
+
+In the Event-Driven State Machine (EDSM) architecture, a single process is employed to concurrently process multiple connections
+
+
+
+Multi-Process EDSM
+
+ Multi-Process EDSM has very good system scalability because no resources are shared among different processes and there is no synchronization overhead.
 
 
 ## 三、你的回答（限制在1分钟，5句话，12秒一句）
