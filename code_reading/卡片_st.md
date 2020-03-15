@@ -61,11 +61,11 @@ State Threads 是为互联网应用程序库，
 
 是如何Scheduling，
 
-ST的多核架构核心是：多进程多线程。
+ST的多核架构核心是：Multi-Process EDSM。
 
 **ST只负责自身thread调度，进程管理是应用程序的事情，** The application designer has full control of how many processes to create ，用户来决定fork多少进程，每个进程分配多少资源 。类似*GOMAXPROCS*
 
-
+The State Threads library combines the advantages of all of the above architecture
 
 
 
@@ -79,7 +79,7 @@ Process management is not in the ST's scope but instead is left up to the applic
 
 >  你根本回答不了，哑口无言，你解决方式看libevent多线程的例子
 
-
+![image-20200314204912781](images/image-20200314204912781.png)
 
 
 
