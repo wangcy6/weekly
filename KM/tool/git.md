@@ -61,7 +61,7 @@ Pull Request 的流程:
   git checkout -b daily-branch
   git branch
   
-  git checkout -b wangcy
+  ​	
   
 - 添加代码 
   git add 2019-06-14.md 
@@ -73,7 +73,7 @@ Pull Request 的流程:
 
   git push --set-upstream origin daily-branch
 
-  git push --set-upstream origin  wangcy6
+  git push --set-upstream origin wangcy6
 
   
 

@@ -53,13 +53,33 @@ categories: ["threads t"]
 
 
 
+# 摘要
+
+State Threads 是为互联网应用程序库，
+
+它拥有多线程编程范式的简单（一个线程支持一个并发连接）以及事件驱动状态机架构的性能和可伸缩性。继承了 *Multi-Process*, *Multi-Threaded*, and *Event-Driven State Machine* architectures优点。
+
+是如何Scheduling，
+
+ST的多核架构核心是：Multi-Process EDSM。
+
+**ST只负责自身thread调度，进程管理是应用程序的事情，** The application designer has full control of how many processes to create ，用户来决定fork多少进程，每个进程分配多少资源 。类似*GOMAXPROCS*
+
+The State Threads library combines the advantages of all of the above architecture
+
+
+
 ## How does ST take advantage of multiple CPUs?
+
+Process management is not in the ST's scope but instead is left up to the application. The application designer has full control of how many processes to create and what resources, if any, to share among them via standard inter-process communication (IPC) facilities
+
+
 
 
 
 >  你根本回答不了，哑口无言，你解决方式看libevent多线程的例子
 
-
+![image-20200314204912781](images/image-20200314204912781.png)
 
 
 
@@ -106,6 +126,12 @@ categories: ["threads t"]
 -  execute state   event wait queue  
 
 -  setjmp/longjmp （不懂）
+
+
+
+MP applications have poor load scalability.
+
+MP applications have very good system scalability
 
 
 
