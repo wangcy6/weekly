@@ -1,6 +1,26 @@
 # 一、docker 
 
-## 1 docker 基本操作
+## 基本操作
+
+### 安装
+
+~~~
+[root@fhb ~]# cat /etc/redhat-release
+CentOS release 6.8 (Final)
+[root@fhb ~]# sudo rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+[root@fhb ~]# sudo yum update -y
+
+curl -sSL https://get.docker.com/ | sh
+docker version
+service docker start
+
+yum install -y nginx
+service nginx start
+~~~
+
+
+
+### docker 基本操作
 
 - 启动
 

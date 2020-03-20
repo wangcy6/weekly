@@ -33,6 +33,47 @@
 
 Raft 算法要求 Leader 当选后立即追加一条 **no-op 的特殊内部日志**，并立即同步到其它节点。这样就可以连带往期日志一起同步了，保障了日志的安全性。
 
-# day2
+### day2
 
 ![image-20191218200720074](..images/image-20191218200720074.png)
+
+
+
+### day3 日志复制
+
+
+
+With this mechanism, a leader does not need to take any
+special actions to restore log consistency when it comes to
+power  
+
+
+
+Committing entries from previous terms  
+
+
+
+To eliminate problems like the one in Figure 8, Raft
+never commits log entries from previous terms by counting replicas. Only log entries from the leader’s current
+term are committed by counting replicas; once an entry
+from the current term has been committed in this way,
+then all prior entries are committed indirectly because
+of the Log Matching Property.  
+
+
+
+
+
+## 参考
+
+
+
+https://juejin.im/post/5af066f1f265da0b715634b9
+
+1. Raft服务器支持多个客户端并发连接
+2. 一致性模块负责接收客户端的消息，追加到本地日志中
+3. 一致性模块负责复制日志到其它服务器节点
+4. 本地日志commit成功后立即应用到状态机
+5. 客户端可以直接查询本地状态机的状态
+
+https://blog.wangjunfeng.com/post/raft/
