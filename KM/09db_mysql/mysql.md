@@ -12,6 +12,30 @@ categories: ["book"]
 
 # sql
 
+## 参考资料1 [廖雪峰的官方网站](https://www.liaoxuefeng.com/)
+
+https://www.liaoxuefeng.com/wiki/1177760294764384/1179611448454560
+
+https://github.com/michaelliao/learn-sql/blob/master/mysql/init-test-data.sql
+
+- 请使用一条语句 统计各班的男生和女生人数
+
+SELECT class_id, gender, COUNT(*) num FROM students GROUP BY class_id, gender;
+
+- 请使用一条SELECT查询查出每个班级男生和女生的平均分：
+
+```mysql
+select class_id, gender,AVG(score)
+ from students
+ group by class_id,gender
+```
+
+[一次group by 优化之旅](https://juejin.im/post/5ced5191e51d455070226f26)
+
+
+
+
+
 ## 部署安装
 
 ~~~shell
@@ -43,5 +67,16 @@ mysql -u root -p  123456
 
 
 
+~~~shell
+ use job;
+ 
+~~~
 
+
+
+
+
+
+
+# 高性能Mysql第三版
 
