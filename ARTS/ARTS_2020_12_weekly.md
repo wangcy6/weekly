@@ -84,9 +84,8 @@ public:
     // ...
 }
 
-1. 如果构造对象是temporary，2 返回值是临时的 
+1. 如果构造对象是temporary，2 返回值是临时的 。
     
-
 ~~~
 
 
@@ -101,17 +100,13 @@ public:
 
 
 
-
-
-
+![image.png](https://i.loli.net/2020/03/20/iDYfz8TNqtjIhPX.png)
 
 
 
 ### 4.  Share
 
 >主要是为了建立你的影响力，能够输出价值观。分享一篇有观点和思考的技术文章。
-
-
 
 
 
