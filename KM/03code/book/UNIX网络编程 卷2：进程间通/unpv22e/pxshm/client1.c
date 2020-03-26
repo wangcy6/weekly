@@ -5,8 +5,7 @@ struct shmstruct {	/* struct stored in shared memory */
 };
 sem_t	*mutex;		/* pointer to named semaphore */
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int		fd, i, nloop;
 	pid_t	pid;
