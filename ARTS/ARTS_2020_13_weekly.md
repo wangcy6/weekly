@@ -9,7 +9,7 @@ categories: ["ARTS"]
 
 
 
-# GTD践行第13周（2020第5周） 
+# GTD践行第13周（2020第13周） 
 
 
 
@@ -74,9 +74,13 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 ### 3. Tip
 
-> 主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。你在工作中遇到的问题，踩过的坑，学习的点滴知识。
+> 主要是为了总结和归纳你在是常工作中所遇到的知识点。学习至少一个技术技巧。
+>
+> 你在工作中遇到的问题，踩过的坑，学习的点滴知识。
 
 
+
+如果没有规划，你必然失败，别以为自己在电脑面前忙碌，你就很好了，完全根本不行。
 
 
 
@@ -87,6 +91,16 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 
 
+
+raft资源：
+
+http://thesecretlivesofdata.com/raft/ 
+
+以前看多次，感觉很简单，但是现在回看一下，自己理解多么肤浅。
+
+内容：
+
+https://static.app.yinxiang.com/embedded-web/profile/#/join?guid=0d8ca4b7-2a2b-4e84-b1c9-632c499e0f00&channel=copylink&shardId=s39&ownerId=8226829
 
 
 
@@ -302,11 +316,7 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 > 没有连续坚持3天，没有坚持超过7天，没有坚持14天。坚持21天
 
-
-
-星期六晚上 在床上看全部动漫 累加13小时，计划彻底失败。还更加严重
-
-星期天 晚上在床上 有解锁看小说 2个小时，昨天问题忘记一干二净，
+![image.png](https://i.loli.net/2020/03/27/xIqA9uGMFOv2YL6.png)
 
 
 
@@ -378,11 +388,7 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 ### C-执行结果（0记录）
 
-- 自己感觉自己发音不好，中断了
-
-- 继续看12月的计划。
-
-  [https://github.com/wangcy6/weekly/blob/master/%E5%91%A8%E8%AF%BB_%E6%8A%80%E6%9C%AF%E7%B1%BB.README.md](https://github.com/wangcy6/weekly/blob/master/周读_技术类.README.md)
+![image.png](https://i.loli.net/2020/03/27/OnWuaqpPRgjxZhi.png)
 
 
 
@@ -390,7 +396,7 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 
 
-## 1. 沟通--深入剖析
+## 1. 深入剖析--沟通
 
 ### 目前现状：
 
@@ -410,13 +416,14 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
   > 你说都是废话，没有目的，没有结果 没有执行，放弃一切想说的，都是这个大脑受当时环境引起的。非自己想说的
 
-- 上面2个并不矛盾
+  
 
 
+### 执行结果
 
+> 不敢不出第一步，被动挨打
 
-
-## 2 -切换频率鼠标
+## 2 深入剖析--学会思考与规划
 
 ### 目前现状：
 
@@ -452,34 +459,27 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
   
 
-### 执行结果（没有变化）
+### 执行结果
 
 
 
-
-
-- 今天写一天python，但是偏离你计划，你准备知识，准备。你其实浪费一天的时间做其他事情。
-- 
+![image.png](https://i.loli.net/2020/03/27/LmeU6TYdO4VgIf1.png)
 
 
 
+2020第13周鼠标点击次数统计:  最大: 5306 最小: 138 平均: 3682 频率: 7
+
+ 7秒一次这说明这一周 只有努力，没有思考，停留在舒适区
 
 
 
-
-##  3. 意志力实验
+##  3. 深入剖析--注意力
 
 ### A-目前现状：
 
 > 注意力高度不集中，一个点击8千次鼠标，
 >
 > 然不停看打开网页，关闭网页。打开聊天软件关闭聊天软件
-
-这就是疯子，闪灵中 不停打字的疯子 
-
-
-
-![image.png](https://i.loli.net/2019/11/04/K6ygNbfeYQMpFVn.png)
 
 
 
@@ -495,19 +495,11 @@ https://github.com/BeamMW/boost-osx/blob/master/include/boost/interprocess/sync/
 
 最高学习效率=15.87%，并却经过机器学习训练得出的这个比例15.87%
 
-​	意思就说： 
-
-> 舒适区的内容对你来说太容易
-
-> 恐慌区的内容太难，
-
-> 刻意练习要求你始终在二者中间一个特别小的学习区里学习 —— 这里的难度对你恰到好处。
-
-![image.png](https://i.loli.net/2019/11/04/Ro4wSLnXVHQICjb.png)
+​	
 
 ### C-执行结果（看到变化）
 
 
 
-连续三天没有写算法了。
+![image.png](https://i.loli.net/2020/03/27/QnZckT475HKyaOI.png)
 
