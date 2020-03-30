@@ -63,6 +63,10 @@ mysql> quit;
 # service mysqld restart
 
 mysql -u root -p  123456
+
+sudo apt-get install mysql-client mysql-server
+sudo service mysql status
+sudo service mysqld start
 ~~~
 
 
