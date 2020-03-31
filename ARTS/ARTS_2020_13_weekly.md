@@ -52,7 +52,9 @@ categories: ["ARTS"]
 | ---- | ---- | ---- |
 |      |      |      |
 
+![image.png](https://i.loli.net/2020/03/31/mPYDE7TnzBJOLwe.png)
 
+http://feihu.me/blog/2014/sgi-std-sort/
 
 ### 2. Review 
 
