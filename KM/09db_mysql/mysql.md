@@ -67,18 +67,78 @@ mysql -u root -p  123456
 sudo apt-get install mysql-client mysql-server
 sudo service mysql status
 sudo service mysqld start
+
+/etc/init.d/networking restart
+select user, plugin from mysql.user;	
+update mysql.user set authentication_string=PASSWORD('123456'), plugin='mysql_native_password' where user='root';
+
 ~~~
 
 
 
 ~~~shell
- use job;
- 
+
+ mysql> create database  dream;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use dream;
+Database changed
+
+mysql+5.7+设置远程登录
+在ubuntu14.04上安装好mysql5.7之后，本地可以连接mysql服务器。
+远程就不行。
+
+注释掉在/etc/mysql/mysql.conf.d/mysqld.cnf里面的bind-address = 127.0.0.1
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+
 ~~~
 
 
 
+#### ubuntu mysql 5.7
 
+https://cloud.tencent.com/developer/article/1392435
+
+~~~shell
+sudo apt-get autoremove --purge mysql-server-5.0
+sudo apt-get remove mysql-server
+sudo apt-get autoremove mysql-server
+sudo apt-get remove mysql-common //这个很重要
+上面的其实有一些是多余的
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
+sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+sudo apt-get install php5-mysql 
+// 安装php5-mysql 是将php和mysql连接起来
+一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运行：
+sudo netstat -tap | grep mysql
+
+ mysql -V
+mysql  Ver 14.14 Distrib 5.7.29, for Linux (x86_64) using  EditLine wrapper
+root@work:~# 
+
+
+mysqladmin -uroot -p password 123456 
+
+
+
+#查看mysql状态
+/etc/init.d/mysql status 或者 service mysql status
+#启动mysql
+/etc/init.d/mysql start 或者 service mysql start
+#停止mysql
+/etc/init.d/mysql stop 或者 service mysql stop
+#重新启动mysql
+/etc/init.d/mysql restart 或者 service mysql restart
+查看mysql服务说明启动成功
+
+————————————————
+版权声明：本文为CSDN博主「南有乔木灬」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/wudawei071193/java/article/details/100777206
+
+ /etc/init.d/networking restart
+~~~
 
 
 
