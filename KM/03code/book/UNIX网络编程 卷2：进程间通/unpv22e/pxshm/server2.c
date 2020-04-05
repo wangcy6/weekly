@@ -23,7 +23,7 @@ main(int argc, char **argv)
 		ptr->msgoff[index] = index * MESGSIZE;
 
 		/* 4initialize the semaphores in shared memory */
-	Sem_init(&ptr->mutex, 1, 1);
+	Sem_init(&ptr->mutex, 1, 1); //
 	Sem_init(&ptr->nempty, 1, NMESG);
 	Sem_init(&ptr->nstored, 1, 0);
 	Sem_init(&ptr->noverflowmutex, 1, 1);

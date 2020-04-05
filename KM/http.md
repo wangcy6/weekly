@@ -417,6 +417,17 @@ https://tools.ietf.org/html/rfc7233#section-3.2
 
 
 
+
+
+
+
+```
+curl -d '{"key1":"value1", "key2":"value2"}' -H "Content-Type: application/json" -X POST http://localhost:3000/data
+
+
+
+```
+
 ## 参考
 
 

@@ -1,31 +1,13 @@
 
 
 
-## 今日面试题 （2020-1-10）
-
-
-
-对导致Redis产生内存碎片操作
-
-1 频繁做更新操作
-2 大量过期键删除
-
-一直不明白,不明白？
-
-为什么产生内存碎片，
-
-1 删除代表可以重用，更新利用已经被释放的数据，
-
-​    很合理呀，完美。理论上没有问题
-
-2  这么说 *jemalloc* 、TCMalloc ，也没有解决内存碎片问题呀
-
- 他们默认redis部署都采用的 *jemalloc*  ，TCMalloc 
 
 
 # 周报
 
 ## 2020
+
+**三月**：[第 12 周](./ARTS/ARTS_2020_12_weekly.md)    [第 13 周](./ARTS/ARTS_2020_13_weekly.md)   
 
 **一月**：[第 1 期](./ARTS/ARTS_2020_01_weekly.md)
 
@@ -34,15 +16,6 @@
 **八月**：[第 1 期](https://www.jianshu.com/p/681b70df9320):[第 2期](https://www.jianshu.com/p/a735b8ae3ac3)  [第 3期](https://www.jianshu.com/p/4d3f6062b97):[第 4期](https://mp.weixin.qq.com/s/JguScQhyAeAQK5ZFxqey7w)
 
 
-
-
-
-# 历史题目
-
-
-
-- 14.内存暴涨
-- 13.NonRecursiveRWLock
 
 
 

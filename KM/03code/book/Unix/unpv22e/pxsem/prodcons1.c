@@ -49,8 +49,7 @@ main(int argc, char **argv)
 /* end main */
 
 /* include prodcons */
-void *
-produce(void *arg)
+void * produce(void *arg)
 {
 	int		i;
 

@@ -31,9 +31,9 @@ main(int argc, char **argv)
 		/* 4this program is the consumer */
 	index = 0;
 	lastnoverflow = 0;
-	for ( ; ; ) {
-		Sem_wait(&ptr->nstored);
-		Sem_wait(&ptr->mutex);
+	for ( ; ; ) { //消费者
+		Sem_wait(&ptr->nstored);// 0
+		Sem_wait(&ptr->mutex); //1
 		offset = ptr->msgoff[index];
 		printf("index = %d: %s\n", index, &ptr->msgdata[offset]);
 		if (++index >= NMESG)
