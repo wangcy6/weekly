@@ -850,7 +850,7 @@ malloc_trim
 
 > intset：就是有序的数组
 >
-> hashtable：二维数组
+> hashtable
 >
 > 你说quiklis错误，错误 问集合不是有序集合。
 
@@ -860,7 +860,7 @@ malloc_trim
 127.0.0.1:6379> SADD fruits "apple" "banana" "cherry"
 (integer) 3
 127.0.0.1:6379> object encoding fruits 
-"hashtable"
+"hashtable"  只有key 没有value
  
 127.0.0.1:6379>  SADD numbers 1 3 5
 (integer) 0
@@ -1844,19 +1844,77 @@ https://redis.io/topics/persistence
 
 # 解密Redis持久化
 
-https://justjavac.com/nosql/2012/04/13/redis-persistence-demystified.html
+http://oldblog.antirez.com/post/redis-persistence-demystified.html
 
 https://justjavac.com/nosql/2012/04/13/redis-persistence-demystified.html
 
-同时，Redis的RDB文件也是Redis主从同步内部实现中的一环。
+https://justjavac.com/nosql/2012/04/13/redis-persistence-demystified.html
+
+However even when using the more advanced persistence mode that Redis provides, called "AOF", 
+
+
+
+
+
+Redis的RDB文件也是Redis主从同步内部实现中的一环。
 
 但是，我们可以很明显的看到，RDB有他的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的，从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。在某些业务下，这是可以忍受的，我们也推荐这些业务使用RDB的方式进行持久化，因为开启RDB的代价并不高。但是对于另外一些对数据安全性要求极高的应用，无法容忍数据丢失的应用，RDB就无能为力了，所以Redis引入了另一个重要的持久化机制：AOF 日志。
 
 
 
+Redis snapshotting is the simplest Redis persistence mode
 
+
+
+The Append Only File, usually called simply AOF, is the main Redis persistence option.
+
+
+
+Once the rewrite is terminated, the temporary file is synched on disk with fsync and is used to overwrite the old AOF file. 
+
+
+
+You may wonder what happens to data that is written to the server while the rewrite is in progress. 
+
+This **new data** is simply also written to the old (current) AOF file, and **at the same time** queued into an in-memory buffer,
+
+
+
+ so that when the new AOF is ready we can write this missing part inside it, and finally replace the old AOF file with the new one. 
+
+
+
+
+
+ 您可能想知道在重写过程中写入服务器的数据会发生什么情况。
+
+ 这些新数据也被简单地写入旧的(当前的) AOF 文件，同时排队进入内存缓冲区，
+
+这样当新的 AOF 准备好时，我们就可以在其中写入这个缺失的部分，
+
+并最终用新的 AOF 文件替换旧的 AOF 文件
+
+https://www.toutiao.com/a1661858461586509/
+
+![image-20200322183259035](images/image-20200322183259035.png)
+
+
+
+client-output-buffer-limit slave设置，当这个值太小会导致主从复制链接断开 
+
+https://github.com/antirez/redis/issues/1400
 
 ## 参考
+
+
+
+# bug
+
+
+
+https://github.com/antirez/redis/issues/4102
+
+
 
 
 
