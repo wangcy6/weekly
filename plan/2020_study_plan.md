@@ -49,7 +49,7 @@
 
 | 专栏 | 周期 | 平均每天 | 监督打卡 | 思考与行动 | 公司/身边大牛他名字是 |
 | ---- | ---- | ---------------- | -------- | ---------- | ---------- |
-| [操作系统](https://github.com/chyyuu/os_course_info) |      |                  |          |            |            |
+| [操作系统](http://os.cs.tsinghua.edu.cn/oscourse/OS2019spring/lecture20) | 24 | 24/12=2 |          |            | operating-system-concepts-10th.pdf  操作系统：精髓与设计原理（中文第七版） |
 |      |      |                  |          |            |            |
 |      |      |                  |          |||
 
