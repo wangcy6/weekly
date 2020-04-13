@@ -66,10 +66,183 @@ Redis Cluster is a distributed implementation of Redis with the following goals,
 > 最高扩展到1000个节点，拿到不能超过吗、为什么这样说
 
 - Acceptable degree of write safety: the system tries (in a best-effort way) to retain all the writes originating from clients connected with the majority of the master nodes. Usually there are small windows where acknowledged writes can be lost. Windows to lose acknowledged writes are larger when clients are in a minority partition.
-
 - Availability: Redis Cluster is able to survive partitions where the majority of the master nodes are reachable and there is at least one reachable slave for every master node that is no longer reachable. Moreover using *replicas migration*, masters no longer replicated by any slave will receive one from a master which is covered by multiple slaves.
 
+### Redis 5.0.8 集群[搭建](https://www.jianshu.com/p/dfc6656d4287)
+
+
+
+| Host    | Address      | Port | Port |
+| ------- | ------------ | ---- | ---- |
+| server1 | 10.115.37.44 | 7001 | 7004 |
+| server2 | 10.115.37.45 | 7002 | 7005 |
+| server3 | 10.115.37.46 | 7003 | 7006 |
+
+
+
+
+
+验证集群。
+
+在server1上连接集群的7001端口的节点，具体如下。
+
+```css
+/usr/local/redis-5.0.8/src/redis-cli -h 10.115.37.44 -c -p 7001
+
+/usr/local/redis-5.0.8/src/redis-cli -h 10.115.37.45 -c -p 7002
+[root@server1 ~]# redis-cli -h 192.168.65.151 -c -p 7002
+192.168.65.151:7002> get yan
+-> Redirected to slot [13290] located at 192.168.65.152:7003
+"ning"
+192.168.65.152:7003>
+```
+
+## Redis监控服务安装部署（RedisLive）
+
+二话不说先上图，能看上再玩，看不上略过，网上各种监控软件还得用自己喜欢的不是！
+
+项目地址：https://github.com/nkrode/RedisLive
+![redis-live.png](https://imgedu.lagou.com/5ce3e71b32cff76795.png)
+
+### 1、环境依赖
+
+- 一些环境依赖，如：yum install gcc g++ zlib zlib-devel openssl openssl-devel
+
+- 安装python2.7+环境
+
+- 安装setuptools：
+
+  - wget --no-check-certificate https://pypi.python.org/packages/source/s/setuptools/setuptools-19.6.tar.gz#md5=c607dd118eae682c44ed146367a17e26
+  - 进入setuptools目录，执行python setup.py install
+
+- 安装pip：
+
+  - pip install --upgrade pip
+
+    Successfully installed pip-20.0.2
+
+  - 
+
+- 安装redislive需要的一些依赖（tornado，redis，python-dateutil，argparse），期间有可能需要升级pip，看情况调整
+
+  - pip install tornado==2.1.1
+
+  - pip install python-dateutil==1.5
+
+  - pip install argparse==1.2.1
+
+  - pip install redis==2.10.6 
+
+    pip uninstall redis (这个特别注意下，不管你实际用的什么版本redis)
+
+    
+
+- 下载redislive源代码，解压配置redis-liver-conf文件
+
+  git clone https://github.com/kumarnitin/RedisLive.git
+
+  cd /usr/local/RedisLive/src
+
+  ```shell
+  {
+  	"RedisServers":
+  	[ 
+  		{
+    			"server": "10.115.37.44",
+    			"port" : 7001
+  		},
+  		{
+    			"server": "10.115.37.44",
+    			"port" : 7004
+  		},
+  		{
+    			"server": "10.115.37.45",
+    			"port" : 7002
+  		},
+  		{
+    			"server": "10.115.37.45",
+    			"port" : 7005
+  		},
+  		{
+    			"server": "10.115.37.46",
+    			"port" : 7003
+  		},
+  		{
+    			"server": "10.115.37.46",
+    			"port" : 7006
+  		}
+  			
+  	],
   
+  	"DataStoreType" : "redis",
+  
+  	"RedisStatsServer":
+  	{
+  		"server" : "10.115.37.44",
+  		"port" : 6385
+  	},
+  	
+  	"SqliteStatsStore" :
+  	{
+  		"path":  "/opt/redis-cluster/data/redislive.db"
+  	}
+  }
+  
+  ```
+
+  ##### 2 启动服务
+
+  ###### 2.1 启动监控服务
+
+  
+
+  ```jsx
+  $./redis-monitor.py --duration=30 & 
+  ```
+
+  duration参数指定了监控服务的运行时间，单位为秒。
+
+  ###### 2.2 将监控服务设置为定时任务
+
+  由于redis-monitor.py脚本采用向 Redis 实例发送 MONITOR 命令和 INFO 命令的方式来取得监控数据，而 MONITOR 命令对于 Redis 实例的性能有较大影响，因此，对于生产环境下的redis-monitor.py的部署，需要设置一个较适宜的duration参数，并使用 crontab 来定时执行该脚本。
+   首先可以创建一个定时任务文件，方便统一管理定时任务。
+
+  
+
+  ```bash
+  $sudo vim /etc/davecron
+  #将监控服务的定时任务写入到定时任务的文件中
+  *\1 * * * * python /usr/local/RedisLive/src/redis-monitor.py --duration 30 >/dev/null 2>&1
+  #1分钟运行一次监控服务，监控服务一次运行30秒
+  ```
+
+  启动定时任务
+
+  
+
+  ```bash
+  $sudo crontab /etc/rootcron
+  ```
+
+  ###### 2.3 启动Web服务
+
+  
+
+  ```ruby
+  cd/usr/local/RedisLive/src/
+  ./redis-live.py &
+  http://10.115.37.44:8888/index.html
+  ```
+
+  
+
+  
+
+
+
+
+
+
 
 ## 学习输出
 
