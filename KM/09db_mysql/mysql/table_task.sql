@@ -1,5 +1,1 @@
-
-
-
-
-insert into promise_day (note) values ('');
+insert into task (note) values ('日拱一卒');
