@@ -1,14 +1,3 @@
----
-title: "card_zooKeeper"
-date: 2020-04-21T14:39:31+08:00
-description: ""
-draft: false
-tags: ["中间件"]
-categories: ["中间件"]
----
-
-
-
 ##  协调者ZooKeeper
 
 ### 一、这个技术出现的背景、初衷和要达到什么样的目标或是要解决什么样的问题
