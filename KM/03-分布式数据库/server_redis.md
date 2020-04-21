@@ -2077,6 +2077,16 @@ client-output-buffer-limit slave设置，当这个值太小会导致主从复制
 
 https://github.com/antirez/redis/issues/1400
 
+
+
+# 第九天
+
+# [Distributed locks with Redis](https://redis.io/topics/distlock)
+
+​	
+
+
+
 ## 参考
 
 
@@ -2137,3 +2147,4 @@ https://cloud.tencent.com/developer/article/1084794
 https://www.zhihu.com/question/51836333
 
 https://www.cnblogs.com/youxin/p/3693252.html
+
