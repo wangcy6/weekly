@@ -30,6 +30,10 @@
 
 
 
+1. 什么是僵尸进程和孤儿进程？
+
+   
+
 
 
 
@@ -92,14 +96,77 @@ Multi-Process EDSM
 
  Multi-Process EDSM has very good system scalability because no resources are shared among different processes and there is no synchronization overhead.
 
+1. ![image-20200418192207406](images/image-20200418192207406.png)么是僵尸进程和孤儿进程 守护进程？
+
+**挂起** 是指在[操作系统](https://zh.wikipedia.org/wiki/操作系统)进程管理将前台的[进程](https://zh.wikipedia.org/wiki/行程)暂停并转入后台的动作。将进程挂起可以让用户在前台执行其他的进程。挂起的进程通常**释放除CPU以外已经占有的系统资源**，如内存等。
+
+[https://zh.wikipedia.org/zh-hans/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B](https://zh.wikipedia.org/zh-hans/守护进程)
+
+http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html
+
+
+
+### 11.6 线程的概念
+
+1. 引入线程的目的是什么？
+2. 什么是线程？
+3. 进程与线程的联系和区别是什么？
+
+### 
+
+![image-20200418193708778](images/image-20200418193708778.png)
+
+
+
+线程有时被称为轻量级进程(Lightweight Process，LWP），是程序执行流的最小单元。
+
+一个[标准](https://wiki.mbalib.com/wiki/标准)的线程由线程ID，当前指令指针([PC](https://wiki.mbalib.com/wiki/PC)），寄存器集合和堆栈组成
+
+| 进程占有的资源                                           | 线程占有的资源               |
+| -------------------------------------------------------- | ---------------------------- |
+| 地址空间  全局变量  打开的文件  子进程  信号量  账户信息 | 栈  寄存器  状态  程序计数器 |
+
+在每个线程中都应具有一个用于控制线程运行的线程控制块TCB，用于指示被执行指令序列的程序计数器、保留局部变量、少数状态参数和返回地址等的一组寄存器和堆栈。
+
+- [https://wiki.mbalib.com/wiki/%E7%BA%BF%E7%A8%8B](https://wiki.mbalib.com/wiki/线程)
+
+![image-20200418194314321](images/image-20200418194314321.png)-
+
+- 为什么需要线程
+
+  ![image-20200418194755173](images/image-20200418194755173.png)
+
+  ![image-20200418194818564](images/image-20200418194818564.png)
+
+  ![image-20200418194946363](images/image-20200418194946363.png)
+
+- 线程概念
+
+  **线程**（英语：thread）是[操作系统](https://zh.wikipedia.org/wiki/操作系统)能够进行运算[调度](https://zh.wikipedia.org/wiki/调度)的最小单位**。大部分情况下**，它被包含在[进程](https://zh.wikipedia.org/wiki/进程)之中，是[进程](https://zh.wikipedia.org/wiki/进程)中的实际运作单位。一条线程指的是[进程](https://zh.wikipedia.org/wiki/进程)中一个单一顺序的控制流，
+
+  
 
 ## 三、你的回答（限制在1分钟，5句话，12秒一句）
 
+- 程序执行全部资源vs程序执行必要资源 【关系】
 
+  程序执行流的最小单元
 
+  
 
+  
 
+  线程：程序执行各自独占栈和寄存器等资源
 
+  
+
+- 通信：依赖内核 可以不依赖内核 隔离 共享
+
+- 场景：多任务 vs子任务   用户体验 异步 响应。io 
+
+ 项目与任务 工厂与车间 
+
+一个进程中可以并发多个线程，每条线程并行执行不同的任务
 
 
 
