@@ -268,47 +268,11 @@ private:
 
 ~~~
 
+# 第 3 章 函数对象
 
 
 
 
-# 内存管理 76page
-
-
-
-![image.png](../images/XpBAW8L61kOdZwz.png)
-
-![image-20200103152815380](../images/image-20200103152815380.png)
-
-
-
-![image-20200103155245043](../images/image-20200103155245043.png)
-
-![image-20200103155348842](../images/image-20200103155348842.png)
-
-![image-20200103160638457](../images/image-20200103160638457.png)
-
-- 我在这里
-
-https://github.com/wangcy6/weekly/blob/master/KM/03code/cpp/smart_ptr-develop/include/boost/smart_ptr/shared_ptr.hpp
-
-
-
-
-
-https://github.com/wangcy6/weekly/blob/master/KM/03code/cpp/smart_ptr-develop/include/boost/smart_ptr/detail/shared_count.hpp
-
-
-
-# 第三部分 线程模块
-
-3.1 共享互斥 `shared_mutex`
-
-> book 497page 
-
- Boost 都提供了 `shared_mutex` 来解决「读者-写者」问题。多个读线程 一个写线程。
-
-shared_mutex` 这个名字并不十分贴切，不如 pthread 直呼「读写锁」
 
 
 
@@ -323,6 +287,14 @@ http://zh.highscore.de/cpp/boost/
 
 
 ![image-20200325182016728](../images/image-20200325182016728.png)
+
+
+
+
+
+
+
+
 
 # References
 

@@ -7,3 +7,6 @@ create table note(
    PRIMARY KEY ( id )
 );
 ALTER TABLE note CONVERT TO CHARACTER SET utf8mb4;
+
+insert into note(note,author) value('选择正确的“难受”','通往财富自由之路')；
+select * from note; 
