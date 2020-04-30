@@ -15,6 +15,10 @@ using namespace std;
 
 
 /****
+创建有名信号量，父进程fork出一个子进程，两者轮流打印自己的pid
+创建有名信号量，父进程fork出一个子进程，两者轮流打印自己的pid
+创建有名信号量，父进程fork出一个子进程，两者轮流打印自己的pid
+
 一. 什么是信号量
 信号量：
 1. 保证进程同步执行
@@ -71,7 +75,7 @@ int main() {
 	if (child_pid < 0) {
 		perror("fork error");
 		return 0;
-	}
+	} //子进程
 	else if (child_pid == 0) {
 		for (int i = 0; i < 5; i++) {
 			sem_wait(&(p->sem2)); //等待，激活，然后等待
