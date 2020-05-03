@@ -324,19 +324,85 @@ http://zh.highscore.de/cpp/boost/
 
 ![image-20200325182016728](../images/image-20200325182016728.png)
 
-# References
-
-[1]  https://zh.cppreference.com/w/cpp/thread/shared_mutex
-
-[2] https://zh.cppreference.com/w/cpp/thread/condition_variable
-
-[3] https://www.jianshu.com/p/f1925247c14f
-
-[4] https://www.boost.org/doc/libs/1_39_0/doc/html/boost_asio/examples.html Boost.Asio
-
-[5] https://zhiqiang.org/coding/std-make-shared-enable-shared-from-this.html
-
-[7] https://heleifz.github.io/14696398760857.html
 
 
+# Linux 多线程服务端编程：使用 muduo C++ 网络库
+
+http://chenshuo.com/book/
+
+
+
+## 第三章 多线程服务器的场合与常见的编程
+
+
+
+
+
+![image-20200425150303107](images/image-20200425150303107.png)
+
+
+
+
+
+![image-20200425150507340](images/image-20200425150507340.png)
+
+- 状态机编程
+
+![image-20200425150538522](images/image-20200425150538522.png)
+
+
+
+- 单线程
+
+  ![image-20200425150859141](images/image-20200425150859141.png)
+
+- 连接 读写 和处理 开启几个线程
+
+![image-20200425155412831](images/image-20200425155412831.png)
+
+- 计算 和IO
+
+![image-20200425155700722](images/image-20200425155700722.png)
+
+
+
+- TCP只进程通信的首选
+
+  ![image-20200425155925736](images/image-20200425155925736.png)
+
+- tcp长连接通信
+
+  ![image-20200425160239114](images/image-20200425160239114.png)
+
+
+
+
+
+![image-20200425160730416](images/image-20200425160730416.png)
+
+
+
+![image-20200425162058072](images/image-20200425162058072.png)
+
+- 比可替换
+
+  ![image-20200425162239809](images/image-20200425162239809.png)
+
+- 增加cpu 无法提交io处理
+
+![image-20200425163454780](images/image-20200425163454780.png)
+
+-异步
+
+
+
+![image-20200425173832365](images/image-20200425173832365.png)
+
+- 一个服务器一般有多少个线程 
+
+![image-20200425174028921](images/image-20200425174028921.png)
+
+- 用户响应时间
+
+![image-20200425174421057](images/image-20200425174421057.png)
 
