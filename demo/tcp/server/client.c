@@ -12,20 +12,21 @@
 /*                                                                         */    
 /*                                                                         */    
 /***************************************************************************/
-    #include <stdio.h> 
-    #include <stdlib.h> 
-    #include <errno.h> 
-    #include <string.h> 
-    #include <netdb.h> 
-    #include <sys/types.h> 
-    #include <netinet/in.h> 
-    #include <sys/socket.h> 
-    #include <unistd.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <errno.h> 
+#include <string.h> 
+#include <netdb.h> 
+#include <sys/types.h> 
+#include <netinet/in.h> 
+#include <sys/socket.h> 
+#include <unistd.h>
+#include <fcntl.h> /* Added for the nonblocking socket */
 
-    #define PORT 3490    /* the port client will be connecting to */
+#define PORT 3490    /* the port client will be connecting to */
+#define MAXDATASIZE 1024 /* max number of bytes we can get at once */
 
-    #define MAXDATASIZE 100 /* max number of bytes we can get at once */
-
+    //./client 127.0.0.1
     int main(int argc, char *argv[])
     {
         int sockfd, numbytes;  
@@ -58,22 +59,35 @@
             perror("connect");
             exit(1);
         }
-	while (1) {
-		if (send(sockfd, "Hello, world!\n", 14, 0) == -1){
-                      perror("send");
+
+	while (1) 
+    {   
+        char sendBuffer[] = "Hello, world!";
+        int sendSize =send(sockfd, sendBuffer, sizeof(sendBuffer), 0);
+		if (sendSize == -1)
+        {    
+              printf(" send failed \n");
+              perror("send");
 		      exit (1);
 		}
-		printf("After the send function \n");
+		printf("sockfd =%d, send sendSize=%d ,data=%s\n",sockfd,sendSize,sendBuffer);
+        sleep(2);
+        
+        //对方一直不发数据，阻塞等待,这程序完蛋了
+        //recvv将会阻塞，直到缓冲区里有至少一个字节才返回，当没有数据到来时，recv会一直阻塞或者直到超时，不会返回
+        fcntl(sockfd, F_SETFL, O_NONBLOCK); /* Change the socket into non-blocking state	*/
+        if ((numbytes=recv(sockfd, buf, MAXDATASIZE, 0)) == -1) {
+            
+            printf(" recv failed \n");
+            perror("recv");
+            exit(1);
+        }	
 
-        	if ((numbytes=recv(sockfd, buf, MAXDATASIZE, 0)) == -1) {
-            		perror("recv");
-            		exit(1);
-		}	
-
-	        buf[numbytes] = '\0';
-
-        	printf("Received in pid=%d, text=: %s \n",getpid(), buf);
+	    buf[numbytes] = '\0';
+        printf("Received in pid=%d, text=: %s \n",getpid(), buf);
 		sleep(1);
+
+        printf("----------- \n");
 
 	}
 
@@ -81,4 +95,6 @@
 
         return 0;
     }
+
+    //https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/
 

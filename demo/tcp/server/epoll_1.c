@@ -13,6 +13,8 @@
 #include <errno.h>
 
 #define MAXEVENTS 64
+#define MAXSIZE 1024
+
 
 static int make_socket_non_blocking (int sfd)
 {
@@ -82,14 +84,16 @@ static int create_and_bind (char *port)
     return sfd;
 }
 
-//gcc epoll_1.c 
+//gcc epoll_1.c -o epollServer
 int main (int argc, char *argv[])
 {
     int sfd, s;
     int efd;
-    struct epoll_event event;
-    struct epoll_event *events;
+    
+    struct epoll_event event; // 事件
+    struct epoll_event *events; //激活事件集合
 
+    char buffer[MAXSIZE];
     if (argc != 2)
     {
         fprintf (stderr, "Usage: %s [port]\n", argv[0]);
@@ -135,20 +139,19 @@ int main (int argc, char *argv[])
     while (1)
     {
         int n, i;
-
+       
         n = epoll_wait (efd, events, MAXEVENTS, -1);
+        printf("wake up process n=%d .... \n",n);
+
+
+
         for (i = 0; i < n; i++)
         {
-            if ((events[i].events & EPOLLERR) ||
-                (events[i].events & EPOLLHUP) ||
-                (!(events[i].events & EPOLLIN)))
-            {
-                // 监测的文件描述符出错了
-                fprintf (stderr, "epoll error\n");
-                close (events[i].data.fd);
-                continue;
+            if(events[i].data.fd < 0)
+            {        
+                    printf("fd is < 0 \n");
+                    continue;
             }
-
             else if (sfd == events[i].data.fd)
             {
                 //监听套接字就绪，表明有一个或者多个连接进来
@@ -209,15 +212,19 @@ int main (int argc, char *argv[])
                 {
                     //如果是已经连接的用户，并且收到数据，
                     //那么进行读入
+                    //https://baike.baidu.com/item/epoll
 
-                    int done = 0;
-                    //socket读取数据逻辑
+                     int sockfd_r =events[i].data.fd;
+                     memset(buffer, 0, sizeof(buffer));
+                    //printf("sockfd_r=%d read data begin ...\n",sockfd_r);
+                    //////////////////////step 01 socket读取数据逻辑///////////////////////
                     while (1)
-                    {
-                        ssize_t count;
-                        char buf[512];
+                    {    
 
-                        count = read (events[i].data.fd, buf, sizeof buf);
+                        
+                        ssize_t  count = read (sockfd_r, buffer, sizeof(buffer));
+                        printf("read count=%d, buf =%s \n",count,buffer);
+
                         if (count == -1)
                         {
                             // 如果 errno == EAGAIN，说明所有数据已读取完毕
@@ -226,39 +233,55 @@ int main (int argc, char *argv[])
                             {
                             // 读取出错
                             perror ("read");
-                            done = 1;
+                            
                             }
+                           // printf("buffer is empty errno=EAGAIN \n");
                             break;
                         }
                         else if (count == 0)
                         {
                             // 客户端断开了连接
-                            done = 1;
+                            // printf(" client peer is closed,  s \n");
+                             close (sockfd_r);
+                          
                             break;
                         }
 
-                    }
-
-                    //修改sockfd_r上要处理的事件为EPOLLOUT
-                    event.data.fd = events[i].data.fd;
+                    }  
+                      //printf("sockfd_r=%d read data end ...\n",sockfd_r);
+                    /////////////////step 02 修改sockfd_r上要处理的事件为EPOLLOUT//////////////////
+                    event.data.fd = sockfd_r;
                     event.events = EPOLLOUT | EPOLLET;
                     epoll_ctl(efd, EPOLL_CTL_MOD, events[i].data.fd, &event);
 
         
-                }else if(events[n].events & EPOLLOUT)
-               {
+                }else if(events[i].events & EPOLLOUT)
+               {      //自己i写成n了，不存在的链接，根本代码执行不到这里，copy错误
                     //如果有数据发送
-                    int sockfd_w = events[n].data.fd;
-                    char buffer[50] = "GeeksForGeeks is for programming geeks."; 
-                    write(sockfd_w, buffer, sizeof(buffer));
-                    //修改sockfd_w上要处理的事件为EPOLLIN
+
+                    //printf("........send begin.EPOLLOUT .... \n");
+
+                   int sockfd_w = events[i].data.fd; //自己i写成n了，一个不存在的链接肯定发送失败。你真2,都是copy造成的错误
+                   
+                   int len=write(sockfd_w, buffer, sizeof(buffer));
+                   
+                   printf("fd=%d,write=%d data=%s\n",sockfd_w,len,buffer);
+
+
+                    /////////////////step 02 修改sockfd_w上要处理的事件为EPOLLIN//////////////////
+                    //why????????????????????????????
                     event.data.fd = sockfd_w;
                     event.events = EPOLLIN | EPOLLET;
                     epoll_ctl(efd, EPOLL_CTL_MOD, sockfd_w, &event);
+
+                   
+                   // printf(".........send end .... \n");
+
                }
+               
         }
      }
-    } //end main loop
+    } //end main loop 3490
 
     free (events);
 
@@ -266,3 +289,4 @@ int main (int argc, char *argv[])
 
     return EXIT_SUCCESS;
 }
+//./epollServer 3490

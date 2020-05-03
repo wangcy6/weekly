@@ -137,6 +137,8 @@ int main (int argc, char *argv[])
         int n, i;
 
         n = epoll_wait (efd, events, MAXEVENTS, -1);
+         printf(" epoll_wait n=%d \n",n);
+
         for (i = 0; i < n; i++)
         {
             if ((events[i].events & EPOLLERR) ||
@@ -208,13 +210,14 @@ int main (int argc, char *argv[])
                 // 已连接套接字可读，我们读取该套接字所有的数据并打印出来
                 // 由于使用了 ET 模式，我们必须将所有可读数据读取完毕
                 int done = 0;
-
+               
                 while (1)
                 {
                     ssize_t count;
                     char buf[512];
-
+                     printf("read data begin \n");
                     count = read (events[i].data.fd, buf, sizeof buf);
+                    printf("read count=%d, buf =%s \n",count,buf);
                     if (count == -1)
                     {
                         // 如果 errno == EAGAIN，说明所有数据已读取完毕
@@ -225,6 +228,7 @@ int main (int argc, char *argv[])
                             perror ("read");
                             done = 1;
                         }
+                         printf("errno EAGAIN \n");
                         break;
                     }
                     else if (count == 0)
@@ -233,14 +237,18 @@ int main (int argc, char *argv[])
                         done = 1;
                         break;
                     }
+                     printf("read ... end \n");
 
-                    // 打印到标准输出
+
+                     printf("write begin.. \n");
+                    //打印到标准输出 只接收不输出。
                     s = write (1, buf, count);
                     if (s == -1)
                     {
                         perror ("write");
                         abort ();
                     }
+                    printf("write end. \n");
                 }
 
                 if (done)
