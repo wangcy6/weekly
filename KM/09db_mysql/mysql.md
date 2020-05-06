@@ -8,7 +8,9 @@ categories: ["book"]
 
 ---
 
+# FQA
 
+- 
 
 # sql
 
@@ -144,3 +146,6 @@ mysqladmin -uroot -p password 123456
 
 # 高性能Mysql第三版
 
+## ref
+
+https://leetcode-cn.com/circle/article/M2rEuR/
