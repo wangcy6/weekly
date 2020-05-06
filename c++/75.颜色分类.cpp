@@ -22,8 +22,8 @@
  * 
  * 示例:
  * 
- * 输入: [2,0,2,1,1,0]
- * 输出: [0,0,1,1,2,2]
+ * 输入: [2,0,2,1,1,0,1]
+ * 输出: [0,0,1,1,1,2,2]
  * 
  * 进阶：
  * 
@@ -65,15 +65,49 @@ https://wiesen.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AC%94%E8%A
 **/
 
 // @lc code=start
-class Solution {
+class Solution
+{
 public:
-    /**
+  /**
      * 算法描述：
      * 
      **/
-    void sortColors(vector<int>& nums) {
-        
+  void sortColors(vector<int> &nums)
+  {
+
+    int low = 0;                // < pivot
+    int high = nums.size() - 1; //> pivot
+    int mid = 0;                //  ==pivot
+
+    while (mid <= high)
+    {
+      if (nums[mid] == 1)
+      {
+        mid++; //等于，不移动
+      }
+      else if (nums[mid] > 1)
+      {
+        //从左边发现大记录，需要移动右面去,nums[mid]很明确了 =2，
+        //原来high位置元素具体不清楚的。可能等于因此swap mid位置不变
+
+        swap(nums,mid, high);
+        high--;
+      }
+      else if (nums[mid] < 1)
+      {
+        //从右面发现大记录，需要移动左边去。 nums[mid]很明确=0，可能自己的，可能上面过来的。low 肯定也是0.
+        swap(nums,mid, low);
+        low++;
+        mid++;
+      }
     }
+  }
+
+  void swap(vector<int> &nums,int i,int j)
+  {
+     int temp =nums[i];
+     nums[i] =nums[j];
+     nums[j] =temp;
+  }
 };
 // @lc code=end
-
