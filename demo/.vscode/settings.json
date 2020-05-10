@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "*.tcc": "c",
+        "fcntl.h": "c",
+        "sstream": "c",
+        "vector": "cpp",
+        "string": "cpp",
+        "stdexcept": "cpp"
+    }
+}
