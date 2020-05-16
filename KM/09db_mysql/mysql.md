@@ -1,6 +1,6 @@
 ---
-title: "mysql "
-date: 2019-11-27
+title: "mysql 45讲"
+date: 2020-5-13
 description: " 你明明知道数据库是你弱点，你为什么不现在补救一下 必须掌握"
 draft: false
 tags: ["mysql"]
@@ -10,9 +10,11 @@ categories: ["book"]
 
 # FQA
 
-- 
 
-# sql
+
+
+
+# 基础知识
 
 ## 参考资料1 [廖雪峰的官方网站](https://www.liaoxuefeng.com/)
 
@@ -146,6 +148,7 @@ mysqladmin -uroot -p password 123456
 
 # 高性能Mysql第三版
 
-## ref
 
-https://leetcode-cn.com/circle/article/M2rEuR/
+
+# MySQL技术内幕(InnoDB存储引擎)
+
