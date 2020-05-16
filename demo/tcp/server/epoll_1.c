@@ -252,6 +252,8 @@ int main (int argc, char *argv[])
                     /////////////////step 02 修改sockfd_r上要处理的事件为EPOLLOUT//////////////////
                     event.data.fd = sockfd_r;
                     event.events = EPOLLOUT | EPOLLET;
+                    //屏蔽后整个进程挂住了。
+                   // epoll_ctl(efd, EPOLL_CTL_MOD, events[i].data.fd, &event);
                     epoll_ctl(efd, EPOLL_CTL_MOD, events[i].data.fd, &event);
 
         
