@@ -80,3 +80,44 @@ public:
 };
 // @lc code=end
 
+class Solution
+{
+public:
+
+    /***
+     1 解题思路2：
+       因为查询时间点，是有限的，开始时间和结束时间也是有点的 不超过1000个
+       直接计算[0-1001]个点直接 全部同时学习的学生。
+       For multiple queries:
+       We can calculate the overlapping intervals at any time by maintaining an array that contains the intervals of all the students. 
+       Doing this requires O(maxm_element + numberOfStudents) time.
+     2.算法描述：
+       1. 用开始时间，作为数组下标，遍历开始时间数组。count[start] += 1;
+       2. 用结束时间，作为数组下标，遍历结束时间数组。 count[end + 1] -= 1;
+       3. 累加：count[i] += count[i - 1];
+     3.复杂度：时间 O(N),空间O(N)
+    int busyStudent(vector<int> &startTime, vector<int> &endTime, int queryTime)
+    {
+
+        //作为一个服务,这里假如每次查询 startTime,endTime固定不变，变化的queryTime.
+        // 如果每次startTime，endTime都是变化的，这个算法浪费空间了.
+        vector<int> count(1002, 0); //key 时间点，value 10002是防止end+1越界，[0--1001]
+
+        for (auto start : startTime)
+        {
+            count[start] += 1;
+        }
+
+        for (auto end : endTime)
+        {
+            count[end + 1] -= 1;
+        }
+        //[1,100],[2,100],[3,100],[4,100] 在4点，100点同时多少个学生在学习,答案就是4.在101点呢，都结束了。
+        for (int i = 1; i < 1002; i++)
+        {
+            count[i] += count[i - 1];
+        }
+
+        return count[queryTime];
+    }
+};
