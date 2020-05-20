@@ -7,7 +7,8 @@ class B {
 public:
   virtual ~B() {}
 };
-class D : public virtual B {};
+class D : public  B {};
+//class D : public virtual B {};
 class X {};
 int main() {
   D *d = new D;

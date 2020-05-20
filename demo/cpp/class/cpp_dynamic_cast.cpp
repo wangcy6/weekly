@@ -5,8 +5,7 @@ class Top1
 {
 public:
   int a;
-  //~Top() {} fuck virtual 忘记声明了，你以为~就是虚函数了
- virtual  ~Top1() {}
+  virtual  ~Top1() {}
 };
 
 class Left1 :  public Top1
