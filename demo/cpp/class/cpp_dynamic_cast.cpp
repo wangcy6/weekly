@@ -61,7 +61,7 @@ void test1()
   Top *top2 = bottom2;
   
   //Left *left = static_cast<Left*>(top1);  //static_cast  不适用 A 和B 之间继承有歧义，可能存在多个 无法跳转的
-
+  //https://www.oschina.net/translate/cpp-virtual-inheritance?lang=chs&p=1
   //Bottom *sbp = static_cast<Bottom*>(top1); 
   Bottom *sbp = dynamic_cast<Bottom*>(top1);  //static_cast  不适用虚继承的down转换
   
@@ -93,9 +93,13 @@ void testSize()
 int main()
 {
   test1();
-  testSize();
+  //testSize();
   return 0;
 }
 
 //https://www.cnblogs.com/dirichlet/archive/2010/04/01/2542360.html
 //https://coolshell.cn/articles/12176.html
+
+
+//https://www.cnblogs.com/dirichlet/archive/2010/04/01/2542360.html
+ //这篇文章主要讲解虚继承的C++对象内存分布问题，从中也引出了dynamic_cast和static_cast本质区别、虚函数表的格式等一些大部分C++程序员都似是而非的概念

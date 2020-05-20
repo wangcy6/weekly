@@ -7,7 +7,8 @@ class B {
 public:
   virtual ~B() {}
 };
-class D : public virtual B {};
+class D : public  B {};
+//class D : public virtual B {};
 class X {};
 int main() {
   D *d = new D;
@@ -17,3 +18,5 @@ int main() {
 
   return 0;
 }
+
+//https://www.oschina.net/translate/cpp-virtual-inheritance?print
