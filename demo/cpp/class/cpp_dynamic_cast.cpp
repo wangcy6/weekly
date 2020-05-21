@@ -98,3 +98,5 @@ int main()
 
 //https://www.cnblogs.com/dirichlet/archive/2010/04/01/2542360.html
 //https://coolshell.cn/articles/12176.html
+
+//浅拷贝,引用计数copy，移动copy  深度拷贝。
