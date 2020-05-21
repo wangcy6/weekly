@@ -5,8 +5,7 @@ class Top1
 {
 public:
   int a;
-  //~Top() {} fuck virtual 忘记声明了，你以为~就是虚函数了
- virtual  ~Top1() {}
+  virtual  ~Top1() {}
 };
 
 class Left1 :  public Top1
@@ -100,6 +99,10 @@ int main()
 //https://www.cnblogs.com/dirichlet/archive/2010/04/01/2542360.html
 //https://coolshell.cn/articles/12176.html
 
+<<<<<<< HEAD
 
 //https://www.cnblogs.com/dirichlet/archive/2010/04/01/2542360.html
  //这篇文章主要讲解虚继承的C++对象内存分布问题，从中也引出了dynamic_cast和static_cast本质区别、虚函数表的格式等一些大部分C++程序员都似是而非的概念
+=======
+//浅拷贝,引用计数copy，移动copy  深度拷贝。
+>>>>>>> 09569121c3f8516c12053b6cd7673b356e4b1600
