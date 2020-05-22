@@ -57,3 +57,5 @@ core.*
 #window
 *.exe
 *.out
+*.mp4
+*.mp3
