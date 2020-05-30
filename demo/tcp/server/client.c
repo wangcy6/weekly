@@ -75,7 +75,7 @@
         
         //对方一直不发数据，阻塞等待,这程序完蛋了
         //recvv将会阻塞，直到缓冲区里有至少一个字节才返回，当没有数据到来时，recv会一直阻塞或者直到超时，不会返回
-        fcntl(sockfd, F_SETFL, O_NONBLOCK); /* Change the socket into non-blocking state	*/
+        //fcntl(sockfd, F_SETFL, O_NONBLOCK); /* Change the socket into non-blocking state	*/
         if ((numbytes=recv(sockfd, buf, MAXDATASIZE, 0)) == -1) {
             
             printf(" recv failed \n");

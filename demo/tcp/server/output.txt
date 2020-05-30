@@ -1,0 +1,86 @@
+11:10:45.761845 write(1, " epoll_wait n=-1 \n", 18) = 18 <0.000107>
+11:10:45.762129 epoll_wait(4, [{EPOLLIN, {u32=3, u64=18035757381844995}}], 64, -1) = 1 <142.427758>
+11:13:08.189998 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000152>
+11:13:08.190259 accept(3, {sa_family=AF_INET, sin_port=htons(43404), sin_addr=inet_addr("127.0.0.1")}, [16]) = 5 <0.000017>
+11:13:08.190386 write(1, "Accepted connection on descripto"..., 65) = 65 <0.000070>
+11:13:08.190504 fcntl(5, F_GETFL)       = 0x2 (flags O_RDWR) <0.000010>
+11:13:08.190572 fcntl(5, F_SETFL, O_RDWR|O_NONBLOCK) = 0 <0.000010>
+11:13:08.190625 epoll_ctl(4, EPOLL_CTL_ADD, 5, {EPOLLIN|EPOLLET, {u32=5, u64=18035757381844997}}) = 0 <0.000012>
+11:13:08.190678 accept(3, 0x7ffcd4b63b70, [16]) = -1 EAGAIN (Resource temporarily unavailable) <0.000019>
+11:13:08.190866 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <0.000097>
+11:13:08.191128 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000077>
+11:13:08.191297 write(1, "read data begin \n", 17) = 17 <0.000068>
+11:13:08.191421 read(5, "Hello, world!\0", 512) = 14 <0.000013>
+11:13:08.191479 write(1, "read count=14, buf =Hello, world"..., 35) = 35 <0.000064>
+11:13:08.191588 write(1, "read ... end \n", 14) = 14 <0.000065>
+11:13:08.191704 write(1, "write begin.. \n", 15) = 15 <0.000062>
+11:13:08.191817 write(1, "Hello, world!\0", 14) = 14 <0.000077>
+11:13:08.191965 write(1, "write end. \n", 12) = 12 <0.000090>
+11:13:08.192107 write(1, "read data begin \n", 17) = 17 <0.000083>
+11:13:08.192239 read(5, 0x7ffcd4b63760, 512) = -1 EAGAIN (Resource temporarily unavailable) <0.000013>
+11:13:08.192307 write(1, "read count=-1, buf =Hello, world"..., 35) = 35 <0.000048>
+11:13:08.192399 write(1, "errno EAGAIN \n", 14) = 14 <0.000038>
+11:13:08.192481 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <1.999261>
+11:13:10.191819 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000021>
+11:13:10.191908 write(1, "read data begin \n", 17) = 17 <0.000010>
+11:13:10.191953 read(5, "", 512)        = 0 <0.000011>
+11:13:10.192225 write(1, "read count=0, buf =Hello, world!"..., 34) = 34 <0.000059>
+11:13:10.192337 write(1, "Closed connection on descriptor "..., 34) = 34 <0.000053>
+11:13:10.192442 close(5)                = 0 <0.000041>
+11:13:10.192520 epoll_wait(4, [{EPOLLIN, {u32=3, u64=18035757381844995}}], 64, -1) = 1 <25.542734>
+11:13:35.735354 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000127>
+11:13:35.735551 accept(3, {sa_family=AF_INET, sin_port=htons(43430), sin_addr=inet_addr("127.0.0.1")}, [16]) = 5 <0.000015>
+11:13:35.735623 write(1, "Accepted connection on descripto"..., 65) = 65 <0.000061>
+11:13:35.735726 fcntl(5, F_GETFL)       = 0x2 (flags O_RDWR) <0.000008>
+11:13:35.735774 fcntl(5, F_SETFL, O_RDWR|O_NONBLOCK) = 0 <0.000011>
+11:13:35.735828 epoll_ctl(4, EPOLL_CTL_ADD, 5, {EPOLLIN|EPOLLET, {u32=5, u64=18035757381844997}}) = 0 <0.000012>
+11:13:35.735883 accept(3, 0x7ffcd4b63b70, [16]) = -1 EAGAIN (Resource temporarily unavailable) <0.000017>
+11:13:35.735949 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <0.000124>
+11:13:35.736215 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000074>
+11:13:35.736348 write(1, "read data begin \n", 17) = 17 <0.000059>
+11:13:35.736452 read(5, "Hello, world!\0", 512) = 14 <0.000017>
+11:13:35.736515 write(1, "read count=14, buf =Hello, world"..., 35) = 35 <0.000059>
+11:13:35.736618 write(1, "read ... end \n", 14) = 14 <0.000054>
+11:13:35.736714 write(1, "write begin.. \n", 15) = 15 <0.000071>
+11:13:35.736834 write(1, "Hello, world!\0", 14) = 14 <0.000059>
+11:13:35.736946 write(1, "write end. \n", 12) = 12 <0.000059>
+11:13:35.737093 write(1, "read data begin \n", 17) = 17 <0.000067>
+11:13:35.737228 read(5, 0x7ffcd4b63760, 512) = -1 EAGAIN (Resource temporarily unavailable) <0.000010>
+11:13:35.737282 write(1, "read count=-1, buf =Hello, world"..., 35) = 35 <0.000042>
+11:13:35.737369 write(1, "errno EAGAIN \n", 14) = 14 <0.000038>
+11:13:35.737450 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <1.999357>
+11:13:37.736981 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000116>
+11:13:37.737220 write(1, "read data begin \n", 17) = 17 <0.000058>
+11:13:37.737324 read(5, "", 512)        = 0 <0.000010>
+11:13:37.737371 write(1, "read count=0, buf =Hello, world!"..., 34) = 34 <0.000054>
+11:13:37.737465 write(1, "Closed connection on descriptor "..., 34) = 34 <0.000053>
+11:13:37.737560 close(5)                = 0 <0.000036>
+11:13:37.737632 epoll_wait(4, [{EPOLLIN, {u32=3, u64=18035757381844995}}], 64, -1) = 1 <88.805624>
+11:15:06.543365 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000116>
+11:15:06.543571 accept(3, {sa_family=AF_INET, sin_port=htons(43518), sin_addr=inet_addr("127.0.0.1")}, [16]) = 5 <0.000015>
+11:15:06.543653 write(1, "Accepted connection on descripto"..., 65) = 65 <0.000064>
+11:15:06.543761 fcntl(5, F_GETFL)       = 0x2 (flags O_RDWR) <0.000008>
+11:15:06.543806 fcntl(5, F_SETFL, O_RDWR|O_NONBLOCK) = 0 <0.000008>
+11:15:06.543846 epoll_ctl(4, EPOLL_CTL_ADD, 5, {EPOLLIN|EPOLLET, {u32=5, u64=18035757381844997}}) = 0 <0.000011>
+11:15:06.543892 accept(3, 0x7ffcd4b63b70, [16]) = -1 EAGAIN (Resource temporarily unavailable) <0.000023>
+11:15:06.543971 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <0.000096>
+11:15:06.544182 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000065>
+11:15:06.544302 write(1, "read data begin \n", 17) = 17 <0.000075>
+11:15:06.544424 read(5, "Hello, world!\0", 512) = 14 <0.000011>
+11:15:06.544478 write(1, "read count=14, buf =Hello, world"..., 35) = 35 <0.000074>
+11:15:06.544607 write(1, "read ... end \n", 14) = 14 <0.000058>
+11:15:06.544712 write(1, "write begin.. \n", 15) = 15 <0.000054>
+11:15:06.544808 write(1, "Hello, world!\0", 14) = 14 <0.000053>
+11:15:06.544904 write(1, "write end. \n", 12) = 12 <0.000053>
+11:15:06.544998 write(1, "read data begin \n", 17) = 17 <0.000074>
+11:15:06.545117 read(5, 0x7ffcd4b63760, 512) = -1 EAGAIN (Resource temporarily unavailable) <0.000010>
+11:15:06.545168 write(1, "read count=-1, buf =Hello, world"..., 35) = 35 <0.000038>
+11:15:06.545244 write(1, "errno EAGAIN \n", 14) = 14 <0.000040>
+11:15:06.545345 epoll_wait(4, [{EPOLLIN, {u32=5, u64=18035757381844997}}], 64, -1) = 1 <1.999724>
+11:15:08.545201 write(1, " epoll_wait n=1 \n", 17) = 17 <0.000260>
+11:15:08.545563 write(1, "read data begin \n", 17) = 17 <0.000085>
+11:15:08.545713 read(5, "", 512)        = 0 <0.000017>
+11:15:08.545783 write(1, "read count=0, buf =Hello, world!"..., 34) = 34 <0.000072>
+11:15:08.545911 write(1, "Closed connection on descriptor "..., 34) = 34 <0.000082>
+11:15:08.546088 close(5)                = 0 <0.000065>
+11:15:08.546213 epoll_wait(4,  <detached ...>

@@ -106,6 +106,19 @@ insert into cinema (id, movie, description, rating) values ('3', 'irish', 'borin
 insert into cinema (id, movie, description, rating) values ('4', 'Ice song', 'Fantacy', '8.6');
 insert into cinema (id, movie, description, rating) values ('5', 'House card', 'Interesting', '9.1');
 
+CREATE TABLE `t` (
+`id` int(11) NOT NULL,
+`k` int(11) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+insert into t(id, k) values(1,1),(2,2);
+
+START TRANSACTION WITH CONSISTENT SNAPSHOT;
+select k from t where id=1;
+commit;
 
 
-
+START TRANSACTION WITH CONSISTENT SNAPSHOT;
+update t set k=k+1 where id=1;
+select k from t where id=1;
+commit;

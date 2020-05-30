@@ -82,7 +82,8 @@ static int create_and_bind (char *port)
     return sfd;
 }
 
-
+  // gcc epoll_1.2.c -o epollServer
+ //  ./epollServer 3490
 int main (int argc, char *argv[])
 {
     int sfd, s;
