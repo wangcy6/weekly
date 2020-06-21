@@ -152,3 +152,13 @@ mysqladmin -uroot -p password 123456
 
 # MySQL技术内幕(InnoDB存储引擎)
 
+#故障解决
+
+微信公共账号出现服务不可用提示
+cd /root/local 
+检查ps -ef |grep ngrok 服务是否存在
+
+./ngrok authtoken 4Q8WccagVYdR3VkJM7tEZ_225WSACJ1Rqydj3Ci19cA
+nohup ./ngrok http 8090  -log /root/local/ngrok.log &
+根据log查看
+http://919f3038c7cf.ngrok.io/

@@ -35,6 +35,8 @@ select * from dream.task_action_daily where id=1;
 //2020年累计看多少次，累计看多少周，全年累计xx次，耗时
 update task_action_daily set days=days+1,weekly=weekly+1,years=years+1,sums=sums+180  where id=1;
 
+update task_action_daily set days=172 where id=1;
+update task_action_daily set weekly=25 where id=1;
 
 更新一个观念：你原来可以选择不看腾讯视频，不是他每次更新动漫，综艺节目，电视剧，你必须去看。
 这个不是法律规定，这个也不是工作要求，跟不上社会习俗，对手不希望你看。
@@ -45,3 +47,8 @@ update task_action_daily set days=days+1,weekly=weekly+1,years=years+1,sums=sums
 
 select days,weekly,years, sums from dream.task_action_daily where id=1;
 
+insert into dream.task_action_daily(task,days,weekly,months,years,sums) values('一周三次跑步',0,0,0,0,0);
+
+//本周累计 本月累计 ，全年累计 
+
+update task_action_daily set weekly=weekly+1,months=months+1,years=years+1 where id=2;
