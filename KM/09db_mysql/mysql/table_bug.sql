@@ -1,4 +1,17 @@
 
+create table bug(
+   id int auto_increment,
+   problem VARCHAR(1000) NOT NULL,
+   tag VARCHAR(1000) NOT NULL,
+   failed int,
+   try int,
+   fix int ,
+   create_time    timestamp default CURRENT_TIMESTAMP ,
+   PRIMARY KEY ( id )
+);
+
+ALTER TABLE bug CONVERT TO CHARACTER SET utf8mb4;
+
 insert into bug(problem,tag,failed,try,fix) values('当有新需求等来临时候，领导怎么安排的，别做别做 等1年 5年 过去了，有新需求，领导怎么安排的，别做别等1年 5年 过去了。你期望事情根本发生','交给完全不懂支配，容易不会让进步，无论这个人在厉害',1000,0,0);
 
 
@@ -18,8 +31,8 @@ insert into bug(problem,tag,failed,try,fix) values('想一想”对于我们达�
 
 
 
-insert into dram.bug(problem,tag,failed,try,fix) values('如果晚上你六点吃饭，你8点 九点吃饭，吃完饭后努力，导致意志力消耗很大，到22点 21你失控，看xx人2点，这个根本控制,一个bug出现  自己三天知道问题了电脑不更新时间，导致熬夜看av，但是不行动修复，更不不修复。感觉耽误时间 三天后，导致5个小时，24小时，48小时无法行动，那是耽误时间',0,0,0,0);
+insert into bug(problem,tag,failed,try,fix) values('如果晚上你六点吃饭，你8点 九点吃饭，吃完饭后努力，导致意志力消耗很大，到22点 21你失控，看xx人2点，这个根本控制,一个bug出现  自己三天知道问题了电脑不更新时间，导致熬夜看av，但是不行动修复，更不不修复。感觉耽误时间 三天后，导致5个小时，24小时，48小时无法行动，那是耽误时间',0,0,0,0);
 
-insert into dram.bug(problem,tag,failed,try,fix) values('你舍去电视剧，然后改为看动漫，但是动漫依然腾讯小程序范围呢呢，舍去动漫，这个欲望。周末下午你看3个小时，消耗很大能大能来能量。-舍去动漫，舍去微信小程序。吸引人注意害人不浅，却不用负责任。这是过去消失产物。',0,0,0,0);
+insert into bug(problem,tag) values('你舍去电视剧，然后改为看动漫，但是动漫依然腾讯小程序范围呢呢，舍去动漫，这个欲望。周末下午你看3个小时，消耗很大能大能来能量。-舍去动漫，舍去微信小程序。吸引人注意害人不浅，却不用负责任。这是过去消失产物','腾讯视频');
 
-
+select * from bug;
