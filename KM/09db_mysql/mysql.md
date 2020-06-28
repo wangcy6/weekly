@@ -162,3 +162,44 @@ cd /root/local
 nohup ./ngrok http 8090  -log /root/local/ngrok.log &
 根据log查看
 http://919f3038c7cf.ngrok.io/
+
+
+
+# 命令
+
+~~~mysql
+mysql> show variables like 'innodb_page_size';
++------------------+-------+
+| Variable_name    | Value |
++------------------+-------+
+| innodb_page_size | 16384 |
++------------------+-------+
+1 row in set (0.02 sec)
+
+
+//表中索引高度
+
+SELECT
+b.name, a.name, index_id, type, a.space, a.PAGE_NO
+FROM
+information_schema.INNODB_SYS_INDEXES a,
+information_schema.INNODB_SYS_TABLES b
+WHERE
+a.table_id = b.table_id AND a.space <> 0;
+
++---------------------------------+-----------------+----------+------+-------+---------+
+| name                            | name            | index_id | type | space | PAGE_NO |
++---------------------------------+-----------------+----------+------+-------+---------+
+| PLEASE_READ_ME_XMG/WARNING      | GEN_CLUST_INDEX |       95 |    1 |    83 |       3 |
+| dream/WARNING                   | PRIMARY         |       94 |    3 |    82 |       3 |
+| mysql/engine_cost               | PRIMARY         |       39 |    3 |    20 |       3 |
+| mysql/gtid_executed             | PRIMARY         |       37 |    3 |    18 |       3 |
+| mysql/help_category             | PRIMARY         |       22 |    3 |     5 |       3 |
+| mysql/help_category             | name            |       23 |    2 |     5 |       4
+
+~~~
+
+
+
+
+
