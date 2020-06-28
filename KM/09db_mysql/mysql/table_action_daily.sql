@@ -8,9 +8,8 @@ create table dream.task_action_daily(
    sums  int,
   create_time timestamp default CURRENT_TIMESTAMP ,
    PRIMARY KEY ( id )
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE task_action_daily CONVERT TO CHARACTER SET utf8mb4;
 
 insert into dream.task_action_daily(task,days,weekly,months,years,sums) values(
 '战拖第一步,你花钱买手机初衷，绝不是为了失去考研，失去工作，失去未来的，失去健康未来，但是遇到腾讯视频就会，
@@ -63,3 +62,5 @@ update task_action_daily set weekly=weekly+1,months=months+1,years=years+1 where
 insert into dream.task_action_daily(task,days,weekly,months,years,sums) values('坐姿反应你思路是否正确？',0,0,0,0,0);
 select * from dream.task_action_daily where id=3;
 
+
+explain select * from dream.task_action_daily order by id;

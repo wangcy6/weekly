@@ -168,6 +168,7 @@ http://919f3038c7cf.ngrok.io/
 # 命令
 
 ~~~mysql
+//InnoDB 中，每个数据页的大小默认是 16KB
 mysql> show variables like 'innodb_page_size';
 +------------------+-------+
 | Variable_name    | Value |
@@ -197,9 +198,22 @@ a.table_id = b.table_id AND a.space <> 0;
 | mysql/help_category             | PRIMARY         |       22 |    3 |     5 |       3 |
 | mysql/help_category             | name            |       23 |    2 |     5 |       4
 
+
+mysql> show table status;
++-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
+| Name              | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time         | Check_time | Collation       | Checksum | Create_options | Comment |
++-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
+| WARNING           | InnoDB |      10 | Dynamic    |    1 |          16384 |       16384 |               0 |            0 |         0 |           NULL | 2020-06-27 22:10:11 | NULL                | NULL       | utf8_unicode_ci |     NULL |                |         |
+| qiji_task         | InnoDB |      10 | Dynamic    |    4 |           4096 |       16384 |               0 |            0 |         0 |              5 | 2020-06-28 09:39:14 | 2020-06-28 09:39:35 | NULL       | utf8_general_ci |     NULL |                |         |
+| task_action_daily | InnoDB |      10 | Dynamic    |    3 |           5461 |       16384 |               0 |            0 |         0 |              4 | 2020-06-28 09:34:24 | 2020-06-28 09:34:48 | NULL       | utf8_general_ci |     NULL |                |         |
++-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
 ~~~
 
 
 
+# bug
 
+- [mysql重启后或者第二天创建表不存在了](https://blog.csdn.net/weixin_43979716/article/details/105783805?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-1)
+
+  
 
