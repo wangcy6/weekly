@@ -207,6 +207,97 @@ mysql> show table status;
 | qiji_task         | InnoDB |      10 | Dynamic    |    4 |           4096 |       16384 |               0 |            0 |         0 |              5 | 2020-06-28 09:39:14 | 2020-06-28 09:39:35 | NULL       | utf8_general_ci |     NULL |                |         |
 | task_action_daily | InnoDB |      10 | Dynamic    |    3 |           5461 |       16384 |               0 |            0 |         0 |              4 | 2020-06-28 09:34:24 | 2020-06-28 09:34:48 | NULL       | utf8_general_ci |     NULL |                |         |
 +-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
+
+
+show processlist;
+
+
+explain select * from user where order by name;
+~~~
+
+
+
+# 案例
+
+
+
+~~~mysql
+CREATE TABLE `teacher` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `age` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+INSERT  INTO teacher(id,NAME,age) VALUES (1,'seven',18);
+INSERT  INTO teacher(id,NAME,age) VALUES (2,'qingshan',20);
+
+
+create table dream.user(
+   id int auto_increment,
+   id_card VARCHAR(1000) NOT NULL,
+   name VARCHAR(1000) NOT NULL,
+   age int,
+   PRIMARY KEY (`id`),
+   INDEX(`name`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+insert into user(id_card,name,age) values('429006xxxxxxxx2134','张三',22),('429006xxxxxxxx2135','李四',26),('129006xxxxxxxx3136','王五',28),('129106xxxxxxxx3337','赵六',17),('129106xxxxxxxx3349','孙XX',43),('129106xxxxxxxx3135','马大哈',39),('129106xxxxxxxx3134','王一',55),('139106xxxxxxxx2236','张三',7),('139106xxxxxxxx2130','张三',31),('439106xxxxxxxx2729','张三',29),('439106xxxxxxxx2734','李明',78),('429106xxxxxxxx1734','张三',96),('129106xxxxxxxx1737','张三',89),('129106xxxxxxxx1132','张三',3),('129106xxxxxxxx1197','张三',11),('129106xxxxxxxx1184','张三',14);
+
+
+ALTER TABLE user ADD INDEX id_card_name_age (`name`,`age`);
+
+show index from user;
+
+show index from user;
+ select * from information_schema.optimizer_trace \G;
+explain select name,age from user order by name, age  \G;
+
+
+explain select id_card,name,age from user order by age limit 3 \G
+
+
+
+
+ALTER TABLE user ADD INDEX id_card_name_age (`name`,`age`);
+explain select name,max(age)from user group by name,age  \G;
+
+mysql> explain select max(age)from user group by age  \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: user
+   partitions: NULL
+         type: index
+possible_keys: id_card_name_age
+          key: id_card_name_age
+      key_len: 3007
+          ref: NULL
+         rows: 17
+     filtered: 100.00
+        Extra: Using index; Using temporary; Using filesort
+1 row in set, 1 warning (0.01 sec)
+
+ERROR: 
+No query specified
+~~~
+
+
+
+### 3
+
+
+
+~~~msyql
+ CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `k` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+insert into t(id, k) values(1,1),(2,2);
+
 ~~~
 
 

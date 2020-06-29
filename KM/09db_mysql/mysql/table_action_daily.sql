@@ -62,5 +62,10 @@ update task_action_daily set weekly=weekly+1,months=months+1,years=years+1 where
 insert into dream.task_action_daily(task,days,weekly,months,years,sums) values('坐姿反应你思路是否正确？',0,0,0,0,0);
 select * from dream.task_action_daily where id=3;
 
+explain select id,name,sex from user where name='shenjian';
+explain select count(*) from dream.task_action_daily order by id;
+explain select count(*) from dream.task_action_daily where id >10 and id <1000 \G;
 
-explain select * from dream.task_action_daily order by id;
+
+
+explain select * from user  order by name;
