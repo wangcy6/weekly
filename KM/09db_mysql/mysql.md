@@ -8,39 +8,27 @@ categories: ["book"]
 
 ---
 
-# FQA
 
 
 
 
+# 部署安装
 
-# 基础知识
 
-## 参考资料1 [廖雪峰的官方网站](https://www.liaoxuefeng.com/)
 
-https://www.liaoxuefeng.com/wiki/1177760294764384/1179611448454560
+## [yum安装mysql 5.6](https://segmentfault.com/a/1190000007667534)(centos 6)
 
-https://github.com/michaelliao/learn-sql/blob/master/mysql/init-test-data.sql
+- 对系统版本要求低，5.7要求高
 
-- 请使用一条语句 统计各班的男生和女生人数
+https://segmentfault.com/a/1190000007667534
 
-SELECT class_id, gender, COUNT(*) num FROM students GROUP BY class_id, gender;
-
-- 请使用一条SELECT查询查出每个班级男生和女生的平均分：
-
-```mysql
-select class_id, gender,AVG(score)
- from students
- group by class_id,gender
-```
-
-[一次group by 优化之旅](https://juejin.im/post/5ced5191e51d455070226f26)
+~~~mysql
+create database test;
+~~~
 
 
 
 
-
-## 部署安装
 
 ~~~shell
 centos6.8
@@ -98,9 +86,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION
 
 ~~~
 
-
-
-#### ubuntu mysql 5.7
+## ubuntu mysql 5.7(centos7)
 
 https://cloud.tencent.com/developer/article/1392435
 
@@ -146,78 +132,81 @@ mysqladmin -uroot -p password 123456
 
 
 
-# 高性能Mysql第三版
-
-
-
-# MySQL技术内幕(InnoDB存储引擎)
-
-#故障解决
-
-微信公共账号出现服务不可用提示
-cd /root/local 
-检查ps -ef |grep ngrok 服务是否存在
-
-./ngrok authtoken 4Q8WccagVYdR3VkJM7tEZ_225WSACJ1Rqydj3Ci19cA
-nohup ./ngrok http 8090  -log /root/local/ngrok.log &
-根据log查看
-http://919f3038c7cf.ngrok.io/
-
-
-
-# 命令
-
-~~~mysql
-//InnoDB 中，每个数据页的大小默认是 16KB
-mysql> show variables like 'innodb_page_size';
-+------------------+-------+
-| Variable_name    | Value |
-+------------------+-------+
-| innodb_page_size | 16384 |
-+------------------+-------+
-1 row in set (0.02 sec)
-
-
-//表中索引高度
-
-SELECT
-b.name, a.name, index_id, type, a.space, a.PAGE_NO
-FROM
-information_schema.INNODB_SYS_INDEXES a,
-information_schema.INNODB_SYS_TABLES b
-WHERE
-a.table_id = b.table_id AND a.space <> 0;
-
-+---------------------------------+-----------------+----------+------+-------+---------+
-| name                            | name            | index_id | type | space | PAGE_NO |
-+---------------------------------+-----------------+----------+------+-------+---------+
-| PLEASE_READ_ME_XMG/WARNING      | GEN_CLUST_INDEX |       95 |    1 |    83 |       3 |
-| dream/WARNING                   | PRIMARY         |       94 |    3 |    82 |       3 |
-| mysql/engine_cost               | PRIMARY         |       39 |    3 |    20 |       3 |
-| mysql/gtid_executed             | PRIMARY         |       37 |    3 |    18 |       3 |
-| mysql/help_category             | PRIMARY         |       22 |    3 |     5 |       3 |
-| mysql/help_category             | name            |       23 |    2 |     5 |       4
-
-
-mysql> show table status;
-+-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
-| Name              | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time         | Check_time | Collation       | Checksum | Create_options | Comment |
-+-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
-| WARNING           | InnoDB |      10 | Dynamic    |    1 |          16384 |       16384 |               0 |            0 |         0 |           NULL | 2020-06-27 22:10:11 | NULL                | NULL       | utf8_unicode_ci |     NULL |                |         |
-| qiji_task         | InnoDB |      10 | Dynamic    |    4 |           4096 |       16384 |               0 |            0 |         0 |              5 | 2020-06-28 09:39:14 | 2020-06-28 09:39:35 | NULL       | utf8_general_ci |     NULL |                |         |
-| task_action_daily | InnoDB |      10 | Dynamic    |    3 |           5461 |       16384 |               0 |            0 |         0 |              4 | 2020-06-28 09:34:24 | 2020-06-28 09:34:48 | NULL       | utf8_general_ci |     NULL |                |         |
-+-------------------+--------+---------+------------+------+----------------+-------------+-----------------+--------------+-----------+----------------+---------------------+---------------------+------------+-----------------+----------+----------------+---------+
-
-
-show processlist;
-
-
-explain select * from user where order by name;
-~~~
+# 
 
 
 
 # 案例
+
+## 第一天
+
+
+
+- 请使用一条语句 统计各班的男生和女生人数
+
+SELECT class_id, gender, COUNT(*) num FROM students GROUP BY class_id, gender;
+
+请使用一条SELECT查询查出每个班级男生和女生的平均分：
+
+```mysql
+select class_id, gender,AVG(score)
+ from students
+ group by class_id,gender
+ 
+https://www.liaoxuefeng.com/wiki/1177760294764384/1179611448454560
+
+https://github.com/michaelliao/learn-sql/blob/master/mysql/init-test-data.sql
+```
+
+
+
+
+
+~~~mysql
+
+explain (select 1000 as f) union (select id from t1 order by id desc limit 2);
+
+mysql> explain select id%10 as m, count(*) as c from t1 group by m;
++----+-------------+-------+-------+---------------+------+---------+------+------+----------------------------------------------+
+| id | select_type | table | type  | possible_keys | key  | key_len | ref  | rows | Extra                                        |
++----+-------------+-------+-------+---------------+------+---------+------+------+----------------------------------------------+
+|  1 | SIMPLE      | t1    | index | PRIMARY,a     | a    | 5       | NULL | 1000 | Using index; Using temporary; Using filesort |
++----+-------------+-------+-------+---------------+------+---------+------+------+----------------------------------------------+
+
+
+
+
+~~~
+
+![image-20200707125356272](../images/image-20200707125356272.png)
+
+
+
+
+
+# 测试数据
+
+- 第一天
+
+~~~mysql
+
+create table t1(id int primary key, a int, b int, index(a));
+
+delimiter ;;
+create procedure idata()
+begin
+declare i int;
+set i=1;
+while(i<=1000)do
+insert into t1 values(i, i, i);
+set i=i+1;
+end while;
+end;;
+delimiter ;
+call idata();
+~~~
+
+
 
 
 
@@ -286,19 +275,7 @@ No query specified
 
 
 
-### 3
-
-
-
-~~~msyql
- CREATE TABLE `t` (
-  `id` int(11) NOT NULL,
-  `k` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-insert into t(id, k) values(1,1),(2,2);
-
-~~~
+### 
 
 
 
