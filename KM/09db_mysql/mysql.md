@@ -271,6 +271,13 @@ possible_keys: id_card_name_age
 
 ERROR: 
 No query specified
+
+ CREATE TABLE `t` (
+`id` int(11) NOT NULL,
+`k` int(11) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+insert into t(id, k) values(1,1),(2,2);
 ~~~
 
 
