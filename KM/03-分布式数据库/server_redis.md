@@ -2079,6 +2079,20 @@ https://github.com/antirez/redis/issues/1400
 
 
 
+- rewriteAppendOnlyFileBackground
+
+在aofrewrite过程中，如果redis本身数据量较大子进程执行时间较长，或者写入流量较高，就会导致aof-rewrite-buffer积攒较多，父进程就要进行大量写磁盘操作，这对于redis来说显然是不够高效的。
+
+http://mysql.taobao.org/monthly/2018/12/06/#
+
+
+
+
+
+
+
+
+
 # 第九天
 
 # [Distributed locks with Redis](https://redis.io/topics/distlock)
