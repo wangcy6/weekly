@@ -188,7 +188,7 @@ http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html
 
 
 
-
+![image-20200715171821421](../images/image-20200715171821421.png)
 
 
 
