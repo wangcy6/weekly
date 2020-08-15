@@ -220,6 +220,7 @@ CREATE TABLE `teacher` (
 
 INSERT  INTO teacher(id,NAME,age) VALUES (1,'seven',18);
 INSERT  INTO teacher(id,NAME,age) VALUES (2,'qingshan',20);
+INSERT  INTO teacher(id,NAME,age) VALUES (3,'wangchuanyi',3);
 
 
 create table dream.user(
@@ -278,6 +279,19 @@ No query specified
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 insert into t(id, k) values(1,1),(2,2);
+
+mysql -h 127.0.0.1 -P 4000 -u root -D test
+START TRANSACTION;
+select * from t;
+hello transaction
+commit;
+
+
+start transaction;                 |              start transaction;
+select * from t;                   |               select * from t; 
+update t set k=k+1 where id=1;      |              update t set k=k+1 where id=1; 
+commit;                             |
+                                     |             commit; -- 事务提交失败，回滚
 ~~~
 
 
