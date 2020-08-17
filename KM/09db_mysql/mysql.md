@@ -292,6 +292,16 @@ select * from t;                   |               select * from t;
 update t set k=k+1 where id=1;      |              update t set k=k+1 where id=1; 
 commit;                             |
                                      |             commit; -- 事务提交失败，回滚
+                                     
+                                     
+
+
+ CREATE TABLE `t2` (
+`id` VARCHAR(31),
+`name` VARCHAR(50),
+     age    int,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 ~~~
 
 
